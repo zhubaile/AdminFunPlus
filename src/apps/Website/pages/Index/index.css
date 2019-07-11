@@ -1,0 +1,44 @@
+
+.shouye{padding: 0; margin: 0;}
+h1{ font-size: 36px;}
+img{ background-size: 100% 100%;}
+/* 导航下面的展示内容 */
+.nav-belowimg{background-size: 100% 100%; display: flex; justify-content: center;}
+.nav-belowimg-conter{display: flex;width: 70%;align-items: center;justify-content: center;}
+.nav-belowimg-conter-left{float: left;margin-top: 150px;margin-bottom: 150px;width: 60%;color: #fff;}
+.nav-belowimg-conter-left h1{ font-size: 36px;}
+.nav-belowimg-conter-left h3{ font-size: 28px;}
+.nav-belowimg-conter-left p{ font-size: 16px; margin-top: 20px;}
+.nav-belowimg-conter-right{float: left;width: 40%;}
+
+/* 依托的内容(许多重复使用) */
+.rely{width: 100%; display: flex; justify-content: center;}
+.rely-conter{ display: flex;width: 70%;align-items: center;justify-content: center;}
+.rely-conter-left{ float: left; width: 40%; color: #000; margin-top: 150px;margin-bottom: 150px; padding: 20px;}
+.rely-conter-left>p{ display: block; width: 70%; opacity: 0.6; text-indent: 2em;}
+.rely-conter-right{ float: left; width: 60%; display: flex; flex-direction: column; align-items: center;justify-content: center;}
+.rely-conter-right-box{ width: 80%;}
+
+/* 产品服务 */
+.service{ width: 100%; display: flex; justify-content: center;}
+.service-conter{ width: 70%;}
+.service-conter-top{ margin-top: 20px; font-size: 20px; color: #000; display: flex; align-items: center;justify-content: center;}
+.service-conter-top strong{ font-size: 38px; margin-left: -10px;}
+.service-conter-top .text{ font-size: 20px; font-weight: 400; opacity: 0.8;}
+.service-conter-botton{margin-top: 50px; display: flex; align-items: center; justify-content: center; margin-bottom: 100px;}
+.service-conter-botton-box{float: left;width: 22%;height: 290px;margin-left: 2%;display: flex;flex-direction: column;align-items: center; justify-content: center;border: 2px solid #000;}
+.service-conter-botton-box>p{ display: block; width: 65%; text-align: center;}
+
+
+/*  */
+.son{ width: 100%; display: flex; justify-content: center;}
+.son .son-conter{  display: flex;width: 100%; color: #fff}
+.son .son-conter .son-conter-left{ width: 50%; display: flex;align-items: center;justify-content: center;}
+.son .son-conter .son-conter-right{ width: 40%; display: flex;align-items: center;justify-content: center;}
+.son .son-conter .son-conter-right>div{ width: 50%; display: flex; align-items:center; justify-content: center; flex-direction: column;
+  background: linear-gradient(to top right, #8FCCF9, #629DF3); padding: 10px; margin-top: 20px;}
+.son .son-conter .son-conter-right>div>p{ margin-top: 20px;}
+
+/*  */
+.footer{ width: 100%; display: flex; justify-content: center; color: #fff; background-size: 100% 100%;}
+.footer-conter-left{ width: 80%; float: left; margin-top: 150px; margin-bottom: 150px; }

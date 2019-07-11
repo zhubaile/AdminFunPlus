@@ -1,0 +1,368 @@
+.menu-w {
+  padding: 10px 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  z-index: 8000;
+}
+.menu-w ul.main-menu {
+  list-style: none;
+  padding: 2rem 1rem;
+  margin-bottom: 0px;
+  z-index: 8000;
+}
+.main-menu .selected.has-sub-menu a .icon-w .os-icon{font-size: 27px;}
+.menu-w .main-menu .selected.has-sub-menu a{-webkit-transition: all 0.2s ease;transition: all 0.2s ease;}
+.menu-w .main-menu .selected.has-sub-menu .sub-menu-w{position: relative; display: none;}
+.menu-w .main-menu .selected.has-sub-menu:hover .sub-menu-w{ display: block;}
+.menu-w .main-menu .selected.has-sub-menu .sub-menu-w .sub-menu-i{ position: absolute; top: -100px; left: 100%; background: blue;}
+.menu-w .main-menu .selected.has-sub-menu .sub-menu-w .sub-menu-i .sub-menu li a{ display: block; color: #fff; opacity: 1;}
+
+.menu-w .main-menu .selected.has-sub-menu:hover{ background: blue;}
+.menu-w .main-menu .selected.has-sub-menu:hover .icon-w{ color: #fff;}
+.menu-w .main-menu .selected.has-sub-menu:hover span{ color: #fff;}
+.menu-w .main-menu .selected.has-sub-menu:hover a:before{ color: #fff;}
+
+
+
+.menu-w .main-menu .selected.has-sub-menu a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transform: translateX(-5px);
+  transform: translateX(-5px);
+}
+.menu-w ul.main-menu > li {
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.menu-w ul.main-menu > li:last-child {
+  border-bottom: none;
+}
+
+.menu-w ul.main-menu > li.has-sub-menu > a:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'osfont' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e91c";
+  font-size: 7px;
+  color: rgba(0, 0, 0, 0.5);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 5px;
+}
+
+
+.menu-w ul.main-menu > li.sub-header {
+  text-transform: uppercase;
+  color: #448eef;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  border-bottom: none;
+}
+
+.menu-w ul.main-menu > li.sub-header:first-child {
+  padding-top: 0px;
+}
+
+.menu-w ul.main-menu > li.sub-header:first-child span {
+  padding-top: 0px;
+}
+
+.menu-w ul.main-menu > li > a {
+  color: #3E4B5B;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  position: relative;
+  font-size: 0.99rem;
+}
+
+.menu-w ul.main-menu > li > a:focus {
+  text-decoration: none;
+}
+
+.menu-w ul.main-menu > li > a:hover {
+  text-decoration: none;
+}
+.menu-w ul.main-menu > li .icon-w {
+  color: #0073ff;
+  font-size: 27px;
+  display: block;
+  padding: 1rem 1rem 1rem 0rem;
+  width: 70px;
+  text-align: center;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.menu-w ul.main-menu > li span {
+  padding: 1rem;
+  padding-left: 0.8rem;
+  display: block;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.menu-w ul.main-menu > li .icon-w + span {
+  padding-left: 0px;
+}
+.menu-position-top.menu-w ul.main-menu > li.selected {
+  position: static;
+  background-color: #fff;
+}
+.menu-position-top.menu-w ul.main-menu > li.selected .icon-w {
+  color: #047bf8;
+}
+.menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w {
+  -webkit-transform: none !important;
+  transform: none !important;
+  border-radius: 0px !important;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  right: 0px;
+  padding: 0px 10px !important;
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+.menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  overflow-x: auto;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i ul.sub-menu {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  min-width: auto;
+  border: none;
+}
+
+.menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i ul.sub-menu li {
+  border-bottom: none;
+  min-width: auto;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+.menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i ul.sub-menu li a:hover {
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+.side-menu-magic {
+  background-image: -webkit-linear-gradient(244deg, #6d16a3 8%, #5211e6 90%);
+  background-image: linear-gradient(-154deg, #6d16a3 8%, #5211e6 90%);
+}
+.menu-w .side-menu-magic {
+  background-image: -webkit-linear-gradient(244deg, #1643A3 8%, #2E1170 90%);
+  background-image: linear-gradient(-154deg, #1643A3 8%, #2E1170 90%);
+  border-radius: 6px;
+  padding: 40px;
+  text-align: center;
+  margin: 20px;
+}
+.menu-position-top.menu-w.sub-menu-style-flyout .main-menu > li.has-sub-menu.active .sub-menu-w {
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i .sub-menu + .sub-menu {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w ul.sub-menu:first-child {
+  border-top: none;
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w > ul, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul {
+  list-style: none;
+  padding: 0px;
+  min-width: 250px;
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li:last-child, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li:last-child {
+  border-bottom: none;
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li > a, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a {
+  color: #fff;
+  display: block;
+  padding: 12px 50px;
+  font-size: 0.99rem;
+  position: relative;
+  white-space: nowrap;
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li > a:before, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 10px;
+  background-color: #FBB463;
+  border-color: #FBB463;
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  -webkit-transform: translate(-10px, -50%);
+  transform: translate(-10px, -50%);
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li > a:hover:before, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a:hover:before {
+  opacity: 1;
+  -webkit-transform: translate(0px, -50%);
+  transform: translate(0px, -50%);
+}
+.menu-w ul.main-menu > li.has-sub-menu > a:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'osfont' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e91c";
+  font-size: 7px;
+  color: rgba(0, 0, 0, 0.5);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 5px;
+}
+
+.menu-w ul.main-menu > li.has-sub-menu.active .sub-menu {
+  display: block;
+}
+.menu-w ul.sub-menu li a {
+  padding: 0.4rem 10px 0.4rem 10px;
+  display: block;
+  position: relative;
+  font-size: 0.81rem;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.menu-w ul.sub-menu li a:before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border: 1px solid #047bf8;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background-color: #fff;
+  display: block;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+.menu-w ul.sub-menu li a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transform: translateX(-5px);
+  transform: translateX(-5px);
+}
+
+
+
+/*.menu-w ul.sub-menu li a:hover:before {
+  -webkit-transform: translate(-5px, -50%);
+  transform: translate(-5px, -50%);
+  border-radius: 6px;
+  background-color: #047bf8;
+  border-color: #047bf8;
+}*/
+.menu-w.sub-menu-style-flyout ul.sub-menu li a {
+  color: #3E4B5B;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
+
+.menu-w .side-menu-magic {
+  background-image: -webkit-linear-gradient(244deg, #1643A3 8%, #2E1170 90%);
+  background-image: linear-gradient(-154deg, #1643A3 8%, #2E1170 90%);
+  border-radius: 6px;
+  padding: 40px;
+  text-align: center;
+  margin: 20px;
+}
+
+.menu-w .side-menu-magic h1, .menu-w .side-menu-magic h2, .menu-w .side-menu-magic h3, .menu-w .side-menu-magic h4, .menu-w .side-menu-magic h5 {
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.menu-w .side-menu-magic p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.menu-w .side-menu-magic .btn-w {
+  margin-top: 15px;
+}
+
+.menu-w .side-menu-magic .btn-white, .menu-w .side-menu-magic .all-wrapper .fc-button, .all-wrapper .menu-w .side-menu-magic .fc-button {
+  border: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
