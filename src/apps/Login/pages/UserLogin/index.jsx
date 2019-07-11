@@ -75,12 +75,7 @@ class UserLogin extends Component {
           // this.props.history.push('/user/login');
         }
       );
-      // const { intl } = this.props;
-      // Message.success(intl.formatMessage({ id: 'app.login.Login successfully' }));
-      // this.props.history.push('/');  //可以添加配置的路由为跳转
-      // Message.success("登录成功");
-      // window.location.href = "index.html"; // 跳转到中后台界面
-      // window.open('index.html');    //打开新的窗口
+  
     });
   }
 
