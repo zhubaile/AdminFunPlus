@@ -4,7 +4,6 @@ import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkb
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
-import Newrole from "./Newrole";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -14,24 +13,25 @@ const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
       _id: random(10000, 20000, 30000, 50025, 68522),
-      merchantId: '000662',
-      name: ['有此山'],
-      time: '茅以升',
-      order: '开发',
-      remark: ['负责...'],
-      balance: '联调工具',
-      email: ['支付中'],
-      tel: ['￥100.00'],
-      role: [' ￥100.00'],
-      status: '支付宝wap',
-      oper: ['查看'],
+      name: '甲乙',
+      admin: 'admin',
+      ip: '168.112.36',
+      oper: '后台登录',
+      time: '2019.6.11 11:36',
+      description: '成功',
+      remark: '',
+      balance: '￥100.00',
+      email: '',
+      tel: '',
+      role: '',
+      status: '',
     };
   });
 };
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 
-export default class Rolemanagement extends Component {
+export default class Operationlog extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,6 +46,7 @@ export default class Rolemanagement extends Component {
       ],
       value: {
         timeType: '',
+        username: '',
         startdate: [],
         orderStatus: '',
         refundStatus: '',
@@ -112,7 +113,7 @@ export default class Rolemanagement extends Component {
   };
   renderOper = () => {
     return (
-      <div className='tb_span'>
+      <div>
         <span>编辑</span>
       </div>
     );
@@ -162,9 +163,6 @@ export default class Rolemanagement extends Component {
         });
       }
     });
-  }
-  newroleBtnOpen() {
-    this.Newrole.newroleopen();
   }
   // 添加分组
   groupingopen() {
@@ -228,11 +226,10 @@ export default class Rolemanagement extends Component {
       </ul>
     );
     return (
-      <div className='rolemanagement'>
-        <Newrole ref={ node => this.Newrole = node } />
+      <div className='operationlog'>
         <Tab shape='pure' className='income-tab'>
-          <Tab.Item title="角色管理">
-            <div className='rolemanagement-content'>
+          <Tab.Item title="操作日志">
+            <div className='operationlog-content'>
               <FormBinderWrapper
                 value={this.state.value}
                 onChange={this.formChange}
@@ -241,42 +238,34 @@ export default class Rolemanagement extends Component {
                 <Row wrap gutter="20" style={styles.formRow}>
                   <Col l="24">
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>商户ID:</span>
-                      <FormBinder name="merchantId"
+                      <span style={styles.formLabel}>姓名:</span>
+                      <FormBinder name="username"
                         autoWidth={false}
                       >
                         <Input style={styles.formInput} />
                       </FormBinder>
-                      <span style={styles.formLabel}>企业名称:</span>
-                      <FormBinder name="name"
-                        autoWidth={false}
+                      <span style={styles.formLabel}>操作时间:</span>
+                      <FormBinder name="startdate"
+                                  autoWidth={false}
                       >
-                        <Input style={styles.formInput} />
+                        <RangePicker style={styles.formInput} />
                       </FormBinder>
+
                       <Button className='btn-all bg' size="large" type="primary">搜索</Button>
-                      <Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button>
                     </div>
                   </Col>
                 </Row>
               </FormBinderWrapper>
             </div>
-            <div className='rolemanagement-panel'>
+            <div className='operationlog-panel'>
               <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
-                {/*                <Table.Column
-                  title=""
-                  width={50}
-                  dataIndex=""
-                  cell={this.renderSelectall}
-                /> */}
-                <Table.Column title="商户ID" dataIndex="merchantId" />
-                <Table.Column title="企业名称" dataIndex="name" />
-                <Table.Column title="姓名" dataIndex="time" />
-                <Table.Column title="角色名称" dataIndex="order" />
-                <Table.Column title="描述" dataIndex="remark" />
-                <Table.Column title="权限类型" dataIndex="balance" />
-{/*                <Table.Column title={statusBtn} dataIndex="2" cell={this.renderStatus} />*/}
-                <Table.Column title="状态" dataIndex="role" cell={this.renderStatus} />
-                <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
+                <Table.Column title="姓名" dataIndex="name" />
+                <Table.Column title="用户名" dataIndex="admin" />
+                <Table.Column title="IP" dataIndex="ip" />
+                <Table.Column title="操作" dataIndex="oper" />
+                <Table.Column title="操作时间" dataIndex="time" />
+                <Table.Column title="说明" dataIndex="description" />
+
               </Table>
               <Pagination
                 style={{ marginTop: '20px', textAlign: 'right' }}

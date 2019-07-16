@@ -101,7 +101,7 @@
 .wodegongdan-pingjia .fankui span{ float: left;}
 .wodegongdan-pingjia .fankui span.next-input.next-input-textarea{ width: 60%;}
 .wodegongdan-pingjia .fankui Button{ margin-left: 5px; margin-top: 140px; border-radius: 5px;}
-
+.wodegongdan-pingjia .next-rating-underlay .next-rating-icon,.wodegongdan-pingjia .next-rating-overlay .next-rating-icon{margin-left: 0;}
 /*删除数据弹窗Starting*/
 .deletedata{ position: fixed; width: 600px; height: 200px; top: 50%; left: 50%; margin-left: -300px; margin-top: -100px; z-index: 8888;
   border-radius: 6px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);

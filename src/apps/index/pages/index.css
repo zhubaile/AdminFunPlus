@@ -185,11 +185,12 @@ a:active{ text-decoration: none; }
   border: 1px solid #BBBBBB;}
 .edit-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
 .edit-content{ margin: 20px auto;}
+.edit-content .next-form-item .next-radio-wrapper{ margin-right: 20px;}
 /*商户信息-冻结用户弹框*/
 .freezeuser-bulletbox{ position: fixed; width: 480px; height: 300px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
   border: 1px solid #BBBBBB;}
-.freezeuser-title{ background-color: rgba(26, 85, 226, 0.95); text-align: center; border: none;}
+.freezeuser-title{ background-color: rgba(26, 85, 226, 0.95); text-align: center; border: none; padding: 0 10px;}
 .freezeuser-title h2{ margin: 0; line-height: 40px; color: rgba(255, 255, 255, 1);}
 .freezeuser-mid{ text-align: center;}
 .freezeuser-mid p{ color: rgba(16, 16, 16, 1);  font-size: 16px;}
@@ -200,7 +201,7 @@ a:active{ text-decoration: none; }
   border: 1px solid #BBBBBB;}
 .certificationstatus-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
 .certificationstatus-content{ margin: 20px auto;}
-
+.certificationstatus-content .next-form-item .next-radio-wrapper{ margin-right: 20px;}
 /*团队权限-角色管理*/
 .rolemanagement-content{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
@@ -211,8 +212,17 @@ a:active{ text-decoration: none; }
   border: 1px solid #BBBBBB;}
 .newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
 .newrole-content{ margin: 20px auto;}
+.newrole-content .next-form-item .next-checkbox-wrapper{ margin-right: 40px;}
 /*团队权限-成员管理*/
-
+.membermanagement-content{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.membermanagement-panel{ background: #FFFFFF; padding: 20px; border-radius: 10px;}
+/*成员管理-添加成员弹框*/
+.addmember-bulletbox{ position: fixed; width: 600px; height: 640px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
+  border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
+  border: 1px solid #BBBBBB;}
+.addmember-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.addmember-content{ margin: 20px auto;}
 /*团队权限-管理台操作日志*/
 
 /* 通用头部 */
@@ -265,18 +275,67 @@ a:active{ text-decoration: none; }
 .editingList .editingList-btn{ text-align: center;}
 .editingList .editingList-btn button{ text-align: center;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 1);color: rgba(255, 255, 255, 1);font-size: 14px;border: 1px solid rgba(255, 255, 255, 0); margin: 30px 10px;}
 .editingList .editingList-btn button.close{ background-color: #E6F1FC;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 1);font-size: 14px;text-align: center;border: 1px solid rgba(206, 219, 222, 1);}
+.operationlog-content{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.operationlog-panel{ background: #FFFFFF; padding: 20px; border-radius: 10px;}
 
+/*系统设置-站点设置*/
+.siteconfiguration-content{ margin: 20px auto;}
+.siteconfiguration-content .next-form-item .next-checkbox-wrapper{ margin-right: 30px;}
+/*系统设置-邮箱收发设置*/
+.mailboxsettings-content{ margin: 20px auto;}
+/*系统设置-短信网关设置*/
+.smsgatewaysettings-content{ margin: 20px auto; padding-left: 30px;}
+.inner_tab{ background: #FFFFFF; border-radius: 10px; padding: 20px; margin: 20px auto;}
+.templateconfiguration-content{ margin: 20px auto;}
+/*添加模板弹窗*/
+.addtemplate{ position: fixed; width: 380px; height: 400px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
+.addtemplate_title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.addtemplate_content{ padding: 20px;}
+.addtemplate_content_bottom{ text-align: center;}
+/*编辑弹窗*/
+.editing{ position: fixed; width: 380px; height: 400px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
+.editing_title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.editing_content{ padding: 20px;}
+.editing_content_bottom{ text-align: center;}
+/*系统设置-二维码网关*/
+.qrcodegateway-content{ margin: 20px auto;}
+/*系统设置-极验设置*/
+/*系统设置-平台版本*/
+.platformversion-content{ margin: 20px auto; padding: 15px; background: #FFFFFF; border-radius: 10px;}
+/*平台初始化及系统搬家*/
+.personal-top{ border-bottom: 1px solid rgba(187, 187, 187, 1); margin-top: 20px; position: relative;}
+.personal-top span{ font-size: 16px; font-weight: 400; color: #108ee9;}
+.personal-top .personal-top-border{ border-bottom: 3px solid #037cf8; width: 180px; margin-top: 10px; margin-bottom: -2px;}
+.platformversion-content{ padding: 15px; background: #FFFFFF; border-radius: 10px;}
+.check-box{ margin-top: 20px; color: rgba(96, 98, 102, 1);}
+.check-box .next-checkbox-wrapper{ margin-left: 15px;}
+.tb_span{ color: rgba(26, 85, 226, 1);}
+.tb_span span{ margin: 0px 5px; cursor: pointer;}
+.tb_span .ver_line{ width: 2px; height: 15px; background-color: rgba(26, 85, 226, 1); display: inline-block; vertical-align: middle; margin: 0 2px;}
+/*用户操作日志*/
+.useractionlog{ width: 100%;}
+.useractionlog-top{ margin-top: 10px; border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.useractionlog-panel{ background: #FFFFFF; padding: 20px; border-radius: 10px;}
+/*用户API日志*/
+.userapilog{ width: 100%;}
+.userapilog-top{ margin-top: 10px; border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.userapilog-panel{ background: #FFFFFF; padding: 20px; border-radius: 10px;}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.next-overlay-wrapper.opened .next-overlay-backdrop{ opacity: 0.5;}
+.overlay-demo {
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+  background: #FFFFFF;
+  box-shadow: 2px 2px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  border-radius: 4px;
+}
 

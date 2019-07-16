@@ -210,10 +210,13 @@ export default class Allworkorders extends Component {
     if (e == 1) {
       return ("受理中");
     } else if (e == 2) {
-      return ("已存档");
+      return ("待评价");
     } else if (e == 3) {
       return ("已完成");
+    } else if (e == 4) {
+      return ("已存档");
     }
+    return null;
   }
   // 获取到选中的数据
   Choice(args) {

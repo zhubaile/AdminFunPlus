@@ -97,6 +97,13 @@ export async function routerRulelist(params) {
     params,
   });
 }
+// 路由规则
+export async function routerRule(params) {
+  return ajaxAmd.get({
+    url: '/routerRule',
+    params,
+  });
+}
 // 创建新规则
 export async function routerRuleadd(params) {
   return ajaxAmd.post({
@@ -289,6 +296,13 @@ export function recharge(params) {
     data: params,
   });
 }
+// 扣费明细
+export function deductionList(params) {
+  return ajaxAmd.post({
+    url: '/deductionList',
+    data: params,
+  });
+}
 // 操作日志
 export function loglist(params) {
   return ajaxAmd.post({
@@ -328,6 +342,13 @@ export function batchRefundList(params) {
 export function totransferList(params) {
   return ajaxAmd.post({
     url: '/totransferList',
+    data: params,
+  });
+}
+// 企业批量付款
+export function batchTotransferList(params) {
+  return ajaxAmd.post({
+    url: '/batchTotransferList',
     data: params,
   });
 }

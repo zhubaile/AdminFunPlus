@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
-
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
@@ -18,6 +20,7 @@ const getData = (length = 10) => {
       role: [' ￥100.00'],
       status: '使用中',
       oper: ['查看'],
+      _id: random(10000, 20000,30000,50025,68522),
     };
   });
 };
@@ -31,6 +34,7 @@ export default class PlatformRouting extends Component {
       current: 1,
       isLoading: false,
       data: [],
+      args: [],
       value: {
         timeType: '',
         startdate: [],
@@ -99,8 +103,42 @@ export default class PlatformRouting extends Component {
   formChange = (value) => {
     this.props.onChange(value);
   };
+  // 获取到选中的数据
+  Choice(args) {
+    debugger;
+    this.setState({
+      args,
+    });
+  }
+  // 删除方法
+  removes() {
+    const { data,args } = this.state;
+    debugger;
+    let index = -1;
+    args.map((id)=>{
+      data.forEach((item, i) => {
+        if (item._id === id) {
+          index = i;
+        }
+      });
+      if (index !== -1) {
+        data.splice(index, 1);
+        this.setState({
+          data,
+        });
+      }
+    });
+  }
   render() {
     const { isLoading, data, current } = this.state;
+    const rowSelection = {
+      onChange: this.Choice.bind(this),
+      getProps: (record,index) => {
+        /* return {
+          disabled: record.id === 100306660942,
+        }; */
+      },
+    };
     return (
       <div className='routingrules'>
         <Tab shape='pure'>
@@ -127,13 +165,13 @@ export default class PlatformRouting extends Component {
               </FormBinderWrapper>
             </div>
             <div className='routingrules-panel'>
-              <Table loading={isLoading} dataSource={data} hasBorder={false}>
-                <Table.Column
+              <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+{/*                <Table.Column
                   title=""
                   width={50}
                   dataIndex=""
                   cell={this.renderSelectall}
-                />
+                />*/}
                 <Table.Column title="商户ID" dataIndex="merchantId" />
                 <Table.Column title="企业名称" dataIndex="name" />
                 <Table.Column title="规则姓名" dataIndex="order" />
@@ -145,7 +183,7 @@ export default class PlatformRouting extends Component {
                 current={current}
                 onChange={this.handlePaginationChange}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn}>删除</Button>
+              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
         </Tab>

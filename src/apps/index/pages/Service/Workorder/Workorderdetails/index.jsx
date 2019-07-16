@@ -168,7 +168,10 @@ export default class Workorderdetails extends Component {
       return ("待评价");
     } else if (e == 3) {
       return ("已完成");
+    } else if (e == 4) {
+      return ("已存档");
     }
+    return null;
   }
 
   // 工单评价

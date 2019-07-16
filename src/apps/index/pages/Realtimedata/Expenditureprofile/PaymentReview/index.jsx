@@ -6,6 +6,9 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import '../../../index.css';
 
 const { Item } = MenuButton;
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
@@ -18,6 +21,7 @@ const getData = (length = 10) => {
       tel: ['api付款'],
       status: '京东代付',
       oper: ['查看'],
+      _id: random(10000, 20000,30000,50025,68522),
     };
   });
 };
@@ -30,6 +34,7 @@ export default class PaymentReview extends Component {
       current: 1,
       isLoading: false,
       data: [],
+      args: [],
       value: {
         jiaose: '角色',
         haoma: '',
@@ -87,8 +92,9 @@ export default class PaymentReview extends Component {
   };
   renderOper = () => {
     return (
-      <div>
-        <Switch size='small' className='div-switch' defaultChecked={false} />
+      <div className='tb_span'>
+        <span>查看</span>
+{/*        <Switch size='small' className='div-switch' defaultChecked={false} />*/}
       </div>
     );
   };
@@ -102,8 +108,43 @@ export default class PaymentReview extends Component {
   formChange=(value)=>{
     debugger;
   }
+  // 获取到选中的数据
+  Choice(args) {
+    debugger;
+    this.setState({
+      args,
+    });
+  }
+  // 删除方法
+  removes() {
+    const { data,args } = this.state;
+    debugger;
+    let index = -1;
+    args.map((id)=>{
+      data.forEach((item, i) => {
+        if (item._id === id) {
+          index = i;
+        }
+      });
+      if (index !== -1) {
+        data.splice(index, 1);
+        this.setState({
+          data,
+        });
+      }
+    });
+  }
+
   render() {
     const { isLoading, data, current } = this.state;
+    const rowSelection = {
+      onChange: this.Choice.bind(this),
+      getProps: (record,index) => {
+        /* return {
+          disabled: record.id === 100306660942,
+        }; */
+      },
+    };
     return (
       <div className='paymentreview'>
         <Tab shape='pure' className='paymentreview-tab'>
@@ -124,13 +165,13 @@ export default class PaymentReview extends Component {
             <div className='paymentreview-panel' >
               <div className='tab-bg'>
                 <div className='tab-panel'>
-                  <Table loading={isLoading} dataSource={data} hasBorder={false}>
-                    <Table.Column
+                  <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+{/*                    <Table.Column
                       title=""
                       width={50}
                       dataIndex=""
                       cell={this.renderSelectall}
-                    />
+                    />*/}
                     <Table.Column title="商户ID" dataIndex="merchantId" />
                     <Table.Column title="企业名称" dataIndex="name" />
                     <Table.Column title="创建时间完成时间" dataIndex="time" />
@@ -139,14 +180,14 @@ export default class PaymentReview extends Component {
                     <Table.Column title="支付状态" dataIndex="email" />
                     <Table.Column title="批次号" dataIndex="tel" />
                     <Table.Column title="付款渠道" dataIndex="status" />
-                    <Table.Column title="操作" dataIndex="oper" />
+                    <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
                   </Table>
                   <Pagination
                     style={{ marginTop: '20px', textAlign: 'right' }}
                     current={current}
                     onChange={this.handlePaginationChange}
                   />
-                  <Button className='' size='large' type='primary' style={styles.delbtn}>删除</Button>
+                  <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
                 </div>
               </div>
             </div>

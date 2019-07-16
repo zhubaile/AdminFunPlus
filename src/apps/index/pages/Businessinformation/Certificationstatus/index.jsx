@@ -86,7 +86,8 @@ export default class Certificationstatus extends Component {
     return (
       <div className='certificationstatus-bulletbox'>
         <div className='edit-title'>
-          <h2>认证状态</h2>
+          <h2 style={{ display: 'inline-block' }}>认证状态</h2>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
         </div>
 
         <div className='certificationstatus-content'>

@@ -86,7 +86,8 @@ export default class Newrole extends Component {
     return (
       <div className='newrole-bulletbox'>
         <div className='newrole-title'>
-          <h2>新增角色</h2>
+          <h2 style={{ display: 'inline-block' }}>新增角色</h2>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
         </div>
 
         <div className='newrole-content'>

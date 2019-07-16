@@ -218,7 +218,7 @@ export default class Aside extends Component {
               >
                 <MenuItem key="4"><Link to="/backadmin/Teamauthority/rolemanagement">角色管理</Link></MenuItem>
                 <MenuItem key="5"><Link to="/backadmin/Teamauthority/membermanagement">成员管理</Link></MenuItem>
-                <MenuItem key="6">管理台操作日志</MenuItem>
+                <MenuItem key="6"><Link to="/backadmin/Teamauthority/operationlog">管理台操作日志</Link></MenuItem>
               </SubMenu>
               <SubMenu
                 key="sub3"
@@ -229,13 +229,13 @@ export default class Aside extends Component {
                   </span>
                 }
               >
-                <MenuItem key="7">站点设置</MenuItem>
-                <MenuItem key="8">邮箱收发设置</MenuItem>
-                <MenuItem key="9">短信网关</MenuItem>
-                <MenuItem key="10">二维码网关</MenuItem>
-                <MenuItem key="11">极验设置</MenuItem>
-                <MenuItem key="12">平台版本</MenuItem>
-                <MenuItem key="13">平台初始化及系统搬家</MenuItem>
+                <MenuItem key="7"><Link to="/backadmin/Systemsettings/siteconfiguration">站点设置</Link></MenuItem>
+                <MenuItem key="8"><Link to="/backadmin/Systemsettings/mailboxsettings">邮箱收发设置</Link></MenuItem>
+                <MenuItem key="9"><Link to="/backadmin/Systemsettings/smsgatewaysettings">短信网关</Link></MenuItem>
+                <MenuItem key="10"><Link to="/backadmin/Systemsettings/qrcodegateway">二维码网关</Link></MenuItem>
+                <MenuItem key="11"><Link to="/backadmin/Systemsettings/extremesetting">极验设置</Link></MenuItem>
+                <MenuItem key="12"><Link to="/backadmin/Systemsettings/platformversion">平台版本</Link></MenuItem>
+                <MenuItem key="13"><Link to="/backadmin/Systemsettings/platforminitialization">平台初始化及系统搬家</Link></MenuItem>
               </SubMenu>
               <SubMenu
                 key="sub4"
@@ -247,8 +247,8 @@ export default class Aside extends Component {
                 }
               >
                 <SubMenu key="sub6" title="请求日志log">
-                  <MenuItem key="14">用户操作日志</MenuItem>
-                  <MenuItem key="15">用户API日志</MenuItem>
+                  <MenuItem key="14"><Link to="/backadmin/Operationalassistance/useractionlog">用户操作日志</Link></MenuItem>
+                  <MenuItem key="15"><Link to="/backadmin/Operationalassistance/Userapilog">用户API日志</Link></MenuItem>
                 </SubMenu>
                 <MenuItem key="16">接口测试</MenuItem>
                 <MenuItem key="17">数据维护</MenuItem>

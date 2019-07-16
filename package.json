@@ -2,7 +2,7 @@
   "name": "zbl",
   "title": "zbl",
   "version": "1.0.0",
-  "description": "3funplus管理后台",
+  "description": "zhubaile",
   "files": [
     "src/",
     "build/",

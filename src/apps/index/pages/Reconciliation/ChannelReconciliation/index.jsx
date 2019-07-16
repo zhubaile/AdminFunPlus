@@ -6,6 +6,9 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import '../../index.css';
 
 const { Item } = MenuButton;
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
@@ -20,7 +23,9 @@ const getData = (length = 10) => {
       tel: '20190606',
       role: '日对账',
       status: '对账成功',
-      oper: ['查看'],
+      oper: [''],
+      _id: random(10000, 20000,30000,50025,68522),
+
     };
   });
 };
@@ -33,6 +38,7 @@ export default class ChannelReconciliation extends Component {
       current: 1,
       isLoading: false,
       data: [],
+      args: [],
       value: {
         jiaose: '角色',
         haoma: '',
@@ -90,21 +96,49 @@ export default class ChannelReconciliation extends Component {
   };
   renderOper = () => {
     return (
-      <div>
-        <Switch size='small' className='div-switch' defaultChecked={false} />
+      <div className='tb_span'>
+        <span>查看</span>
+        {/* <Switch size='small' className='div-switch' defaultChecked={false} /> */}
       </div>
     );
   };
   renderSelectall = () => {
     return (
       <div>
-        <Checkbox defaultChecked={true} />
+        <Checkbox defaultChecked />
       </div>
     );
   };
   formChange=(value)=>{
     debugger;
   }
+  // 获取到选中的数据
+  Choice(args) {
+    debugger;
+    this.setState({
+      args,
+    });
+  }
+  // 删除方法
+  removes() {
+    const { data,args } = this.state;
+    debugger;
+    let index = -1;
+    args.map((id)=>{
+      data.forEach((item, i) => {
+        if (item._id === id) {
+          index = i;
+        }
+      });
+      if (index !== -1) {
+        data.splice(index, 1);
+        this.setState({
+          data,
+        });
+      }
+    });
+  }
+
   render() {
     const { isLoading, data, current } = this.state;
     const payChannel = [
@@ -112,6 +146,14 @@ export default class ChannelReconciliation extends Component {
       { value: '2', label: '2' },
     ];
 
+    const rowSelection = {
+      onChange: this.Choice.bind(this),
+      getProps: (record,index) => {
+        /* return {
+          disabled: record.id === 100306660942,
+        }; */
+      },
+    };
 
     return (
       <div className='channelreconciliation'>
@@ -151,7 +193,7 @@ export default class ChannelReconciliation extends Component {
                         </FormBinder>
                         <span style={styles.formLabel}>支付渠道流水号：</span>
                         <FormBinder name='out_trade_no'>
-                          <Input style={styles.formInput} className='input-bg' placeholder='输入订单号' />
+                          <Input style={styles.formInput} className='input-bg' placeholder='' />
                         </FormBinder>
                         <Button className='btn-all bg' size="large" type="secondary">搜索</Button>
                       </div>
@@ -164,13 +206,13 @@ export default class ChannelReconciliation extends Component {
             <div className='channelreconciliation-panel' >
               <div className=''>
                 <div className='tab-panel'>
-                  <Table loading={isLoading} dataSource={data} hasBorder={false}>
-                    <Table.Column
+                  <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+                    {/* <Table.Column
                       title=""
                       width={50}
                       dataIndex=""
                       cell={this.renderSelectall}
-                    />
+                    /> */}
                     <Table.Column title="商户ID" dataIndex="merchantId" />
                     <Table.Column title="商户订单号" dataIndex="order" />
                     <Table.Column title="支付渠道" dataIndex="pay" />
@@ -182,14 +224,14 @@ export default class ChannelReconciliation extends Component {
                     <Table.Column title="清算日期" dataIndex="tel" />
                     <Table.Column title="对账周期" dataIndex="role" />
                     <Table.Column title="对账结果" dataIndex="status" />
-                    <Table.Column title="对账处理" dataIndex="oper" />
+                    <Table.Column title="对账处理" dataIndex="oper" cell={this.renderOper} />
                   </Table>
                   <Pagination
                     style={{ marginTop: '20px', textAlign: 'right' }}
                     current={current}
                     onChange={this.handlePaginationChange}
                   />
-                  <Button className='' size='large' type='primary' style={styles.delbtn}>删除</Button>
+                  <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
                 </div>
               </div>
             </div>

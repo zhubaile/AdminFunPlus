@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+/*import { openInvoice,changeInvoiceInfo } from '@indexApi';*/
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
@@ -21,6 +21,8 @@ export default class Addmember extends Component {
       open: false,
       content: null,
       confirm: null,
+      data: [],
+      isLoading: [],
       value: {
         psd1: '',
         psd2: '',
@@ -40,7 +42,6 @@ export default class Addmember extends Component {
       },
     };
   }
-
   addmemberclose() {
     this.setState({
       open: false,
@@ -61,7 +62,7 @@ export default class Addmember extends Component {
     });
   };
 
-  SubInvoiceinfo(r,v) {
+  /*  SubInvoiceinfo(r,v) {
     changeInvoiceInfo({
       ...r,
     }).then(({ status,data })=>{
@@ -72,34 +73,39 @@ export default class Addmember extends Component {
       }
     });
     debugger;
-    /* this.refs.form.validateAll((errors, values) => {
+    /!* this.refs.form.validateAll((errors, values) => {
       debugger;
-    }) */
-  }
+    }) *!/
+  } */
   render() {
-    const { content, confirm } = this.state;
-    const type = [
-      { value: '0', label: '企业增值税专用发票' },
-      { value: '1', label: '企业增值税普通发票' },
-      { value: '2', label: '组织增值税普通发票' },
-      { value: '3', label: '个人增值税普通发票' },
+    const { content, confirm, value, data } = this.state;
+    const jiaose = [
+      { value: '0', label: '0' },
+      { value: '1', label: '1' },
+      { value: '2', label: '2' },
+      { value: '3', label: '3' },
     ];
     if (!this.state.open) return null;
     return (
-      <div className='newrole-bulletbox'>
-        <div className='newrole-title'>
-          <h2>新增角色</h2>
+      <div className='addmember-bulletbox'>
+        <div className='addmember-title'>
+          <h2 style={{ display: 'inline-block' }}>添加成员</h2>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
         </div>
 
-        <div className='newrole-content'>
-          <Form className='form'>
+        <div className='addmember-content'>
+          <Form className='form'
+            value={this.state.value}
+            onChange={this.formChange}
+            ref="form"
+          >
             <FormItem
               label='商户ID'
               {...formItemLayout}
             >
               <Input
                 name='invoiceType'
-                placeholder='请输入'
+                placeholder='请输入用户名'
                 /*                style={{ width: '100%' }}
                                 dataSource={confirm}
                                 defaultValue={content.invoiceType} */
@@ -111,7 +117,7 @@ export default class Addmember extends Component {
             >
               <Input
                 name='psd1'
-                placeholder='请输入'
+                placeholder='请输入用户名'
                 /*              defaultValue={content.company} */
               />
             </FormItem>
@@ -119,11 +125,11 @@ export default class Addmember extends Component {
             <FormItem
               label='真实姓名'
               {...formItemLayout}
-              /*asterisk*/
+              /* asterisk */
             >
               <Input
                 name="psd2"
-                placeholder="请输入真实姓名"
+                placeholder="请输入用户名"
                 /* defaultValue={content.invoiceTitle} */
               />
             </FormItem>
@@ -134,8 +140,8 @@ export default class Addmember extends Component {
             >
               <Input
                 name="bank"
-                placeholder=''
-/*                defaultValue={content.bank}*/
+                placeholder='请输入用户名'
+/*                defaultValue={content.bank} */
               />
             </FormItem>
 
@@ -146,8 +152,8 @@ export default class Addmember extends Component {
               <Input
                 name="psd1"
                 htmlType='password'
-                placeholder=''
-                /*                defaultValue={content.bank}*/
+                placeholder='请输入密码'
+                /*                defaultValue={content.bank} */
               />
             </FormItem>
             <FormItem
@@ -157,8 +163,8 @@ export default class Addmember extends Component {
               <Input
                 name="psd2"
                 htmlType='password'
-                placeholder=''
-                /*                defaultValue={content.bank}*/
+                placeholder='请输入确认密码'
+                /*                defaultValue={content.bank} */
               />
             </FormItem>
             <FormItem
@@ -167,8 +173,8 @@ export default class Addmember extends Component {
             >
               <Input
                 name="tel"
-                placeholder=''
-                /*                defaultValue={content.bank}*/
+                placeholder='请输入联系方式'
+                /*                defaultValue={content.bank} */
               />
             </FormItem>
             <FormItem
@@ -177,7 +183,7 @@ export default class Addmember extends Component {
             >
               <Input
                 name="e_mail"
-                placeholder=''
+                placeholder='请输入电子邮箱'
               />
             </FormItem>
             <FormItem
@@ -185,26 +191,33 @@ export default class Addmember extends Component {
               {...formItemLayout}
             >
               <Select
-                name="jiaose"
-                dataSource='type'
+                name=''
+                dataSource={jiaose}
+                style={{ width: '200px' }}
               />
+              <span style={styles.prompt}>(角色可多选)</span>
             </FormItem>
             <FormItem
-              label='操作权限'
+              label='状态'
               {...formItemLayout}
             >
-              <Switch defaultChecked value="">（是否禁用）</Switch>
+              <Switch defaultChecked value="" />
+              <span style={styles.prompt}>（是否禁用）</span>
             </FormItem>
             <FormItem wrapperCol={{ offset: 6 }} >
               <Form.Submit
                 style={styles.submitbtn}
                 validate
                 type="primary"
-                onClick={(v, e) => this.SubInvoiceinfo(v,e)}
+/*                onClick={(v, e) => this.SubInvoiceinfo(v,e)} */
               >
                 添加
               </Form.Submit>
-              <Form.Reset style={styles.cancelbtn} onClick={this.addmemberclose.bind(this)}>取消</Form.Reset>
+              <Form.Reset
+                style={styles.cancelbtn}
+                onClick={this.addmemberclose.bind(this)}
+              >取消
+              </Form.Reset>
             </FormItem>
           </Form>
         </div>
@@ -232,5 +245,9 @@ const styles = {
     height: '28px',
     backgroundColor: 'rgba(86, 119, 252, 1)',
     borderRadius: '4px',
+  },
+  prompt: {
+    color: 'rgba(108, 117, 125, 0.7)',
+    marginLeft: '10px',
   },
 };

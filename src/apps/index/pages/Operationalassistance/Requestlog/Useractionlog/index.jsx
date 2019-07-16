@@ -3,37 +3,33 @@ import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select , Menu,MenuButton, Radio, Input, Grid, DatePicker, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-import '../index.css';
-import Resetpassword from "./Resetpassword/index";
-import Edit from "./Edit/index";
-import Freezeuser from "./Freezeuser/index";
-import Certificationstatus from "./Certificationstatus/index";
+import '../../../index.css';
 
-const { Item } = MenuButton;
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+const { Item } = MenuButton;
 const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
       merchantId: '000662',
-      name: ['甲乙'],
-      time: '1234789',
-      order: '茅以升',
-      remark: ['上海市...'],
-      balance: '互联网',
-      tel: ['1361111'],
+      name: ['有此山'],
+      time: '123456@qq.com',
+      order: 'admin01',
+      remark: ['- -.'],
+      balance: '管理平台',
+      tel: ['- -'],
       email: ['52@'],
-      role: [' 7'],
+      role: [' 168.112.36'],
       status: '成功',
-      oper: ['查看'],
-      _id: random(10000, 20000,30000,50025,68522),
+      oper: ['登录'],
+      _id: random(10000, 20000, 30000, 50000, 60000),
     };
   });
 };
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
-export default class Businessinformation extends Component {
+export default class Useractionlog extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,10 +93,10 @@ export default class Businessinformation extends Component {
   };
   renderOper = () => {
     return (
-      <div className='tb_span'>
-        <span onClick={this.editBtnOpen.bind(this)}>编辑</span>
-        <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span>
-        <span style={{ color: 'darkorange' }} onClick={this.freezeUserOpen.bind(this)}>冻结</span>
+      <div>
+        <a>编辑</a>
+        <a>重置密码</a>
+        <a>冻结</a>
       </div>
     );
   };
@@ -120,8 +116,8 @@ export default class Businessinformation extends Component {
   };
   renderCertification = () => {
     return (
-      <div style={{ color: 'red', cursor: 'pointer' }}>
-      <span onClick={this.certificationStatusOpen.bind(this)}>成功</span>
+      <div>
+        <a>成功</a>
       </div>
     );
   }
@@ -135,21 +131,7 @@ export default class Businessinformation extends Component {
   formChange=(value)=>{
     debugger;
   }
-  resetBtnOpen() {
-    this.Resetpassword.resetPasswordopen();
-  }
-  editBtnOpen() {
-    this.Edit.editopen();
-  }
-  freezeUserOpen() {
-    this.Freezeuser.freezeUseropen();
-  }
-  certificationStatusOpen() {
-    this.Certificationstatus.certificationopen();
-  }
-  // 获取到选中的数据
   Choice(args) {
-    debugger;
     this.setState({
       args,
     });
@@ -172,6 +154,9 @@ export default class Businessinformation extends Component {
         });
       }
     });
+  }
+  tabBtn() {
+    this.props.history.push("/backadmin/Operationalassistance/Userapilog");
   }
   render() {
     const { isLoading, data, current } = this.state;
@@ -197,22 +182,16 @@ export default class Businessinformation extends Component {
     ];
     const rowSelection = {
       onChange: this.Choice.bind(this),
-      getProps: (record,index) => {
-        /* return {
-          disabled: record.id === 100306660942,
-        }; */
+      getProps: (record, index) => {
+
       },
     };
 
     return (
-      <div className='businessinformation'>
-        <Resetpassword ref={ node => this.Resetpassword = node } />
-        <Edit ref={ node => this.Edit = node } />
-        <Freezeuser ref={ node => this.Freezeuser = node } />
-        <Certificationstatus ref={ node => this.Certificationstatus = node } />
+      <div className='useractionlog'>
         <Tab shape='pure'>
-          <Tab.Item title="商户信息">
-            <div className='businessinformation-top'>
+          <Tab.Item title="用户操作日志">
+            <div className='useractionlog-top'>
               <FormBinderWrapper
                 value={this.state.value}
                 onChange={this.formChange}
@@ -225,60 +204,60 @@ export default class Businessinformation extends Component {
                       <FormBinder name="timeType"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} placeholder='' />
+                        <Input placeholder='请输入' />
                       </FormBinder>
                       <span style={styles.formLabel}>企业名称：</span>
                       <FormBinder name='refundStatus'>
-                        <Input style={styles.formInput} placeholder='' />
+                        <Input placeholder='请输入' />
                       </FormBinder>
-                      <span style={styles.formLabel}>法人姓名：</span>
+                      {/*                      <span style={styles.formLabel}>法人姓名：</span>
                       <FormBinder name='orderStatus'>
                         <Input style={styles.formInput} placeholder='' />
-                      </FormBinder>
+                      </FormBinder> */}
                     </div>
                   </Col>
                   <Col l="24">
                     <div style={styles.formItemTwo}>
-                      <span style={styles.formLabel}>所属行业：</span>
+                      {/*                      <span style={styles.formLabel}>所属行业：</span>
                       <FormBinder name='payChannel'>
                         <Select style={styles.formSelect} dataSource={payChannel} />
-                      </FormBinder>
-                      <span style={styles.formLabel}>手机号：</span>
+                      </FormBinder> */}
+                      <span style={styles.formLabel}>应用ID：</span>
                       <FormBinder name='out_trade_no'>
-                        <Input className='input-bg' placeholder='' />
+                        <Input placeholder='请输入' />
                       </FormBinder>
-                      <span style={styles.formLabel}>状态：</span>
+                      <span style={styles.formLabel}>IP地址：</span>
                       <FormBinder name="device" >
-                        <Select style={{ width: '200px' }} dataSource={device} />
+                        <Input placeholder='请输入' />
                       </FormBinder>
                       <Button className='btn-all bg' size="large" type="primary">搜索</Button>
-                      <Button className='btn-all bg' size="large" type="primary" style={{ opacity: '0.5' }}>重置</Button>
+                      {/*                      <Button className='btn-all bg' size="large" type="primary" style={{ opacity: '0.5' }}>重置</Button> */}
                     </div>
                   </Col>
                 </Row>
               </FormBinderWrapper>
             </div>
-            <div className='businessinformation-panel' >
+            <div className='useractionlog-panel' >
               <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-{/*                <Table.Column
+                {/* <Table.Column
                   title=""
                   width={50}
                   dataIndex=""
                   cell={this.renderSelectall}
-                />*/}
+                /> */}
                 <Table.Column title="商户ID" dataIndex="merchantId" />
                 <Table.Column title="企业名称" dataIndex="name" />
-                <Table.Column title="统一社会信用代码" dataIndex="time" />
-                <Table.Column title="法人姓名" dataIndex="order" />
-                <Table.Column title="企业地址" dataIndex="remark" />
-                <Table.Column title="所属行业" dataIndex="balance" />
-                <Table.Column title="联系方式" dataIndex="tel" />
-                <Table.Column title="邮箱" dataIndex="email" />
-                <Table.Column title="上次登录时间" dataIndex="role" />
-                <Table.Column title="登录状态" cell={this.renderStatus} />
+                <Table.Column title="账号" dataIndex="time" />
+                <Table.Column title="用户名称" dataIndex="order" />
+                <Table.Column title="应用" dataIndex="tel" />
+                <Table.Column title="操作" dataIndex="oper" />
+                <Table.Column title="操作对象" dataIndex="balance" />
+                <Table.Column title="备注" dataIndex="remark" />
+                <Table.Column title="IP" dataIndex="role" />
+                {/*                <Table.Column title="登录状态" cell={this.renderStatus} />
                 <Table.Column title="权限状态" cell={this.renderPermission} />
                 <Table.Column title="认证状态" dataIndex="status" cell={this.renderCertification} />
-                <Table.Column title="操作" cell={this.renderOper} />
+                <Table.Column title="操作" cell={this.renderOper} /> */}
               </Table>
               <Pagination
                 style={{ marginTop: '20px', textAlign: 'right' }}
@@ -288,6 +267,7 @@ export default class Businessinformation extends Component {
               <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
+          <Tab.Item title="用户API日志" onClick={this.tabBtn.bind(this)}></Tab.Item>
         </Tab>
       </div>
     );

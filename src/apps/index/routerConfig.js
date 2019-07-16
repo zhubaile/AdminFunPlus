@@ -40,6 +40,18 @@ const Invoice = React.lazy(() => import('./pages/Service/Invoice')); // 发票
 const ForeignAPI = React.lazy(() => import('./pages/InterfaceManagement/foreignAPI')); // 对外API
 const Interfaceaccess = React.lazy(() => import('./pages/InterfaceManagement/Interfaceaccess')); // 接口访问白名单
 const InterfaceDocument = React.lazy(() => import('./pages/InterfaceManagement/InterfaceDocument')); // 接口文档
+const Operationlog = React.lazy(() => import('./pages/Teamauthority/Operationlog')); // 管理台操作日志
+
+const Siteconfiguration = React.lazy(() => import('./pages/Systemsettings/Siteconfiguration')); // 站点设置
+const Mailboxsettings = React.lazy(() => import('./pages/Systemsettings/Mailboxsettings')); // 邮箱收发设置
+const Smsgatewaysettings = React.lazy(() => import('./pages/Systemsettings/Smsgatewaysettings')); // 短信网关
+const Qrcodegateway = React.lazy(() => import('./pages/Systemsettings/Qrcodegateway')); // 二维码网关
+const Extremesetting = React.lazy(() => import('./pages/Systemsettings/Extremesetting'));// 极验设置
+const Platformversion = React.lazy(() => import('./pages/Systemsettings/Platformversion')); // 平台版本
+const Platforminitialization = React.lazy(() => import('./pages/Systemsettings/Platforminitialization')); // 平台初始化及系统搬家
+
+const Useractionlog = React.lazy(() => import('./pages/Operationalassistance/Requestlog/Useractionlog'));
+const Userapilog = React.lazy(() => import('./pages/Operationalassistance/Requestlog/Userapilog'));
 /* 错误的信息 */
 const Empty = React.lazy(() => import('./pages/Exception/Empty'));
 const Forbidden = React.lazy(() => import('./pages/Exception/Forbidden'));
@@ -143,6 +155,46 @@ const routerConfig = [
   {
     path: '/backadmin/interfaceManagement/interfaceDocument',
     component: InterfaceDocument,
+  },
+  {
+    path: '/backadmin/Teamauthority/operationlog',
+    component: Operationlog,
+  },
+  {
+    path: '/backadmin/Systemsettings/siteconfiguration',
+    component: Siteconfiguration,
+  },
+  {
+    path: '/backadmin/Systemsettings/mailboxsettings',
+    component: Mailboxsettings,
+  },
+  {
+    path: '/backadmin/Systemsettings/smsgatewaysettings',
+    component: Smsgatewaysettings,
+  },
+  {
+    path: '/backadmin/Systemsettings/qrcodegateway',
+    component: Qrcodegateway,
+  },
+  {
+    path: '/backadmin/Systemsettings/extremesetting',
+    component: Extremesetting,
+  },
+  {
+    path: '/backadmin/Systemsettings/platformversion',
+    component: Platformversion,
+  },
+  {
+    path: '/backadmin/Systemsettings/platforminitialization',
+    component: Platforminitialization,
+  },
+  {
+    path: '/backadmin/Operationalassistance/useractionlog',
+    component: Useractionlog,
+  },
+  {
+    path: '/backadmin/Operationalassistance/Userapilog',
+    component: Userapilog,
   },
   {
     path: '/backadmin/exception/500',

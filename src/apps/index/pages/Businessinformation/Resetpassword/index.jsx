@@ -81,7 +81,8 @@ export default class Resetpassword extends Component {
     return (
       <div className='resetpsd-bulletbox'>
         <div className='resetpsd-title'>
-          <h2>重置密码</h2>
+          <h2 style={{ display: 'inline-block' }}>重置密码</h2>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
         </div>
 
         <div className='resetpsd-content'>

@@ -15,16 +15,16 @@ const getData = (length = 10) => {
     return {
       _id: random(10000, 20000, 30000, 50025, 68522),
       merchantId: '000662',
-      name: ['花果山'],
-      time: '20190606',
-      order: '02456245',
-      remark: ['贵'],
-      balance: '￥100.00',
-      email: ['支付中'],
-      tel: ['￥100.00'],
-      role: [' ￥100.00'],
-      status: '支付宝wap',
-      oper: ['查看'],
+      name: ['有此山'],
+      time: '连岳',
+      order: '01',
+      remark: '系统管理',
+      balance: '2019.6.11 11:36',
+      email: ['78@qq.com'],
+      tel: ['136000'],
+      role: [''],
+      status: '',
+      oper: [''],
     };
   });
 };
@@ -112,8 +112,9 @@ export default class Membermanagement extends Component {
   };
   renderOper = () => {
     return (
-      <div>
+      <div className='tb_span'>
         <span>编辑</span>
+        <span>展开</span>
       </div>
     );
   };
@@ -228,11 +229,11 @@ export default class Membermanagement extends Component {
       </ul>
     );
     return (
-      <div className='rolemanagement'>
+      <div className='membermanagement'>
         <Addmember ref={ node => this.Addmenber = node } />
         <Tab shape='pure' className='income-tab'>
           <Tab.Item title="成员角色">
-            <div className='rolemanagement-content'>
+            <div className='membermanagement-content'>
               <FormBinderWrapper
                 value={this.state.value}
                 onChange={this.formChange}
@@ -260,14 +261,8 @@ export default class Membermanagement extends Component {
                 </Row>
               </FormBinderWrapper>
             </div>
-            <div className='rolemanagement-panel'>
+            <div className='membermanagement-panel'>
               <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
-                {/*                <Table.Column
-                  title=""
-                  width={50}
-                  dataIndex=""
-                  cell={this.renderSelectall}
-                /> */}
                 <Table.Column title="商户ID" dataIndex="merchantId" />
                 <Table.Column title="企业名称" dataIndex="name" />
                 <Table.Column title="姓名" dataIndex="time" />
@@ -276,7 +271,6 @@ export default class Membermanagement extends Component {
                 <Table.Column title="邮箱" dataIndex="email" />
                 <Table.Column title="所属角色" dataIndex="remark" />
                 <Table.Column title="上次登录时间" dataIndex="balance" />
-{/*                <Table.Column title={statusBtn} dataIndex="2" cell={this.renderStatus} />*/}
                 <Table.Column title="状态" dataIndex="role" cell={this.renderStatus} />
                 <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
               </Table>

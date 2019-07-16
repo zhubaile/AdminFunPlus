@@ -81,7 +81,8 @@ export default class Freezeuser extends Component {
     return (
       <div className='freezeuser-bulletbox'>
         <div className='freezeuser-title'>
-          <h2>冻结用户</h2>
+          <h2 style={{ display: 'inline-block' }}>冻结用户</h2>
+          <span style={{ fontSize: '38px', color: '#ffffff', float: 'right', cursor: 'pointer' }}>×</span>
         </div>
         <div className='freezeuser-mid'>
           <p>确定要冻结用户吗？</p>

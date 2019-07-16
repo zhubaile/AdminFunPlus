@@ -86,7 +86,8 @@ export default class Edit extends Component {
     return (
       <div className='edit-bulletbox'>
         <div className='edit-title'>
-          <h2>编辑</h2>
+          <h2 style={{ display: 'inline-block' }}>编辑</h2>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
         </div>
 
         <div className='edit-content'>

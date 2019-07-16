@@ -20,13 +20,20 @@ module.exports = {
   devServer: {
     proxy: proxy,
     historyApiFallback: {
-      index: 'build/index.html',
+      index: 'build/login.html',
       disableDotRule: true,
       rewrites:[
         { from: /^\/$/, to: 'build/login.html' },
         { from: /^\/user/, to: 'build/login.html' }, // 登录界面
         { from: /^\/website/, to: 'build/website.html' }, // 官网界面
         { from: /^\/backadmin/, to: 'build/index.html' } // 管理后台
+        // { from: /\/index.html$/, to:'build/index.html' },
+        // { from: /\/website.html$/, to:'build/website.html' },  // 匹配已website.html结束的字符，匹配成功跳转到website.html
+        // { from: /\/login.html$/, to:'build/login.html' },
+        // { from: /^\/website/, to:'build/website.html' },     // 匹配已website开头的字符，匹配成功跳转到website.html
+        // /*{ from: /(?=website)/, to:'build/website.html' },
+        // { from: /(?=login)/, to:'build/login.html' },*/
+        // { from: /^\/user/, to:'build/login.html' }
       ],
     }
   },
