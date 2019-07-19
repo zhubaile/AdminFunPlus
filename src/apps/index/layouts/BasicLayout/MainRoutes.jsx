@@ -66,7 +66,7 @@ class MainRoutes extends Component {
         })}
 
         {/* 首页默认重定向到 /dashboard */}
-        <Redirect exact from="/backadmin" to="/backadmin/income" />
+        <Redirect exact from="/backadmin" to="/backadmin/realtimedata/realtimedataIncome" />
 
         {/* 未匹配到的路由重定向到 404 */}
         <Route component={NotFound} />

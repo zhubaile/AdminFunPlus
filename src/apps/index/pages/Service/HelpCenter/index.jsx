@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Pagination,Radio,Select, Input,Switch,DatePicker,Form } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-// import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
+import { helpCentercolumnList,helpCenterinsertHelpCenter } from '@indexApi';
+import Addcolumns from './addcolumns';
 import '../index.css';
 import moment from "moment/moment";
 
@@ -21,24 +22,11 @@ export default class HelpCenter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 1,
-      pageSize: 10,
-      total: 0,
       isLoading: false,
+      columnslist: [], // 栏目列表
       datas: [],
-      args: [], // 所有选中的id
-      listValue: '状态/全部',
-      toplist: false,
-      grouplistdata: [
-        { dGroupName: '' },
-      ],
-      // datas: [],
     };
   }
-  btnClick() {
-    this.props.editor(this.input.getInputNode().value);
-  }
-
   componentDidMount() {
     this.fetchData();
   }
@@ -48,139 +36,115 @@ export default class HelpCenter extends Component {
         isLoading: true,
       },
       () => {
-       /* this.mockApi(len).then((data) => { // data 里面为数据
-          debugger;
-          this.setState({
-            datas: data,
-            isLoading: false,
-          });
-        });*/
+        helpCentercolumnList().then(({ status,data })=>{
+          if (data.errCode == 0) {
+            const list = data.data;
+            const columnslist = list.map(item=>({ label: item.columnName,value: item.columnName }));
+            this.setState({
+              columnslist,
+            });
+          }
+        });
       }
     );
   };
- /* mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };*/
-
-  handlePaginationChange = (current) => {
-    this.setState(
-      {
-        current,
-      },
-      () => {
-        this.fetchData();
-      }
-    );
-  };
-  renderRule = () => {
-    return (
-      <div>
-        <select className='table-select'>
-          <option value="volvo">默认规则</option>
-          <option value="saab">自定义规则</option>
-          <option value="opel">自定义规则</option>
-          <option value="audi">新增规则</option>
-        </select>
-      </div>
-    );
-  };
-  renderOper = () => {
-    return (
-      <div style={{ color: '#1A55E2', cursor: 'pointer' }}>
-       查看
-      </div>
-    );
-  };
-  // 获取到选中的数据
-  Choice(args) {
-    debugger;
-    this.setState({
-      args,
-    });
+  // 添加栏目
+  addcolumnsbtn() {
+    this.Addcolumns.addcolumnsopen();
   }
-  // 删除方法
-  removes() {
-    const { datas,args } = this.state;
+  // 提交帮助信息
+  subHelp(values) {
+    if (!values.createdAt) {
+      return null;
+    }
     debugger;
-    let index = -1;
-    args.map((id)=>{
-      datas.forEach((item, i) => {
-        if (item._id === id) {
-          index = i;
-        }
-      });
-      if (index !== -1) {
-        datas.splice(index, 1);
+    const createdAt = values.createdAt.valueOf();
+    helpCenterinsertHelpCenter({
+      ...values,
+      createdAt,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        Message.success(data.message);
         this.setState({
-          datas,
+          value: {
+            columnName: '',
+            title: '',
+            keyword: '',
+            centent: '',
+            readPower: false,
+            createdAt: '',
+          },
         });
       }
     });
   }
   render() {
-    const { isLoading, datas, current,total,pageSize } = this.state;
-    const startValue = moment('2019-05-08', 'YYYY-MM-DD', true);
-    const endValue = moment('2017-12-15', 'YYYY-MM-DD', true);
-    const Allstart = [
-      { value: '状态/全部', label: '状态/全部' },
-      { value: '可使用', label: '可使用' },
-      { value: '离线', label: '离线' },
-    ];
-    const grouplistdata = this.state.grouplistdata;
-    console.log(this.state.datas);
-    // 多选按钮
-    const rowSelection = {
-      onChange: this.Choice.bind(this),
-      getProps: (record,index) => {
-        /* return {
-          disabled: record.id === 100306660942,
-        }; */
-      },
-    };
+    const { isLoading, datas, columnslist } = this.state;
+    debugger;
+    // const startValue = moment('2019-05-08', 'YYYY-MM-DD', true);
+    // const endValue = moment('2017-12-15', 'YYYY-MM-DD', true);
     return (
       <div className='helpCenter'>
+        <Addcolumns ref={node=>this.Addcolumns = node} fetchData={this.fetchData.bind(this)} />
         <div className='currency-top'>
           帮助中心
+          <button className='Addcolumns' onClick={this.addcolumnsbtn.bind(this)}>添加栏目</button>
           <div className='currency-top-bottombor' />
         </div>
         <div className='helpCenter-main'>
           <Form value={this.state.value} onChange={this.formChange} ref="form" {...formItemLayout}>
-            <FormItem label='所属栏目'>
-              <Select style={styles.formbinderbox} name="ApplicationChannel" dataSource={Allstart} />
+            <FormItem label='所属栏目'
+              style={{ margin: '10px 0' }}
+              required
+              requiredMessage="不能为空"
+            >
+              <Select style={styles.formbinderbox} name="columnName" dataSource={columnslist} />
             </FormItem>
-            <FormItem label='标题'>
-              <Input style={styles.formbinderbox} name='caidan' placeholder='输入自定义名称备注' hasClear />
+            <FormItem label='标题'
+              style={{ margin: '10px 0' }}
+              required
+              requiredMessage="不能为空"
+            >
+              <Input style={styles.formbinderbox} name='title' placeholder='输入自定义名称备注' hasClear />
             </FormItem>
-            <FormItem label='关键字'>
-              <Input style={styles.formbinderbox} name='lanmu' placeholder='输入自定义名称备注' hasClear />
+            <FormItem label='关键字'
+              style={{ margin: '10px 0' }}
+              required
+              requiredMessage="不能为空"
+            >
+              <Input style={styles.formbinderbox} name='keyword' placeholder='输入自定义名称备注' hasClear />
             </FormItem>
-            <FormItem label='内容'>
+            <FormItem label='内容'
+              style={{ margin: '10px 0' }}
+              required
+              requiredMessage="不能为空"
+            >
               <Input.TextArea
                 style={styles.formbinderboxs}
-                name='description'
+                name='centent'
                 placeholder="多行输入"
                 rows={8}
               />
             </FormItem>
-            <FormItem label='时间' >
-              <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} />
+            <FormItem label='时间'
+              style={{ margin: '10px 0' }}
+              required
+              requiredMessage="不能为空"
+            >
+              <DatePicker name='createdAt' format="YYYY-M-D" showTime={{ format: 'HH:mm' }} />
             </FormItem>
-            <FormItem label='阅读权限' >
-              <Switch name='yuedu' />
+            <FormItem label='阅读权限' style={{ margin: '10px 0' }} >
+              <Switch name='readPower' />
             </FormItem>
-            <FormItem label='属性设置' >
+            <FormItem label='属性设置' style={{ margin: '10px 0' }} >
               <RadioGroup aria-labelledby="radio-a11y" name='status'>
                 <Radio id="python" value="python">置顶显示</Radio>
                 <Radio id="java" value="java">默认排序</Radio>
               </RadioGroup>
             </FormItem>
-            <FormItem label=" ">
-              <Form.Submit validate type="primary" onClick={this.submitHandle} style={{ marginRight: 7 }}>提交</Form.Submit>
+            <FormItem label=" " style={{ margin: '10px 0' }}>
+              <Form.Submit validate type="primary" onClick={this.subHelp.bind(this)} style={{ marginRight: 7 }}>提交</Form.Submit>
             </FormItem>
           </Form>
         </div>

@@ -3,7 +3,7 @@ import { Link,withRouter } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select, Menu,MenuButton } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 
-import { channel,channelbindRule } from '@indexApi';
+import { channel } from '@indexApi';
 import '../../../index.css';
 
 const Option = Select.Option;
@@ -25,6 +25,7 @@ export default class ApplicationChannel extends Component {
       waiceng: 0,
       shuzi: 0,
       total: 0,
+      pageSize: 10,
       current: 1,
       isLoading: false,
       datas: [],
@@ -53,9 +54,10 @@ export default class ApplicationChannel extends Component {
       },
       () => {
         const current = this.state.current;
+        const limit = this.state.pageSize;
         channel({
           page: current,
-          limit: '10',
+          limit,
         }).then(({ status,data })=>{
           debugger;
           this.setState({
@@ -82,6 +84,7 @@ export default class ApplicationChannel extends Component {
   ceshibtn(e) {
     const Windex = e.target.name; // 外围的索引
     const Nindex = e.target.value; // 里面的索引
+    debugger;
     const Nstart = this.state.datas[Windex].rules[Nindex].ruleSwitch; // 选中的值的状态(true/false)
     const judgeid = this.state.datas[Windex]._id;
     debugger;
@@ -122,12 +125,14 @@ export default class ApplicationChannel extends Component {
   renderOper = (value,index,record) => {
     return (
       <div>
-        <Switch className='div-switch' checked={value} onClick={()=>this.changeswitch(record,index)} />
+        <Switch className='div-switch' checked={value} />
+        {/* 如果需要改变开关状态加入onClick */}
+        {/* onClick={()=>this.changeswitch(record,index)} */}
       </div>
     );
   };
-  // 改变开关
-  changeswitch(record,index) {
+  // 改变开关状态
+  /*  changeswitch(record,index) {
     debugger;
     const shuzi = this.state.shuzi;
     const reluss = record.rules;
@@ -149,9 +154,9 @@ export default class ApplicationChannel extends Component {
         this.fetchData();
       }
     });
-  }
+  } */
   render() {
-    const { isLoading, datas, current, total } = this.state;
+    const { isLoading, datas, current, total, pageSize } = this.state;
     console.log(this.state.datas);
     debugger;
     return (
@@ -160,30 +165,30 @@ export default class ApplicationChannel extends Component {
           <Tab.Item title="应用渠道">
             <div className='tab-content' >
               <Table loading={isLoading} dataSource={datas} hasBorder={false}>
-                <Table.Column title="商户ID" dataIndex="merchantId" />
+                {/* <Table.Column title="商户ID" dataIndex="channelId" /> */}
                 <Table.Column title="支付渠道" dataIndex="des" />
                 <Table.Column title="使用场景" dataIndex="payScene" />
                 <Table.Column title="路由规则" dataIndex="rules" cell={this.renderRule} />
-                <Table.Column title="状态" dataIndex="status" cell={this.renderStatus} />
                 <Table.Column
-                  title="操作"
+                  title="状态"
                   width={200}
                   dataIndex="ruleSwitch"
                   cell={this.renderOper}
                 />
               </Table>
-              {/*                  <Pagination
-                    style={{ marginTop: '20px', textAlign: 'right' }}
-                    current={current}
-                    onChange={this.handlePaginationChange}
-                    pageSize={10} // 界面展示多少条数据
-                    total={total} // 一共多少条数据
-                  /> */}
+              <Pagination
+                style={{ marginTop: '20px', textAlign: 'right' }}
+                current={current}
+                onChange={this.handlePaginationChange}
+                pageSize={pageSize} // 界面展示多少条数据
+                total={total}
+              />
             </div>
           </Tab.Item>
 
-          <Tab.Item title="平台渠道" onClick={this.btn.bind(this)}>
-          </Tab.Item>
+          {/* 暂时没有内容，以后直接解开注释就行了 */}
+          {/* <Tab.Item title="平台渠道" onClick={this.btn.bind(this)}>
+          </Tab.Item> */}
         </Tab>
       </div>
     );

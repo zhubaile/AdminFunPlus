@@ -6,107 +6,74 @@ import { actions, reducers, connect } from '@indexStore';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import Linegraph from '../components/Linegraph';
 import '../../index.css';
+import { verifybillsummary,verifybillparams } from '@indexApi';
 // import Check from "../../Backstageworkorder/Workorderdetails/Check/index";
 // import SelectLang from "../../../../Internationalization/SelectLang/SelectLang";
 
 const { Item } = MenuButton;
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      merchantId: '000662',
-      name: ['花果山'],
-      time: '20190606',
-      order: '02456245',
-      remark: ['贵'],
-      balance: '￥100.00',
-      email: ['支付中'],
-      tel: ['￥100.00'],
-      role: [' ￥100.00'],
-      status: '支付宝wap',
-      oper: ['查看'],
-    };
-  });
-};
+
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 export default class CustomSummary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 1,
-      isLoading: false,
-      data: [],
+      // current: 1,
+      // isLoading: false,
+      // data: [],
+      // value: {
+      //   jiaose: '角色',
+      //   haoma: '',
+      //   timeType: '',
+      //   startdate: [],
+      //   orderStatus: '',
+      //   refundStatus: '',
+      //   payChannel: '',
+      //   device: '',
+      //   out_trade_no: '',
+      // },
       value: {
-        jiaose: '角色',
-        haoma: '',
-        timeType: '',
         startdate: [],
-        orderStatus: '',
-        refundStatus: '',
-        payChannel: '',
-        device: '',
-        out_trade_no: '',
+        channelId: '',
+        deviceId: '',
       },
+      Transactionfigures: [], // 收入支出的金额
+      Dropdownbox: [],
+      Dropdownboxson: [],
     };
   }
 
   componentDidMount() {
-    debugger;
-    this.fetchData();
-  }
-
-  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };
-
-  fetchData = (len) => {
-    this.setState(
-      {
-        isLoading: true,
-      },
-      () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
-          debugger;
-          this.setState({
-            data,
-            isLoading: false,
-          });
+    verifybillsummary().then(({ status,data })=>{
+      if (data.errCode == 0) {
+        this.setState({
+          Transactionfigures: data.data[0],
         });
       }
-    );
-  };
-
-  handlePaginationChange = (current) => {
-    this.setState(
-      {
-        current,
-      },
-      () => {
-        this.fetchData();
+    });
+    verifybillparams().then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        const channels = data.data.channels; // 选择渠道
+        const devices = data.data.devices; // 选择参数
+        const channelss = channels.map(item=>({ value: item._id,label: item.channelName }));
+        const dClassifys = devices.map(item=>({ value: item._id,label: item.dName }));
+        this.setState({
+          Dropdownbox: channelss,
+          Dropdownboxson: dClassifys,
+        });
       }
-    );
+    });
+  }
+  formChange = (value) => {
+    this.setState({
+      value,
+    });
   };
-  renderOper = () => {
-    return (
-      <div>
-        <Switch size='small' className='div-switch' defaultChecked={false} />
-      </div>
-    );
-  };
-  renderSelectall = () => {
-    return (
-      <div>
-        <Checkbox defaultChecked />
-      </div>
-    );
-  };
-  formChange=(value)=>{
+  search() {
+    const values = this.state.value;
     debugger;
+    this.refs.linegraph.fetchData(values);
   }
   render() {
     const { isLoading, data, current } = this.state;
@@ -130,7 +97,10 @@ export default class CustomSummary extends Component {
       { value: '1', label: '1' },
       { value: '2', label: '2' },
     ];
-
+    const paymentchannelone = this.state.Dropdownbox;
+    const paymentchanneltwo = this.state.Dropdownboxson;
+    const { Transactionfigures } = this.state;
+    debugger;
     return (
       <div className='customsummary'>
         <Tab shape='pure' className='income-tab'>
@@ -156,13 +126,13 @@ export default class CustomSummary extends Component {
                           <Select style={styles.formSelect} dataSource={orderStatus} />
                         </FormBinder>
                         <span style={styles.formLabel}>支付渠道：</span>
-                        <FormBinder name='payChannel'>
-                          <Select style={styles.formSelect} dataSource={payChannel} />
+                        <FormBinder name='channelId'>
+                          <Select style={styles.formSelect} dataSource={paymentchannelone} />
                         </FormBinder>
-                        <FormBinder name="device" >
-                          <Select style={{ width: '200px' }} dataSource={device} />
+                        <FormBinder name="deviceId" >
+                          <Select style={{ width: '200px' }} dataSource={paymentchanneltwo} />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary">搜索</Button>
+                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                       </div>
                     </Col>
                   </Row>
@@ -172,30 +142,31 @@ export default class CustomSummary extends Component {
                 <div className='exhibition-bor'>
                   <span>收入</span>
                   <div>
-                    <strong>￥30000</strong>300/笔
+                    <strong>￥{Transactionfigures.incomeAmount}</strong>
+                    {/* 300/笔 */}
                   </div>
                 </div>
                 <div className='exhibition-bor'>
                   <span>成功率</span>
                   <div>
-                    <strong>100%</strong>
+                    <strong>{Transactionfigures.successPercent}</strong>
                   </div>
                 </div>
                 <div className='exhibition-bor'>
                   <span>退款</span>
                   <div>
-                    <strong>￥3999</strong>
+                    <strong>￥{Transactionfigures.refundAmount}</strong>
                   </div>
                 </div>
                 <div className='exhibition-bor'>
                   <span>付款</span>
                   <div>
-                    <strong>￥3999</strong>
+                    <strong>￥{Transactionfigures.payMentAmount}</strong>
                   </div>
                 </div>
                 <div className='clearfix' />
               </div>
-              <Linegraph />
+              <Linegraph ref='linegraph' />
             </div>
             <div className='outlay-panel' >
               <div className='' />

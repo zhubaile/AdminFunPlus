@@ -5,7 +5,7 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import Addgrouping from './Addgrouping';
 import Official from './Adddevice/official';
 import Custom from './Adddevice/custom';
-import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
+import { device,deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
 
 const random = (min, max) => {
@@ -37,10 +37,12 @@ export default class EquipmentManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      total: 0,
+      pageSize: 10,
       current: 1,
       isLoading: false,
-      data: [],
-/*      datas: [],*/
+      datas: [],
+      /*      datas: [], */
       args: [],
       toplist: false,
       grouplistdata: [
@@ -58,8 +60,7 @@ export default class EquipmentManagement extends Component {
   }
 
   componentDidMount() {
-    debugger;
-    this.Toupdatelist();
+    // this.Toupdatelist();
     this.fetchData();
   }
 
@@ -76,14 +77,6 @@ export default class EquipmentManagement extends Component {
       }
     );
   };
-  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };
 
   fetchData = (len) => {
     this.setState(
@@ -91,12 +84,20 @@ export default class EquipmentManagement extends Component {
         isLoading: true,
       },
       () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
+        const page = this.state.current;
+        const limit = this.state.pageSize;
+        device({
+          page,
+          limit,
+        }).then(({ status,data })=>{
           debugger;
-          this.setState({
-            data,
-            isLoading: false,
-          });
+          if (data.errCode == 0) {
+            this.setState({
+              datas: data.data.list,
+              isLoading: false,
+              total: data.data.total,
+            });
+          }
         });
       }
     );
@@ -126,9 +127,9 @@ export default class EquipmentManagement extends Component {
       </div>
     );
   };
-  formChange = (value) => {
+ /* formChange = (value) => {
     this.props.onChange(value);
-  };
+  };*/
   zbl=(value)=>{
     this.setState({
       listValue: value,
@@ -171,7 +172,7 @@ export default class EquipmentManagement extends Component {
     );
   }
   render() {
-    const { isLoading, data, current } = this.state;
+    const { isLoading, datas, current,pageSize,total } = this.state;
     const Allstatus = [
       { value: '可使用', label: '可使用' },
       { value: '离线', label: '离线' },
@@ -212,15 +213,15 @@ export default class EquipmentManagement extends Component {
                   <Col l="24">
                     <div style={styles.formItem}>
                       <span style={styles.formLabel}>商户ID:</span>
-                      <FormBinder name="merchantId"
-                        autoWidth={false}
-                      >
+                      <FormBinder name="merchantId">
+                        <Input style={styles.formInput} />
+                      </FormBinder>
+                      <span style={styles.formLabel}>设备名称:</span>
+                      <FormBinder name="channame">
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <span style={styles.formLabel}>设备ID:</span>
-                      <FormBinder name="name"
-                        autoWidth={false}
-                      >
+                      <FormBinder name="name">
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <Button className='btn-all bg' size="large" type="primary">搜索设备</Button>
@@ -236,7 +237,7 @@ export default class EquipmentManagement extends Component {
               </FormBinderWrapper>
             </div>
             <div className='equipmentmanagement-panel'>
-              <Table loading={isLoading} dataSource={data} hasBorder={false}>
+              <Table loading={isLoading} dataSource={datas} hasBorder={false}>
                 <Table.Column title="商户ID" dataIndex="merchantId" />
                 <Table.Column title="企业名称" dataIndex="name" />
                 <Table.Column title="设备名称" dataIndex="role" />
@@ -251,6 +252,8 @@ export default class EquipmentManagement extends Component {
                 style={{ marginTop: '20px', textAlign: 'right' }}
                 current={current}
                 onChange={this.handlePaginationChange}
+                pageSize={pageSize}
+                total={total}
               />
             </div>
           </Tab.Item>

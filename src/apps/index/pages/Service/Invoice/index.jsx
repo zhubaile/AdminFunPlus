@@ -2,58 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Pagination,Table,Select, Input,MenuButton,DatePicker,Form } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-// import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
+import { invoiceList } from '@indexApi';
 import '../index.css';
 import moment from "moment/moment";
 
 const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
 const { Item } = MenuButton;
-const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
 
-// MOCK 数据，实际业务按需进行替换
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      name: ['淘小宝', '淘二宝'][random(0, 1)],
-      level: ['普通会员', '白银会员', '黄金会员', 'VIP 会员'][random(0, 3)],
-      _id: random(10000, 20000,30000,50025,68522),
-      accumulative: random(50000, 100000),
-      regdate: `2018-12-1${random(1, 9)}`,
-      birthday: `1992-10-1${random(1, 9)}`,
-      store: ['余杭盒马店', '滨江盒马店', '西湖盒马店'][random(0, 2)],
-      z: ['支付宝'],
-    };
-  });
-};
-
-/* const onChange = function (...args) {
-  const { datas } = this.state;
-    debugger;
-    console.log(...args);
-    let index = -1;
-    datas.forEach((item, i) => {
-      if (item._id === id) {
-        index = i;
-      }
-    });
-    if (index !== -1) {
-      datas.splice(index, 1);
-      this.setState({
-        datas,
-      });
-    }
-  },
-  const rowSelection = {
-    onChange,
-    getProps: (record,index) => {
-      /!* return {
-        disabled: record.id === 100306660942,
-      }; *!/
-    },
-  }; */
 export default class Invoice extends Component {
   constructor(props) {
     super(props);
@@ -62,46 +18,48 @@ export default class Invoice extends Component {
       pageSize: 10,
       total: 0,
       isLoading: false,
-      datas: [],
+      datas: [], // 发票列表数据
+      startdate: [], // 时间框
       args: [], // 所有选中的id
       listValue: '状态/全部',
       toplist: false,
       grouplistdata: [
         { dGroupName: '' },
       ],
-      // datas: [],
     };
   }
-  btnClick() {
-    this.props.editor(this.input.getInputNode().value);
-  }
+  // btnClick() {
+  //   this.props.editor(this.input.getInputNode().value);
+  // }
 
   componentDidMount() {
     this.fetchData();
   }
-  fetchData = (len) => {
+  fetchData = (invoiceTitle,arrivalDate) => {
     this.setState(
       {
         isLoading: true,
       },
       () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
+        const page = this.state.current;
+        const pageSize = this.state.pageSize;
+        invoiceList({
+          page,
+          pageSize,
+          invoiceTitle,
+          arrivalDate,
+        }).then(({ status,data })=>{
           debugger;
-          this.setState({
-            datas: data,
-            isLoading: false,
-          });
+          if (data.errCode == 0) {
+            this.setState({
+              isLoading: false,
+              total: data.data.totalCount ,
+              datas: data.data.result,
+            });
+          }
         });
       }
     );
-  };
-  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
   };
 
   handlePaginationChange = (current) => {
@@ -159,15 +117,42 @@ export default class Invoice extends Component {
       }
     });
   }
+  // 改变选择的时间
+  rangetime(value) {
+    const createdAt = [];
+    if (value.length == 2) {
+      if (value[0] && value[1]) {
+        const startdatestart = moment(value[0]._d).valueOf();
+        const startdateend = moment(value[1]._d).valueOf();
+        createdAt.push(startdatestart,startdateend);
+      } else if (value[0]) {
+        const startdatestart = moment(value[0]._d).valueOf();
+        const startdateend = '';
+        createdAt.push(startdatestart,startdateend);
+      } else if (value[1]) {
+        const startdatestart = '';
+        const startdateend = moment(value[1]._d).valueOf();
+        createdAt.push(startdatestart,startdateend);
+      } else {
+        return null;
+      }
+    }
+    // const timess = moment().format('YYYY-MM-DD 23:59:59');
+    debugger;
+    this.setState({
+      startdate: createdAt,
+    });
+  }
+  // 搜索
+  searchbtn() {
+    const invoiceTitle = this.input.getInputNode().value;
+    const arrivalDate = this.state.startdate;
+    this.fetchData(invoiceTitle,arrivalDate);
+  }
   render() {
     const { isLoading, datas, current,total,pageSize } = this.state;
     const startValue = moment('2019-05-08', 'YYYY-MM-DD', true);
     const endValue = moment('2017-12-15', 'YYYY-MM-DD', true);
-    const Allstart = [
-      { value: '状态/全部', label: '状态/全部' },
-      { value: '可使用', label: '可使用' },
-      { value: '离线', label: '离线' },
-    ];
     const grouplistdata = this.state.grouplistdata;
     console.log(this.state.datas);
     // 多选按钮
@@ -189,12 +174,13 @@ export default class Invoice extends Component {
           <div className='invoice-main-top'>
             <div className='left'>
               <span>开票时间：</span>
-              <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} />
+              <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} onChange={this.rangetime.bind(this)} />
               <span style={{ marginLeft: '20px' }}>发票抬头：</span>
-              <Select style={{ width: '150px' }} name="ApplicationChannel" dataSource={Allstart} />
+              <Input placeholder='请输入发票抬头' ref={node=>this.input = node} />
+              {/* <Select style={{ width: '150px' }} name="ApplicationChannel" dataSource={Allstart} /> */}
             </div>
             <div className='right'>
-              <button>查询</button>
+              <button onClick={this.searchbtn.bind(this)}>查询</button>
             </div>
           </div>
 

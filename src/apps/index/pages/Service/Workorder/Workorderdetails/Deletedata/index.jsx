@@ -32,10 +32,11 @@ export default class Deletedata extends Component {
     workOrderdeleteWork({
       _id,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
         this.deletedataopen();
-        this.props.history.push("/admin/backstageworkorder/Allworkorders");
+        this.props.history.push("/backadmin/service/allworkorders");
       }else{
         Message.success(data.message);
       }

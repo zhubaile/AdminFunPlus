@@ -47,14 +47,7 @@ export async function deviceparams(params) {
     params,
   });
 }
-// 添加设备
-export async function device(params) {
-  return ajaxAmd.post({
-    // url: '/device/add',
-    url: '/device',
-    data: params,
-  });
-}
+
 // 路由里面新规则的初始应用通道
 export async function channelParams(params) {
   return ajaxAmd.get({
@@ -76,13 +69,8 @@ export async function deviceGroupruleParams(params) {
     data: params,
   });
 }
-// 获取应用直连渠道规则
-export async function channel(params) {
-  return ajaxAmd.get({
-    url: '/channel',
-    params,
-  });
-}
+
+
 // 改变直连渠道的开关
 export async function channelbindRule(params) {
   return ajaxAmd.post({
@@ -218,13 +206,6 @@ export function deleteRolePms(params) {
   });
 }
 
-// 发票列表
-export function invoiceList(params) {
-  return ajaxAmd.get({
-    url: '/invoiceList',
-    params,
-  });
-}
 // 申请开票界面内容加载
 export function invoiceDataInfo(params) {
   return ajaxAmd.get({
@@ -373,20 +354,6 @@ export function getDevice(params) {
     data: params,
   });
 }
-// 用户工单查询
-export function workOrderworkList(params) {
-  return ajaxAmd.post({
-    url: '/workOrder/workList',
-    data: params,
-  });
-}
-// 工单详情
-export function workOrderworkDetails(params) {
-  return ajaxAmd.post({
-    url: '/workOrder/workDetails',
-    data: params,
-  });
-}
 // 提交工单
 export function workOrderworkOrderInsert(params) {
   return ajaxAmd.post({
@@ -394,13 +361,7 @@ export function workOrderworkOrderInsert(params) {
     data: params,
   });
 }
-// 工单删除
-export function workOrderdeleteWork(params) {
-  return ajaxAmd.post({
-    url: '/workOrder/deleteWork',
-    data: params,
-  });
-}
+
 // 工单评价
 export function workOrderremainEvaluated(params) {
   return ajaxAmd.post({
@@ -408,13 +369,7 @@ export function workOrderremainEvaluated(params) {
     data: params,
   });
 }
-// 客服回复
-export function workOrdercustomerWork(params) {
-  return ajaxAmd.post({
-    url: '/workOrder/customerWork',
-    data: params,
-  });
-}
+
 // 结单接口
 export function workOrderisStatement(params) {
   return ajaxAmd.post({
@@ -443,20 +398,7 @@ export function companyaccountInfo(params) {
     params,
   });
 }
-// 对账 财务汇总
-export function verifybillsummary(params) {
-  return ajaxAmd.get({
-    url: '/verifybill/summary',
-    params,
-  });
-}
-// 财务汇总 获取下拉框
-export function verifybillparams(params) {
-  return ajaxAmd.get({
-    url: '/verifybill/params',
-    params,
-  });
-}
+
 // 图标
 export function verifybill(params) {
   return ajaxAmd.get({
@@ -471,15 +413,67 @@ export function exportExcel(params) {
     params,
   });
 }
-// 会话记录
-export function workOrdersessionList(params) {
+
+
+// BackAdmin的API接口 zbl starting
+
+// 默认展示的聊天记录
+export function workOrderuserRecordOne(params) {
+  return ajaxAmd.post({
+    url: '/workOrder/userRecordOne',
+    data: params,
+  });
+}
+// 管理后台的工单查询
+export function workOrderworkList(params) {
+  return ajaxAmd.post({
+    url: '/workOrder/workList',
+    data: params,
+  });
+}
+// 工单删除
+export function workOrderdeleteWork(params) {
+  return ajaxAmd.post({
+    url: '/workOrder/deleteWork',
+    data: params,
+  });
+}
+// 工单详情
+export function workOrderworkDetails(params) {
+  return ajaxAmd.post({
+    url: '/workOrder/workDetails',
+    data: params,
+  });
+}
+// 客服回复
+export function workOrdercustomerWork(params) {
+  return ajaxAmd.post({
+    url: '/workOrder/customerWork',
+    data: params,
+  });
+}
+// 添加栏目
+export function helpCenterinsertColumn(params) {
   return ajaxAmd.get({
-    url: '/workOrder/sessionList',
+    url: '/helpCenter/insertColumn',
     params,
   });
 }
-
-// 客服聊天
+// 获取栏目列表
+export function helpCentercolumnList(params) {
+  return ajaxAmd.get({
+    url: '/helpCenter/columnList',
+    params,
+  });
+}
+// 提交栏目信息
+export function helpCenterinsertHelpCenter(params) {
+  return ajaxAmd.post({
+    url: '/helpCenter/insertHelpCenter',
+    data: params,
+  });
+}
+// 客服聊天列表
 export function workOrderserviceList(params) {
   return ajaxAmd.get({
     url: '/workOrder/serviceList',
@@ -493,10 +487,46 @@ export function workOrderuserRecord(params) {
     data: params,
   });
 }
-// 默认展示的聊天记录
-export function workOrderuserRecordOne(params) {
+// 会话记录
+export function workOrdersessionList(params) {
+  return ajaxAmd.get({
+    url: '/workOrder/sessionList',
+    params,
+  });
+}
+// 对账 财务汇总
+export function verifybillsummary(params) {
+  return ajaxAmd.get({
+    url: '/verifybill/summary',
+    params,
+  });
+}
+// 财务汇总 获取下拉框
+export function verifybillparams(params) {
+  return ajaxAmd.get({
+    url: '/verifybill/params',
+    params,
+  });
+}
+// 发票列表
+export function invoiceList(params) {
   return ajaxAmd.post({
-    url: '/workOrder/userRecordOne',
+    url: '/invoiceList',
     data: params,
   });
 }
+// 获取应用渠道规则
+export async function channel(params) {
+  return ajaxAmd.get({
+    url: '/channel',
+    params,
+  });
+}
+// 获取设备列表
+export async function device(params) {
+  return ajaxAmd.get({
+    url: '/device',
+    params,
+  });
+}
+// BackAdmin的API接口 zbl ending

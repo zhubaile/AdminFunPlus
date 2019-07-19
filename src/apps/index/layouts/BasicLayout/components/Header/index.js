@@ -21,7 +21,7 @@ export default class Header extends Component {
     super(props);
 
     this.state = {
-      status: null,
+      status: 0,
     };
   }
   componentDidMount() {

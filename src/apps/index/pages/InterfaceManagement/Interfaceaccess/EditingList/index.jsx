@@ -65,7 +65,7 @@ export default class EditingList extends Component {
     return (
       <div className='editingList'>
         <div className='editingList-top'>
-          <h2>选择时间</h2>
+          <h2>编辑白名单</h2>
           <strong onClick={this.editingclose.bind(this)}>×</strong>
         </div>
         <div className='editingList-form'>

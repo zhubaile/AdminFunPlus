@@ -74,15 +74,7 @@
 
 .wodegongdan-conter {line-height: 20px;border-radius: 10px 10px 10px 10px;box-shadow: 0px 1px 8px 0px rgba(229, 229, 229, 0.81);border: 1px solid rgba(255, 255, 255, 0); margin-top: 20px; padding: 20px; background: #fff;}
 .wodegongdan-conter-main>span{ margin-left: 20px;}
-.wodegongdan-conter-main .searchbtn{
-  width: 80px; margin-left: 10px;
-  height: 30px;
-  border-radius: 4px;
-  background-color: rgba(73, 127, 255, 1);
-  color: rgba(255, 255, 255, 1);
-  font-size: 14px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0);}
+.wodegongdan-conter-main .searchbtn{width: 80px; margin-left: 10px;height: 30px;border-radius: 4px;background-color: rgba(73, 127, 255, 1);color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;border: 1px solid rgba(255, 255, 255, 0);}
 .wodegongdan-footer{ border-radius: 10px 10px 10px 10px;box-shadow: 0px 1px 8px 0px rgba(229, 229, 229, 0.81);border: 1px solid rgba(255, 255, 255, 0); margin-top: 20px; padding: 20px; background: #fff;}
 .wodegongdan-footer .removebtn{ float: left; margin: 20px 10px; width: 71px;height: 34px;border-radius: 4px;background-color: rgba(26, 85, 226, 0.95);color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;
   border: 1px solid rgba(255, 255, 255, 0); }
@@ -155,7 +147,21 @@ a:hover .sidebar-navone,a:hover .sidebar-navtwo{ background:#037cf8; color: #FFF
 .invoice-main-content{line-height: 20px; margin-top: 20px;border-radius: 10px 10px 10px 10px;color: rgba(16, 16, 16, 1);font-size: 14px;box-shadow: 0px 1px 8px 0px rgba(229, 229, 229, 0.81);border: 1px solid rgba(255, 255, 255, 0);}
 .invoice-main-content .removebtn{ float: left; margin: 20px 10px; width: 71px;height: 34px;border-radius: 4px;background-color: rgba(26, 85, 226, 0.95);color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;
   border: 1px solid rgba(255, 255, 255, 0); }
+
 /* 帮助中心 */
 .helpCenter{ width: 100%;}
 .helpCenter-main{ padding: 20px;}
 .helpCenter-main .next-input.next-medium.next-select-inner{ border-radius: 5px;}
+.helpCenter .currency-top .Addcolumns{ float: right;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 0.95);font-size: 14px;text-align: center;border: 1px solid rgba(187, 218, 249, 1);}
+/* 添加栏目 */
+.addcolumns{position: fixed; width: 500px; height:220px;  top: 50%; left: 50%; margin-top: -250px; margin-left: -110px; z-index: 8888; background-color: #FFF; border-radius: 5px; font-size: 16px;
+  -webkit-box-shadow: 1px 1px 3px #666; -moz-box-shadow: 1px 1px 3px #666; box-shadow: 1px 1px 3px #666; overflow: auto;line-height: 20px;border: 1px solid rgba(187, 187, 187, 1); padding: 10px 20px;}
+.addcolumns .addcolumns-top{ width: 100%;}
+.addcolumns .addcolumns-top h2{float: left;}
+.addcolumns .addcolumns-top strong{ float: right; font-size: 25px; font-weight: 500; margin-top: 15px; cursor: pointer;}
+.addcolumns-content{ clear: both;}
+.addcolumns-content span{ }
+.addcolumns-content input{ margin-left: 10px;width: 350px;height: 30px;line-height: 20px;border-radius: 4px;background-color: rgba(230, 247, 255, 1); padding-left:15px;border: 1px solid rgba(145, 213, 255, 1); margin-top: 20px;}
+.addcolumns .addcolumns-btn{ text-align: center;}
+.addcolumns .addcolumns-btn button{ text-align: center;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 1);color: rgba(255, 255, 255, 1);font-size: 14px;border: 1px solid rgba(255, 255, 255, 0); margin: 30px 10px;}
+.addcolumns .addcolumns-btn button:first-child{ background-color: #E6F1FC;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 1);font-size: 14px;text-align: center;border: 1px solid rgba(206, 219, 222, 1);}

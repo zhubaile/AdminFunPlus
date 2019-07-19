@@ -122,7 +122,7 @@ export default class PlatformChannel extends Component {
           <Tab.Item title="平台渠道" key='2'>
             <div className='tab-content' >
               <Table loading={isLoading} dataSource={data} hasBorder={false}>
-                <Table.Column title="商户ID" dataIndex="merchantId" />
+                {/* <Table.Column title="商户ID" dataIndex="merchantId" /> */}
                 <Table.Column title="支付渠道" dataIndex="name" />
                 <Table.Column title="使用场景" dataIndex="level" />
                 <Table.Column title="路由规则" dataIndex="rule" cell={this.renderRule} />

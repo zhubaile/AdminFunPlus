@@ -11,6 +11,8 @@ import '../../index.css';
 import Deletedata from './Deletedata';
 // import Check from './Check';
 
+const Cookies = require('js-cookie');
+
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const formItemLayout = {
@@ -49,6 +51,7 @@ export default class Workorderdetails extends Component {
   }
   fetchData = (len) => {
     const id = this.state.id;
+    debugger;
     workOrderworkDetails({
       _id: id,
     }).then(({ status,data })=>{
@@ -58,21 +61,17 @@ export default class Workorderdetails extends Component {
           work: data.data.work,
           workDetail: data.data.workDetail,
           workEvaluate: data.data.workEvaluate,
+        },()=>{
+          this.onScrollHandle(this.messagesEnd);
         });
       }
-      // const work = data.data.work;
-      // const workDetail = data.data.workDetail;
-      // const workEvaluate = data.data.workEvaluate;
-      // debugger;
-      // if (data.errCode == 0) {
-      //   this.props.history.push({ pathname: "/admin/backstageworkorder/Workorderdetails", state: { work,workDetail,workEvaluate } });
-      // }
     });
   };
 
   formChange = (value) => {
 
   };
+  // 滑轮自动下滑到底部
   onScrollHandle(event) {
     const clientHeight = event.clientHeight;
     const scrollHeight = event.scrollHeight;
@@ -112,7 +111,8 @@ export default class Workorderdetails extends Component {
     subreply() {
       const contents = this.state.Probleminput;
       const _id = this.state.work[0]._id;
-      const byReplyId = this.state.workDetail[0].userId;
+      const byReplyId = Cookies.get('userId'); // 用户的id
+      debugger;
       if (!contents) {
         return Message.success('输入问题不能为空');
       }
@@ -138,15 +138,15 @@ export default class Workorderdetails extends Component {
     workorderdetailsOpen(id) {
       this.Deletedata.deletedataopen(id);
     }
-  // 结单
+  /*  // 结单
     workorderdetailsOpenbtn() {
       const id = this.state.work[0]._id;
       this.Check.checkopen(id);
     }
     // 返回工单列表
     reworklist() {
-      this.props.history.push("/admin/backstageworkorder/Allworkorders");
-    }
+      this.props.history.push("/backadmin/service/allworkorders");
+    } */
   renderOper = (values,index,record) => {
     return (
       <div>
@@ -194,8 +194,9 @@ export default class Workorderdetails extends Component {
   }
   render() {
     const { isLoading, work, workDetail,workEvaluate } = this.state;
-    const status = work[0].status;
-    const isStatement = work[0].isStatement;
+    const status = work[0].status; // 状态，处理中，待评价，已存档，已完成
+    const usernames = work[0].username; // 用户识别
+    const isStatement = work[0].isStatement; // 是否结单
     return (
       <div className='backstageworkorder'>
         <Deletedata ref={ node => this.Deletedata = node } history={this.props.history} />
@@ -209,10 +210,11 @@ export default class Workorderdetails extends Component {
           <div className='wodegongdan-table'>
             <Table loading={isLoading} dataSource={work} hasBorder={false}>
               <Table.Column title="工单编号" dataIndex="_id" />
-              <Table.Column title="工单标题" dataIndex="title" />
               <Table.Column title="描述" dataIndex="description" />
               <Table.Column title="优先级" dataIndex="level" />
-              <Table.Column title="提交账号" dataIndex="account" />
+              <Table.Column title="企业名称" dataIndex="companyName" />
+              <Table.Column title="创建人" dataIndex="username" />
+              <Table.Column title="联系方式" dataIndex="phone" />
               <Table.Column title="提交时间" dataIndex="createdAt" cell={this.time} />
               <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} />
               <Table.Column
@@ -231,7 +233,7 @@ export default class Workorderdetails extends Component {
                 workDetail.map((item)=>{
                     return (
                       <div className='communicate'>
-                        { item.username == '3FunPlus客服' ? (<img src={require('@img/logo/logo1.png')} alt="" />) : (<img src={require('@img/img/avatar1.jpg')} alt="" />)}
+                        { item.username == usernames ? (<img src={require('@img/img/avatar1.jpg')} alt="" />) : (<img src={require('@img/logo/logo1.png')} alt="" />) }
                         <ul>
                           <li>{item.username}</li>
                           <li>{item.description}</li>
@@ -255,7 +257,6 @@ export default class Workorderdetails extends Component {
             )}
           </div>
           <div className={isStatement == 1 ? 'wodegongdan-pingjia' : 'wodegongdan-pingjia nodisplay'}>
-           {/* <p style={{ borderLeft: '2px solid blue', marginLeft: '5px' }}>{status == 3 ? ('您的评价') : ('待评价')}</p>*/}
             {status == 3 ? (
               <Form
                 {...formItemLayout}

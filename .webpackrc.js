@@ -6,9 +6,9 @@ let proxy = {};
   target: "http://192.168.1.123:3000",
   changeOrigin: true,
 };*/
-proxy['/web/beta/v1.0/**'] = {
+proxy['/admin/**'] = {
   // 代理测试环境地址 如下，代理就是把请求本地的url接到配置好的url上。
-  target: "http://192.168.1.105:3000",
+  target: "http://192.168.1.118:3001",
   changeOrigin: true,
 };
 console.log('---------111112222333456---------')
@@ -27,13 +27,6 @@ module.exports = {
         { from: /^\/user/, to: 'build/login.html' }, // 登录界面
         { from: /^\/website/, to: 'build/website.html' }, // 官网界面
         { from: /^\/backadmin/, to: 'build/index.html' } // 管理后台
-        // { from: /\/index.html$/, to:'build/index.html' },
-        // { from: /\/website.html$/, to:'build/website.html' },  // 匹配已website.html结束的字符，匹配成功跳转到website.html
-        // { from: /\/login.html$/, to:'build/login.html' },
-        // { from: /^\/website/, to:'build/website.html' },     // 匹配已website开头的字符，匹配成功跳转到website.html
-        // /*{ from: /(?=website)/, to:'build/website.html' },
-        // { from: /(?=login)/, to:'build/login.html' },*/
-        // { from: /^\/user/, to:'build/login.html' }
       ],
     }
   },

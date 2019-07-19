@@ -40,7 +40,7 @@ export default class Addgrouping extends Component {
       value,
     });
   };
-  componentDidMount() {
+  /*componentDidMount() {
     deviceGroupaddparmas().then(
       ({ status, data }) => {
         debugger;
@@ -53,7 +53,7 @@ export default class Addgrouping extends Component {
         // console.log(channelss[0].value);
         // this.props.gaibianid(channelss[0].value);
         // 二
-        /* const channelss = function (arr) {
+        /!* const channelss = function (arr) {
           const newArr = [];
           for (let i = 0; i < arr.length; i++) {
             newArr.push({ value: arr[i]._id,label: arr[i].des });
@@ -69,7 +69,7 @@ export default class Addgrouping extends Component {
         };
         // 重新定义
         const newdClassifys = dClassifys(dClassify);
-        const newdchannelss = channelss(channels); */
+        const newdchannelss = channelss(channels); *!/
         if (data.errCode == 0) {
           this.setState({
             channels: channelss,
@@ -81,7 +81,7 @@ export default class Addgrouping extends Component {
       ({ status, data }) => {
       }
     );
-  }
+  }*/
   // deviceGroupaddparmas
   addgrouping() {
     this.refs.form.validateAll((errors, values) => {
