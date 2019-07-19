@@ -291,52 +291,10 @@ export function loglist(params) {
     data: params,
   });
 }
-// 收入
-export function incomeList(params) {
-  return ajaxAmd.post({
-    url: '/incomeList',
-    data: params,
-  });
-}
 // 订单退款
 export function refund(params) {
   return ajaxAmd.post({
     url: '/refund',
-    data: params,
-  });
-}
-// 订单退款列表
-export function orderRefundList(params) {
-  return ajaxAmd.post({
-    url: '/orderRefundList',
-    data: params,
-  });
-}
-// 批量退款列表
-export function batchRefundList(params) {
-  return ajaxAmd.post({
-    url: '/batchRefundList',
-    data: params,
-  });
-}
-// 企业付款列表
-export function totransferList(params) {
-  return ajaxAmd.post({
-    url: '/totransferList',
-    data: params,
-  });
-}
-// 企业批量付款
-export function batchTotransferList(params) {
-  return ajaxAmd.post({
-    url: '/batchTotransferList',
-    data: params,
-  });
-}
-// 出款审核列表
-export function payOutExamineList(params) {
-  return ajaxAmd.post({
-    url: '/payOutExamineList',
     data: params,
   });
 }
@@ -530,3 +488,48 @@ export async function device(params) {
   });
 }
 // BackAdmin的API接口 zbl ending
+// BackAdmin的API接口 kkk starting
+// 收入
+export function incomeList(params) {
+  return ajaxAmd.post({
+    url: '/incomeList',
+    data: params,
+  });
+}
+// 支出
+// 企业付款
+export function totransferList(params) {
+  return ajaxAmd.post({
+    url: '/totransferList',
+    data: params,
+  });
+}
+// 批量付款
+export function batchTotransferList(params) {
+  return ajaxAmd.post({
+    url: '/batchTotransferList',
+    data: params,
+  });
+}
+// 订单退款
+export function orderRefundList(params) {
+  return ajaxAmd.post({
+    url: '/orderRefundList',
+    data: params,
+  });
+}
+// 批量退款
+export function batchRefundList(params) {
+  return ajaxAmd.post({
+    url: '/batchRefundList',
+    data: params,
+  });
+}
+// 出款审核
+export function payOutExamineList(params) {
+  return ajaxAmd.post({
+    url: '/payOutExamineList',
+    data: params,
+  });
+}
+// BackAdmin的API接口 kkk ending

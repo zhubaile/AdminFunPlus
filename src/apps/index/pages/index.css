@@ -1,5 +1,7 @@
 /*全局Starting*/
 a:active{ text-decoration: none; }
+/*选项卡全局*/
+.next-tabs.next-medium .next-tabs-tab-inner{ font-size: 16px;}
 /*下拉框、输入框全局样式*/
 .next-range-picker.next-medium{ height: 30px; line-height: 30px;}
 .next-range-picker.next-medium .next-range-picker-trigger{ border-radius: 4px;}
@@ -339,3 +341,56 @@ a:active{ text-decoration: none; }
   border-radius: 4px;
 }
 
+/*企业付款、批量付款、订单退款、批量退款-----------Starting*/
+.expendbatchre .container-block,.expendordbat .container-block,.auditofpayment .container-block{ margin: 20px 0px 0px 0px;}
+.expendordbat .next-row.next-row-wrap{ margin: 20px 0px 20px 0px;}
+/*.expendordbat .expendordbat-tab{ margin-top: 20px;}*/
+.expendordbat-tab  .expendordbat-tabs-border{clear: both; border-bottom: 1px solid #dddddd;}
+.expendordbat-tab { position: relative;}
+.expendordbat-tab .orderposab{ position: absolute; top: 0; right: 20px; background:#E2EDFF; color: #1989FA; border-radius: 4px; border-color: #A3D0FD;}
+.expendordbat-tab .next-tabs-content .expendbatchre-message{background: #E6F7FF; border: 1px solid #91D5FF; border-radius: 4px; margin: 20px 0px; width: 80%;}
+/*批量付款、订单退款、批量退款-----------Ending*/
+.paymentreview .auditofpayment-top{border-bottom: 1px solid rgba(187, 187, 187, 1); margin-top: 20px;}
+.paymentreview .auditofpayment-top span{ font-size: 20px; font-weight: 400;width: 64px;height: 24px;color: rgba(116, 116, 116, 1);font-size: 16px;text-align: left;}
+.paymentreview .auditofpayment-top span.spanbtn{border-right: 1px solid rgba(187, 187, 187, 1); padding: 0 20px; cursor: pointer;}
+.paymentreview .auditofpayment-top span.spanbtn.color{color: blue;}
+.paymentreview .auditofpayment-top-border{ border-bottom: 3px solid #037cf8; width: 35px; margin-top: 10px; margin-bottom: -2px;}
+
+/*管理权限（后台）*/
+/* 成员管理 */
+.membermanagement{ width: 100%; }
+.membermanagement-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.addmemberbtn{position: absolute; top: 15px; right: 20px;border-radius: 6px; background-color: #E2EDFF; border: 1px solid #A3D0FD; color: #1989FA; cursor: pointer;}
+.membermanagement-bottom{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.membermanagement-bottom-top{ border-bottom: 1px solid rgba(187, 187, 187, 0.45); padding-bottom: 10px; margin-bottom: 10px;}
+
+.addmenber{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
+.addmenber>span{ margin-top: 10px; width: 90%;}
+.addmenber>span input{ display: block; width: 90%;}
+.next-overlay-wrapper .next-overlay-inner{ z-index: 8889;}
+
+.membermanagements-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1); border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
+.Newrole{ border-radius: 6px; background-color: #E2EDFF; border: 1px solid #A3D0FD; color: #1989FA; cursor: pointer;}
+
+.membermanagement-top .member-role{ margin-left: 30px;}
+.member-panel .tab-panel{ padding-bottom: 20px; }
+/*成员管理----新增角色--starting*/
+.newrole{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
+.newrole div{ margin: 15px auto;}
+.newrole label{ margin-right: 10px;}
+/*成员管理----新增角色--ending*/
+
+/*成员管理----编辑角色--starting*/
+.editingrole{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
+.editingrole div{ margin: 15px auto;}
+.editingrole label{ margin-right: 10px;}
+/*成员管理----编辑角色--ending*/

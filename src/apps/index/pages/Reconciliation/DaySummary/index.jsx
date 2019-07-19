@@ -80,7 +80,11 @@ export default class DaySummary extends Component {
       }
     );
   };
-
+  search() {
+    const values = this.state.value;
+    debugger;
+    /*    this.refs.linegraph.fetchData(values);*/
+  }
   handlePaginationChange = (current) => {
     this.setState(
       {
@@ -163,7 +167,7 @@ export default class DaySummary extends Component {
                           <Select style={{ width: '200px' }} dataSource={device} />
                         </FormBinder>
                         <Button className='btn-all bg' size="large" type="secondary">对比其他时间</Button>
-                        <Button className='btn-all bg' size="large" type="secondary">搜索</Button>
+                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                       </div>
                     </Col>
                   </Row>

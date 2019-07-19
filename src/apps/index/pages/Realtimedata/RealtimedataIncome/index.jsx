@@ -2,31 +2,22 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select , Menu,MenuButton, Radio, Input, Grid, DatePicker, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
+import { incomeList } from '@indexApi';
+import moment from "moment/moment";
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../index.css';
 
-const { Item } = MenuButton;
-const random = (min, max) => {
+/* const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
-      merchantId: '000662',
-      name: ['花果山'],
-      time: '20190606',
-      order: '02456245',
-      remark: ['贵'],
-      balance: '￥100.00',
-      email: ['支付中'],
-      tel: ['￥100.00'],
-      role: [' ￥100.00'],
-      status: '支付宝wap',
-      oper: [''],
       _id: random(10000, 20000,30000,50025,68522),
     };
   });
-};
+}; */
+const { Item } = MenuButton;
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 export default class RealtimedataIncome extends Component {
@@ -34,36 +25,57 @@ export default class RealtimedataIncome extends Component {
     super(props);
     this.state = {
       current: 1,
+      pageSize: 10,
+      total: 0,
+      result: [],
+      result1: [],
+      result2: [],
       isLoading: false,
       data: [],
       args: [],
       value: {
-        jiaose: '角色',
-        haoma: '',
-        timeType: '创建时间',
+        timeType: '',
         startdate: [],
         orderStatus: '',
         refundStatus: '',
-        payChannel: '',
+        channel: [],
         device: '',
         out_trade_no: '',
       },
     };
   }
 
+  // 重置按钮
+  handleReset() {
+    this.setState({
+      value: {
+        timeType: 'createdAt',
+        startdate: [],
+        orderStatus: '',
+        payChannel: '',
+        channel: '',
+        out_trade_no: '',
+      },
+    });
+  }
+  // 搜索按钮
+  search(e) {
+    const { validateFields } = this.refs.form;
+    validateFields((errors,values)=>{
+      const arrivalDate = [];
+      if (values.startdate.length == 2) {
+        const startdatestart = moment(values.startdate[0]._d).valueOf();
+        const startdateend = moment(values.startdate[1]._d).valueOf();
+        arrivalDate.push(startdatestart);
+        arrivalDate.push(startdateend);
+      }
+      debugger;
+      this.fetchData(values,arrivalDate);
+    });
+  }
   componentDidMount() {
-    debugger;
     this.fetchData();
   }
-
-  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };
 
   fetchData = (len) => {
     this.setState(
@@ -71,12 +83,26 @@ export default class RealtimedataIncome extends Component {
         isLoading: true,
       },
       () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
-          debugger;
-          this.setState({
-            data,
-            isLoading: false,
-          });
+        const pageSize = this.state.pageSize; // 一页多少数据
+        const page = this.state.current; // 页码
+        incomeList({
+          page,
+          pageSize,
+        }).then(({ status,data })=>{
+          if (data.errCode == 0) {
+            const rrr = data.data.result2;
+            const result2 = rrr.channel;
+            const channel = result2.map(item=>({ value: item._id, label: item.payScene, son: item.children }));
+            const resultt = Object.assign({},rrr,{ channel });
+            debugger;
+            this.setState({
+              isLoading: false,
+              total: data.data.totalCount,
+              result: data.data.result, // 数据列表
+              result1: data.data.result1,
+              result2: resultt,
+            });
+          }
         });
       }
     );
@@ -96,7 +122,7 @@ export default class RealtimedataIncome extends Component {
     return (
       <div className='tb_span'>
         <span>查看</span>
-       {/* <Switch size='small' className='div-switch' defaultChecked={false} />*/}
+        {/* <Switch size='small' className='div-switch' defaultChecked={false} /> */}
       </div>
     );
   };
@@ -122,46 +148,56 @@ export default class RealtimedataIncome extends Component {
   }
   // 删除方法
   removes() {
-    const { data,args } = this.state;
+    const { result,args } = this.state;
     debugger;
     let index = -1;
     args.map((id)=>{
-      data.forEach((item, i) => {
+      result.forEach((item, i) => {
         if (item._id === id) {
           index = i;
         }
       });
       if (index !== -1) {
-        data.splice(index, 1);
+        result.splice(index, 1);
         this.setState({
-          data,
+          result,
         });
       }
     });
   }
-
+  createdAt=(e)=>{
+    const createdAt = moment(e).format('YYYY-MM-DD HH:mm:ss');
+    return (
+      <p>{createdAt}</p>
+    );
+  }
+  updatedAt=(e)=>{
+    const updatedAt = moment(e).format('YYYY-MM-DD HH:mm:ss');
+    return (
+      <p>{updatedAt}</p>
+    );
+  }
+  // 输入支付渠道获取设备(级联子元素)
+  Accesschannels(e,v,i) {
+    const values = this.state.value;
+    const value = Object.assign({},values,{ device: '' });
+    this.setState({
+      value,
+    },()=>{
+      const device = i.son;
+      const devices = device.map(item=>({ value: item._id, label: item.dName }));
+      const valueson = Object.assign({},values,{ device: devices });
+      this.setState({
+        value: valueson,
+      });
+    });
+  }
   render() {
-    const { isLoading, data, current } = this.state;
-    const timeType = [
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-    ];
-    const orderStatus = [
-      { value: '1 ', label: '1' },
-      { value: '2', label: '2' },
-    ];
-    const refundStatus = [
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-    ];
-    const payChannel = [
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-    ];
-    const device = [
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-    ];
+    const { isLoading, data, current,pageSize,total,result,result1,result2 } = this.state;
+    const timeType = result2.dateType; // 选择时间下拉框
+    const orderStatus = result2.orderStatus; // 退款状态
+    const channel = result2.channel; // 支付渠道
+    const device = this.state.value.device;
     const rowSelection = {
       onChange: this.Choice.bind(this),
       getProps: (record,index) => {
@@ -177,8 +213,8 @@ export default class RealtimedataIncome extends Component {
           <Tab.Item title="收入">
             <div style={styles.divMargin}>
               <div className='income-tabs'>
-                <div>总收入金额：xxx</div>
-                <div>支付成功率：90%</div>
+                <div>总收入金额：{result1.totalAmount}</div>
+                <div>支付成功率：{result1.successRate}</div>
               </div>
               <div className='income-tabs rightbtn'>
                 <Button className='btn-all bg' size="large" type="secondary" disabled style={{ opacity: 0.5 }}>表格列过滤</Button>
@@ -200,7 +236,7 @@ export default class RealtimedataIncome extends Component {
                         <FormBinder name="timeType"
                           autoWidth={false}
                         >
-                          <Select style={styles.formSelect} dataSource={timeType} defaultValue='创建时间' />
+                          <Select style={styles.formSelect} dataSource={timeType} />
                         </FormBinder>
                         <FormBinder name='startdate'>
                           <RangePicker className='showHour' showTime resetTime />
@@ -211,15 +247,15 @@ export default class RealtimedataIncome extends Component {
                         </FormBinder>
                         <span style={styles.formLabel}>退款状态</span>
                         <FormBinder name='refundStatus'>
-                          <Select style={styles.formSelect} dataSource={refundStatus} />
+                          <Select style={styles.formSelect} dataSource='' />
                         </FormBinder>
                       </div>
                     </Col>
                     <Col l="24">
                       <div style={styles.formItemTwo}>
                         <span style={styles.formLabel}>支付渠道</span>
-                        <FormBinder name='payChannel'>
-                          <Select style={styles.formSelect} dataSource={payChannel} />
+                        <FormBinder name='channel'>
+                          <Select style={styles.formSelect} dataSource={channel} onChange={this.Accesschannels.bind(this)} />
                         </FormBinder>
                         <FormBinder name="device" >
                           <Select style={{ width: '200px' }} dataSource={device} />
@@ -228,8 +264,8 @@ export default class RealtimedataIncome extends Component {
                         <FormBinder name='out_trade_no'>
                           <Input className='input-bg' placeholder='输入订单号' />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary">搜索</Button>
-                        <Button className='btn-all bg' size="large" type="secondary">重置</Button>
+                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
                       </div>
                     </Col>
                   </Row>
@@ -240,29 +276,38 @@ export default class RealtimedataIncome extends Component {
             <div className='realtimedataincome-panel' >
               <div className=''>
                 <div className='tab-panel'>
-                  <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-{/*                    <Table.Column
+                  <Table loading={isLoading} dataSource={result} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+                    {/*                    <Table.Column
                       title=""
                       width={50}
                       dataIndex=""
                       cell={this.renderSelectall}
-                    />*/}
-                    <Table.Column title="商户ID" dataIndex="merchantId" />
-                    <Table.Column title="企业名称" dataIndex="name" />
-                    <Table.Column title="创建时间完成时间" dataIndex="time" />
-                    <Table.Column title="商户订单号平台流水号" dataIndex="order" />
-                    <Table.Column title="商品名称备注" dataIndex="remark" />
-                    <Table.Column title="创建金额实付金额" dataIndex="balance" />
-                    <Table.Column title="支付状态" dataIndex="email" />
-                    <Table.Column title="退款金额退款状态" dataIndex="tel" />
-                    <Table.Column title="分润金额分润状态" dataIndex="role" />
-                    <Table.Column title="渠道设备ID" dataIndex="status" />
+                    /> */}
+                    <Table.Column title="商户ID" dataIndex="cpId" />
+                    <Table.Column title="企业名称" dataIndex="cpName" />
+                    <Table.Column title="创建时间" dataIndex="createdAt" onClick={this.createdAt} />
+                    <Table.Column title="完成时间" dataIndex="updatedAt" onClick={this.updatedAt} />
+                    <Table.Column title="商户订单号" dataIndex="out_trade_no" />
+                    <Table.Column title="平台流水号" dataIndex="orderNo" />
+                    <Table.Column title="商品名称" dataIndex="orderDes" />
+                    <Table.Column title="备注" dataIndex="" />
+                    <Table.Column title="创建金额" dataIndex="amount" />
+                    <Table.Column title="实付金额" dataIndex="amount_real" />
+                    <Table.Column title="支付状态" dataIndex="orderStatusName" />
+                    <Table.Column title="退款金额" dataIndex="" />
+                    <Table.Column title="退款状态" dataIndex="" />
+                    <Table.Column title="分润金额" dataIndex="" />
+                    <Table.Column title="分润状态" dataIndex="" />
+                    <Table.Column title="渠道" dataIndex="channelName" />
+                    <Table.Column title="设备ID" dataIndex="deviceId" />
                     <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
                   </Table>
                   <Pagination
                     style={{ marginTop: '20px', textAlign: 'right' }}
                     current={current}
                     onChange={this.handlePaginationChange}
+                    pageSize={pageSize} // 界面展示多少条数据
+                    total={total} // 一共多少条数据
                   />
                   <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
                 </div>

@@ -6,8 +6,13 @@ import { asideMenuConfig } from './menuConfig';
 // 实时数据-收入
 const RealtimedataIncome = React.lazy(() => import('./pages/Realtimedata/RealtimedataIncome'));
 // 实时数据-支出概况
-const OutLay = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/OutLay'));
-const PaymentReview = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/PaymentReview'));
+const OutLay = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/OutLay')); // 支出
+const Enterprisepayment = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/Enterprisepayment')); // 企业付款
+const BusinessPaymentBatch = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/BusinessPaymentBatch')); // 批量付款
+const Orderrefund = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/Orderrefund')); // 订单退款
+const Batchrefund = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/Batchrefund')); // 批量退款
+
+const PaymentReview = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/PaymentReview')); // 出款审核
 // 对账
 const ChannelReconciliation = React.lazy(() => import('./pages/Reconciliation/ChannelReconciliation')); // 渠道对账
 const CustomSummary = React.lazy(() => import('./pages/Reconciliation/CustomSummary')); // 自定义汇总
@@ -24,9 +29,12 @@ const EquipmentManagement = React.lazy(() => import('./pages/Applicationmanageme
 const RoutingRules = React.lazy(() => import('./pages/Applicationmanagement/Routingrulesoverview/RoutingRules')); // 路由规则（用户）
 const PlatformRouting = React.lazy(() => import('./pages/Applicationmanagement/Routingrulesoverview/PlatformRouting')); // 平台路由覆盖
 const Businessinformation = React.lazy(() => import('./pages/Businessinformation')); // 商户信息
-
+// 团队权限（用户）
 const Rolemanagement = React.lazy(() => import('./pages/Teamauthority/Rolemanagement')); // 角色管理
 const Membermanagement = React.lazy(() => import('./pages/Teamauthority/Membermanagement')); // 成员管理
+// 管理权限（后台）
+const Rolepermissions = React.lazy(() => import('./pages/Administrativeauthority/Rolepermissions')); // 角色权限
+const MemberManagement = React.lazy(() => import('./pages/Administrativeauthority/Membermanagement')); // 成员管理
 // 服务
 // 工单
 const Allworkorders = React.lazy(() => import('./pages/Service/Workorder/Allworkorders')); // 工单
@@ -40,7 +48,7 @@ const Invoice = React.lazy(() => import('./pages/Service/Invoice')); // 发票
 const ForeignAPI = React.lazy(() => import('./pages/InterfaceManagement/foreignAPI')); // 对外API
 const Interfaceaccess = React.lazy(() => import('./pages/InterfaceManagement/Interfaceaccess')); // 接口访问白名单
 const InterfaceDocument = React.lazy(() => import('./pages/InterfaceManagement/InterfaceDocument')); // 接口文档
-const Operationlog = React.lazy(() => import('./pages/Teamauthority/Operationlog')); // 管理台操作日志
+const Operationlog = React.lazy(() => import('./pages/Administrativeauthority/Operationlog')); // 管理台操作日志
 
 const Siteconfiguration = React.lazy(() => import('./pages/Systemsettings/Siteconfiguration')); // 站点设置
 const Mailboxsettings = React.lazy(() => import('./pages/Systemsettings/Mailboxsettings')); // 邮箱收发设置
@@ -67,6 +75,22 @@ const routerConfig = [
   {
     path: '/backadmin/Realtimedata/outLay',
     component: OutLay,
+  },
+  {
+    path: '/backadmin/Realtimedata/enterprisepayment',
+    component: Enterprisepayment,
+  },
+  {
+    path: '/backadmin/Realtimedata/businessPaymentBatch',
+    component: BusinessPaymentBatch,
+  },
+  {
+    path: '/backadmin/Realtimedata/orderrefund',
+    component: Orderrefund,
+  },
+  {
+    path: '/backadmin/Realtimedata/batchrefund',
+    component: Batchrefund,
   },
   {
     path: '/backadmin/Realtimedata/paymentReview',
@@ -125,6 +149,14 @@ const routerConfig = [
     component: Membermanagement,
   },
   {
+    path: '/backadmin/Administrativeauthority/rolepermissions',
+    component: Rolepermissions,
+  },
+  {
+    path: '/backadmin/Administrativeauthority/memberManagement',
+    component: MemberManagement,
+  },
+  {
     path: '/backadmin/service/allworkorders',
     component: Allworkorders,
   },
@@ -157,7 +189,7 @@ const routerConfig = [
     component: InterfaceDocument,
   },
   {
-    path: '/backadmin/Teamauthority/operationlog',
+    path: '/backadmin/Administrativeauthority/operationlog',
     component: Operationlog,
   },
   {

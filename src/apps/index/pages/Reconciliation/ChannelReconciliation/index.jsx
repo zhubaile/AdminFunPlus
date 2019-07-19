@@ -83,7 +83,11 @@ export default class ChannelReconciliation extends Component {
       }
     );
   };
-
+  search() {
+    const values = this.state.value;
+    debugger;
+    /*    this.refs.linegraph.fetchData(values);*/
+  }
   handlePaginationChange = (current) => {
     this.setState(
       {
@@ -195,7 +199,7 @@ export default class ChannelReconciliation extends Component {
                         <FormBinder name='out_trade_no'>
                           <Input style={styles.formInput} className='input-bg' placeholder='' />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary">搜索</Button>
+                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                       </div>
                     </Col>
                   </Row>

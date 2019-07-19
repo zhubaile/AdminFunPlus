@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select , Menu,MenuButton, Radio, Input, Grid, DatePicker, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
+/*import { totransferList } from '@indexApi';*/
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
@@ -34,6 +35,8 @@ export default class OutLay extends Component {
     super(props);
     this.state = {
       current: 1,
+      pageSize: 10,
+      total: 0,
       isLoading: false,
       data: [],
       args: [],
@@ -52,18 +55,18 @@ export default class OutLay extends Component {
   }
 
   componentDidMount() {
-    debugger;
+
     this.fetchData();
   }
 
-  mockApi = (len) => {
+/*  mockApi = (len) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
         debugger;
       }, 600);
     });
-  };
+  };*/
 
   fetchData = (len) => {
     this.setState(
@@ -81,6 +84,28 @@ export default class OutLay extends Component {
       }
     );
   };
+/*  fetchData = (len) => {
+    this.setState(
+      {
+        isLoading: true,
+      },
+      () => {
+        const pageSize = this.state.pageSize; // 一页多少数据
+        const page = this.state.current; // 页码
+        totransferList({
+          page,
+          pageSize,
+        }).then(({ status,data })=>{
+          debugger;
+          if (data.errorCode == 0){
+            this.setState({
+
+            });
+          }
+        });
+      }
+    );
+  };*/
 
   handlePaginationChange = (current) => {
     this.setState(
@@ -135,7 +160,18 @@ export default class OutLay extends Component {
       }
     });
   }
-
+  btnOne() {
+    this.props.history.push('/backadmin/Realtimedata/outLay');
+  }
+  btnTwo() {
+    this.props.history.push('/backadmin/Realtimedata/businessPaymentBatch');
+  }
+  btnThree() {
+    this.props.history.push('/backadmin/Realtimedata/orderrefund');
+  }
+  btnFour() {
+    this.props.history.push('/backadmin/Realtimedata/batchrefund');
+  }
   render() {
     const { isLoading, data, current } = this.state;
     const timeType = [
@@ -169,8 +205,8 @@ export default class OutLay extends Component {
 
     return (
       <div className='outlay'>
-        <Tab shape='pure' className='income-tab'>
-          <Tab.Item title="支出">
+        <Tab shape='pure' className='income-tab' defaultActiveKey='1'>
+          <Tab.Item title="企业付款" key='1'>
             <div style={styles.divMargin}>
               <div className='outlay-tabs'>
                 <div>总支出金额：xxx</div>
@@ -265,6 +301,20 @@ export default class OutLay extends Component {
               </div>
             </div>
           </Tab.Item>
+
+
+          <Tab.Item title="批量付款" key='2' onClick={this.btnTwo.bind(this)} >
+
+          </Tab.Item>
+
+          <Tab.Item title="订单退款" key='3' onClick={this.btnThree.bind(this)} >
+
+          </Tab.Item>
+
+          <Tab.Item title="批量退款" key='4' onClick={this.btnFour.bind(this)} >
+
+          </Tab.Item>
+
         </Tab>
       </div>
     );

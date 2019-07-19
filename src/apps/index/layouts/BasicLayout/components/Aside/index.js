@@ -57,7 +57,7 @@ export default class Aside extends Component {
               >
                 <MenuItem key="1"><Link to="/backadmin/realtimedata/realtimedataIncome">收入</Link></MenuItem>
                 <SubMenu key="sub3" title="支出概况">
-                  <MenuItem key="2"><Link to="/backadmin/Realtimedata/outLay">支出</Link></MenuItem>
+                  <MenuItem key="2"><Link to="/backadmin/Realtimedata/enterprisepayment">支出</Link></MenuItem>
                   <MenuItem key="3"><Link to="/backadmin/Realtimedata/paymentReview">出款审核</Link></MenuItem>
                 </SubMenu>
               </SubMenu>
@@ -218,10 +218,24 @@ export default class Aside extends Component {
               >
                 <MenuItem key="4"><Link to="/backadmin/Teamauthority/rolemanagement">角色管理</Link></MenuItem>
                 <MenuItem key="5"><Link to="/backadmin/Teamauthority/membermanagement">成员管理</Link></MenuItem>
-                <MenuItem key="6"><Link to="/backadmin/Teamauthority/operationlog">管理台操作日志</Link></MenuItem>
               </SubMenu>
+
               <SubMenu
                 key="sub3"
+                title={
+                  <span>
+                    <i className="os-icon os-icon-coins-4" />
+                    <span>管理权限</span>
+                  </span>
+                }
+              >
+                <MenuItem key="6"><Link to="/backadmin/Administrativeauthority/rolepermissions">角色权限</Link></MenuItem>
+                <MenuItem key="7"><Link to="/backadmin/Administrativeauthority/memberManagement">成员管理</Link></MenuItem>
+                <MenuItem key="8"><Link to="/backadmin/Administrativeauthority/operationlog">管理台操作日志</Link></MenuItem>
+              </SubMenu>
+
+              <SubMenu
+                key="sub4"
                 title={
                   <span>
                     <i className="os-icon os-icon-coins-4" />
@@ -229,16 +243,16 @@ export default class Aside extends Component {
                   </span>
                 }
               >
-                <MenuItem key="7"><Link to="/backadmin/Systemsettings/siteconfiguration">站点设置</Link></MenuItem>
-                <MenuItem key="8"><Link to="/backadmin/Systemsettings/mailboxsettings">邮箱收发设置</Link></MenuItem>
-                <MenuItem key="9"><Link to="/backadmin/Systemsettings/smsgatewaysettings">短信网关</Link></MenuItem>
-                <MenuItem key="10"><Link to="/backadmin/Systemsettings/qrcodegateway">二维码网关</Link></MenuItem>
-                <MenuItem key="11"><Link to="/backadmin/Systemsettings/extremesetting">极验设置</Link></MenuItem>
-                <MenuItem key="12"><Link to="/backadmin/Systemsettings/platformversion">平台版本</Link></MenuItem>
-                <MenuItem key="13"><Link to="/backadmin/Systemsettings/platforminitialization">平台初始化及系统搬家</Link></MenuItem>
+                <MenuItem key="9"><Link to="/backadmin/Systemsettings/siteconfiguration">站点设置</Link></MenuItem>
+                <MenuItem key="10"><Link to="/backadmin/Systemsettings/mailboxsettings">邮箱收发设置</Link></MenuItem>
+                <MenuItem key="11"><Link to="/backadmin/Systemsettings/smsgatewaysettings">短信网关</Link></MenuItem>
+                <MenuItem key="12"><Link to="/backadmin/Systemsettings/qrcodegateway">二维码网关</Link></MenuItem>
+                <MenuItem key="13"><Link to="/backadmin/Systemsettings/extremesetting">极验设置</Link></MenuItem>
+                <MenuItem key="14"><Link to="/backadmin/Systemsettings/platformversion">平台版本</Link></MenuItem>
+                <MenuItem key="15"><Link to="/backadmin/Systemsettings/platforminitialization">平台初始化及系统搬家</Link></MenuItem>
               </SubMenu>
               <SubMenu
-                key="sub4"
+                key="sub5"
                 title={
                   <span>
                     <i className="os-icon os-icon-coins-4" />
