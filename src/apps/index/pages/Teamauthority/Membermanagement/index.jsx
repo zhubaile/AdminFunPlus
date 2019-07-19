@@ -6,6 +6,7 @@ import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
 import Addmember from "./Addmember/index";
 import Resetpassword from "./Resetpassword/index";
+import {Message} from "@alifd/next/lib/index";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -70,8 +71,9 @@ export default class Membermanagement extends Component {
           this.setState({
             grouplistdata: data.data,
           });
+        } else {
+          Message.success(data.message);
         }
-        // Message.success(data.message);
       }
     );
   };

@@ -4,10 +4,10 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { withRouter, Link } from 'react-router-dom';
 import { Input, Radio, Tab , Button, Grid, Form, DatePicker,Table,Pagination,Message } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-/*import Customerservice from "../components/Customerservice";*/
+/* import Customerservice from "../components/Customerservice"; */
 import Newrole from "./NewRole";
 import Editingrole from "./EditingRole";
-import { roleList, userDelete, deleteRolePms } from '@indexApi';
+import { sysRoleList, deleteSysRolePms } from '@indexApi';
 
 import '../../index.css';
 
@@ -57,40 +57,28 @@ class Rolepermissions extends Component {
     this.fetchData();
   }
 
-  /* mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-      }, 600);
-    });
-  }; */
-
   fetchData = (len) => {
     this.setState(
       {
         isLoading: true,
       },
       () => {
-        /* this.mockApi(len).then((data) => { // data 里面为数据
-          this.setState({
-            data,
-            isLoading: false,
-          });
-        }); */
         const pages = this.state.current;
         const pageSize = this.state.pageSize;
-        roleList({
+        sysRoleList({
           page: pages,
           pageSize,
         }).then(({ status,data })=>{
           debugger;
           if (data.errCode == 0) {
             this.setState({
-              premissions: data.data.premissions,
-              datas: data.data.role,
+              premissions: data.data.premissions, // 新增角色的权限值
+              datas: data.data.role, // 列表
               isLoading: false,
-              total: data.data.totalCount,
+              total: data.data.totalCount, // 列表总数
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }
@@ -128,14 +116,13 @@ class Rolepermissions extends Component {
   // 修改
   editingrolebtnopen=(record)=> {
     const premissions = this.state.premissions;
-    debugger;
     this.Editingrole.cancelbtnopen(record,premissions);
   }
   // 删除
   onRemove = (id) => {
     const { datas } = this.state;
     debugger;
-    deleteRolePms({
+    deleteSysRolePms({
       _id: id,
     }).then(({ status,data })=>{
       debugger;
@@ -152,8 +139,9 @@ class Rolepermissions extends Component {
             datas,
           });
         }
+      } else {
+        Message.success(data.message);
       }
-      Message.success(data.message);
     });
   };
   renderOper = (value,index,record) => {
@@ -161,7 +149,6 @@ class Rolepermissions extends Component {
       <div>
         <a
           style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px', borderRight: '2px solid #999999' }}
-/*          onClick={this.handleDetail} */
           onClick={this.editingrolebtnopen.bind(this,record)}
         >
           修改
@@ -178,8 +165,6 @@ class Rolepermissions extends Component {
   };
   // 状态
    renderStatus = (datas) => {
-     debugger;
-     /*    */
      return (
        <div>
          <Radio id="status" value="status" checked={datas.enabled} >{datas.enabledName}</Radio>
@@ -187,23 +172,14 @@ class Rolepermissions extends Component {
      );
    };
    render() {
-     const { isLoading, datas, current, total } = this.state;
+     const { isLoading, datas, current, total,pageSize } = this.state;
      const {
        intl: { formatMessage },
      } = this.props;
-
-     const quanbuyingyong = [
-       { value: '0', label: '全部应用' },
-       { value: '1', label: '部分' },
-     ];
-     const jiaose = [
-       { value: '0', label: '角色' },
-       { value: '1', label: '人' },
-     ];
      return (
        <div className='membermanagement'>
          <Newrole ref={node=>this.Newrole = node} fetchData={this.fetchData.bind(this)} />
-         <Editingrole ref={node=>this.Editingrole = node} />
+         <Editingrole ref={node=>this.Editingrole = node} fetchData={this.fetchData.bind(this)} />
          <Tab shape='pure'>
            <Tab.Item title="角色权限">
              <div className='membermanagements-top'>
@@ -233,13 +209,13 @@ class Rolepermissions extends Component {
                  style={{ marginTop: '20px', textAlign: 'right' }}
                  current={current}
                  onChange={this.handlePaginationChange}
-                 pageSize={10} // 界面展示多少条数据
+                 pageSize={pageSize} // 界面展示多少条数据
                  total={total} // 一共多少条数据
                />
              </div>
            </Tab.Item>
          </Tab>
-{/*         <Customerservice />*/}
+         {/*         <Customerservice /> */}
        </div>
      );
    }

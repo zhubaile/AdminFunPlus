@@ -53,11 +53,6 @@ export default class Edit extends Component {
     });
     this.confirmCallBack = confirm;
   }
-  formChange = (value) => {
-    this.setState({
-      value,
-    });
-  };
 
   SubInvoiceinfo(r,v) {
     changeInvoiceInfo({
@@ -70,24 +65,15 @@ export default class Edit extends Component {
       }
     });
     debugger;
-    /* this.refs.form.validateAll((errors, values) => {
-      debugger;
-    }) */
   }
   render() {
     const { content, confirm } = this.state;
-    const fptype = [
-      { value: '0', label: '企业增值税专用发票' },
-      { value: '1', label: '企业增值税普通发票' },
-      { value: '2', label: '组织增值税普通发票' },
-      { value: '3', label: '个人增值税普通发票' },
-    ];
     if (!this.state.open) return null;
     return (
       <div className='edit-bulletbox'>
         <div className='edit-title'>
           <h2 style={{ display: 'inline-block' }}>编辑</h2>
-          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.editclose.bind(this)}>×</span>
         </div>
 
         <div className='edit-content'>
@@ -98,9 +84,9 @@ export default class Edit extends Component {
             >
               <Input
                 name='psd1'
-                htmlType='password'
+                // htmlType='password'
                 placeholder='请填写有效的名称'
-                /*              defaultValue={content.company} */
+                defaultValue='15617975412'
               />
             </FormItem>
             <FormItem
@@ -118,7 +104,7 @@ export default class Edit extends Component {
             <FormItem
               label='法人姓名'
               {...formItemLayout}
-              /*asterisk*/
+              /* asterisk */
             >
               <Input
                 name="psd2"
@@ -134,7 +120,7 @@ export default class Edit extends Component {
               <Input
                 name="bank"
                 placeholder='请填写有效的地址'
-/*                defaultValue={content.bank}*/
+/*                defaultValue={content.bank} */
               />
             </FormItem>
 
@@ -169,7 +155,7 @@ export default class Edit extends Component {
                 /*                defaultValue={content.taxNumber} */
               />
             </FormItem>
-            <FormItem
+            {/*   <FormItem
               label='登录状态'
               {...formItemLayout}
             >
@@ -201,7 +187,7 @@ export default class Edit extends Component {
               >
                 驳回
               </Radio>
-            </FormItem>
+            </FormItem> */}
             <FormItem wrapperCol={{ offset: 6 }} >
               <Form.Submit
                 style={styles.submitbtn}
@@ -213,8 +199,6 @@ export default class Edit extends Component {
               </Form.Submit>
               <Form.Reset style={styles.cancelbtn} onClick={this.editclose.bind(this)}>取消</Form.Reset>
             </FormItem>
-            {/* <Button type='secondary'style={styles.cancelbtn} siza='large' onClick={this.billinginformationclose.bind(this)}>取消</Button> */}
-            {/* <Button type='primary'style={styles.submitbtn} siza='large' onClick={this.SubInvoiceinfo.bind(this)}>提交</Button> */}
           </Form>
         </div>
 

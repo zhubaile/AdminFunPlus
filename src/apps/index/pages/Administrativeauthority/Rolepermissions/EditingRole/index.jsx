@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { Input, Radio , Button, Message, Form, Select, Checkbox } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import Demopay from '../../../../../Website/pages/Demo/Demopay';
-import { changeRolePms } from '@indexApi';
+import { changeSysRolePms } from '@indexApi';
 import '../../../index.css';
 
 const Option = Select.Option;
@@ -48,8 +48,7 @@ export default class Editingrole extends Component {
     const premissions = this.state.content.premissions;
     const descriptionval = this.description.getInputNode().value;
     const notesval = this.notes.getInputNode().value;
-    debugger;
-    changeRolePms({
+    changeSysRolePms({
       premissions,
       description: descriptionval,
       notes: notesval,
@@ -58,8 +57,10 @@ export default class Editingrole extends Component {
       if (data.errCode == 0) {
         Message.success(data.message);
         this.cancelbtnclose();
+        this.props.fetchData();
+      } else {
+        Message.success(data.message);
       }
-      Message.success(data.message);
     });
   }
 

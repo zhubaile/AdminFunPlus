@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Input, Radio , Button, Message, Form, Select, Checkbox } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-import { addRolePms } from '@indexApi';
+import { addSysRolePms } from '@indexApi';
 import '../../../index.css';
 
 const Option = Select.Option;
@@ -46,15 +46,16 @@ export default class Newrole extends Component {
   // 新增角色权限
   addnewrole() {
     this.refs.form.validateAll((errors, values) => {
-      addRolePms({
+      addSysRolePms({
         ...values,
       }).then(({ status,data })=>{
         if (data.errCode == 0) {
           Message.success(data.message);
           this.newroleclose();
           this.props.fetchData();
+        } else {
+          Message.success(data.message);
         }
-        Message.success(data.message);
       });
     });
   }

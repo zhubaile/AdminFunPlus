@@ -43,34 +43,7 @@ export default class Newrole extends Component {
     this.confirmCallBack = confirm;
   }
 
-  /*  onNestChange(value) {
-    this.setState({
-      payvalue: value,
-    });
-  } */
-  /*  paybtn() {
-    const payinputvalue = this.payinputvalue.value;
-    const payvalues = this.state.payvalue;
-    const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
-    if (!reg.test(payinputvalue) || !payinputvalue) {
-      alert('请输入充值金额');
-    } else if (payvalues == 'zfb') {
-      this.Demopay.zfbopen(payinputvalue);
-    } else if (payvalues == 'wx') {
-      this.Wxpaypopup.open(payinputvalue);
-    } else {
-      alert('请选择支付方式');
-    }
-  } */
   render() {
-    /*    const yingyong = [
-      { value: '全部应用 ', label: '全部应用' },
-      { value: '待分配', label: '待分配' },
-    ];
-    const jiaose = [
-      { value: '选择角色', label: '选择角色' },
-      { value: '人', label: '人' },
-    ]; */
     if (!this.state.open) return null;
     return (
       <div className="newrole">

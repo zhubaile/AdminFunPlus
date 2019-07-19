@@ -12,6 +12,7 @@ import { searchUserList, userDelete } from '@indexApi';
 
 
 import '../../index.css';
+import {Message} from "@alifd/next/lib/index";
 
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
@@ -74,12 +75,6 @@ class MemberManagement extends Component {
         isLoading: true,
       },
       () => {
-        /* this.mockApi(len).then((data) => { // data 里面为数据
-          this.setState({
-            data,
-            isLoading: false,
-          });
-        }); */
         const pages = this.state.current;
         const pageSize = this.state.pageSize;
         searchUserList({
@@ -97,6 +92,8 @@ class MemberManagement extends Component {
               isLoading: false,
               total: data.data.totalCount,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }

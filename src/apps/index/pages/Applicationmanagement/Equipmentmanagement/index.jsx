@@ -7,6 +7,7 @@ import Official from './Adddevice/official';
 import Custom from './Adddevice/custom';
 import { device,deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
+import {Message} from "@alifd/next/lib/index";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -97,6 +98,8 @@ export default class EquipmentManagement extends Component {
               isLoading: false,
               total: data.data.total,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }
@@ -167,6 +170,8 @@ export default class EquipmentManagement extends Component {
           });
           debugger; */
           // this.Custom.customopen();
+        } else {
+          Message.success(data.message);
         }
       }
     );

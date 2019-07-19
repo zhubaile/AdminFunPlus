@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table,Button,Input,Grid ,DatePicker,Pagination,Dialog,Select } from '@alifd/next';
+import { Table,Button,Input,Grid ,DatePicker,Pagination,Message,Select } from '@alifd/next';
 import { Link } from 'react-router-dom';
 // import Nav from '../components/Nav';
 // import Administrators from '../../Personal/components/Administrators/Administrators';
@@ -51,11 +51,14 @@ export default class Allworkorders extends Component {
           pageSize,
           beginTime: operationtime,
         }).then(({ status,data })=>{
-          debugger;
-          this.setState({
-            datas: data.data,
-            isLoading: false,
-          });
+          if (data.errCode == 0) {
+            this.setState({
+              datas: data.data,
+              isLoading: false,
+            });
+          } else {
+            Message.success(data.message);
+          }
         });
       }
     );
@@ -119,6 +122,8 @@ export default class Allworkorders extends Component {
                 datas: data.data,
                 isLoading: false,
               });
+            } else {
+              Message.success(data.message);
             }
           });
         });
@@ -183,6 +188,8 @@ export default class Allworkorders extends Component {
             });
           }
         });
+      } else {
+        Message.success(data.message);
       }
     });
   }

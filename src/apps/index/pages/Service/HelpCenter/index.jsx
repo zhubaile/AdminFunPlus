@@ -78,6 +78,8 @@ export default class HelpCenter extends Component {
             createdAt: '',
           },
         });
+      } else {
+        Message.success(data.message);
       }
     });
   }

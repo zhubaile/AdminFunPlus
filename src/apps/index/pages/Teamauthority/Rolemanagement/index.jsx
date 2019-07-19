@@ -5,6 +5,7 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
 import Newrole from "./Newrole";
+import {Message} from "@alifd/next/lib/index";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -69,8 +70,9 @@ export default class Rolemanagement extends Component {
           this.setState({
             grouplistdata: data.data,
           });
+        }else {
+          Message.success(data.message);
         }
-        // Message.success(data.message);
       }
     );
   };

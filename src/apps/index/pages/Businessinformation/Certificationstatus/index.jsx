@@ -8,11 +8,11 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import '../../index.css';
 
 const FormItem = Form.Item;
-
+const RadioGroup = Radio.Group;
 const { Row, Col } = Grid;
 const formItemLayout = {
-  labelCol: { xxs: 8, s: 6, l: 10 },
-  wrapperCol: { s: 12, l: 10 },
+  labelCol: { xxs: 10, s: 10, l: 10 },
+  wrapperCol: { xxs: 12, s: 12, l: 12 },
 };
 export default class Certificationstatus extends Component {
   constructor(props) {
@@ -21,21 +21,21 @@ export default class Certificationstatus extends Component {
       open: false,
       content: null,
       confirm: null,
-      value: {
-        psd1: '',
-        psd2: '',
-        companyname: '',
-        invoicetype: '',
-        invoice: '',
-        bank: '',
-        accountopening: '',
-        taxnumber: '',
-        email: '',
-        status1: '',
-        status2: '',
-        radio1: '',
-        radio2: '',
-      },
+      // value: {
+      //   psd1: '',
+      //   psd2: '',
+      //   companyname: '',
+      //   invoicetype: '',
+      //   invoice: '',
+      //   bank: '',
+      //   accountopening: '',
+      //   taxnumber: '',
+      //   email: '',
+      //   status1: '',
+      //   status2: '',
+      //   radio1: '',
+      //   radio2: '',
+      // },
     };
   }
 
@@ -53,14 +53,9 @@ export default class Certificationstatus extends Component {
     });
     this.confirmCallBack = confirm;
   }
-  formChange = (value) => {
-    this.setState({
-      value,
-    });
-  };
 
   SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
+    /* changeInvoiceInfo({
       ...r,
     }).then(({ status,data })=>{
       if (data.errCode == 0) {
@@ -68,26 +63,16 @@ export default class Certificationstatus extends Component {
         this.billinginformationclose();
         this.props.fetchData();
       }
-    });
-    debugger;
-    /* this.refs.form.validateAll((errors, values) => {
-      debugger;
-    }) */
+    }); */
   }
   render() {
     const { content, confirm } = this.state;
-    const fptype = [
-      { value: '0', label: '企业增值税专用发票' },
-      { value: '1', label: '企业增值税普通发票' },
-      { value: '2', label: '组织增值税普通发票' },
-      { value: '3', label: '个人增值税普通发票' },
-    ];
     if (!this.state.open) return null;
     return (
       <div className='certificationstatus-bulletbox'>
         <div className='edit-title'>
           <h2 style={{ display: 'inline-block' }}>认证状态</h2>
-          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.certificationclose.bind(this)}>×</span>
         </div>
 
         <div className='certificationstatus-content'>
@@ -96,18 +81,10 @@ export default class Certificationstatus extends Component {
               label='认证处理'
               {...formItemLayout}
             >
-              <Radio
-                name="radio1"
-                defaultChecked
-              >
-                通过
-              </Radio>
-              <Radio
-                name="radio2"
-                defaultChecked
-              >
-                驳回
-              </Radio>
+              <RadioGroup aria-labelledby="radio-a11y" name='radiostatus'>
+                <Radio id="python" value="python">通过</Radio>
+                <Radio id="java" value="java">驳回</Radio>
+              </RadioGroup>
             </FormItem>
             <FormItem
               label='是否允许再次认证申请'

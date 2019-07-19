@@ -176,36 +176,6 @@ export function createUser(params) {
   });
 }
 
-// 角色权限列表
-export function roleList(params) {
-  return ajaxAmd.get({
-    url: '/roleList',
-    params,
-  });
-}
-// 添加角色权限
-export function addRolePms(params) {
-  return ajaxAmd.post({
-    url: '/addRolePms',
-    data: params,
-  });
-}
-
-// 修改角色权限
-export function changeRolePms(params) {
-  return ajaxAmd.post({
-    url: '/changeRolePms',
-    data: params,
-  });
-}
-// 删除角色权限
-export function deleteRolePms(params) {
-  return ajaxAmd.post({
-    url: '/deleteRolePms',
-    data: params,
-  });
-}
-
 // 申请开票界面内容加载
 export function invoiceDataInfo(params) {
   return ajaxAmd.get({
@@ -485,6 +455,35 @@ export async function device(params) {
   return ajaxAmd.get({
     url: '/device',
     params,
+  });
+}
+// 角色权限列表
+export function sysRoleList(params) {
+  return ajaxAmd.get({
+    url: '/sysRoleList',
+    params,
+  });
+}
+// 添加角色权限
+export function addSysRolePms(params) {
+  return ajaxAmd.post({
+    url: '/addSysRolePms',
+    data: params,
+  });
+}
+
+// 修改角色权限
+export function changeSysRolePms(params) {
+  return ajaxAmd.post({
+    url: '/changeSysRolePms',
+    data: params,
+  });
+}
+// 删除角色权限
+export function deleteSysRolePms(params) {
+  return ajaxAmd.post({
+    url: '/deleteSysRolePms',
+    data: params,
   });
 }
 // BackAdmin的API接口 zbl ending

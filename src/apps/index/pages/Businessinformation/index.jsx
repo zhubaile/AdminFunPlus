@@ -61,16 +61,6 @@ export default class Businessinformation extends Component {
     debugger;
     this.fetchData();
   }
-
-/*  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };*/
-
   fetchData = (len) => {
     this.setState(
       {
@@ -94,7 +84,24 @@ export default class Businessinformation extends Component {
       }
     );
   };
-
+  // 搜索
+  searchbtn() {
+    const value = this.state.value;
+  }
+  // 重置
+  resetbtn() {
+    this.setState({
+      value: {
+        timeType: '',
+        startdate: [],
+        orderStatus: '',
+        refundStatus: '',
+        payChannel: '',
+        device: '',
+        out_trade_no: '',
+      },
+    });
+  }
   handlePaginationChange = (current) => {
     this.setState(
       {
@@ -109,29 +116,29 @@ export default class Businessinformation extends Component {
     return (
       <div className='tb_span'>
         <span onClick={this.editBtnOpen.bind(this)}>编辑</span>
-
+        {/*       <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span> */}
         <span style={{ color: 'darkorange' }} onClick={this.freezeUserOpen.bind(this)}>冻结</span>
       </div>
     );
   };
-  renderStatus = () => {
+  /* renderStatus = () => {
     return (
       <div>
         <Switch size='small' className='div-switch' defaultChecked={false} />
       </div>
     );
-  };
-  renderPermission = () => {
+  }; */
+  /* renderPermission = () => {
     return (
       <div>
         <Switch size='small' className='div-switch' defaultChecked={false} />
       </div>
     );
-  };
+  }; */
   renderCertification = () => {
     return (
       <div style={{ color: 'red', cursor: 'pointer' }}>
-      <span onClick={this.certificationStatusOpen.bind(this)}>成功</span>
+        <span onClick={this.certificationStatusOpen.bind(this)}>成功</span>
       </div>
     );
   }
@@ -143,9 +150,10 @@ export default class Businessinformation extends Component {
     );
   };
   formChange=(value)=>{
-    debugger;
+    this.setState({
+      value,
+    });
   }
-
   editBtnOpen() {
     this.Edit.editopen();
   }
@@ -214,7 +222,7 @@ export default class Businessinformation extends Component {
 
     return (
       <div className='businessinformation'>
-
+        {/* <Resetpassword ref={ node => this.Resetpassword = node } /> */}
         <Edit ref={ node => this.Edit = node } />
         <Freezeuser ref={ node => this.Freezeuser = node } />
         <Certificationstatus ref={ node => this.Certificationstatus = node } />
@@ -259,21 +267,15 @@ export default class Businessinformation extends Component {
                       <FormBinder name="device" >
                         <Select style={{ width: '200px' }} dataSource={device} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索</Button>
-                      <Button className='btn-all bg' size="large" type="primary" style={{ opacity: '0.5' }}>重置</Button>
+                      <Button className='btn-all bg' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
+                      <Button className='btn-all bg' size="large" type="primary" style={{ opacity: '0.5' }} onClick={this.resetbtn.bind(this)}>重置</Button>
                     </div>
                   </Col>
                 </Row>
               </FormBinderWrapper>
             </div>
             <div className='businessinformation-panel' >
-              <Table loading={isLoading} dataSource={data} pageSize={pageSize} total={total} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-{/*                <Table.Column
-                  title=""
-                  width={50}
-                  dataIndex=""
-                  cell={this.renderSelectall}
-                />*/}
+              <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
                 <Table.Column title="商户ID" dataIndex="merchantId" />
                 <Table.Column title="企业名称" dataIndex="name" />
                 <Table.Column title="统一社会信用代码" dataIndex="time" />
@@ -282,9 +284,9 @@ export default class Businessinformation extends Component {
                 <Table.Column title="所属行业" dataIndex="balance" />
                 <Table.Column title="联系方式" dataIndex="tel" />
                 <Table.Column title="邮箱" dataIndex="email" />
-                <Table.Column title="上次登录时间" dataIndex="role" />
+                {/* <Table.Column title="上次登录时间" dataIndex="role" />
                 <Table.Column title="登录状态" cell={this.renderStatus} />
-                <Table.Column title="权限状态" cell={this.renderPermission} />
+                <Table.Column title="权限状态" cell={this.renderPermission} /> */}
                 <Table.Column title="认证状态" dataIndex="status" cell={this.renderCertification} />
                 <Table.Column title="操作" cell={this.renderOper} />
               </Table>
@@ -292,6 +294,8 @@ export default class Businessinformation extends Component {
                 style={{ marginTop: '20px', textAlign: 'right' }}
                 current={current}
                 onChange={this.handlePaginationChange}
+                pageSize={pageSize}
+                total={total}
               />
               <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>

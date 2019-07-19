@@ -59,12 +59,15 @@ export default class ApplicationChannel extends Component {
           page: current,
           limit,
         }).then(({ status,data })=>{
-          debugger;
-          this.setState({
-            datas: data.data,
-            isLoading: false,
-            total: data.total,
-          });
+          if (data.errCode == 0) {
+            this.setState({
+              datas: data.data,
+              isLoading: false,
+              total: data.total,
+            });
+          } else {
+            Message.success(data.message);
+          }
         });
       }
     );

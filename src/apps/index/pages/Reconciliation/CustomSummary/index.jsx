@@ -49,6 +49,8 @@ export default class CustomSummary extends Component {
         this.setState({
           Transactionfigures: data.data[0],
         });
+      } else {
+        Message.success(data.message);
       }
     });
     verifybillparams().then(({ status,data })=>{
@@ -62,6 +64,8 @@ export default class CustomSummary extends Component {
           Dropdownbox: channelss,
           Dropdownboxson: dClassifys,
         });
+      } else {
+        Message.success(data.message);
       }
     });
   }

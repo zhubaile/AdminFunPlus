@@ -43,6 +43,8 @@ export default class Customerservice extends Component {
         this.setState({
           workOrderserviceLists: data.data,
         });
+      } else {
+        Message.success(data.message);
       }
     });
     const userId = Cookies.get('userId');
@@ -62,6 +64,8 @@ export default class Customerservice extends Component {
         },()=>{
           this.onScrollHandle(this.messagesEnd);
         });
+      } else {
+        Message.success(data.message);
       }
     });
   }
@@ -94,6 +98,8 @@ export default class Customerservice extends Component {
           workOrdersessionLists: data.data,
           // stylecolor: false,
         });
+      } else {
+        Message.success(data.message);
       }
     });
   };

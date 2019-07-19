@@ -64,6 +64,8 @@ export default class Workorderdetails extends Component {
         },()=>{
           this.onScrollHandle(this.messagesEnd);
         });
+      } else {
+        Message.success(data.message);
       }
     });
   };
