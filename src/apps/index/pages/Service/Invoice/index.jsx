@@ -56,6 +56,8 @@ export default class Invoice extends Component {
               total: data.data.totalCount ,
               datas: data.data.result,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }

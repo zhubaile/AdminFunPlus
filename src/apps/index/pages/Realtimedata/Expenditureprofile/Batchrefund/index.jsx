@@ -51,6 +51,8 @@ export default class Batchrefund extends Component {
               isLoading: false,
               total: data.data.totalCount,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }

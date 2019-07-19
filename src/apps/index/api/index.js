@@ -532,4 +532,12 @@ export function payOutExamineList(params) {
     data: params,
   });
 }
+// 商户信息
+export function businessInformation(params) {
+  return ajaxAmd.post({
+    url: '/businessInformation',
+    data: params,
+  });
+}
+
 // BackAdmin的API接口 kkk ending

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select , Menu,MenuButton, Radio, Input, Grid, DatePicker, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
+import { businessInformation } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../index.css';
-import Resetpassword from "./Resetpassword/index";
+
 import Edit from "./Edit/index";
 import Freezeuser from "./Freezeuser/index";
 import Certificationstatus from "./Certificationstatus/index";
@@ -38,6 +39,8 @@ export default class Businessinformation extends Component {
     super(props);
     this.state = {
       current: 1,
+      pageSize: 10,
+      total: 0,
       isLoading: false,
       data: [],
       args: [],
@@ -59,14 +62,14 @@ export default class Businessinformation extends Component {
     this.fetchData();
   }
 
-  mockApi = (len) => {
+/*  mockApi = (len) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
         debugger;
       }, 600);
     });
-  };
+  };*/
 
   fetchData = (len) => {
     this.setState(
@@ -74,12 +77,19 @@ export default class Businessinformation extends Component {
         isLoading: true,
       },
       () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
-          debugger;
-          this.setState({
-            data,
-            isLoading: false,
-          });
+        const pageSize = this.state.pageSize;
+        const pages = this.state.current;
+        businessInformation({
+          pageSize,
+          pages,
+        }).then(({ status, data })=>{
+          if (data.errCode == 0) {
+            this.setState({
+              isLoading: false,
+            });
+          } else {
+            Message.success(data.message);
+          }
         });
       }
     );
@@ -99,7 +109,7 @@ export default class Businessinformation extends Component {
     return (
       <div className='tb_span'>
         <span onClick={this.editBtnOpen.bind(this)}>编辑</span>
-        <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span>
+
         <span style={{ color: 'darkorange' }} onClick={this.freezeUserOpen.bind(this)}>冻结</span>
       </div>
     );
@@ -135,9 +145,7 @@ export default class Businessinformation extends Component {
   formChange=(value)=>{
     debugger;
   }
-  resetBtnOpen() {
-    this.Resetpassword.resetPasswordopen();
-  }
+
   editBtnOpen() {
     this.Edit.editopen();
   }
@@ -174,7 +182,7 @@ export default class Businessinformation extends Component {
     });
   }
   render() {
-    const { isLoading, data, current } = this.state;
+    const { isLoading, data, current, pageSize, total } = this.state;
     const timeType = [
       { value: '1', label: '1' },
       { value: '2', label: '2' },
@@ -206,7 +214,7 @@ export default class Businessinformation extends Component {
 
     return (
       <div className='businessinformation'>
-        <Resetpassword ref={ node => this.Resetpassword = node } />
+
         <Edit ref={ node => this.Edit = node } />
         <Freezeuser ref={ node => this.Freezeuser = node } />
         <Certificationstatus ref={ node => this.Certificationstatus = node } />
@@ -259,7 +267,7 @@ export default class Businessinformation extends Component {
               </FormBinderWrapper>
             </div>
             <div className='businessinformation-panel' >
-              <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+              <Table loading={isLoading} dataSource={data} pageSize={pageSize} total={total} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
 {/*                <Table.Column
                   title=""
                   width={50}

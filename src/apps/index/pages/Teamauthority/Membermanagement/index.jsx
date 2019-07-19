@@ -5,6 +5,7 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
 import Addmember from "./Addmember/index";
+import Resetpassword from "./Resetpassword/index";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -38,7 +39,7 @@ export default class Membermanagement extends Component {
       current: 1,
       isLoading: false,
       data: [],
-/*      datas: [],*/
+      /*      datas: [], */
       args: [],
       toplist: false,
       grouplistdata: [
@@ -114,7 +115,7 @@ export default class Membermanagement extends Component {
     return (
       <div className='tb_span'>
         <span>编辑</span>
-        <span>展开</span>
+        <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span>
       </div>
     );
   };
@@ -197,6 +198,12 @@ export default class Membermanagement extends Component {
       }
     );
   }
+  resetBtnOpen() {
+    this.Resetpassword.resetPasswordopen();
+  }
+  search() {
+    const values = this.state.value;
+  }
   render() {
     const { isLoading, data, current } = this.state;
     const Allstatus = [
@@ -230,9 +237,10 @@ export default class Membermanagement extends Component {
     );
     return (
       <div className='membermanagement'>
+        <Resetpassword ref={ node => this.Resetpassword = node } />
         <Addmember ref={ node => this.Addmenber = node } />
         <Tab shape='pure' className='income-tab'>
-          <Tab.Item title="成员角色">
+          <Tab.Item title="成员管理">
             <div className='membermanagement-content'>
               <FormBinderWrapper
                 value={this.state.value}
@@ -254,7 +262,7 @@ export default class Membermanagement extends Component {
                       >
                         <Input style={styles.formInput} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索</Button>
+                      <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
                       <Button className='btn-all bg' size="large" type="secondary" onClick={this.addmemberBtnOpen.bind(this)}>添加成员</Button>
                     </div>
                   </Col>

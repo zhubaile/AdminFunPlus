@@ -161,6 +161,9 @@ export default class interfaceDocument extends Component {
       }
     });
   }
+  search() {
+    const values = this.state.value;
+  }
   render() {
     const { isLoading, datas, current,total,pageSize } = this.state;
     const Allstart = [
@@ -193,7 +196,7 @@ export default class interfaceDocument extends Component {
               <input placeholder='请输入' />
             </div>
             <div className='right'>
-              <button>搜索</button>
+              <button onClick={this.search.bind(this)}>搜索</button>
               <button onClick={this.addmenubtn.bind(this)}>添加菜单</button>
             </div>
           </div>

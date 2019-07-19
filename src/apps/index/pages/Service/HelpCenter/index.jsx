@@ -43,6 +43,8 @@ export default class HelpCenter extends Component {
             this.setState({
               columnslist,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }

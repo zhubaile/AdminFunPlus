@@ -102,6 +102,8 @@ export default class RealtimedataIncome extends Component {
               result1: data.data.result1,
               result2: resultt,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }

@@ -127,6 +127,8 @@ export default class Enterprisepayment extends Component {
               isLoading: false,
               total: data.data.totalCount,
             });
+          } else {
+            Message.success(data.message);
           }
         });
         /* this.mockApi(len).then((data) => { // data 里面为数据

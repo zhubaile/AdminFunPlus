@@ -5,7 +5,7 @@ import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,S
 import { actions, reducers, connect } from '@indexStore';
 import { openInvoice,changeInvoiceInfo } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-import '../../index.css';
+import '../../../index.css';
 
 const FormItem = Form.Item;
 

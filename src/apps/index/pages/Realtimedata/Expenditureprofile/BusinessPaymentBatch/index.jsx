@@ -57,6 +57,8 @@ export default class BusinessPaymentBatch extends Component {
               isLoading: false,
               total: data.data.totalCount,
             });
+          } else {
+            Message.success(data.message);
           }
         });
       }

@@ -196,6 +196,9 @@ export default class Rolemanagement extends Component {
       }
     );
   }
+  search() {
+    const values = this.state.value;
+  }
   render() {
     const { isLoading, data, current } = this.state;
     const Allstatus = [
@@ -253,7 +256,7 @@ export default class Rolemanagement extends Component {
                       >
                         <Input style={styles.formInput} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索</Button>
+                      <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
                       <Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button>
                     </div>
                   </Col>
