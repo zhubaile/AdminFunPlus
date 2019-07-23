@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+import { companyupdateCompany } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../index.css';
 
@@ -21,23 +21,23 @@ export default class Edit extends Component {
       open: false,
       content: null,
       confirm: null,
+      isLoading: false,
+      dustyInfo: [],
       value: {
-        psd1: '',
-        psd2: '',
-        companyname: '',
-        invoicetype: '',
-        invoice: '',
-        bank: '',
-        accountopening: '',
-        taxnumber: '',
-        email: '',
-        status1: '',
-        status2: '',
-        radio1: '',
-        radio2: '',
+        cpName: '',
+        linkPhone: '',
+        cpAddress: '',
+        linkEmail: '',
+        cpBusinessNumber: '',
+        linkName: '',
+        cpIndustryCategory: '',
       },
     };
   }
+  componentDidMount() {
+    // this.fetchData();
+  }
+
 
   editclose() {
     this.setState({
@@ -46,29 +46,36 @@ export default class Edit extends Component {
     });
   }
   editopen(content,confirm) {
+    debugger;
     this.setState({
       open: true,
       content,
-      confirm,
+      dustyInfo: confirm,
+      value: content,
     });
     this.confirmCallBack = confirm;
   }
-
-  SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
-      ...r,
+  handleSubmit(v) {
+    debugger;
+    companyupdateCompany({
+      ...v,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
-        this.billinginformationclose();
+        this.editclose();
         this.props.fetchData();
+      } else {
+        Message.success(data.message);
       }
     });
-    debugger;
   }
   render() {
-    const { content, confirm } = this.state;
+    const { isLoading,content, confirm,value,dustyInfo } = this.state;
+    const payChannel = dustyInfo.channel;
+    debugger;
     if (!this.state.open) return null;
+    console.log(value);
     return (
       <div className='edit-bulletbox'>
         <div className='edit-title'>
@@ -77,16 +84,16 @@ export default class Edit extends Component {
         </div>
 
         <div className='edit-content'>
-          <Form className='form'>
+          <Form className='form' value={value}>
             <FormItem
               label='企业名称'
               {...formItemLayout}
             >
               <Input
-                name='psd1'
+                name='cpName'
                 // htmlType='password'
                 placeholder='请填写有效的名称'
-                defaultValue='15617975412'
+                // defaultValue='15617975412'
               />
             </FormItem>
             <FormItem
@@ -94,7 +101,7 @@ export default class Edit extends Component {
               {...formItemLayout}
             >
               <Input
-                name='invoiceType'
+                name='cpBusinessNumber'
                 placeholder='请填写有效的代码'
 /*                style={{ width: '100%' }}
                 dataSource={confirm}
@@ -107,7 +114,7 @@ export default class Edit extends Component {
               /* asterisk */
             >
               <Input
-                name="psd2"
+                name="linkName"
                 placeholder="请填写有效的姓名"
                 /* defaultValue={content.invoiceTitle} */
               />
@@ -118,7 +125,7 @@ export default class Edit extends Component {
               {...formItemLayout}
             >
               <Input
-                name="bank"
+                name="cpAddress"
                 placeholder='请填写有效的地址'
 /*                defaultValue={content.bank} */
               />
@@ -128,11 +135,15 @@ export default class Edit extends Component {
               label='所属行业'
               {...formItemLayout}
             >
-              <Input
-                name="bankNumber"
-                placeholder="请填写有效的行业"
-/*                defaultValue={content.bankNumber} */
+              <Select
+                name="cpIndustryCategory"
+                style={{ width: '200px' }}
+                dataSource={payChannel}
               />
+              {/*   <Input
+                name="cpIndustryCategory"
+                placeholder="请填写有效的行业"
+              /> */}
             </FormItem>
 
             <FormItem
@@ -140,7 +151,7 @@ export default class Edit extends Component {
               {...formItemLayout}
             >
               <Input
-                name="taxNumber"
+                name="linkPhone"
                 placeholder="请填写有效的联系方式"
 /*                defaultValue={content.taxNumber} */
               />
@@ -150,7 +161,7 @@ export default class Edit extends Component {
               {...formItemLayout}
             >
               <Input
-                name="email"
+                name="linkEmail"
                 placeholder="请填写有效的邮箱地址"
                 /*                defaultValue={content.taxNumber} */
               />
@@ -191,9 +202,8 @@ export default class Edit extends Component {
             <FormItem wrapperCol={{ offset: 6 }} >
               <Form.Submit
                 style={styles.submitbtn}
-                validate
                 type="primary"
-                onClick={(v, e) => this.SubInvoiceinfo(v,e)}
+                onClick={this.handleSubmit.bind(this)}
               >
                 提交
               </Form.Submit>

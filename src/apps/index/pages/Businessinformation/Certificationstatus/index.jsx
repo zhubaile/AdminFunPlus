@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+import { companyupdateAuditSuccess } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../index.css';
 
@@ -21,21 +21,10 @@ export default class Certificationstatus extends Component {
       open: false,
       content: null,
       confirm: null,
-      // value: {
-      //   psd1: '',
-      //   psd2: '',
-      //   companyname: '',
-      //   invoicetype: '',
-      //   invoice: '',
-      //   bank: '',
-      //   accountopening: '',
-      //   taxnumber: '',
-      //   email: '',
-      //   status1: '',
-      //   status2: '',
-      //   radio1: '',
-      //   radio2: '',
-      // },
+      value: {
+        reason: '',
+        type: null,
+      },
     };
   }
 
@@ -50,24 +39,34 @@ export default class Certificationstatus extends Component {
       open: true,
       content,
       confirm,
+      value: content,
     });
     this.confirmCallBack = confirm;
   }
-
-  SubInvoiceinfo(r,v) {
-    /* changeInvoiceInfo({
-      ...r,
+  SubInvoiceinfo(v,e) {
+    debugger;
+    const _id = this.state.content._id;
+    const content = v.reason;
+    debugger;
+    companyupdateAuditSuccess({
+      _id,
+      content,
+      type: v.type,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
-        this.billinginformationclose();
+        this.certificationclose();
         this.props.fetchData();
+      }else{
+        Message.success(data.message);
       }
-    }); */
+    });
   }
   render() {
-    const { content, confirm } = this.state;
+    const { content, confirm,value } = this.state;
     if (!this.state.open) return null;
+    const two = 2;    const three = 3;
     return (
       <div className='certificationstatus-bulletbox'>
         <div className='edit-title'>
@@ -76,23 +75,21 @@ export default class Certificationstatus extends Component {
         </div>
 
         <div className='certificationstatus-content'>
-          <Form className='form'>
+          <Form className='form' value={value}>
             <FormItem
               label='认证处理'
               {...formItemLayout}
             >
-              <RadioGroup aria-labelledby="radio-a11y" name='radiostatus'>
-                <Radio id="python" value="python">通过</Radio>
-                <Radio id="java" value="java">驳回</Radio>
+              <RadioGroup aria-labelledby="radio-a11y" name='type'>
+                <Radio value={two}>通过</Radio>
+                <Radio value={three}>驳回</Radio>
               </RadioGroup>
             </FormItem>
             <FormItem
-              label='是否允许再次认证申请'
+              label='驳回原因'
               {...formItemLayout}
             >
-              <Switch
-                name="status1"
-              />
+              <Input.TextArea name="reason" />
             </FormItem>
             <FormItem wrapperCol={{ offset: 6 }} >
               <Form.Submit

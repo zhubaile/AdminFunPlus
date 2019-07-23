@@ -35,6 +35,8 @@ export default class Mailboxsettings extends Component {
         this.setState({
           value: data.data,
         });
+      } else {
+        Message.success(data.message);
       }
     });
   }

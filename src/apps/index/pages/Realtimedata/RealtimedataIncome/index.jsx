@@ -54,6 +54,7 @@ export default class RealtimedataIncome extends Component {
         orderStatus: '',
         payChannel: '',
         channel: '',
+        device: '',
         out_trade_no: '',
       },
     });

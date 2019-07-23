@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+import { companyfreeze } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../index.css';
 
@@ -22,14 +22,7 @@ export default class Freezeuser extends Component {
       content: null,
       confirm: null,
       value: {
-        psd1: '',
-        psd2: '',
-        companyname: '',
-        invoicetype: '',
-        invoice: '',
-        bank: '',
-        accountopening: '',
-        taxnumber: '',
+        id: '',
       },
     };
   }
@@ -53,43 +46,59 @@ export default class Freezeuser extends Component {
       value,
     });
   };
-
-  SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
-      ...r,
+  SubInvoiceinfo() {
+    const _id = this.state.content._id;
+    const statues = this.state.content.frozenState;
+    let frozenState;
+    if (statues == 1) {
+      frozenState = 2;
+    } else if (statues == 2) {
+      frozenState = 1;
+    } else {
+      return null;
+    }
+    debugger;
+    companyfreeze({
+      _id,
+      frozenState,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
+        debugger;
         Message.success(data.message);
-        this.billinginformationclose();
+        this.freezeUserclose();
         this.props.fetchData();
       }
     });
-    debugger;
-    /* this.refs.form.validateAll((errors, values) => {
-      debugger;
-    }) */
   }
   render() {
-    const { content, confirm } = this.state;
-    const fptype = [
-      { value: '0', label: '企业增值税专用发票' },
-      { value: '1', label: '企业增值税普通发票' },
-      { value: '2', label: '组织增值税普通发票' },
-      { value: '3', label: '个人增值税普通发票' },
-    ];
+    const { content, confirm, value } = this.state;
     if (!this.state.open) return null;
     return (
       <div className='freezeuser-bulletbox'>
         <div className='freezeuser-title'>
-          <h2 style={{ display: 'inline-block' }}>冻结用户</h2>
-          <span style={{ fontSize: '38px', color: '#ffffff', float: 'right', cursor: 'pointer' }}>×</span>
+          {
+            content.frozenState == 2 ? (
+              <h2 style={{ display: 'inline-block' }}>解冻用户</h2>
+            ) : (
+              <h2 style={{ display: 'inline-block' }}>冻结用户</h2>
+            )
+          }
+          {/*          <h2 style={{ display: 'inline-block' }}>冻结用户</h2> */}
+          <span style={{ fontSize: '38px', color: '#ffffff', float: 'right', cursor: 'pointer' }} onClick={this.freezeUserclose.bind(this)}>×</span>
         </div>
         <div className='freezeuser-mid'>
-          <p>确定要冻结用户吗？</p>
+          {
+            content.frozenState == 2 ? (
+              <p>确定要解冻用户吗？</p>
+            ) : (
+              <p>确定要冻结用户吗？</p>
+            )
+          }
         </div>
 
         <div className='freezeuser-content'>
-          <Form className='form'>
+          <Form className='form' value={value}>
             <FormItem wrapperCol={{ offset: 6 }} >
               <Form.Submit
                 style={styles.submitbtn}

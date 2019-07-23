@@ -587,11 +587,31 @@ export function payOutExamineList(params) {
   });
 }
 // 商户信息
-export function businessInformation(params) {
+export function companybusinessInformation(params) {
   return ajaxAmd.post({
-    url: '/businessInformation',
+    url: '/company/businessInformation',
     data: params,
   });
 }
-
+// 编辑操作修改信息
+export function companyupdateCompany(params) {
+  return ajaxAmd.post({
+    url: '/company/updateCompany',
+    data: params,
+  });
+}
+// 冻结解禁操作接口
+export function companyfreeze(params) {
+  return ajaxAmd.post({
+    url: '/company/freeze',
+    data: params,
+  });
+}
+// 审核商户信息
+export function companyupdateAuditSuccess(params) {
+  return ajaxAmd.post({
+    url: '/company/updateAuditSuccess',
+    data: params,
+  });
+}
 // BackAdmin的API接口 kkk ending
