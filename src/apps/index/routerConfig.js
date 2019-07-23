@@ -45,8 +45,10 @@ const Invoice = React.lazy(() => import('./pages/Service/Invoice')); // 发票
 // import { asideMenuConfig } from './pages/Service/Invoice';
 // 管控
 // 接口管理
+// import { asideMenuConfig } from './pages/InterfaceManagement/Interfaceaccess/IpNamelist';
 const ForeignAPI = React.lazy(() => import('./pages/InterfaceManagement/foreignAPI')); // 对外API
 const Interfaceaccess = React.lazy(() => import('./pages/InterfaceManagement/Interfaceaccess')); // 接口访问白名单
+const IpNamelist = React.lazy(() => import('./pages/InterfaceManagement/Interfaceaccess/IpNamelist')); // 接口访问白名单的ip管理
 const InterfaceDocument = React.lazy(() => import('./pages/InterfaceManagement/InterfaceDocument')); // 接口文档
 const Operationlog = React.lazy(() => import('./pages/Administrativeauthority/Operationlog')); // 管理台操作日志
 
@@ -183,6 +185,10 @@ const routerConfig = [
   {
     path: '/backadmin/interfaceManagement/interfaceaccess',
     component: Interfaceaccess,
+  },
+  {
+    path: '/backadmin/interfaceManagement/ipNamelist',
+    component: IpNamelist,
   },
   {
     path: '/backadmin/interfaceManagement/interfaceDocument',

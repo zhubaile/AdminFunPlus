@@ -45,10 +45,13 @@ export default class Editingrole extends Component {
   }
   // 提交按钮
   addeditingrole() {
+    const id = this.state.content._id;
     const premissions = this.state.content.premissions;
     const descriptionval = this.description.getInputNode().value;
     const notesval = this.notes.getInputNode().value;
+    debugger;
     changeSysRolePms({
+      _id: id,
       premissions,
       description: descriptionval,
       notes: notesval,
@@ -66,6 +69,7 @@ export default class Editingrole extends Component {
 
   checkoutbtn(v,e) {
     let zzzz = this.state.content.premissions;
+    debugger;
     const id = e.target.id;
     if (zzzz.indexOf(id) > -1) {
       zzzz = zzzz.filter(n => n !== id);

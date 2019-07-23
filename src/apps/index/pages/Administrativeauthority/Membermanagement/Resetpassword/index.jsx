@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+import { sysChangePwd } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
@@ -32,6 +32,10 @@ export default class Resetpassword extends Component {
     this.setState({
       open: false,
       content: null,
+      value: {
+        psd1: '',
+        psd2: '',
+      },
     });
   }
   resetPasswordopen(content,confirm) {
@@ -49,42 +53,43 @@ export default class Resetpassword extends Component {
   };
 
   SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
+    const content = this.state.content;
+    debugger;
+    sysChangePwd({
+      _id: content,
       ...r,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
-        this.billinginformationclose();
+        this.resetPasswordclose();
         this.props.fetchData();
+      } else {
+        Message.success(data.message);
       }
     });
-    debugger;
-    /* this.refs.form.validateAll((errors, values) => {
-      debugger;
-    }) */
   }
   render() {
-    const { content, confirm } = this.state;
+    const { content, confirm,value } = this.state;
     if (!this.state.open) return null;
     return (
       <div className='resetpsd-bulletbox'>
         <div className='resetpsd-title'>
           <h2 style={{ display: 'inline-block' }}>重置密码</h2>
-          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.resetPasswordclose.bind(this)}>×</span>
         </div>
 
         <div className='resetpsd-content'>
-          <Form className='form'>
+          <Form className='form' name={value}>
             <FormItem
               label='新密码'
               {...formItemLayout}
               asterisk
             >
               <Input
-                name='psd1'
+                name='password'
                 htmlType='password'
                 placeholder='请输入新密码'
-                /*              defaultValue={content.company} */
               />
               <p style={styles.promptMessage}>提示：密码由6-16个字符组成，区分大小写（不能包含空格）</p>
             </FormItem>
@@ -94,10 +99,9 @@ export default class Resetpassword extends Component {
               asterisk
             >
               <Input
-                name="psd2"
+                name="passwordTwo"
                 htmlType='password'
                 placeholder="请输入确认新密码"
-                /* defaultValue={content.invoiceTitle} */
               />
             </FormItem>
             <FormItem wrapperCol={{ offset: 6 }} >
@@ -136,6 +140,7 @@ const styles = {
     color: 'rgba(78, 126, 232, 1)',
     borderColor: 'rgba(193, 241, 248, 1)',
     borderRadius: '4px',
+    marginTop: '8px',
   },
   submitbtn: {
     display: 'inline-block',
@@ -143,5 +148,6 @@ const styles = {
     height: '28px',
     backgroundColor: 'rgba(86, 119, 252, 1)',
     borderRadius: '4px',
+    marginTop: '8px',
   },
 };

@@ -34,6 +34,11 @@ export default class Newrole extends Component {
     this.setState({
       open: false,
       content: null,
+      value: {
+        description: '',
+        notes: '',
+        premissions: [],
+      },
     });
   }
   newroleopen(content,confirm) {

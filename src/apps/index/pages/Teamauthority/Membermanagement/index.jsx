@@ -6,7 +6,7 @@ import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
 import '../../index.css';
 import Addmember from "./Addmember/index";
 import Resetpassword from "./Resetpassword/index";
-import {Message} from "@alifd/next/lib/index";
+import { Message } from "@alifd/next/lib/index";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -37,6 +37,8 @@ export default class Membermanagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pageSize: 10,
+      total: 0,
       current: 1,
       isLoading: false,
       data: [],
@@ -111,21 +113,6 @@ export default class Membermanagement extends Component {
       () => {
         this.fetchData();
       }
-    );
-  };
-  renderOper = () => {
-    return (
-      <div className='tb_span'>
-        <span>编辑</span>
-        <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span>
-      </div>
-    );
-  };
-  renderSelectall = () => {
-    return (
-      <div>
-        <Checkbox defaultChecked />
-      </div>
     );
   };
   formChange = (value) => {
@@ -206,8 +193,24 @@ export default class Membermanagement extends Component {
   search() {
     const values = this.state.value;
   }
+  renderOper = () => {
+    return (
+      <div className='tb_span'>
+        <span>编辑</span>
+        <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span>
+        <span onClick={this.addmemberBtnOpen.bind(this)}>添加成员</span>
+      </div>
+    );
+  };
+  renderSelectall = () => {
+    return (
+      <div>
+        <Checkbox defaultChecked />
+      </div>
+    );
+  };
   render() {
-    const { isLoading, data, current } = this.state;
+    const { isLoading, data, current,pageSize,total } = this.state;
     const Allstatus = [
       { value: '可使用', label: '可使用' },
       { value: '离线', label: '离线' },
@@ -252,7 +255,11 @@ export default class Membermanagement extends Component {
                 <Row wrap gutter="20" style={styles.formRow}>
                   <Col l="24">
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>姓名:</span>
+                      <span style={styles.formLabel}>商户ID：</span>
+                      <FormBinder name="ID">
+                        <Input style={styles.formInput} />
+                      </FormBinder>
+                      <span style={styles.formLabel}>企业名称:</span>
                       <FormBinder name="merchantId"
                         autoWidth={false}
                       >
@@ -265,7 +272,7 @@ export default class Membermanagement extends Component {
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
-                      <Button className='btn-all bg' size="large" type="secondary" onClick={this.addmemberBtnOpen.bind(this)}>添加成员</Button>
+                      {/* <Button className='btn-all bg' size="large" type="secondary" onClick={this.addmemberBtnOpen.bind(this)}>添加成员</Button> */}
                     </div>
                   </Col>
                 </Row>
@@ -288,6 +295,8 @@ export default class Membermanagement extends Component {
                 style={{ marginTop: '20px', textAlign: 'right' }}
                 current={current}
                 onChange={this.handlePaginationChange}
+                pageSize={pageSize}
+                total={total}
               />
               <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>

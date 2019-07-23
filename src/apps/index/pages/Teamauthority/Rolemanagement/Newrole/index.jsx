@@ -92,16 +92,13 @@ export default class Newrole extends Component {
 
         <div className='newrole-content'>
           <Form className='form'>
-            <FormItem
+            {/*  <FormItem
               label='商户ID'
               {...formItemLayout}
             >
               <Input
                 name='invoiceType'
                 placeholder='请输入'
-                /*                style={{ width: '100%' }}
-                                dataSource={confirm}
-                                defaultValue={content.invoiceType} */
               />
             </FormItem>
             <FormItem
@@ -111,14 +108,13 @@ export default class Newrole extends Component {
               <Input
                 name='psd1'
                 placeholder='请输入'
-                /*              defaultValue={content.company} */
               />
-            </FormItem>
+            </FormItem> */}
 
             <FormItem
               label='角色名称'
               {...formItemLayout}
-              /*asterisk*/
+              /* asterisk */
             >
               <Input
                 name="psd2"
@@ -134,7 +130,7 @@ export default class Newrole extends Component {
               <Input
                 name="bank"
                 placeholder=''
-/*                defaultValue={content.bank}*/
+/*                defaultValue={content.bank} */
               />
             </FormItem>
             <FormItem

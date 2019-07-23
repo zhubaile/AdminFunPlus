@@ -35,6 +35,14 @@ export default class Customerservice extends Component {
     this.socket = io.connect(`ws://192.168.1.105:3000`);
     this.onScrollHandle = this.onScrollHandle.bind(this);
   }
+  // 定时器
+  tick(userId) {
+    this.socket.emit('heartbeat',userId);
+  }
+  // 解除定时器
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
   componentDidMount() {
     this.fetchData();
     /* 联系人的列表 */
@@ -48,6 +56,7 @@ export default class Customerservice extends Component {
       }
     });
     const userId = Cookies.get('userId');
+    this.interval = setInterval(() => this.tick(userId), 3000);
     debugger;
     // 初始聊天记录内容
     workOrderuserRecordOne({

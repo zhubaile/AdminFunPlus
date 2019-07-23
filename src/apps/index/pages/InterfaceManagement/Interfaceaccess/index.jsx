@@ -84,6 +84,8 @@ export default class interfaceaccess extends Component {
         isLoading: true,
       },
       () => {
+        // const pages = this.state.current;
+        // const pageSizes = this.state.pageSize;
         this.mockApi(len).then((data) => { // data 里面为数据
           debugger;
           this.setState({
@@ -151,61 +153,39 @@ export default class interfaceaccess extends Component {
       }
     );
   };
-  renderRule = () => {
-    return (
-      <div>
-        <select className='table-select'>
-          <option value="volvo">默认规则</option>
-          <option value="saab">自定义规则</option>
-          <option value="opel">自定义规则</option>
-          <option value="audi">新增规则</option>
-        </select>
-      </div>
-    );
-  };
-  renderOper = () => {
-    return (
-      <div style={{ color: '#1A55E2', cursor: 'pointer' }} onClick={this.editingbtn.bind(this)}>
-        编辑
-      </div>
-    );
-  };
-  zbl=(value)=>{
-    this.setState({
-      listValue: value,
-    });
-    // ajax 方法
-  }
-  // 选择的数据
-  Choice(args) {
-    this.setState({
-      args,
-    });
-  }
-  // 删除
-  removes() {
-    const { datas,args } = this.state;
-    debugger;
-    let index = -1;
-    args.map((id)=>{
-      datas.forEach((item, i) => {
-        if (item._id === id) {
-          index = i;
-        }
-      });
-      if (index !== -1) {
-        datas.splice(index, 1);
-        this.setState({
-          datas,
-        });
-      }
-    });
-  }
-  addIp() {
+  /*  addIp() {
     this.Ippopup.ippopupopen();
   }
-  editingbtn(){
+  editingbtn() {
     this.EditingList.editingopen();
+  } */
+  Ipnamelistbtn() {
+    this.props.history.push('/backadmin/interfaceManagement/ipNamelist');
+  }
+  // 搜索框
+  searchbtn() {
+    // const pages = this.state.current;
+    // const pageSizes = this.state.pageSize;
+    const name = this.inputname.getInputNode().value;
+    this.fetchData(name);
+    /* sysUserList({
+      name,
+      page: pages,
+      pageSize: pageSizes,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        this.setState({
+          datas: data.data.result,
+        });
+      }
+    }); */
+  }
+  // 应用ID框
+  applicationid=(value)=>{
+    return (
+      <a href="javascript:;" onClick={this.Ipnamelistbtn.bind(this)}>{value}</a>
+    );
   }
   render() {
     const { isLoading, datas, current,total,pageSize } = this.state;
@@ -216,47 +196,32 @@ export default class interfaceaccess extends Component {
     ];
     const grouplistdata = this.state.grouplistdata;
     console.log(this.state.datas);
-    // 多选按钮
-    const rowSelection = {
-      onChange: this.Choice.bind(this),
-      getProps: (record,index) => {
-        /* return {
-          disabled: record.id === 100306660942,
-        }; */
-      },
-    };
     return (
       <div className='interfaceaccess'>
         <Ippopup ref={node=>this.Ippopup = node} />
         <EditingList ref={node=>this.EditingList = node } />
         <div className='currency-top'>
           接口访问白名单
-          <button className='addip' onClick={this.addIp.bind(this)}>添加IP</button>
           <div className='currency-top-bottombor' />
+        </div>
+        <div className='membermanagement-top'>
+          <span>企业名称：</span>
+          <Input hasClear placeholder='企业名称' res={node=>this.inputname = node} />
+          <Button className='btn-all' style={{ marginLeft: '20px' }} size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
         </div>
         <div className='interfaceaccess-main'>
           <div className='interfaceaccess-main-content'>
-            <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-              <Table.Column title="菜单名称" dataIndex="_id" />
-              <Table.Column title="创建时间" dataIndex="todayFlow" />
-              <Table.Column title="属性" dataIndex="yeTodayFlow" />
-              <Table.Column title="描述 " dataIndex="totalFlow" />
-              <Table.Column title="菜单等级" dataIndex="classify" />
-              <Table.Column title="所属栏目" dataIndex="classify" />
-              <Table.Column
-                title="操作"
-                width={200}
-                dataIndex="oper"
-                cell={this.renderOper}
-              />
+            <Table loading={isLoading} dataSource={datas} hasBorder={false}>
+              <Table.Column title="应用ID" dataIndex="_id" cell={this.applicationid} />
+              <Table.Column title="企业名称" dataIndex="todayFlow" />
+              <Table.Column title="是否默认应用" dataIndex="yeTodayFlow" />
             </Table>
-            <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button>
             <Pagination
               style={{ marginTop: '20px', textAlign: 'right' }}
               current={current}
               onChange={this.handlePaginationChange}
               pageSize={pageSize} // 界面展示多少条数据
-              total={total} // 一共多少条数据
+              total={total}
             />
           </div>
         </div>

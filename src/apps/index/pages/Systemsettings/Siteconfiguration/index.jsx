@@ -1,37 +1,14 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
-import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch, Form } from '@alifd/next';
-import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
+import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Radio, Switch, Form,Message } from '@alifd/next';
+import { siteConfigget,siteConfigpost } from '@indexApi';
 import '../../index.css';
 
 const FormItem = Form.Item;
-
+const RadioGroup = Radio.Group;
 const formItemLayout = {
   labelCol: { xxs: 8, s: 2, l: 2 },
   wrapperCol: { s: 8, l: 6 },
-};
-const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      _id: random(10000, 20000, 30000, 50025, 68522),
-      name: '甲乙',
-      admin: 'admin',
-      ip: '168.112.36',
-      oper: '后台登录',
-      time: '2019.6.11 11:36',
-      description: '成功',
-      remark: '',
-      balance: '￥100.00',
-      email: '',
-      tel: '',
-      role: '',
-      status: '',
-    };
-  });
 };
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
@@ -40,104 +17,47 @@ export default class Siteconfiguration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 1,
       isLoading: false,
-      data: [],
-      args: [],
-      toplist: false,
-      grouplistdata: [
-        { dGroupName: '' },
-      ],
       value: {
-        name1: '',
-        name2: '',
-        name3: '',
-        e_mail: '',
+        siteName: '',
+        netName: '',
+        netDomin: '',
+        siteMail: '',
         copyright: '',
-        number: '',
-        prompt: '',
-        timeType: '',
-        username: '',
-        startdate: [],
-        orderStatus: '',
-        refundStatus: '',
-        payChannel: '',
-        listValue: '状态',
+        baNo: '',
+        isCash: false,
+        isCreateIndex: true,
+        netCloseTip: '',
       },
     };
   }
 
+  // 获取初始值
   componentDidMount() {
-    debugger;
-    // this.Toupdatelist();
-    // this.fetchData();
-  }
-
-  // 获取分组列表
-  Toupdatelist=()=>{
-    deviceGrouplist().then(
-      ({ status, data }) => {
-        if (data.errCode == 0) {
-          this.setState({
-            grouplistdata: data.data,
-          });
-        }
-        // Message.success(data.message);
-      }
-    );
-  };
-/*  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };*/
-
-  fetchData = (len) => {
-    this.setState(
-      {
-        isLoading: true,
-      },
-      () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
-          this.setState({
-            data,
-            isLoading: false,
-          });
+    siteConfigget().then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        this.setState({
+          value: data.data,
         });
+      } else {
+        Message.success(data.message);
       }
-    );
-  };
-
-  handlePaginationChange = (current) => {
-    this.setState(
-      {
-        current,
-      },
-      () => {
-        this.fetchData();
+    });
+  }
+  SubInvoiceinfo(v,e) {
+    debugger;
+    siteConfigpost({
+      ...v,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        Message.success(data.message);
+      } else {
+        Message.success(data.message);
       }
-    );
-  };
-  renderOper = () => {
-    return (
-      <div>
-        <span>编辑</span>
-      </div>
-    );
-  };
-  renderSelectall = () => {
-    return (
-      <div>
-        <Checkbox defaultChecked />
-      </div>
-    );
-  };
-  formChange = (value) => {
-    this.props.onChange(value);
-  };
+    });
+  }
   tabBtnOne() {
     debugger;
     this.props.history.push("/backadmin/Systemsettings/siteconfiguration");
@@ -153,19 +73,18 @@ export default class Siteconfiguration extends Component {
     this.props.history.push("/backadmin/Systemsettings/qrcodegateway");
   }
   render() {
-    const { isLoading, data, current } = this.state;
     return (
       <div className='siteconfiguration'>
         <Tab shape='pure' >
           <Tab.Item title="站点配置" onClick={this.tabBtnOne.bind(this)}>
             <div className='siteconfiguration-content'>
-              <Form className='form'>
+              <Form className='form' value={this.state.value}>
                 <FormItem
                   label='站点名称'
                   {...formItemLayout}
                 >
                   <Input
-                    name='name1'
+                    name='siteName'
                     placeholder='请输入'
                   />
                 </FormItem>
@@ -174,7 +93,7 @@ export default class Siteconfiguration extends Component {
                   {...formItemLayout}
                 >
                   <Input
-                    name='name2'
+                    name='netName'
                     placeholder='请输入'
                   />
                 </FormItem>
@@ -184,7 +103,7 @@ export default class Siteconfiguration extends Component {
                   {...formItemLayout}
                 >
                   <Input
-                    name="name3"
+                    name="netDomin"
                     placeholder=""
                   />
                 </FormItem>
@@ -194,7 +113,7 @@ export default class Siteconfiguration extends Component {
                   {...formItemLayout}
                 >
                   <Input
-                    name="e_mail"
+                    name="siteMail"
                     placeholder=''
                   />
                 </FormItem>
@@ -213,7 +132,7 @@ export default class Siteconfiguration extends Component {
                   {...formItemLayout}
                 >
                   <Input
-                    name="number"
+                    name="baNo"
                     placeholder=''
                   />
                 </FormItem>
@@ -221,21 +140,23 @@ export default class Siteconfiguration extends Component {
                   label='是否缓存'
                   {...formItemLayout}
                 >
-                  <Switch defaultChecked value="" />
+                  <Switch name='isCash' />
                   <span>（是否禁用）</span>
                 </FormItem>
                 <FormItem
-                  label='是否缓存'
+                  label='静态首页'
                   {...formItemLayout}
                 >
-                  <Checkbox defaultChecked value="">生成</Checkbox>
-                  <Checkbox defaultChecked value="">不生成</Checkbox>
+                  <RadioGroup aria-labelledby="radio-a11y" name='isCreateIndex'>
+                    <Radio id="true" value>生成</Radio>
+                    <Radio id="java" value={false}>不生成</Radio>
+                  </RadioGroup>
                 </FormItem>
                 <FormItem
                   label='闭站提示'
                   {...formItemLayout}
                 >
-                  <Input.TextArea name='prompt' placeholder='服务器正在打瞌睡' />
+                  <Input.TextArea name='netCloseTip' placeholder='服务器正在打瞌睡' />
                 </FormItem>
                 <FormItem wrapperCol={{ offset: 2 }} >
                   <Form.Submit
@@ -260,8 +181,8 @@ export default class Siteconfiguration extends Component {
           <Tab.Item title="二维码网关" onClick={this.tabBtnFour.bind(this)}>
           </Tab.Item>
 
-{/*          <Tab.Item title="极验设置">
-          </Tab.Item>*/}
+          {/*          <Tab.Item title="极验设置">
+          </Tab.Item> */}
         </Tab>
       </div>
     );

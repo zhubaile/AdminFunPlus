@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-/*import { openInvoice,changeInvoiceInfo } from '@indexApi';*/
+/* import { openInvoice,changeInvoiceInfo } from '@indexApi'; */
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
@@ -99,16 +99,13 @@ export default class Addmember extends Component {
             onChange={this.formChange}
             ref="form"
           >
-            <FormItem
+            {/* <FormItem
               label='商户ID'
               {...formItemLayout}
             >
               <Input
                 name='invoiceType'
                 placeholder='请输入用户名'
-                /*                style={{ width: '100%' }}
-                                dataSource={confirm}
-                                defaultValue={content.invoiceType} */
               />
             </FormItem>
             <FormItem
@@ -118,9 +115,8 @@ export default class Addmember extends Component {
               <Input
                 name='psd1'
                 placeholder='请输入用户名'
-                /*              defaultValue={content.company} */
               />
-            </FormItem>
+            </FormItem> */}
 
             <FormItem
               label='真实姓名'

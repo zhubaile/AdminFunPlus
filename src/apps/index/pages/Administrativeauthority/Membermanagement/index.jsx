@@ -2,36 +2,21 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { withRouter, Link } from 'react-router-dom';
-import { Input, Radio, Tab , Button, Grid, Form, DatePicker,Table,Pagination,Select } from '@alifd/next';
+import { Input, Radio, Tab , Button, Grid, Form, DatePicker,Table,Pagination,Select ,Message } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-/*import Customerservice from "../components/Customerservice";*/
+/* import Customerservice from "../components/Customerservice"; */
 import Addmenber from "./addmember";
+import Resetpassword from "./Resetpassword";
 /* import Newrole from "./NewRole";
 import Editingrole from "./EditingRole"; */
-import { searchUserList, userDelete } from '@indexApi';
-
-
+import { sysUserList, sysUserDelete } from '@indexApi';
 import '../../index.css';
-import {Message} from "@alifd/next/lib/index";
 
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 const { Group: RadioGroup } = Radio;
 const FormItem = Form.Item;
 
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      name: ['肖悦'],
-      level: ['12345678@qq.com'],
-      rule: ['136123456'],
-      oper: ['撒打发斯蒂芬'],
-      role: ['系统管理员'],
-      zhuangtai: [false,'已激活'],
-      description: ['在应用中拥有所有操作权限'],
-    };
-  });
-};
 @withRouter
 class MemberManagement extends Component {
   static displayName = 'MemberManagement';
@@ -61,14 +46,6 @@ class MemberManagement extends Component {
     this.fetchData();
   }
 
-  /* mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-      }, 600);
-    });
-  }; */
-
   fetchData = (len) => {
     this.setState(
       {
@@ -77,7 +54,7 @@ class MemberManagement extends Component {
       () => {
         const pages = this.state.current;
         const pageSize = this.state.pageSize;
-        searchUserList({
+        sysUserList({
           page: pages,
           pageSize,
         }).then(({ status,data })=>{
@@ -122,44 +99,39 @@ class MemberManagement extends Component {
     );
   };
   // 添加成员弹出框
-  addmemberbtnopen() {
+  addmemberbtnopen=(record)=>{
     const searchs = this.state.search;
-    this.Addmenber.addmemberopen(searchs);
-  }
-  formChange=(value)=>{
-
+    debugger;
+    this.Addmenber.addmemberopen(searchs,record);
   }
   // 搜索框
   searchbtn() {
-    this.refs.form.validateAll((errors, values) => {
-      const pages = this.state.current;
-      const pageSizes = this.state.pageSize;
-      searchUserList({
-        quanbuyingyong: values.quanbuyingyong,
-        roles: values.roles,
-        keyword: values.keyword,
-        page: pages,
-        pageSize: pageSizes,
-      }).then(({ status,data })=>{
-        debugger;
-        if (data.errCode == 0) {
-          this.setState({
-            datas: data.data.result,
+    this.setState(
+      {
+        isLoading: true,
+      },()=>{
+        this.refs.form.validateAll((errors, values) => {
+          debugger;
+          const pages = this.state.current;
+          const pageSizes = this.state.pageSize;
+          sysUserList({
+            roles: values.roles,
+            keyword: values.keyword,
+            page: pages,
+            pageSize: pageSizes,
+          }).then(({ status,data })=>{
+            debugger;
+            if (data.errCode == 0) {
+              this.setState({
+                isLoading: false,
+                datas: data.data.result,
+                total: data.data.totalCount,
+              });
+            }
           });
-        }
+        });
       });
-    });
   }
-  // 状态的值
-  /*  renderOper = (datas) => {
-    const z = datas[0];
-    return (
-      <div>
-        <Radio id="shiduide" value="shiduide" checked={z} >{datas[1]}</Radio>
-        {/!* <Radio id="shiduide" value="shiduide" checked={false}>--</Radio> *!/}
-      </div>
-    );
-  }; */
 
    renderStatus = (datas) => {
      return (
@@ -170,7 +142,7 @@ class MemberManagement extends Component {
    };
   onRemove = (id) => {
     const { datas } = this.state;
-    userDelete({
+    sysUserDelete({
       _id: id,
     }).then(({ status,data })=>{
       debugger;
@@ -187,10 +159,17 @@ class MemberManagement extends Component {
             datas,
           });
         }
+      } else {
+        Message.success(data.message);
       }
     });
     // 写一个删除的请求
   };
+  // 重置密码
+  resetpas=(id)=>{
+    debugger;
+    this.Resetpassword.resetPasswordopen(id);
+  }
   renderOper = (value,index,record) => {
     return (
       <div>
@@ -200,6 +179,18 @@ class MemberManagement extends Component {
         >
           <FormattedMessage id="app.btn.delete" />
         </a>
+        <a
+          style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px' }}
+          onClick={this.addmemberbtnopen.bind(this,record)}
+        >
+         编辑
+        </a>
+        <a
+          style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px' }}
+          onClick={this.resetpas.bind(this,record._id)}
+        >
+          重置密码
+        </a>
       </div>
     );
   };
@@ -208,15 +199,12 @@ class MemberManagement extends Component {
     const {
       intl: { formatMessage },
     } = this.props;
-
-    const quanbuyingyong = [
-      { value: '0', label: '全部应用' },
-      { value: '1', label: '部分' },
-    ];
     const jiaose = search;
+    debugger;
     return (
       <div className='membermanagement'>
         <Addmenber ref={node=>this.Addmenber = node} fetchData={this.fetchData.bind(this)} />
+        <Resetpassword ref={node=>this.Resetpassword = node} fetchData={this.fetchData.bind(this)} />
         {/*  <Newrole ref={node=>this.Newrole = node} />
         <Editingrole ref={node=>this.Editingrole = node} /> */}
         <Tab shape='pure'>
@@ -228,11 +216,9 @@ class MemberManagement extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <FormBinder name="quanbuyingyong" >
-                  <Select dataSource={quanbuyingyong} style={styles.forminput} placeholder='全部应用' />
-                </FormBinder>
                 <FormBinder name='roles' >
-                  <Select dataSource={jiaose} style={styles.forminput} placeholder='角色' />
+                  <Select mode="multiple" style={styles.forminput} dataSource={jiaose} placeholder='选择角色' />
+                  {/* <Select dataSource={jiaose} style={styles.forminput} placeholder='角色' /> */}
                 </FormBinder>
                 <FormBinder name='keyword' >
                   <Input hasClear placeholder='支持姓名邮箱手机号' style={styles.forminput} />
@@ -249,7 +235,7 @@ class MemberManagement extends Component {
                 </RadioGroup>
               </div>
               <Table loading={isLoading} dataSource={datas} hasBorder={false}>
-                <Table.Column title="姓名" dataIndex="username" />
+                <Table.Column title="账号" dataIndex="username" />
                 <Table.Column title="邮箱" dataIndex="email" />
                 <Table.Column title="手机号" dataIndex="phone" />
                 <Table.Column
@@ -282,7 +268,7 @@ class MemberManagement extends Component {
             </div>
           </Tab.Item>
         </Tab>
-{/*        <Customerservice />*/}
+        {/*        <Customerservice /> */}
       </div>
     );
   }

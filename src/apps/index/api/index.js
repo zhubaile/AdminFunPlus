@@ -481,8 +481,63 @@ export function changeSysRolePms(params) {
 }
 // 删除角色权限
 export function deleteSysRolePms(params) {
-  return ajaxAmd.post({
+  return ajaxAmd.delete({
     url: '/deleteSysRolePms',
+    params,
+  });
+}
+// 成员管理列表
+export function sysUserList(params) {
+  return ajaxAmd.post({
+    url: '/sysUserList',
+    data: params,
+  });
+}
+// 成员列表删除
+export function sysUserDelete(params) {
+  return ajaxAmd.delete({
+    url: '/sysUserDelete',
+    params,
+  });
+}
+// 添加成员
+export function sysCreateUser(params) {
+  return ajaxAmd.post({
+    url: '/sysCreateUser',
+    data: params,
+  });
+}
+// 成员管理的修改密码
+export function sysChangePwd(params) {
+  return ajaxAmd.post({
+    url: '/sysChangePwd',
+    data: params,
+  });
+}
+// 站点设置
+export function siteConfigget(params) {
+  return ajaxAmd.get({
+    url: '/siteConfig',
+    params,
+  });
+}
+// 邮箱配置
+export function mailConfigget(params) {
+  return ajaxAmd.get({
+    url: '/mailConfig',
+    params,
+  });
+}
+export function mailConfigpost(params) {
+  return ajaxAmd.post({
+    url: '/mailConfig',
+    data: params,
+  });
+}
+// 编辑站点设置
+export function siteConfigpost(params) {
+  return ajaxAmd.post({
+    url: '/siteConfig',
     data: params,
   });
 }

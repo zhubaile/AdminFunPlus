@@ -115,7 +115,7 @@ export default class Rolemanagement extends Component {
   renderOper = () => {
     return (
       <div className='tb_span'>
-        <span>编辑</span>
+        <span onClick={this.newroleBtnOpen.bind(this)}>编辑</span>
       </div>
     );
   };
@@ -129,12 +129,6 @@ export default class Rolemanagement extends Component {
   formChange = (value) => {
     this.props.onChange(value);
   };
-  zbl=(value)=>{
-    this.setState({
-      listValue: value,
-    });
-    // ajax 方法
-  }
   renderStatus = () => {
     return (
       <Switch size='small' className='div-switch' defaultChecked={false} />
@@ -168,36 +162,6 @@ export default class Rolemanagement extends Component {
   newroleBtnOpen() {
     this.Newrole.newroleopen();
   }
-  // 添加分组
-  groupingopen() {
-    this.Addgrouping.addgroupingopen();
-  }
-  // 获取分组列表
-  grouplist() {
-    this.setState({
-      toplist: !this.state.toplist,
-    });
-  }
-  // 获取设备参数
-  deviceopen(id) {
-    // const dd = this.state.ApplicationChannel;
-    console.log(id);
-    deviceparams({
-      dGroupId: id,
-    }).then(
-      ({ status, data }) => {
-        if (data.errCode == 0) {
-          this.grouplist();
-          this.Official.officialopen(data.data,id);
-          /* this.setState({
-            datas: data.data,
-          });
-          debugger; */
-          // this.Custom.customopen();
-        }
-      }
-    );
-  }
   search() {
     const values = this.state.value;
   }
@@ -208,30 +172,12 @@ export default class Rolemanagement extends Component {
       { value: '离线', label: '离线' },
       { value: '日限满额', label: '日限满额' },
     ];
-    const statusBtn = (
-      <Select onChange={this.zbl} placeholder={this.state.listValue} dataSource={Allstatus} />
-    );
     const rowSelection = {
       onChange: this.Choice.bind(this),
       getProps: (record, index) => {
 
       },
     };
-    const grouplistdata = this.state.grouplistdata;
-    const equipmentlist = (
-      <ul className="event-list">
-        {
-          grouplistdata.map((item,key)=>{
-            return (
-              <li key={key}>
-                <p>{item.dGroupName}</p>
-                <button onClick={()=>this.deviceopen(item._id)}>添加设备</button>
-              </li>
-            );
-          })
-        }
-      </ul>
-    );
     return (
       <div className='rolemanagement'>
         <Newrole ref={ node => this.Newrole = node } />
@@ -259,7 +205,7 @@ export default class Rolemanagement extends Component {
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
-                      <Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button>
+                      {/*<Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button>*/}
                     </div>
                   </Col>
                 </Row>

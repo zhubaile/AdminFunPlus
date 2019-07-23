@@ -179,8 +179,8 @@ a:active{ text-decoration: none; }
 .resetpsd-bulletbox{ position: fixed; width: 480px; height: 300px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
   border: 1px solid #BBBBBB;}
-.resetpsd-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
-.resetpsd-content{ margin: 20px auto;}
+.resetpsd-title{ border-bottom: 1px solid #dddddd; padding: 0 20px;}
+.resetpsd-content{ margin: 20px auto; padding: 0 20px;}
 /*商户信息-编辑弹框*/
 .edit-bulletbox{ position: fixed; width: 600px; height: 640px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
@@ -224,7 +224,7 @@ a:active{ text-decoration: none; }
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
   border: 1px solid #BBBBBB;}
 .addmember-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
-.addmember-content{ margin: 20px auto;}
+.addmember-content{ margin: 20px auto; padding: 0 10px;}
 /*团队权限-管理台操作日志*/
 
 /* 通用头部 */
@@ -256,7 +256,7 @@ a:active{ text-decoration: none; }
 .interfaceaccess-main .removebtn{ float: left; margin: 20px 10px; width: 71px;height: 34px;border-radius: 4px;background-color: rgba(26, 85, 226, 0.95);color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;
   border: 1px solid rgba(255, 255, 255, 0); }
 /* 新增IP */
-.ippopup{position: fixed; width: 500px; height:220px;  top: 50%; left: 50%; margin-top: -250px; margin-left: -110px; z-index: 8888; background-color: #FFF; border-radius: 5px; font-size: 16px;
+/*.ippopup{position: fixed; width: 500px; height:220px;  top: 50%; left: 50%; margin-top: -250px; margin-left: -110px; z-index: 8888; background-color: #FFF; border-radius: 5px; font-size: 16px;
   -webkit-box-shadow: 1px 1px 3px #666; -moz-box-shadow: 1px 1px 3px #666; box-shadow: 1px 1px 3px #666; overflow: auto;line-height: 20px;border: 1px solid rgba(187, 187, 187, 1); padding: 10px 20px;}
 .ippopup .ippopup-top{ width: 100%;}
 .ippopup .ippopup-top h2{float: left;}
@@ -266,7 +266,7 @@ a:active{ text-decoration: none; }
 .ippopup-content input{ margin-left: 10px;width: 350px;height: 30px;line-height: 20px;border-radius: 4px;background-color: rgba(230, 247, 255, 1); padding-left:15px;border: 1px solid rgba(145, 213, 255, 1); margin-top: 20px;}
 .ippopup .ippopup-btn{ text-align: center;}
 .ippopup .ippopup-btn button{ text-align: center;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 1);color: rgba(255, 255, 255, 1);font-size: 14px;border: 1px solid rgba(255, 255, 255, 0); margin: 30px 10px;}
-.ippopup .ippopup-btn button:first-child{ background-color: #E6F1FC;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 1);font-size: 14px;text-align: center;border: 1px solid rgba(206, 219, 222, 1);}
+.ippopup .ippopup-btn button:first-child{ background-color: #E6F1FC;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 1);font-size: 14px;text-align: center;border: 1px solid rgba(206, 219, 222, 1);}*/
 .editingList{position: fixed; width: 500px; height:450px;  top: 50%; left: 50%; margin-top: -250px; margin-left: -110px; z-index: 8888; background-color: #FFF; border-radius: 5px; font-size: 16px;
   -webkit-box-shadow: 1px 1px 3px #666; -moz-box-shadow: 1px 1px 3px #666; box-shadow: 1px 1px 3px #666; overflow: auto;line-height: 20px;border: 1px solid rgba(187, 187, 187, 1); padding: 10px 20px;}
 .editingList .editingList-top{ width: 100%;}
@@ -371,6 +371,9 @@ a:active{ text-decoration: none; }
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
 .addmenber>span{ margin-top: 10px; width: 90%;}
 .addmenber>span input{ display: block; width: 90%;}
+.addmenber button{margin: 10px 20px;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 0.95);color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;border: 1px solid rgba(255, 255, 255, 0);}
+.addmenber button.quxiao{border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 0.95);font-size: 14px;border: 1px solid rgba(187, 218, 249, 1);}
+.addmenber .next-select .next-select-inner{ height: auto;}
 .next-overlay-wrapper .next-overlay-inner{ z-index: 8889;}
 
 .membermanagements-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
@@ -378,6 +381,7 @@ a:active{ text-decoration: none; }
 .Newrole{ border-radius: 6px; background-color: #E2EDFF; border: 1px solid #A3D0FD; color: #1989FA; cursor: pointer;}
 
 .membermanagement-top .member-role{ margin-left: 30px;}
+.membermanagement-top .next-select .next-select-inner{ height: auto;}
 .member-panel .tab-panel{ padding-bottom: 20px; }
 /*成员管理----新增角色--starting*/
 .newrole{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
@@ -394,3 +398,36 @@ a:active{ text-decoration: none; }
 .editingrole div{ margin: 15px auto;}
 .editingrole label{ margin-right: 10px;}
 /*成员管理----编辑角色--ending*/
+
+
+
+/* 应用参数 */
+.applicationters{ width: 100%;}
+/* IP白名单 */
+.applicationters .tab-contenttwo{ display: flex; align-content: center; justify-content: center;}
+.applicationters .tab-contenttwo .tab-contenttwo-left{ width: 54%; border-right: 1px solid rgba(187, 187, 187, 0.5); padding-bottom: 50px;}
+.tab-contenttwo-left .next-message.tab-contenttwo-left-message{background: #E6F7FF; border: 1px solid #91D5FF; border-radius: 4px; margin: 20px 20px 20px 0px;}
+/* 新增IP */
+.ippopup{
+  position: fixed; width: 500px; height:220px;  top: 50%; left: 50%; margin-top: -250px; margin-left: -110px; z-index: 8888; background-color: #FFF; border-radius: 5px; font-size: 16px;
+  -webkit-box-shadow: 1px 1px 3px #666; -moz-box-shadow: 1px 1px 3px #666; box-shadow: 1px 1px 3px #666; overflow: auto;line-height: 20px;border: 1px solid rgba(187, 187, 187, 1); padding: 10px 20px;
+}
+.ippopup .ippopup-top h2{float: left;}
+.ippopup .ippopup-top strong{ float: right; font-size: 25px; font-weight: 500; margin-top: 15px; cursor: pointer;}
+.ippopup-content{ clear: both;}
+.ippopup-content span{ }
+.ippopup-content input{ margin-left: 10px;width: 350px;height: 30px;line-height: 20px;border-radius: 4px;background-color: rgba(230, 247, 255, 1); padding-left:15px;border: 1px solid rgba(145, 213, 255, 1); margin-top: 20px;}
+.ippopup .ippopup-btn{ text-align: center;}
+.ippopup .ippopup-btn button{ text-align: center;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 1);color: rgba(255, 255, 255, 1);font-size: 14px;border: 1px solid rgba(255, 255, 255, 0); margin: 30px 10px;}
+.ippopup .ippopup-btn button:first-child{ background-color: #E6F1FC;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 1);font-size: 14px;text-align: center;border: 1px solid rgba(206, 219, 222, 1);}
+/* 左边内容 */
+.tab-contenttwo-left .tab-contenttwo-left-btn{margin: 0px 20px 20px 0px;}
+.tab-contenttwo-left .tab-contenttwo-left-btn Button{border-radius: 4px;}
+.tab-contenttwo-left .tab-contenttwo-left-btn Button i{ margin: 0 5px;}
+.tab-contenttwo-left .tab-contenttwo-left-btn div{float: right;}
+.tab-contenttwo-left .tab-contenttwo-left-btn div span{ line-height: 30px; margin-right: 10px;}
+.tab-contenttwo-left .tab-contenttwo-left-btn div .next-switch.next-switch-on.next-switch-medium.div-switch{ width: 70px; background: rgba(86,119,252,1);}
+.tab-contenttwo-left .tab-contenttwo-left-btn div .next-switch.next-switch-off.next-switch-medium.div-switch{ width: 70px; background: #fff;}
+/* 右边内容 */
+.applicationters .tab-contenttwo .tab-contenttwo-right{ width: 45%; padding-left: 20px;}
+.tab-contenttwo-right div{opacity: 0.5;color: rgba(16, 16, 16, 1);font-size: 14px;text-align: left; margin-top: 60px;}
