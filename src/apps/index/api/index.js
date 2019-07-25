@@ -162,12 +162,12 @@ export function userDelete(params) {
   });
 }
 // 成员管理
-export function searchUserList(params) {
-  return ajaxAmd.post({
-    url: '/searchUserList',
-    data: params,
-  });
-}
+// export function searchUserList(params) {
+//   return ajaxAmd.post({
+//     url: '/searchUserList',
+//     data: params,
+//   });
+// }
 // 添加成员
 export function createUser(params) {
   return ajaxAmd.post({
@@ -611,6 +611,28 @@ export function companyfreeze(params) {
 export function companyupdateAuditSuccess(params) {
   return ajaxAmd.post({
     url: '/company/updateAuditSuccess',
+    data: params,
+  });
+}
+// 团队权限 角色管理
+// 用户角色列表
+export function roleList(params) {
+  return ajaxAmd.post({
+    url: '/roleList',
+    data: params,
+  });
+}
+// 用户角色权限修改
+export function changeRolePms(params) {
+  return ajaxAmd.post({
+    url: '/changeRolePms',
+    data: params,
+  });
+}
+// 用户成员管理列表
+export function searchUserList(params) {
+  return ajaxAmd.post({
+    url: '/searchUserList',
     data: params,
   });
 }

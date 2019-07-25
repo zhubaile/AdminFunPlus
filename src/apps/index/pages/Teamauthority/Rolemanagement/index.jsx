@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-import { deviceGrouplist,deviceparams,devicelist } from '@indexApi';
+import { roleList } from '@indexApi';
 import '../../index.css';
 import Newrole from "./Newrole";
-import {Message} from "@alifd/next/lib/index";
+import { Message } from "@alifd/next/lib/index";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -37,66 +37,46 @@ export default class Rolemanagement extends Component {
     super(props);
     this.state = {
       current: 1,
+      pageSize: 10,
+      total: 0,
       isLoading: false,
       data: [],
-/*      datas: [],*/
+      role: [],
       args: [],
-      toplist: false,
-      grouplistdata: [
-        { dGroupName: '' },
-      ],
       value: {
-        timeType: '',
-        startdate: [],
-        orderStatus: '',
-        refundStatus: '',
-        payChannel: '',
-        listValue: '状态',
+        cpName: '',
+        cpId: '',
       },
     };
   }
 
   componentDidMount() {
-    debugger;
-    this.Toupdatelist();
     this.fetchData();
   }
-
-  // 获取分组列表
-  Toupdatelist=()=>{
-    deviceGrouplist().then(
-      ({ status, data }) => {
-        if (data.errCode == 0) {
-          this.setState({
-            grouplistdata: data.data,
-          });
-        }else {
-          Message.success(data.message);
-        }
-      }
-    );
-  };
-  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-        debugger;
-      }, 600);
-    });
-  };
-
   fetchData = (len) => {
     this.setState(
       {
         isLoading: true,
       },
       () => {
-        this.mockApi(len).then((data) => { // data 里面为数据
+        const pageSize = this.state.pageSize;
+        const page = this.state.current;
+        roleList({
+          page,
+          pageSize,
+          ...len,
+        }).then(({ status, data })=>{
           debugger;
-          this.setState({
-            data,
-            isLoading: false,
-          });
+          if (data.errCode == 0) {
+            this.setState({
+              premissions: data.data.premissions, // 新增角色的权限值
+              isLoading: false,
+              role: data.data.role, // 列表
+              total: data.data.totalCount, // 列表总数
+            });
+          } else {
+            Message.success(data.message);
+          }
         });
       }
     );
@@ -112,10 +92,11 @@ export default class Rolemanagement extends Component {
       }
     );
   };
-  renderOper = () => {
+  renderOper = (value, index, record) => {
+    debugger;
     return (
       <div className='tb_span'>
-        <span onClick={this.newroleBtnOpen.bind(this)}>编辑</span>
+        <span onClick={this.newroleBtnOpen.bind(this, record)}>编辑</span>
       </div>
     );
   };
@@ -127,11 +108,13 @@ export default class Rolemanagement extends Component {
     );
   };
   formChange = (value) => {
-    this.props.onChange(value);
+    this.setState({
+      value,
+    });
   };
-  renderStatus = () => {
+  renderStatus = (datas) => {
     return (
-      <Switch size='small' className='div-switch' defaultChecked={false} />
+      <Switch size='small' className='div-switch' id="enabled" value="enabled" checked={datas.enabled} />
     );
   };
   // 获取到选中的数据
@@ -142,36 +125,33 @@ export default class Rolemanagement extends Component {
   }
   // 删除方法
   removes() {
-    const { data,args } = this.state;
+    const { role,args } = this.state;
     debugger;
     let index = -1;
     args.map((id)=>{
-      data.forEach((item, i) => {
+      role.forEach((item, i) => {
         if (item._id === id) {
           index = i;
         }
       });
       if (index !== -1) {
-        data.splice(index, 1);
+        role.splice(index, 1);
         this.setState({
-          data,
+          role,
         });
       }
     });
   }
-  newroleBtnOpen() {
-    this.Newrole.newroleopen();
+  newroleBtnOpen=(record)=> {
+    const premissions = this.state.premissions;
+    this.Newrole.newroleopen(record,premissions);
   }
   search() {
     const values = this.state.value;
+    this.fetchData(values);
   }
   render() {
-    const { isLoading, data, current } = this.state;
-    const Allstatus = [
-      { value: '可使用', label: '可使用' },
-      { value: '离线', label: '离线' },
-      { value: '日限满额', label: '日限满额' },
-    ];
+    const { isLoading, data, current, pageSize, total, role } = this.state;
     const rowSelection = {
       onChange: this.Choice.bind(this),
       getProps: (record, index) => {
@@ -180,7 +160,7 @@ export default class Rolemanagement extends Component {
     };
     return (
       <div className='rolemanagement'>
-        <Newrole ref={ node => this.Newrole = node } />
+        <Newrole ref={ node => this.Newrole = node } fetchData={this.fetchData.bind(this)} />
         <Tab shape='pure' className='income-tab'>
           <Tab.Item title="角色管理">
             <div className='rolemanagement-content'>
@@ -193,45 +173,47 @@ export default class Rolemanagement extends Component {
                   <Col l="24">
                     <div style={styles.formItem}>
                       <span style={styles.formLabel}>商户ID:</span>
-                      <FormBinder name="merchantId"
+                      <FormBinder name="cpId"
                         autoWidth={false}
                       >
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <span style={styles.formLabel}>企业名称:</span>
-                      <FormBinder name="name"
+                      <FormBinder name="cpName"
                         autoWidth={false}
                       >
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
-                      {/*<Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button>*/}
+                      {/* <Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button> */}
                     </div>
                   </Col>
                 </Row>
               </FormBinderWrapper>
             </div>
             <div className='rolemanagement-panel'>
-              <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
+              <Table loading={isLoading} dataSource={role} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
                 {/*                <Table.Column
                   title=""
                   width={50}
                   dataIndex=""
                   cell={this.renderSelectall}
                 /> */}
-                <Table.Column title="商户ID" dataIndex="merchantId" />
-                <Table.Column title="企业名称" dataIndex="name" />
-                <Table.Column title="姓名" dataIndex="time" />
-                <Table.Column title="角色名称" dataIndex="order" />
-                <Table.Column title="描述" dataIndex="remark" />
-                <Table.Column title="权限类型" dataIndex="balance" />
-{/*                <Table.Column title={statusBtn} dataIndex="2" cell={this.renderStatus} />*/}
-                <Table.Column title="状态" dataIndex="role" cell={this.renderStatus} />
+                <Table.Column title="商户ID" dataIndex="cpId" />
+                <Table.Column title="企业名称" dataIndex="cpName" />
+                {/* <Table.Column title="姓名" dataIndex="time" /> */}
+                <Table.Column title="角色名称" dataIndex="description" />
+                <Table.Column title="描述" dataIndex="notes" />
+                {/* <Table.Column title="权限类型" dataIndex="notes" /> */}
+                {/*                <Table.Column title={statusBtn} dataIndex="2" cell={this.renderStatus} /> */}
+                <Table.Column title="状态" dataIndex="enabled" cell={this.renderStatus} />
                 <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
               </Table>
               <Pagination
                 style={{ marginTop: '20px', textAlign: 'right' }}
                 current={current}
+                pageSize={pageSize}
+                total={total}
                 onChange={this.handlePaginationChange}
               />
               <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>

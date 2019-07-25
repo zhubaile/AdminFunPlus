@@ -165,3 +165,23 @@ a:hover .sidebar-navone,a:hover .sidebar-navtwo{ background:#037cf8; color: #FFF
 .addcolumns .addcolumns-btn{ text-align: center;}
 .addcolumns .addcolumns-btn button{ text-align: center;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 1);color: rgba(255, 255, 255, 1);font-size: 14px;border: 1px solid rgba(255, 255, 255, 0); margin: 30px 10px;}
 .addcolumns .addcolumns-btn button:first-child{ background-color: #E6F1FC;border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 1);font-size: 14px;text-align: center;border: 1px solid rgba(206, 219, 222, 1);}
+/*寄件弹框*/
+.shipping{ position: fixed; width: 330px; height: 300px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 9999;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
+.shipping .shipping-title{ border-bottom: 1px solid #666666; padding: 0 15px; margin-bottom: 5%;}
+.shipping .shipping-title h2{ display: inline-block;}
+.shipping .shipping-title span{ font-size: 38px; float: right; cursor: pointer;}
+.shipping-content{ padding: 15px;}
+.shipping-btn{ text-align: center;}
+/*发票详情*/
+.invoicedetails{ width: 100%; display: flex; justify-items: center; flex-direction: column;}
+.invoicedetails ul li{ font-size: 14px; font-weight: bold;}
+.invoicedetails .invoicedetails-top{ border-bottom: 1px solid rgba(187, 187, 187, 1); font-size: 20px; position: relative;}
+.invoicedetails-conter ul li{ display: inline-block; margin-right: 20%;}
+.invoicedetails .invoicedetails-top .invoicedetails-top-border{ border-bottom: 3px solid #037cf8; width: 35px; margin-top: 10px; margin-bottom: -2px;}
+.invoicedetails-conter {line-height: 20px;border-radius: 10px 10px 10px 10px;box-shadow: 0px 1px 8px 0px rgba(229, 229, 229, 0.81);border: 1px solid rgba(255, 255, 255, 0); margin-top: 20px; padding: 20px; background: #fff;}
+.invoicedetails-footer{ border-radius: 10px 10px 10px 10px;box-shadow: 0px 1px 8px 0px rgba(229, 229, 229, 0.81);border: 1px solid rgba(255, 255, 255, 0); margin-top: 20px; padding: 20px; background: #fff;}
+.invoicedetails-footer div{ display: inline-block; vertical-align: top; width: 50%;}
+.invoicedetails-footer div ul li{ line-height: 30px;}
+.invoicedetails-footer div ul li span{ font-weight: normal;}

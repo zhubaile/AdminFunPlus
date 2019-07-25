@@ -5,6 +5,7 @@ import { actions, reducers, connect } from '@indexStore';
 import { invoiceList } from '@indexApi';
 import '../index.css';
 import moment from "moment/moment";
+import Shipping from "./Shipping";
 
 const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
@@ -26,6 +27,9 @@ export default class Invoice extends Component {
       grouplistdata: [
         { dGroupName: '' },
       ],
+      value: {
+        fapiao: '',
+      },
     };
   }
   // btnClick() {
@@ -89,7 +93,15 @@ export default class Invoice extends Component {
   renderOper = () => {
     return (
       <div style={{ color: '#1A55E2', cursor: 'pointer' }}>
-       查看
+        <span onClick={this.detailBtn.bind(this)}>详情</span>
+        <span onClick={this.invoiceBtn.bind(this)}>寄件</span>
+      </div>
+    );
+  };
+  renderStatus = () => {
+    return (
+      <div>
+        <span>待处理</span>
       </div>
     );
   };
@@ -151,8 +163,16 @@ export default class Invoice extends Component {
     const arrivalDate = this.state.startdate;
     this.fetchData(invoiceTitle,arrivalDate);
   }
+  // 寄件
+  invoiceBtn() {
+    this.Shipping.shippingopen();
+  }
+  // 详情
+  detailBtn() {
+    this.props.history.push("/backadmin/service/invoicedetails");
+  }
   render() {
-    const { isLoading, datas, current,total,pageSize } = this.state;
+    const { isLoading, datas, current,total,pageSize,value } = this.state;
     const startValue = moment('2019-05-08', 'YYYY-MM-DD', true);
     const endValue = moment('2017-12-15', 'YYYY-MM-DD', true);
     const grouplistdata = this.state.grouplistdata;
@@ -166,8 +186,14 @@ export default class Invoice extends Component {
         }; */
       },
     };
+    const list = [
+      { value: '上海', label: '上海' },
+      { value: '杭州', label: '杭州' },
+      { value: '北京', label: '北京' },
+    ];
     return (
       <div className='invoice'>
+        <Shipping ref={ node=>this.Shipping = node } />
         <div className='currency-top'>
           发票管理
           <div className='currency-top-bottombor' />
@@ -178,8 +204,8 @@ export default class Invoice extends Component {
               <span>开票时间：</span>
               <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} onChange={this.rangetime.bind(this)} />
               <span style={{ marginLeft: '20px' }}>发票抬头：</span>
-              <Input placeholder='请输入发票抬头' ref={node=>this.input = node} />
-              {/* <Select style={{ width: '150px' }} name="ApplicationChannel" dataSource={Allstart} /> */}
+              {/* <Input placeholder='请输入发票抬头' ref={node=>this.input = node} /> */}
+              <Select style={{ width: '200px' }} name="fapiao" dataSource={list} />
             </div>
             <div className='right'>
               <button onClick={this.searchbtn.bind(this)}>查询</button>
@@ -187,25 +213,35 @@ export default class Invoice extends Component {
           </div>
 
           <div className='invoice-main-content'>
-            <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+            <Table
+              loading={isLoading}
+              dataSource={datas}
+              hasBorder={false}
+              primaryKey='_id'
+              rowSelection={rowSelection}
+            >
               <Table.Column title="发票ID" dataIndex="_id" />
               <Table.Column title="企业名称" dataIndex="todayFlow" />
               <Table.Column title="企业税号" dataIndex="yeTodayFlow" />
-              <Table.Column title="税额 " dataIndex="totalFlow" />
               <Table.Column title="发票抬头" dataIndex="classify" />
-              <Table.Column title="快递单号" dataIndex="classify" />
+              <Table.Column title="发票类型 " dataIndex="totalFlow" />
+{/*              <Table.Column title="订单号" dataIndex="classify" />*/}
               <Table.Column title="开票金额" dataIndex="1" />
-              <Table.Column title="状态" dataIndex="2" />
               <Table.Column title="开票时间" dataIndex="3  " />
-              <Table.Column title="开票人" dataIndex="4" />
               <Table.Column
-                title="发票明细"
+                title="状态"
+                dataIndex="4"
+                cell={this.renderStatus}
+              />
+              <Table.Column
+                title="操作"
                 width={200}
                 dataIndex="oper"
                 cell={this.renderOper}
               />
             </Table>
             <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button>
+
             <Pagination
               style={{ marginTop: '20px', textAlign: 'right' }}
               current={current}

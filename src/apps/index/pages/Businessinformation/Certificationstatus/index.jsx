@@ -58,7 +58,7 @@ export default class Certificationstatus extends Component {
         Message.success(data.message);
         this.certificationclose();
         this.props.fetchData();
-      }else{
+      } else {
         Message.success(data.message);
       }
     });
@@ -66,7 +66,7 @@ export default class Certificationstatus extends Component {
   render() {
     const { content, confirm,value } = this.state;
     if (!this.state.open) return null;
-    const two = 2;    const three = 3;
+    const two = 2; const three = 3;
     return (
       <div className='certificationstatus-bulletbox'>
         <div className='edit-title'>

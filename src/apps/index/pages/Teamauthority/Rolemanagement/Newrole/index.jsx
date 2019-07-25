@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+import { changeRolePms } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
 const FormItem = Form.Item;
+const items = [];
 
 const { Row, Col } = Grid;
 const formItemLayout = {
@@ -18,130 +19,126 @@ export default class Newrole extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      content: null,
-      confirm: null,
       value: {
-        psd1: '',
-        psd2: '',
-        companyname: '',
-        invoicetype: '',
-        invoice: '',
-        bank: '',
-        accountopening: '',
-        taxnumber: '',
-        email: '',
-        status1: '',
-        status2: '',
-        radio1: '',
-        radio2: '',
+        description: '',
+        notes: '',
+        premissions: [],
       },
+      open: false,
+      content: [],
+      premission: null,
+
     };
   }
 
   newroleclose() {
     this.setState({
       open: false,
-      content: null,
+      content: [],
     });
   }
-  newroleopen(content,confirm) {
+  newroleopen(content,premission) {
+    debugger;
+    // const values = Object.assign({},this.state.value,{ premissions: content.premissions }); // name 的值需要替换
     this.setState({
       open: true,
       content,
-      confirm,
+      premission,
     });
     this.confirmCallBack = confirm;
   }
-  formChange = (value) => {
+  /*  formChange = (value) => {
     this.setState({
       value,
     });
-  };
+  }; */
 
-  SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
-      ...r,
+  SubInvoiceinfo() {
+    const id = this.state.content._id;
+    const premissions = this.state.content.premissions;
+    const descriptionval = this.description.getInputNode().value;
+    console.log(this.notes);
+    const notesval = this.notes.getInputNode().value;
+    debugger;
+    changeRolePms({
+      _id: id,
+      premissions,
+      description: descriptionval,
+      // notes: notesval,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
-        this.billinginformationclose();
+        this.newroleclose();
         this.props.fetchData();
+      } else {
+        Message.success(data.message);
       }
     });
+  }
+  checkoutbtn(v,e) {
+    let zzzz = this.state.content.premissions;
     debugger;
-    /* this.refs.form.validateAll((errors, values) => {
-      debugger;
-    }) */
+    const id = e.target.id;
+    if (zzzz.indexOf(id) > -1) {
+      zzzz = zzzz.filter(n => n !== id);
+      const values = Object.assign({},this.state.content,{ premissions: zzzz }); // name 的值需要替换
+      this.setState({
+        content: values,
+      });
+    } else {
+      zzzz.push(id);
+      const values = Object.assign({},this.state.content,{ premissions: zzzz }); // name 的值需要替换
+      this.setState({
+        content: values,
+      });
+    }
   }
   render() {
-    const { content, confirm } = this.state;
-    const fptype = [
-      { value: '0', label: '企业增值税专用发票' },
-      { value: '1', label: '企业增值税普通发票' },
-      { value: '2', label: '组织增值税普通发票' },
-      { value: '3', label: '个人增值税普通发票' },
-    ];
+    const { content, premission } = this.state;
+    const premissionss = content.premissions; // 选中的所有权限
     if (!this.state.open) return null;
     return (
       <div className='newrole-bulletbox'>
         <div className='newrole-title'>
           <h2 style={{ display: 'inline-block' }}>新增角色</h2>
-          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
+          <span style={styles.cha} onClick={this.newroleclose.bind(this)}>×</span>
         </div>
-
         <div className='newrole-content'>
-          <Form className='form'>
-            {/*  <FormItem
-              label='商户ID'
-              {...formItemLayout}
-            >
-              <Input
-                name='invoiceType'
-                placeholder='请输入'
-              />
-            </FormItem>
-            <FormItem
-              label='企业名称'
-              {...formItemLayout}
-            >
-              <Input
-                name='psd1'
-                placeholder='请输入'
-              />
-            </FormItem> */}
 
-            <FormItem
-              label='角色名称'
-              {...formItemLayout}
-              /* asterisk */
-            >
-              <Input
-                name="psd2"
-                placeholder="系统管理员"
-                /* defaultValue={content.invoiceTitle} */
-              />
-            </FormItem>
 
-            <FormItem
-              label='角色描述'
-              {...formItemLayout}
-            >
               <Input
-                name="bank"
+                name="description"
+                placeholder=""
+                defaultValue={content.description}
+                ref={node=>this.description = node}
+              />
+
+
+              <Input
+                name="notes"
                 placeholder=''
-/*                defaultValue={content.bank} */
+                defaultValue={content.notes}
+                ref={node=>this.notes = node}
               />
-            </FormItem>
-            <FormItem
+            {/*            <FormItem
               label='账户面板权限'
               {...formItemLayout}
-            >
-              <Checkbox defaultChecked value="">账户概览</Checkbox>
-              <Checkbox defaultChecked value="">余额明细</Checkbox>
-              <Checkbox defaultChecked value="">订单中心</Checkbox>
-            </FormItem>
-            <FormItem
+            > */}
+            <div>
+              {
+                  premission.map((item)=>{
+                    debugger;
+                    return (
+                      <Checkbox name='premissions' defaultChecked={premissionss.includes(item._id)} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                    );
+                  })
+                }
+            </div>
+
+            {/*            </FormItem> */}
+
+            {/*            <FormItem
               label='应用面板权限'
               {...formItemLayout}
             >
@@ -155,19 +152,10 @@ export default class Newrole extends Component {
             >
               <Checkbox defaultChecked value="">退款（包含支付订单、支付订单批量退款、业务订单查询、充值记录管理处的退款权限）</Checkbox>
 
-            </FormItem>
-            <FormItem wrapperCol={{ offset: 6 }} >
-              <Form.Submit
-                style={styles.submitbtn}
-                validate
-                type="primary"
-                onClick={(v, e) => this.SubInvoiceinfo(v,e)}
-              >
-                确定
-              </Form.Submit>
-              <Form.Reset style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Form.Reset>
-            </FormItem>
-          </Form>
+            </FormItem> */}
+            <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
+            <Button type='primary' style={styles.submitbtn} onClick={this.SubInvoiceinfo.bind(this)}>提交</Button>
+
         </div>
 
 
@@ -177,6 +165,12 @@ export default class Newrole extends Component {
 }
 
 const styles = {
+  cha: {
+    fontSize: '38px',
+    color: '#666666',
+    float: 'right',
+    cursor: 'pointer',
+  },
   cancelbtn: {
     display: 'inline-block',
     marginLeft: '10px',

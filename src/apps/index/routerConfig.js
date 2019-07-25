@@ -42,6 +42,7 @@ const Workorderdetails = React.lazy(() => import('./pages/Service/Workorder/Work
 const Realtimetion = React.lazy(() => import('./pages/Service/Realtimetion')); // 实时咨询
 const HelpCenter = React.lazy(() => import('./pages/Service/HelpCenter')); // 帮助中心
 const Invoice = React.lazy(() => import('./pages/Service/Invoice')); // 发票
+const Invoicedetails = React.lazy(() => import('./pages/Service/Invoicedetails'));// 发票详情
 // import { asideMenuConfig } from './pages/Service/Invoice';
 // 管控
 // 接口管理
@@ -173,6 +174,10 @@ const routerConfig = [
   {
     path: '/backadmin/service/invoice',
     component: Invoice,
+  },
+  {
+    path: '/backadmin/service/invoicedetails',
+    component: Invoicedetails,
   },
   {
     path: '/backadmin/service/helpCenter',
