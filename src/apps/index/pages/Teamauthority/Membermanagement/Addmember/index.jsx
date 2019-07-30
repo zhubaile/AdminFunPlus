@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-/* import { openInvoice,changeInvoiceInfo } from '@indexApi'; */
+import { createUser,changeUser } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
@@ -18,204 +18,191 @@ export default class Addmember extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      value: {
+        name: '',
+        username: '',
+        password: '',
+        passwordTwo: '',
+        phone: '',
+        email: '',
+        roles: [],
+        enabled: '',
+        groupId: '',
+      },
       open: false,
-      content: null,
-      confirm: null,
+      content: null, // 下拉框数据
+      confirm: '', // id
+      record: null, // 编辑的时候详细信息
       data: [],
       isLoading: [],
-      value: {
-        psd1: '',
-        psd2: '',
-        companyname: '',
-        invoicetype: '',
-        invoice: '',
-        bank: '',
-        accountopening: '',
-        taxnumber: '',
-        email: '',
-        status1: '',
-        status2: '',
-        radio1: '',
-        radio2: '',
-        e_mail: '',
-        jiaose: '',
-      },
     };
   }
   addmemberclose() {
     this.setState({
       open: false,
       content: null,
+      value: {},
     });
   }
-  addmemberopen(content,confirm) {
+  addmemberopen(content,confirm,record) {
     this.setState({
       open: true,
       content,
       confirm,
+      value: record,
+      record,
     });
     this.confirmCallBack = confirm;
   }
-  formChange = (value) => {
-    this.setState({
-      value,
-    });
-  };
+  //   addmemberopen(content,confirm) {
+  //   debugger;
+  //   if (!confirm.id) {
+  //     this.setState({
+  //       open: true,
+  //       content,
+  //       confirm,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       open: true,
+  //       content,
+  //       confirm,
+  //       value: confirm,
+  //     });
+  //   }
+  // }
+  // formChange = (value) => {
+  //   this.setState({
+  //     value,
+  //   });
+  // };
 
-  /*  SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
-      ...r,
-    }).then(({ status,data })=>{
-      if (data.errCode == 0) {
-        Message.success(data.message);
-        this.billinginformationclose();
-        this.props.fetchData();
-      }
-    });
-    debugger;
-    /!* this.refs.form.validateAll((errors, values) => {
+  // 提交
+  Addbtn=()=> {
+    this.refs.form.validateAll((errors, values) => {
+      const _id = this.state.confirm;
+      const groupId = this.state.confirm;
       debugger;
-    }) *!/
-  } */
+      const addedit = !_id ? createUser : changeUser;
+      addedit({
+        _id,
+        groupId,
+        ...values,
+      }).then(({ status, data }) => {
+        debugger;
+        if (data.errCode == 0) {
+          this.addmemberclose();
+          Message.success(data.message);
+          this.props.fetchData();
+        } else {
+          Message.success(data.message);
+        }
+      });
+    });
+  }
   render() {
-    const { content, confirm, value, data } = this.state;
-    const jiaose = [
-      { value: '0', label: '0' },
-      { value: '1', label: '1' },
-      { value: '2', label: '2' },
-      { value: '3', label: '3' },
-    ];
+    const { content, confirm, value, data, record } = this.state;
+    debugger;
     if (!this.state.open) return null;
     return (
       <div className='addmember-bulletbox'>
         <div className='addmember-title'>
           <h2 style={{ display: 'inline-block' }}>添加成员</h2>
-          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.addmemberclose.bind(this)}>×</span>
         </div>
 
         <div className='addmember-content'>
-          <Form className='form'
+          <FormBinderWrapper
             value={this.state.value}
             onChange={this.formChange}
             ref="form"
           >
-            {/* <FormItem
-              label='商户ID'
-              {...formItemLayout}
-            >
-              <Input
-                name='invoiceType'
-                placeholder='请输入用户名'
-              />
-            </FormItem>
-            <FormItem
-              label='企业名称'
-              {...formItemLayout}
-            >
-              <Input
-                name='psd1'
-                placeholder='请输入用户名'
-              />
-            </FormItem> */}
+            <div style={styles.formItem}>
+              <span style={styles.formLabel}>真实姓名</span>
+              <FormBinder name="name">
+                <Input
+                  placeholder="请输入用户名"
+                  /* defaultValue={content.invoiceTitle} */
+                />
+              </FormBinder>
+            </div>
 
-            <FormItem
-              label='真实姓名'
-              {...formItemLayout}
-              /* asterisk */
-            >
-              <Input
-                name="psd2"
-                placeholder="请输入用户名"
-                /* defaultValue={content.invoiceTitle} */
-              />
-            </FormItem>
+            <div style={styles.formItem}>
+              <span style={styles.formLabel}>用户名</span>
+              <FormBinder name="username">
+                <Input
+                  readOnly={confirm}
+                  placeholder='请输入用户名'
+                />
+              </FormBinder>
+            </div>
+            {
+              !confirm ?
+                <div style={styles.formItem}>
+                  <span style={styles.formLabel}>密码</span>
+                  <FormBinder name="password">
+                    <Input
+                      htmlType='password'
+                      placeholder='请输入密码'
+                      /*                defaultValue={content.bank} */
+                    />
+                  </FormBinder>
+                </div> : null
+            }
+            {
+              !confirm ?
+                <div style={styles.formItem}>
+                  <span style={styles.formLabel}>确认密码</span>
+                  <FormBinder name="passwordTwo">
+                    <Input
+                      htmlType='password'
+                      placeholder='请输入确认密码'
+                      /*                defaultValue={content.bank} */
+                    />
+                  </FormBinder>
+                </div> : null
+            }
+            <div style={styles.formItem}>
+              <span style={styles.formLabel}>联系方式</span>
+              <FormBinder name="phone">
+                <Input
+                  placeholder='请输入联系方式'
+                  /*                defaultValue={content.bank} */
+                />
+              </FormBinder>
+            </div>
+            <div style={styles.formItem}>
+              <span style={styles.formLabel}>电子邮箱</span>
+              <FormBinder name="email">
+                <Input
+                  placeholder='请输入电子邮箱'
+                />
+              </FormBinder>
+            </div>
 
-            <FormItem
-              label='用户名'
-              {...formItemLayout}
-            >
-              <Input
-                name="bank"
-                placeholder='请输入用户名'
-/*                defaultValue={content.bank} */
-              />
-            </FormItem>
+            <div style={styles.formItem}>
+              <span style={styles.formLabel}>所属角色</span>
+              <FormBinder name="roles">
+                <Select
+                  mode="multiple"
+                  dataSource={content}
+                  // defaultValue={confirm.roles}
+                  style={{ width: '200px' }}
+                />
+              </FormBinder>
+              <p style={styles.prompt}>(角色可多选)</p>
+            </div>
+            <div style={styles.formItem}>
+              <span style={styles.formLabel}>状态</span>
+              <FormBinder name="enabled">
+                <Switch value="" checked={content} />
+              </FormBinder>
+              <p style={styles.prompt}>（是否禁用）</p>
+            </div>
+            <Button style={styles.submitbtn} onClick={this.Addbtn}>添加</Button>
+            <Button style={styles.cancelbtn} onClick={this.addmemberclose.bind(this)}>取消</Button>
+          </FormBinderWrapper>
 
-            <FormItem
-              label='密码'
-              {...formItemLayout}
-            >
-              <Input
-                name="psd1"
-                htmlType='password'
-                placeholder='请输入密码'
-                /*                defaultValue={content.bank} */
-              />
-            </FormItem>
-            <FormItem
-              label='确认密码'
-              {...formItemLayout}
-            >
-              <Input
-                name="psd2"
-                htmlType='password'
-                placeholder='请输入确认密码'
-                /*                defaultValue={content.bank} */
-              />
-            </FormItem>
-            <FormItem
-              label='联系方式'
-              {...formItemLayout}
-            >
-              <Input
-                name="tel"
-                placeholder='请输入联系方式'
-                /*                defaultValue={content.bank} */
-              />
-            </FormItem>
-            <FormItem
-              label='电子邮箱'
-              {...formItemLayout}
-            >
-              <Input
-                name="e_mail"
-                placeholder='请输入电子邮箱'
-              />
-            </FormItem>
-            <FormItem
-              label='所属角色'
-              {...formItemLayout}
-            >
-              <Select
-                name=''
-                dataSource={jiaose}
-                style={{ width: '200px' }}
-              />
-              <span style={styles.prompt}>(角色可多选)</span>
-            </FormItem>
-            <FormItem
-              label='状态'
-              {...formItemLayout}
-            >
-              <Switch defaultChecked value="" />
-              <span style={styles.prompt}>（是否禁用）</span>
-            </FormItem>
-            <FormItem wrapperCol={{ offset: 6 }} >
-              <Form.Submit
-                style={styles.submitbtn}
-                validate
-                type="primary"
-/*                onClick={(v, e) => this.SubInvoiceinfo(v,e)} */
-              >
-                添加
-              </Form.Submit>
-              <Form.Reset
-                style={styles.cancelbtn}
-                onClick={this.addmemberclose.bind(this)}
-              >取消
-              </Form.Reset>
-            </FormItem>
-          </Form>
         </div>
 
 
@@ -225,6 +212,15 @@ export default class Addmember extends Component {
 }
 
 const styles = {
+  formItem: {
+    marginBottom: '20px',
+  },
+  formLabel: {
+    width: '70px',
+    marginRight: '10px',
+    textAlign: 'right',
+    display: 'inline-block',
+  },
   cancelbtn: {
     display: 'inline-block',
     marginLeft: '10px',

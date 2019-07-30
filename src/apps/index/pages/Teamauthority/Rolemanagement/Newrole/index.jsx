@@ -64,7 +64,7 @@ export default class Newrole extends Component {
       _id: id,
       premissions,
       description: descriptionval,
-      // notes: notesval,
+      notes: notesval,
     }).then(({ status,data })=>{
       debugger;
       if (data.errCode == 0) {
@@ -105,28 +105,31 @@ export default class Newrole extends Component {
           <span style={styles.cha} onClick={this.newroleclose.bind(this)}>×</span>
         </div>
         <div className='newrole-content'>
+          <div>
+            <label>角色名称</label>
+            <Input
+              name="description"
+              placeholder=""
+              defaultValue={content.description}
+              ref={node=>this.description = node}
+            />
+          </div>
+          <div>
+            <label>角色描述</label>
+            <Input
+              name="notes"
+              placeholder=''
+              defaultValue={content.notes}
+              ref={node=>this.notes = node}
+            />
+          </div>
 
-
-              <Input
-                name="description"
-                placeholder=""
-                defaultValue={content.description}
-                ref={node=>this.description = node}
-              />
-
-
-              <Input
-                name="notes"
-                placeholder=''
-                defaultValue={content.notes}
-                ref={node=>this.notes = node}
-              />
-            {/*            <FormItem
+          {/*            <FormItem
               label='账户面板权限'
               {...formItemLayout}
             > */}
-            <div>
-              {
+          <div>
+            {
                   premission.map((item)=>{
                     debugger;
                     return (
@@ -134,11 +137,11 @@ export default class Newrole extends Component {
                     );
                   })
                 }
-            </div>
+          </div>
 
-            {/*            </FormItem> */}
+          {/*            </FormItem> */}
 
-            {/*            <FormItem
+          {/*            <FormItem
               label='应用面板权限'
               {...formItemLayout}
             >
@@ -153,9 +156,11 @@ export default class Newrole extends Component {
               <Checkbox defaultChecked value="">退款（包含支付订单、支付订单批量退款、业务订单查询、充值记录管理处的退款权限）</Checkbox>
 
             </FormItem> */}
+
+          <div>
             <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
             <Button type='primary' style={styles.submitbtn} onClick={this.SubInvoiceinfo.bind(this)}>提交</Button>
-
+          </div>
         </div>
 
 
@@ -173,7 +178,7 @@ const styles = {
   },
   cancelbtn: {
     display: 'inline-block',
-    marginLeft: '10px',
+    margin: '10px 20px 20px 40px',
     width: '80px',
     height: '28px',
     backgroundColor: 'rgba(230, 241, 252, 1)',
@@ -183,6 +188,7 @@ const styles = {
   },
   submitbtn: {
     display: 'inline-block',
+    margin: '10px 20px 20px 40px',
     width: '80px',
     height: '28px',
     backgroundColor: 'rgba(86, 119, 252, 1)',

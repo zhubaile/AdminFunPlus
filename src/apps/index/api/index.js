@@ -169,12 +169,12 @@ export function userDelete(params) {
 //   });
 // }
 // 添加成员
-export function createUser(params) {
-  return ajaxAmd.post({
-    url: '/createUser',
-    data: params,
-  });
-}
+// export function createUser(params) {
+//   return ajaxAmd.post({
+//     url: '/createUser',
+//     data: params,
+//   });
+// }
 
 // 申请开票界面内容加载
 export function invoiceDataInfo(params) {
@@ -633,6 +633,34 @@ export function changeRolePms(params) {
 export function searchUserList(params) {
   return ajaxAmd.post({
     url: '/searchUserList',
+    data: params,
+  });
+}
+// 创建用户
+export function createUser(params) {
+  return ajaxAmd.post({
+    url: '/createUser',
+    data: params,
+  });
+}
+// 修改用户
+export function changeUser(params) {
+  return ajaxAmd.post({
+    url: '/changeUser',
+    data: params,
+  });
+}
+// 修改密码
+export function changePwd(params) {
+  return ajaxAmd.post({
+    url: '/changePwd',
+    data: params,
+  });
+}
+// 管理台操作日志
+export function sysLoglist(params) {
+  return ajaxAmd.post({
+    url: '/sysLoglist',
     data: params,
   });
 }

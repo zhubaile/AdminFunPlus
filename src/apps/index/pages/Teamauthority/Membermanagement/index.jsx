@@ -1,6 +1,6 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
-import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch } from '@alifd/next';
+import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch,Radio } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import { searchUserList } from '@indexApi';
 import '../../index.css';
@@ -42,12 +42,13 @@ export default class Membermanagement extends Component {
       current: 1,
       isLoading: false,
       data: [],
-      role: [],
+      result: [],
+      roless: [],
       args: [],
       value: {
         cpId: '',
         cpName: '',
-        description: '',
+        roles: '',
       },
     };
   }
@@ -72,9 +73,12 @@ export default class Membermanagement extends Component {
         }).then(({ status, data })=>{
           debugger;
           if (data.errCode == 0) {
+            const kkk = data.data.role;
+            const roles = kkk.map(item=>({ value: item.roleName, label: item.description }));
             this.setState({
               isLoading: false,
-              role: data.data.role,
+              result: data.data.result,
+              roless: roles,
               total: data.data.totalCount,
             });
           } else {
@@ -100,53 +104,95 @@ export default class Membermanagement extends Component {
       value,
     });
   };
-  renderStatus = () => {
-    return (
-      <span>正常</span>
-    );
-  };
+    renderStatus = (datas) => {
+      return (
+        <div>
+          <Radio id="enabled" value="enabled" checked={datas.enabled} >{datas.enabledName}</Radio>
+        </div>
+      );
+    };
   // 获取到选中的数据
-  Choice(args) {
-    this.setState({
-      args,
-    },);
-  }
+    Choice(args) {
+      this.setState({
+        args,
+      },);
+    }
   // 删除方法
-  removes() {
-    const { role,args } = this.state;
-    debugger;
-    let index = -1;
-    args.map((id)=>{
-      role.forEach((item, i) => {
-        if (item._id === id) {
-          index = i;
+    removes() {
+      const { result,args } = this.state;
+      debugger;
+      let index = -1;
+      args.map((id)=>{
+        result.forEach((item, i) => {
+          if (item._id === id) {
+            index = i;
+          }
+        });
+        if (index !== -1) {
+          result.splice(index, 1);
+          this.setState({
+            result,
+          });
         }
       });
-      if (index !== -1) {
-        role.splice(index, 1);
-        this.setState({
-          role,
+    }
+    // 添加成员
+    addmemberBtnOpen() {
+      const adds = this.state.roless;
+      debugger;
+      this.Addmenber.addmemberopen(adds);
+    }
+  // 编辑
+    editmemberBtnOpen(record) {
+      const adds = this.state.roless;
+      const id = record._id;
+      debugger;
+      this.Addmenber.addmemberopen(adds,id,record);
+    }
+  resetBtnOpen=(id)=> {
+    debugger;
+    this.Resetpassword.resetPasswordopen(id);
+  }
+  // 搜索框
+  searchbtn() {
+    this.setState(
+      {
+        isLoading: true,
+      },()=>{
+        this.refs.form.validateAll((errors, values) => {
+          debugger;
+          const pages = this.state.current;
+          const pageSizes = this.state.pageSize;
+          searchUserList({
+            cpId: values.cpId,
+            cpName: values.cpName,
+            roleName: values.roleName,
+            keyword: values.keyword,
+            page: pages,
+            pageSize: pageSizes,
+          }).then(({ status,data })=>{
+            debugger;
+            if (data.errCode == 0) {
+              this.setState({
+                isLoading: false,
+                result: data.data.result,
+                total: data.data.totalCount,
+              });
+            }
+          });
         });
-      }
-    });
+      });
   }
-  addmemberBtnOpen() {
-    this.Addmenber.addmemberopen();
-  }
-
-  resetBtnOpen() {
-    this.Resetpassword.resetPasswordopen();
-  }
-  search() {
-    const values = this.state.value;
-    this.fetchData(values);
-  }
-  renderOper = () => {
+  // search() {
+  //   const values = this.state.value;
+  //   this.fetchData(values);
+  // }
+  renderOper = (value,index,record) => {
     return (
       <div className='tb_span'>
-        <span>编辑</span>
-        <span onClick={this.resetBtnOpen.bind(this)}>重置密码</span>
-        <span onClick={this.addmemberBtnOpen.bind(this)}>添加成员</span>
+        <span onClick={this.editmemberBtnOpen.bind(this,record)}>编辑</span>
+        <span onClick={this.resetBtnOpen.bind(this, record._id)}>重置密码</span>
+        <span onClick={this.addmemberBtnOpen.bind(this, record._id)}>添加成员</span>
       </div>
     );
   };
@@ -158,10 +204,8 @@ export default class Membermanagement extends Component {
     );
   };
   render() {
-    const { isLoading, data, current,pageSize,total,role } = this.state;
-    const roleName = [
-      { value: '系统管理员', label: '系统管理员' },
-    ];
+    const { isLoading, data, current,pageSize,total,roless, result } = this.state;
+    const roleName = roless;
     const rowSelection = {
       onChange: this.Choice.bind(this),
       getProps: (record, index) => {
@@ -171,8 +215,8 @@ export default class Membermanagement extends Component {
 
     return (
       <div className='membermanagement'>
-        <Resetpassword ref={ node => this.Resetpassword = node } />
-        <Addmember ref={ node => this.Addmenber = node } />
+        <Resetpassword ref={ node => this.Resetpassword = node } fetchData={this.fetchData.bind(this)} />
+        <Addmember ref={ node => this.Addmenber = node } fetchData={this.fetchData.bind(this)} />
         <Tab shape='pure' className='income-tab'>
           <Tab.Item title="成员管理">
             <div className='membermanagement-content'>
@@ -195,13 +239,15 @@ export default class Membermanagement extends Component {
                         <Input style={styles.formInput} />
                       </FormBinder>
                       <span style={styles.formLabel}>角色名称:</span>
-                      <FormBinder name="description"
+                      <FormBinder name="roleName"
                         autoWidth={false}
                       >
-                        <Select style={styles.formSelect} dataSource={roleName} />
-                        {/*<Input style={styles.formInput} />*/}
+                        <Select mode="multiple" style={styles.formSelect} dataSource={roleName} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
+                      <FormBinder name="keyword" autoWidth={false}>
+                        <Input hasClear placeholder='支持姓名邮箱手机号' style={styles.formInput} />
+                      </FormBinder>
+                      <Button className='btn-all bg' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
                       {/* <Button className='btn-all bg' size="large" type="secondary" onClick={this.addmemberBtnOpen.bind(this)}>添加成员</Button> */}
                     </div>
                   </Col>
@@ -209,17 +255,21 @@ export default class Membermanagement extends Component {
               </FormBinderWrapper>
             </div>
             <div className='membermanagement-panel'>
-              <Table loading={isLoading} dataSource={role} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
+              <Table loading={isLoading} dataSource={result} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
                 <Table.Column title="商户ID" dataIndex="cpId" />
                 <Table.Column title="企业名称" dataIndex="cpName" />
-                <Table.Column title="姓名" dataIndex="time" />
-                <Table.Column title="用户名" dataIndex="order" />
-                <Table.Column title="联系方式" dataIndex="tel" />
+                <Table.Column title="姓名" dataIndex="name" />
+                <Table.Column title="用户名" dataIndex="username" />
+                <Table.Column title="联系方式" dataIndex="phone" />
                 <Table.Column title="邮箱" dataIndex="email" />
-                <Table.Column title="所属角色" dataIndex="description" />
-                <Table.Column title="上次登录时间" dataIndex="balance" />
-                <Table.Column title="状态" dataIndex="role" cell={this.renderStatus} />
-                <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
+                <Table.Column title="所属角色" dataIndex="roleName" />
+                <Table.Column title="上次登录时间" dataIndex="lastTime" />
+                <Table.Column
+                  title="状态"
+                  dataIndex="enabled"
+                  cell={this.renderStatus}
+                />
+                <Table.Column title="操作" dataIndex="" cell={this.renderOper} />
               </Table>
               <Pagination
                 style={{ marginTop: '20px', textAlign: 'right' }}

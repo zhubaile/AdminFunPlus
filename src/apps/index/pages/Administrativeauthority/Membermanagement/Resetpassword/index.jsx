@@ -115,8 +115,6 @@ export default class Resetpassword extends Component {
               </Form.Submit>
               <Form.Reset style={styles.cancelbtn} onClick={this.resetPasswordclose.bind(this)}>取消</Form.Reset>
             </FormItem>
-            {/* <Button type='secondary'style={styles.cancelbtn} siza='large' onClick={this.billinginformationclose.bind(this)}>取消</Button> */}
-            {/* <Button type='primary'style={styles.submitbtn} siza='large' onClick={this.SubInvoiceinfo.bind(this)}>提交</Button> */}
           </Form>
         </div>
 

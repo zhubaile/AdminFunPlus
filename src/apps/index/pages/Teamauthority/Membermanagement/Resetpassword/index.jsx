@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Input,Button , Grid, Form, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { openInvoice,changeInvoiceInfo } from '@indexApi';
+import { changePwd } from '@indexApi';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../../index.css';
 
@@ -22,8 +22,8 @@ export default class Resetpassword extends Component {
       content: null,
       confirm: null,
       value: {
-        psd1: '',
-        psd2: '',
+        password: '',
+        passwordTwo: '',
       },
     };
   }
@@ -32,6 +32,10 @@ export default class Resetpassword extends Component {
     this.setState({
       open: false,
       content: null,
+      value: {
+        password: '',
+        passwordTwo: '',
+      },
     });
   }
   resetPasswordopen(content,confirm) {
@@ -49,39 +53,41 @@ export default class Resetpassword extends Component {
   };
 
   SubInvoiceinfo(r,v) {
-    changeInvoiceInfo({
+    const content = this.state.content;
+    debugger;
+    changePwd({
+      _id: content,
       ...r,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
-        this.billinginformationclose();
+        this.resetPasswordclose();
         this.props.fetchData();
+      } else {
+        Message.success(data.message);
       }
     });
-    debugger;
-    /* this.refs.form.validateAll((errors, values) => {
-      debugger;
-    }) */
   }
   render() {
-    const { content, confirm } = this.state;
+    const { content, confirm,value } = this.state;
     if (!this.state.open) return null;
     return (
       <div className='resetpsd-bulletbox'>
         <div className='resetpsd-title'>
           <h2 style={{ display: 'inline-block' }}>重置密码</h2>
-          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }}>×</span>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.resetPasswordclose.bind(this)}>×</span>
         </div>
 
         <div className='resetpsd-content'>
-          <Form className='form'>
+          <Form className='form' name={value}>
             <FormItem
               label='新密码'
               {...formItemLayout}
               asterisk
             >
               <Input
-                name='psd1'
+                name='password'
                 htmlType='password'
                 placeholder='请输入新密码'
                 /*              defaultValue={content.company} */
@@ -94,7 +100,7 @@ export default class Resetpassword extends Component {
               asterisk
             >
               <Input
-                name="psd2"
+                name="passwordTwo"
                 htmlType='password'
                 placeholder="请输入确认新密码"
                 /* defaultValue={content.invoiceTitle} */
@@ -111,8 +117,6 @@ export default class Resetpassword extends Component {
               </Form.Submit>
               <Form.Reset style={styles.cancelbtn} onClick={this.resetPasswordclose.bind(this)}>取消</Form.Reset>
             </FormItem>
-            {/* <Button type='secondary'style={styles.cancelbtn} siza='large' onClick={this.billinginformationclose.bind(this)}>取消</Button> */}
-            {/* <Button type='primary'style={styles.submitbtn} siza='large' onClick={this.SubInvoiceinfo.bind(this)}>提交</Button> */}
           </Form>
         </div>
 

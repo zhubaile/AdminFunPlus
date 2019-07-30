@@ -86,6 +86,7 @@ export default class Businessinformation extends Component {
               isLoading: false,
               result: data.data.companyInfo,
               dustyInfo: resulta,
+              total: data.data.totalCount,
             });
           } else {
             Message.success(data.message);
