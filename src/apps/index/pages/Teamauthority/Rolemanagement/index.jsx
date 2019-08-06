@@ -7,28 +7,6 @@ import '../../index.css';
 import Newrole from "./Newrole";
 import { Message } from "@alifd/next/lib/index";
 
-const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      _id: random(10000, 20000, 30000, 50025, 68522),
-      merchantId: '000662',
-      name: ['有此山'],
-      time: '茅以升',
-      order: '开发',
-      remark: ['负责...'],
-      balance: '联调工具',
-      email: ['支付中'],
-      tel: ['￥100.00'],
-      role: [' ￥100.00'],
-      status: '支付宝wap',
-      oper: ['查看'],
-    };
-  });
-};
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 

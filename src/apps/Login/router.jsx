@@ -5,7 +5,6 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 
 import routerConfig from './routerConfig';
-
 /**
  * 将路由信息扁平化，继承上一级路由的 path
  * @param {Array} config 路由配置
@@ -116,4 +115,5 @@ function renderRouterConfigV4(container, router, contextPath) {
 
 const routerWithReactRouter4 = recursiveRouterConfigV4(routerConfig);
 const routeChildren = renderRouterConfigV4(null, routerWithReactRouter4, '/');
+// export default withRouter(routeChildren);
 export default <Router>{routeChildren}</Router>;

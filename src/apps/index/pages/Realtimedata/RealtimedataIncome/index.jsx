@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select , Menu,MenuButton, Radio, Input, Grid, DatePicker, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { incomeList } from '@indexApi';
+import { incomeList,exportExcel } from '@indexApi';
 import moment from "moment/moment";
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../index.css';
@@ -195,6 +195,23 @@ export default class RealtimedataIncome extends Component {
       });
     });
   }
+  // 下载Excel
+  exportexcelbtn() {
+    exportExcel().then((res)=>{
+      const blob = new Blob([res.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }); // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
+      const downloadElement = this.btna;
+      const href = window.URL.createObjectURL(blob); // 创建下载的链接
+      const datatime = moment().format("YYYY-MM-DD HH:mm:ss"); // 当前时间
+      downloadElement.href = href;
+      // downloadElement.download = 'xxx.xlsx'; // 下载后文件名
+      downloadElement.download = (`${datatime}.xlsx`); // 下载后文件名
+      document.body.appendChild(downloadElement);
+      downloadElement.click(); // 点击下载
+      document.body.removeChild(downloadElement); // 下载完成移除元素
+      window.URL.revokeObjectURL(href); // 释放掉blob对象
+      debugger;
+    });
+  }
   render() {
     const { isLoading, data, current,pageSize,total,result,result1,result2 } = this.state;
     const timeType = result2.dateType; // 选择时间下拉框
@@ -221,7 +238,8 @@ export default class RealtimedataIncome extends Component {
               </div>
               <div className='income-tabs rightbtn'>
                 <Button className='btn-all bg' size="large" type="secondary" disabled style={{ opacity: 0.5 }}>表格列过滤</Button>
-                <Button className='btn-all bg' size="large" type="secondary">导出结果为表格</Button>
+                <Button className='btn-all bg' size="large" type="secondary" onClick={this.exportexcelbtn.bind(this)}>导出结果为表格</Button>
+                <a href='javascript:;' ref={(node)=>{ this.btna = node; }} style={{ display: 'none' }} />
               </div>
             </div>
             <div className='income-tabs-border' />

@@ -29,6 +29,7 @@ export default class TransactionReport extends Component {
   formChange = (value) => {
     this.props.onChange(value);
   };
+
   // 选择日期值
   onMonthCellRender(value) {
     const years = value.year();

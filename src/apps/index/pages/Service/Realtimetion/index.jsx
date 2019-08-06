@@ -3,7 +3,7 @@ import { Tab,Button,Input } from '@alifd/next';
 import { Link } from 'react-router-dom';
 // import Nav from '../components/Nav';
 // import Administrators from '../../Personal/components/Administrators/Administrators';
-import '../../../layouts/BasicLayout/components/Header/index.scss';
+import '../../../layouts/BasicLayout/components/Icon/iconfont.css';
 import '../index.css';
 import { workOrderuserRecord,workOrderuserRecordOne,workOrderserviceList,workOrdersessionList } from '@indexApi';
 import { Message } from "@alifd/next/lib/index";
@@ -27,12 +27,15 @@ export default class Customerservice extends Component {
       Probleminput: '', // 输入框内容
       datas: [], // 之前的聊天记录
       messagelist: [], // 此刻聊天的记录
-      array: [], // 用户的个人信息
+      array: {
+        roles: [],
+      }, // 用户的个人信息
       username: '', // 当前对方用户名称
       byReplyId: '', // 对方id
       userId: '', // 用户id
     };
-    this.socket = io.connect(`ws://192.168.1.105:3000`);
+    this.socket = io.connect(`ws://192.168.1.118:3000`);
+    // this.socket = io.connect(`ws://funplus.yue-net.com`);
     this.onScrollHandle = this.onScrollHandle.bind(this);
   }
   // 定时器
@@ -47,6 +50,7 @@ export default class Customerservice extends Component {
     this.fetchData();
     /* 联系人的列表 */
     workOrderserviceList().then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         this.setState({
           workOrderserviceLists: data.data,
@@ -56,20 +60,19 @@ export default class Customerservice extends Component {
       }
     });
     const userId = Cookies.get('userId');
-    this.interval = setInterval(() => this.tick(userId), 3000);
-    debugger;
+    // this.interval = setInterval(() => this.tick(userId), 3000);
     // 初始聊天记录内容
     workOrderuserRecordOne({
+      senderType: 2,
       userId,
     }).then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
         this.setState({
-          datas: data.data.data,
-          array: data.data.userInfo,
-          username: data.data.userInfo.username,
+          datas: data.data,
+          array: data.userInfo,
+          username: data.userInfo.username,
           userId,
-          byReplyId: data.data.userInfo._id,
+          byReplyId: data.userInfo.byReplyId,
         },()=>{
           this.onScrollHandle(this.messagesEnd);
         });
@@ -101,7 +104,9 @@ export default class Customerservice extends Component {
   }
   // 会话的列表
   fetchData = () => {
-    workOrdersessionList().then(({ status,data })=>{
+    workOrdersessionList({
+      senderType: 2,
+    }).then(({ status,data })=>{
       if (data.errCode == 0) {
         this.setState({
           workOrdersessionLists: data.data,
@@ -174,8 +179,9 @@ export default class Customerservice extends Component {
       userId,
       customerContent,
       times,
-      reacordStatus: 2,
+      senderType: 2,
     };
+    console.log(myMsg);
     // this.socket.send(myMsg);
     this.socket.emit('sayTo',myMsg);
     this.setState((prevState)=>{
@@ -199,14 +205,15 @@ export default class Customerservice extends Component {
     workOrderuserRecord({
       userId,
       byReplyId: e,
+      senderType: 2,
     }).then(({ status,data })=>{
       debugger;
       if (data.errCode == 0) {
         this.setState({
-          datas: data.data.data, // 获取之前的聊天记录
+          datas: data.data, // 获取之前的聊天记录
           messagelist: [], // 此刻聊天记录清空
-          username: data.data.userInfo.username,
-          array: data.data.userInfo,
+          username: data.userInfo.username,
+          array: data.userInfo,
           byReplyId: e,
           userId,
         },()=>{
@@ -221,18 +228,20 @@ export default class Customerservice extends Component {
     const { stylecolor,workOrdersessionLists,workOrderserviceLists, datas, messagelist,username,array } = this.state;
     const zbla = (
       messagelist.map((item) => {
+        const userid = this.state.userId; // 自己的id
         const times = moment(item.times).format('YYYY-MM-DD HH:mm:ss');
         console.log(times);
         debugger;
         return (
           <div>
             {
-              item.isStatus == true ? (
-                <div className="chat-message">
+              item.userId == userid ? (
+                <div className="chat-message self">
                   <div className="chat-message-avatar">
-                    <img alt="" src={require('@img/img/avatar1.jpg')} />
+                    <img alt="" src={require('@img/img/avatar2.jpg')} />
                     <div>
-                      <p>{username}</p>
+                      {/* <p>{array.username}</p> */}
+                      <p>本人</p>
                       <span>{times}</span>
                     </div>
                   </div>
@@ -243,12 +252,11 @@ export default class Customerservice extends Component {
                   </div>
                 </div>
               ) : (
-                <div className="chat-message self">
+                <div className="chat-message">
                   <div className="chat-message-avatar">
-                    <img alt="" src={require('@img/img/avatar2.jpg')} />
+                    <img alt="" src={require('@img/img/avatar1.jpg')} />
                     <div>
-                      {/* <p>{array.username}</p> */}
-                      <p>本人</p>
+                      <p>{username}</p>
                       <span>{times}</span>
                     </div>
                   </div>
@@ -270,11 +278,11 @@ export default class Customerservice extends Component {
         <div className='backstageworkorder-box'>
           <div className='chat-list'>
             <div className={stylecolor == true ? 'chat-list-box color' : 'chat-list-box'} onClick={this.Conversation.bind(this)}>
-              <i className="os-icon os-icon-mail-14" />
+              <i className="iconfont icon-huihua" style={{ fontSize: '20px', fontWeight: 'bold' }} />
               <span>正在会话</span>
             </div>
             <div className={stylecolor == false ? 'chat-list-box color' : 'chat-list-box'} onClick={this.listbtn.bind(this)}>
-              <i className="os-icon os-icon-mail-14" />
+              <i className="iconfont icon-liebiao" style={{ fontSize: '20px',fontWeight: 'bold' }} />
               <span>用户列表</span>
             </div>
           </div>
@@ -284,19 +292,20 @@ export default class Customerservice extends Component {
                 workOrdersessionLists.map((item)=>{
                   debugger;
                   return (
-                    <div className='user-w' onClick={this.SwitchingUsers.bind(this,item.byReplyId)}>
+                    <div className='user-w' onClick={this.SwitchingUsers.bind(this,item.sendId)}>
                       <div className="avatar with-status status-green">
                         <img alt="" src={require('@img/img/avatar1.jpg')} />
                       </div>
                       <div className="user-info">
                         <div className="user-date">
-                          {moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                          {moment(item.sendTime).format('YYYY-MM-DD HH:mm:ss')}
                         </div>
                         <div className="user-name">
-                          {item.username}
+                          {item.senderName}
+                          <span className={item.no_readed_num == 0 ? 'noreadednum no' : 'noreadednum'}>{item.no_readed_num}</span>
                         </div>
                         <div className="last-message">
-                          {item.customerContent}
+                          {item.last_message}
                         </div>
                       </div>
                     </div>
@@ -342,18 +351,18 @@ export default class Customerservice extends Component {
                     return (
                       <div>
                         {
-                          item.serviceStatus == 0 ? (
+                          item.senderType == 1 ? (
                             <div className="chat-message">
                               <div className="chat-message-avatar">
                                 <img alt="" src={require('@img/img/avatar1.jpg')} />
                                 <div>
                                   <p>{item.username}</p>
-                                  <span>{item.createdAt}</span>
+                                  <span>{moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
                                 </div>
                               </div>
                               <div className="chat-message-content-w">
                                 <div className="chat-message-content">
-                                  {item.customerContent}
+                                  {item.message}
                                 </div>
                               </div>
                             </div>
@@ -364,12 +373,12 @@ export default class Customerservice extends Component {
                                 <div>
                                   {/* <p>{item.username}</p> */}
                                   <p>本人</p>
-                                  <span>{item.createdAt}</span>
+                                  <span>{moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
                                 </div>
                               </div>
                               <div className="chat-message-content-w">
                                 <div className="chat-message-content">
-                                  {item.customerContent}
+                                  {item.message}
                                 </div>
                               </div>
                             </div>
@@ -409,11 +418,11 @@ export default class Customerservice extends Component {
             <div className='administrators'>
               <img src={require('@img/img/avatar1.jpg')} alt="" />
               <h2>{array.username}</h2>
-              <p>商户ID：{array._id}</p>
-              <p>企业名称：{array.companyName}</p>
+              <p>商户ID：{array.cpId}</p>
+              <p>企业名称：{array.cpName}</p>
               <p>联系方式：{array.phone}</p>
               <p>联系邮箱：{array.email}</p>
-              <p>角色名称：{array.premissions}</p>
+              <p>角色名称：{array.roles.join('.')}</p>
             </div>
           </div>
         </div>

@@ -3,31 +3,20 @@ import { withRouter,Link } from 'react-router-dom';
 import { Input,Button , Grid, DatePicker , Tab, Message,Form ,Switch,Pagination,Table } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 import Ippopup from './ippopup';
-import { ObtainsettingwhiteIps,deletesettingwhiteIps,addwhiteListSwitch } from '@indexApi';
+import { settingwhiteIpsget,settingwhiteIpspost,settingwhiteIpsdele,settingwhiteIpschangeStatus } from '@indexApi';
 import '../../../index.css';
+import moment from "moment/moment";
 
 const { Row, Col } = Grid;
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      name: ['淘小宝', '淘二宝'],
-      level: ['普通会员', '白银会员', '黄金会员', 'VIP 会员'],
-      balance: (10000, 100000),
-      accumulative: (50000, 100000),
-      regdate: `2018-12-1`,
-      birthday: `1992-10-1`,
-      store: ['余杭盒马店', '滨江盒马店', '西湖盒马店'],
-    };
-  });
-};
 @withRouter
 export default class Applicationparameters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 1,
       isLoading: false,
-      data: [],
+      data: [], // 列表数据
+      id: this.props.location.state.id,
+      whiteListSwitch: false,
     };
   }
   btnClick() {
@@ -37,14 +26,6 @@ export default class Applicationparameters extends Component {
   componentDidMount() {
     this.fetchData();
   }
-
-  /*  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-      }, 600);
-    });
-  }; */
   // 获取所有ip的数据
   fetchData = (len) => {
     this.setState(
@@ -52,95 +33,88 @@ export default class Applicationparameters extends Component {
         isLoading: true,
       },
       () => {
-        ObtainsettingwhiteIps().then(({ status,data })=>{
+        const appId = this.state.id;
+        settingwhiteIpsget({
+          appId,
+        }).then(({ status,data })=>{
+          debugger;
           if (data.errCode == 0) {
             this.setState({
               isLoading: false,
-              data: data.data,
+              data: data.data.list,
+              whiteListSwitch: data.data.whiteListSwitch,
             });
           } else {
             Message.success(data.message);
           }
         });
-        /* this.mockApi(len).then((data) => { // data 里面为数据
+      }
+    );
+  };
+  // 删除
+  deleteip=(ip)=> {
+    const appId = this.state.id;
+    const datas = this.state.data;
+    settingwhiteIpsdele({
+      appId,
+      ip,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        let index = -1;
+        console.log(datas);
+        debugger;
+        datas.forEach((item, i) => {
+          debugger;
+          if (item.ip === ip) {
+            index = i;
+          }
+        });
+        if (index !== -1) {
+          datas.splice(index, 1);
           this.setState({
-            data,
-            isLoading: false,
+            data: datas,
           });
-        }); */
+        }
+        // this.fetchData();
+        // location.reload()
+      } else {
+        Message.success(data.message);
       }
-    );
-  };
-
-  handlePaginationChange = (current) => {
-    this.setState(
-      {
-        current,
-      },
-      () => {
-        this.fetchData();
-      }
-    );
-  };
-  deleteip(record,index) {
-    deletesettingwhiteIps({
-      ip: record.ip,
-    }).then(
-      location.reload()
-    );
+    });
   }
   renderOper = (value,index,record) => {
-    debugger;
     return (
       <div>
-        <Button
-          type="primary"
-          style={{ marginRight: '5px' }}
-          onClick={this.handleDetail}
-        >
-          详情
-          {/* <FormattedMessage id="app.btn.detail" /> */}
-        </Button>
-        <Button type="normal" warning onClick={()=>this.deleteip(record,index)}>
+        <Button type="normal" warning onClick={this.deleteip.bind(this,record.ip)}>
           删除
           {/* <FormattedMessage id="app.btn.delete" /> */}
         </Button>
       </div>
     );
   };
-  /*  // 复制按钮功能
-  copybtn() {
-    const applicationID = this.applicationID.getInputNode(); // Input 获取demo节点用getInputNode()方法
-    applicationID.select();
-    if (!applicationID.value) {
-      Message.success('复制内容为空');
-      return;
-    }
-    document.execCommand('copy');
-    Message.success('复制成功');
-  }
-  handleSubmit=()=> {
-    const z = this.Mtextinput.getInputNode().value;
-    alert(z);
-    debugger;
-  } */
   // 添加ip
   addIP() {
-    this.Ippopup.ippopupopen();
+    const appId = this.state.id;
+    this.Ippopup.ippopupopen(appId);
   }
   // 白名单开关
   addopenSwitch(e) {
-    debugger;
-    addwhiteListSwitch({
+    const appId = this.state.id;
+    settingwhiteIpschangeStatus({
       whiteListSwitch: e,
+      appId,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
+        Message.success(data.message);
+        this.setState({
+          whiteListSwitch: e,
+        });
+      } else {
         Message.success(data.message);
       }
     });
-  }
-  btn() {
-    this.props.history.push('/admin/applicationsettings/applicationparameters');
   }
   render() {
     const formItemLayout = {
@@ -151,9 +125,9 @@ export default class Applicationparameters extends Component {
         span: 14,
       },
     };
-    const { isLoading, data, current } = this.state;
-    // const copybtn = (<Button onClick={this.copybtn.bind(this)}>复制</Button>);
-    // const phonebtn = (<Button>手机/邮箱验证查看</Button>);
+    const { isLoading, data, current,whiteListSwitch } = this.state;
+    console.log(whiteListSwitch);
+    debugger;
     return (
       <div className='applicationters'>
         <Tab shape='pure' className='backstage-tab' defaultActiveKey='2'>
@@ -171,7 +145,7 @@ export default class Applicationparameters extends Component {
                   </Button>
                   <div>
                     <span>全限白名单</span>
-                    <Switch size='large' className='div-switch' defaultChecked={false} name='whiteListSwitch' onChange={this.addopenSwitch.bind(this)} />
+                    <Switch size='large' className='div-switch' checked={whiteListSwitch} onChange={this.addopenSwitch.bind(this)} />
                   </div>
                 </div>
                 <div className='claer' />
@@ -186,11 +160,6 @@ export default class Applicationparameters extends Component {
                       cell={this.renderOper}
                     />
                   </Table>
-                  <Pagination
-                    style={{ marginTop: '20px', textAlign: 'right' }}
-                    current={current}
-                    onChange={this.handlePaginationChange}
-                  />
                 </div>
               </div>
               <div className='tab-contenttwo-right'>
@@ -206,7 +175,7 @@ export default class Applicationparameters extends Component {
             </div>
           </Tab.Item>
         </Tab>
-        <Ippopup ref={ node => this.Ippopup = node } />
+        <Ippopup ref={ node => this.Ippopup = node } fetchData={this.fetchData.bind(this)} />
       </div>
     );
   }

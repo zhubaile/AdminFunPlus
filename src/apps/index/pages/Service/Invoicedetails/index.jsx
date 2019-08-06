@@ -12,74 +12,20 @@ const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 
 export default class Invoicedetails extends Component {
-/*  static displayName = 'Setting';*/
+/*  static displayName = 'Setting'; */
 
   constructor(props) {
     super(props);
     this.state = {
-      total: 0, // 总数据
-      pageSize: 10, // 一页条数
-      current: 1, // 页码
-      isLoading: false,
-      datas: [],
-      value: {
-        companyName: '',
-        operationtime: [],
-        _id: '',
-        status: '',
-      },
+      datas: this.props.location.state.record, // 父级传过来的数据
     };
   }
   componentDidMount() {
     // this.fetchData();
   }
-
-/*  fetchData = (len) => {
-    this.setState(
-      {
-        isLoading: true,
-      },
-      () => {
-        const pages = this.state.current;
-        const pageSize = this.state.pageSize;
-        const operationtime = this.state.value.operationtime;
-        debugger;
-        workOrderworkList({
-          page: pages,
-          pageSize,
-          beginTime: operationtime,
-        }).then(({ status,data })=>{
-          if (data.errCode == 0) {
-            this.setState({
-              datas: data.data,
-              isLoading: false,
-            });
-          } else {
-            Message.success(data.message);
-          }
-        });
-      }
-    );
-  };*/
-
-
-  // 详情
-  handleDetail=(id)=> {
-    this.props.history.push({ pathname: "/backadmin/service/workorderdetails", state: { id } });
-  }
-
-  renderOper = (value,index,record) => {
-    return (
-      <div>
-        <a href="javascript:;" style={{ marginRight: '3px' }} onClick={this.handleDetail.bind(this,record._id)}>详情</a>
-        {/* <span>|</span>
-        <a href="javascript:;" style={{ marginLeft: '3px' }} onClick={this.handleDelete.bind(this,record._id)} >删除</a> */}
-      </div>
-    );
-  };
-
   render() {
-
+    const { datas } = this.state;
+    debugger;
     return (
       <div className='invoicedetails'>
         {/* <Nav defaultActiveKey='2' history={this.props.history} /> */}
@@ -90,25 +36,29 @@ export default class Invoicedetails extends Component {
           </div>
           <div className='invoicedetails-conter'>
             <ul>
-              <li>当前状态：XX</li>
-              <li>订单号：123</li>
-              <li>运单号：</li>
+              <li>当前状态：{datas.invoiceStatusName}</li>
+              <li>运单号：{datas.courierNumber}</li>
             </ul>
           </div>
           <div className='invoicedetails-footer'>
             <div>
               <ul>
-                <li>发票ID <span>CZ1558581363296</span></li>
-                <li>企业名称 <span>有此山</span></li>
-                <li>企业税号 <span>123</span></li>
-                <li>邮寄地址 <span>上海市闵行区XXXX， 姓名，手机号</span></li>
+                <li>发票ID： <span>{datas.invoiceNo}</span></li>
+                {datas.cpName ? (<li>企业名称： <span>{datas.cpName}</span></li>) : null}
+                {datas.taxNumber ? (<li>企业税号： <span>{datas.taxNumber}</span></li>) : null}
+                <li>姓名： <span>{datas.name}</span></li>
+                {datas.retreatTicketName ? (
+                  <li>退票原因 <span>{datas.retreatTicketName}</span></li>
+                ) : null}
+                <li>邮寄地址： <span>{datas.mailAddress}</span></li>
               </ul>
             </div>
             <div>
               <ul>
-                <li>开票金额 <span>￥100.00</span></li>
-                <li>发票抬头 <span>上海</span></li>
-                <li>发票类型 <span>123</span></li>
+                <li>开票金额 <span>￥{datas.fee}</span></li>
+                <li>发票抬头 <span>{datas.invoiceTitle}</span></li>
+                <li>发票类型 <span>{datas.invoiceStatusName}</span></li>
+                <li>手机号： <span>{datas.phone}</span></li>
               </ul>
             </div>
           </div>

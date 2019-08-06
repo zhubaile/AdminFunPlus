@@ -1,9 +1,10 @@
+
 .headaside{ width: 260px;min-height: 100%; border-right: 1px solid #DBD9D9; position: relative;}
 .headaside>ul{ width: 80%; margin-left: 10%; background: none; padding-top: 20px; font-size: 16px; color: #666666;}
 .headaside>ul>li{ border-bottom: 1px solid #DBD9D9;}
 .headaside ul{background: none;}
 .headaside ul li .ice-menu-submenu-title{ height: 60px; line-height: 60px; }
-.headaside ul li .ice-menu-submenu-title span i{ color: blue; margin-right: 20px; }
+.headaside ul li .ice-menu-submenu-title span i{ color: #3978ff; margin-right: 20px; font-size: 24px; }
 .headaside ul li .ice-menu-item{ padding-left: 20px; }
 
 
@@ -16,5 +17,5 @@
 
 // 让没有子元素的不显示向下图标
 .headaside .ice-menu .cancel.ice-menu-submenu-inline > .ice-menu-submenu-title:after{content: none;}
-.headaside .ice-menu .cancel .ice-menu-submenu-title span a{ display: block; width: 100%; height: 60px; color: #666;}
+.headaside .ice-menu .cancel .ice-menu-submenu-title span a{ display: block; width: 100%; height: 60px; color: #666; line-height: 60px;}
 .headaside .ice-menu.ice-menu-inline .ice-menu{ font-size: 14px;}

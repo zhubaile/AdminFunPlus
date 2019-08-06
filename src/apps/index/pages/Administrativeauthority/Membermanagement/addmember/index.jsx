@@ -1,7 +1,7 @@
 /* eslint  react/no-string-refs: 0 */
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { Input, Radio , Message, Grid, Form, Select } from '@alifd/next';
+import { Input, Radio , Message, Switch, Form, Select } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import { sysCreateUser } from '@indexApi';
 import '../../../index.css';
@@ -22,6 +22,7 @@ export default class Addmenber extends Component {
         password: '',
         notes: '',
         roles: [],
+        status: false,
       },
       open: false,
       content: null,
@@ -76,7 +77,7 @@ export default class Addmenber extends Component {
   }
   render() {
     // const jiaose = this.state.content;
-    const { content , confirm } = this.state;
+    const { content , confirm,value } = this.state;
     if (!this.state.open) return null;
     debugger;
     return (
@@ -118,8 +119,13 @@ export default class Addmenber extends Component {
             <Select mode="multiple" dataSource={content} placeholder='选择角色' defaultValue={confirm.roles} />
             {/* <Select dataSource={content} placeholder='选择角色' defaultValue={confirm.roles} /> */}
           </FormBinder>
-          <button className='quxiao' onClick={this.addmemberclose.bind(this)}>取消</button>
-          <button onClick={this.addmember}>添加</button>
+          <FormBinder name="status">
+            <Switch checkedChildren="正常" unCheckedChildren="禁止" defaultChecked={value.status} style={{ marginTop: '10px', width: '100px' }} />
+          </FormBinder>
+          <div>
+            <button className='quxiao' onClick={this.addmemberclose.bind(this)}>取消</button>
+            <button onClick={this.addmember}>添加</button>
+          </div>
         </FormBinderWrapper>
       </div>
     );

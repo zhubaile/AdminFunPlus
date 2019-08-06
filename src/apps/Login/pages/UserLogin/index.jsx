@@ -61,8 +61,9 @@ class UserLogin extends Component {
           debugger;
           if (data.errCode == 0) {
             Cookies.set('userId', data.userData._id);
+            Cookies.set('status', 0,{ expires: 1 });
             Message.success(intl.formatMessage({ id: 'app.login.Login successfully' }));
-            this.props.history.push('/backadmin');
+            this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
             window.location.href = "";
           } else {
             Message.success(data.message);
@@ -89,6 +90,11 @@ class UserLogin extends Component {
     this.setState({
       type: this.state.type === 'password' ? 'text' : 'password',
     });
+  }
+  btnn(){
+    debugger;
+    this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
+    // window.location.href = "";
   }
   render() {
     const { intl } = this.props;
@@ -160,7 +166,10 @@ class UserLogin extends Component {
                 >
                   <FormattedMessage id='app.login.sign.in' />
                 </Button>
-                <Link to="/user/sendmailbox" style={styles.tips}>
+                <button onClick={this.btnn.bind(this)}>
+                  跳转
+                </button>
+                <Link to="/backadmin/realtimedata/realtimedataIncome" style={styles.tips}>
                   <FormattedMessage id='app.login.register.now' />
                 </Link>
               </div>

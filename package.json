@@ -1,8 +1,8 @@
 {
-  "name": "zbl",
-  "title": "zbl",
+  "name": "3funplus_admin",
+  "title": "3funplus_admin",
   "version": "1.0.0",
-  "description": "zhubaile",
+  "description": "3FunPlus_admin",
   "files": [
     "src/",
     "build/",

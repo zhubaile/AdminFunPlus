@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect,withRouter } from 'react-router-dom';
 import { Grid } from '@alifd/next';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -11,6 +11,7 @@ import IceImg from '@icedesign/img';
 
 const { Row, Col } = Grid;
 
+@withRouter
 export default class UserLayout extends Component {
   render() {
     return (

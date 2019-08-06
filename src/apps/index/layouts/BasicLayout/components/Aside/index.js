@@ -11,8 +11,11 @@ import StyledMenu, {
 } from '@icedesign/styled-menu';
 // import { FormattedMessage } from 'react-intl';
 // import { asideMenuConfig } from '../../../../menuConfig';
-import '../Header/index.scss'; // icon 样式
+// import '../Header/index.scss'; // icon 样式
 import './index.scss';
+import '../Icon/iconfont.css';
+
+const Cookies = require('js-cookie');
 
 const { Item, SubNav } = Nav;
 @withRouter
@@ -23,7 +26,6 @@ export default class Aside extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
 
     };
@@ -34,8 +36,8 @@ export default class Aside extends Component {
       isMobile,
       status,
     } = this.props;
-
     const { openDrawer, collapse } = this.state;
+    debugger;
     return (
       <div className='headaside'>
         {
@@ -50,7 +52,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     {/* <Icon type="filter" /> */}
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-shuju" />
                     <span>实时数据</span>
                   </span>
                 }
@@ -65,7 +67,7 @@ export default class Aside extends Component {
                 key="sub2"
                 title={
                   <span>
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-duizhangdan" />
                     <span>对账</span>
                   </span>
                 }
@@ -91,14 +93,15 @@ export default class Aside extends Component {
                 title={
                   <span>
                     {/* <Icon type="filter" /> */}
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-yingyongguanli2" />
                     <span>应用管理</span>
                   </span>
                 }
               >
                 <SubMenu key="sub3" title="渠道管理">
                   <MenuItem key="1"><Link to="/backadmin/applicationmanagement/applicationChannel">应用渠道</Link></MenuItem>
-                  <MenuItem key="2"><Link to="/backadmin/applicationmanagement/platformChannel">平台渠道</Link></MenuItem>
+                  {/* 暂时隐藏 */}
+                  {/* <MenuItem key="2"><Link to="/backadmin/applicationmanagement/platformChannel">平台渠道</Link></MenuItem> */}
                 </SubMenu>
                 <MenuItem key="3"><Link to="/backadmin/applicationmanagement/equipmentManagement">设备管理</Link></MenuItem>
                 <SubMenu key="sub4" title="路由规则概况">
@@ -113,7 +116,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     <Link to="/backadmin/businessinformation">
-                      <i className="os-icon os-icon-coins-4" />
+                      <i className="iconfont icon-icon63" />
                       <span>商户信息</span>
                     </Link>
                   </span>
@@ -136,7 +139,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     <Link to='/backadmin/service/realtimetion'>
-                      <i className="os-icon os-icon-coins-4" />
+                      <i className="iconfont icon-huihua" />
                       <span>实时咨询</span>
                     </Link>
                   </span>
@@ -148,7 +151,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     <Link to='/backadmin/service/allworkorders'>
-                      <i className="os-icon os-icon-coins-4" />
+                      <i className="iconfont icon-gongdan1" />
                       <span>工单管理</span>
                     </Link>
                   </span>
@@ -164,7 +167,7 @@ export default class Aside extends Component {
                   <span>
                     {/* <Icon type="filter" /> */}
                     <Link to='/backadmin/service/invoice'>
-                      <i className="os-icon os-icon-coins-4" />
+                      <i className="iconfont icon-invoice" />
                       <span>发票</span>
                     </Link>
                   </span>
@@ -177,7 +180,7 @@ export default class Aside extends Component {
                   <span>
                     {/* <Icon type="filter" /> */}
                     <Link to='/backadmin/service/helpCenter'>
-                      <i className="os-icon os-icon-coins-4" />
+                      <i className="iconfont icon-bangzhuzhongxin" />
                       <span>帮助中心</span>
                     </Link>
                   </span>
@@ -198,20 +201,21 @@ export default class Aside extends Component {
                 title={
                   <span>
                     {/* <Icon type="filter" /> */}
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-jiekou1" />
                     <span>接口管理</span>
                   </span>
                 }
               >
-                <MenuItem key="1"><Link to='/backadmin/interfaceManagement/foreignAPI'>对外API</Link></MenuItem>
-                <MenuItem key="2"><Link to='/backadmin/interfaceManagement/interfaceDocument'>接口文档</Link></MenuItem>
+                {/* 暂时隐藏 */}
+                {/* <MenuItem key="1"><Link to='/backadmin/interfaceManagement/foreignAPI'>对外API</Link></MenuItem>
+                <MenuItem key="2"><Link to='/backadmin/interfaceManagement/interfaceDocument'>接口文档</Link></MenuItem> */}
                 <MenuItem key="3"><Link to='/backadmin/interfaceManagement/interfaceaccess'>接口访问白名单</Link></MenuItem>
               </SubMenu>
               <SubMenu
                 key="sub2"
                 title={
                   <span>
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-shanghuguanli" />
                     <span>团队权限</span>
                   </span>
                 }
@@ -224,7 +228,7 @@ export default class Aside extends Component {
                 key="sub3"
                 title={
                   <span>
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-guanli" />
                     <span>管理权限</span>
                   </span>
                 }
@@ -238,7 +242,7 @@ export default class Aside extends Component {
                 key="sub4"
                 title={
                   <span>
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-shezhi1" />
                     <span>系统设置</span>
                   </span>
                 }
@@ -255,12 +259,12 @@ export default class Aside extends Component {
                 key="sub5"
                 title={
                   <span>
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-yunying1" />
                     <span>运营辅助</span>
                   </span>
                 }
               >
-                <SubMenu key="sub6" title="请求日志log">
+                <SubMenu key="sub7" title="请求日志log">
                   <MenuItem key="14"><Link to="/backadmin/Operationalassistance/useractionlog">用户操作日志</Link></MenuItem>
                   <MenuItem key="15"><Link to="/backadmin/Operationalassistance/Userapilog">用户API日志</Link></MenuItem>
                 </SubMenu>
@@ -268,10 +272,10 @@ export default class Aside extends Component {
                 <MenuItem key="17">数据维护</MenuItem>
               </SubMenu>
               <SubMenu
-                key="sub5"
+                key="sub6"
                 title={
                   <span>
-                    <i className="os-icon os-icon-coins-4" />
+                    <i className="iconfont icon-gongju2" />
                     <span>高级工具</span>
                   </span>
                 }

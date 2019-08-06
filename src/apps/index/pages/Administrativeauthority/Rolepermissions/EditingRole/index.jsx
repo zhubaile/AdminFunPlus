@@ -49,7 +49,6 @@ export default class Editingrole extends Component {
     const premissions = this.state.content.premissions;
     const descriptionval = this.description.getInputNode().value;
     const notesval = this.notes.getInputNode().value;
-    debugger;
     changeSysRolePms({
       _id: id,
       premissions,

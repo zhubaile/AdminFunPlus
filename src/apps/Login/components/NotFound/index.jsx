@@ -15,7 +15,7 @@ export default class NotFound extends Component {
           <div className="prompt">
             <h3 style={styles.title}>抱歉，你访问的页面不存在</h3>
             <p style={styles.description}>
-              您要找的页面没有找到，请返回<Link to="/user/login">首页</Link>继续浏览
+              您要找的页面没有找到，请返回<Link to="/backadminuser/login">首页</Link>继续浏览
             </p>
           </div>
         </div>

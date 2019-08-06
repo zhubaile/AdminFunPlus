@@ -1,36 +1,14 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
-import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch } from '@alifd/next';
+import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch,Message } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import Addgrouping from './Addgrouping';
 import Official from './Adddevice/official';
 import Custom from './Adddevice/custom';
-import { device,deviceGrouplist,deviceparams,devicelist } from '@indexApi';
+import { deviceGrouplist,devicelist,deviceget } from '@indexApi';
 import '../../index.css';
-import {Message} from "@alifd/next/lib/index";
+import moment from "moment/moment";
 
-const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      _id: random(10000, 20000, 30000, 50025, 68522),
-      merchantId: '000662',
-      name: ['花果山'],
-      time: '20190606',
-      order: '02456245',
-      remark: ['贵'],
-      balance: '￥100.00',
-      email: ['支付中'],
-      tel: ['￥100.00'],
-      role: [' ￥100.00'],
-      status: '支付宝wap',
-      oper: ['查看'],
-    };
-  });
-};
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 
@@ -43,19 +21,14 @@ export default class EquipmentManagement extends Component {
       current: 1,
       isLoading: false,
       datas: [],
-      /*      datas: [], */
       args: [],
       toplist: false,
+      listValue: '状态/全部',
       grouplistdata: [
         { dGroupName: '' },
       ],
       value: {
-        timeType: '',
-        startdate: [],
-        orderStatus: '',
-        refundStatus: '',
-        payChannel: '',
-        listValue: '状态',
+        dName: '',
       },
     };
   }
@@ -66,7 +39,7 @@ export default class EquipmentManagement extends Component {
   }
 
   // 获取分组列表
-  Toupdatelist=()=>{
+  /* Toupdatelist=()=>{
     deviceGrouplist().then(
       ({ status, data }) => {
         if (data.errCode == 0) {
@@ -77,9 +50,9 @@ export default class EquipmentManagement extends Component {
         // Message.success(data.message);
       }
     );
-  };
+  }; */
 
-  fetchData = (len) => {
+  fetchData = (values) => {
     this.setState(
       {
         isLoading: true,
@@ -87,9 +60,10 @@ export default class EquipmentManagement extends Component {
       () => {
         const page = this.state.current;
         const limit = this.state.pageSize;
-        device({
+        devicelist({
           page,
           limit,
+          ...values,
         }).then(({ status,data })=>{
           debugger;
           if (data.errCode == 0) {
@@ -116,28 +90,43 @@ export default class EquipmentManagement extends Component {
       }
     );
   };
-  renderOper = () => {
+  // 搜索
+  searchBtn() {
+    const { validateFields } = this.refs.form;
+    validateFields((errors,values)=>{
+      debugger;
+      this.fetchData(values);
+    });
+  }
+  // 编辑
+  editbtn(record) {
+    deviceget({
+      dId: record._id,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        this.Official.officialopen(data.data,record.dGroupId,record._id);
+      } else {
+        Message.success(data.message);
+      }
+    });
+  }
+  renderOper = (value,index,record) => {
     return (
       <div>
-        <Switch size='small' className='div-switch' defaultChecked={false} />
+        <a onClick={this.editbtn.bind(this,record)}>
+          编辑
+        </a>
       </div>
     );
   };
-  renderSelectall = () => {
-    return (
-      <div>
-        <Checkbox defaultChecked />
-      </div>
-    );
-  };
- /* formChange = (value) => {
+  /* formChange = (value) => {
     this.props.onChange(value);
-  };*/
-  zbl=(value)=>{
+  }; */
+  selectstart=(value)=>{
     this.setState({
       listValue: value,
     });
-    // ajax 方法
   }
   renderStatus = () => {
     return (
@@ -145,18 +134,17 @@ export default class EquipmentManagement extends Component {
     );
   };
   // 添加分组
-  groupingopen() {
+  /*  groupingopen() {
     this.Addgrouping.addgroupingopen();
-  }
+  } */
   // 获取分组列表
-  grouplist() {
+  /*  grouplist() {
     this.setState({
       toplist: !this.state.toplist,
     });
-  }
+  } */
   // 获取设备参数
-  deviceopen(id) {
-    // const dd = this.state.ApplicationChannel;
+  /* deviceopen(id) {
     console.log(id);
     deviceparams({
       dGroupId: id,
@@ -165,15 +153,17 @@ export default class EquipmentManagement extends Component {
         if (data.errCode == 0) {
           this.grouplist();
           this.Official.officialopen(data.data,id);
-          /* this.setState({
-            datas: data.data,
-          });
-          debugger; */
-          // this.Custom.customopen();
         } else {
           Message.success(data.message);
         }
       }
+    );
+  } */
+  // 时间转换
+  createdAt=(e)=>{
+    const updatedAt = moment(e).format('YYYY-MM-DD HH:mm:ss');
+    return (
+      <p>{updatedAt}</p>
     );
   }
   render() {
@@ -184,7 +174,7 @@ export default class EquipmentManagement extends Component {
       { value: '日限满额', label: '日限满额' },
     ];
     const statusBtn = (
-      <Select onChange={this.zbl} placeholder={this.state.listValue} dataSource={Allstatus} />
+      <Select onChange={this.selectstart} placeholder={this.state.listValue} dataSource={Allstatus} />
     );
     const grouplistdata = this.state.grouplistdata;
     const equipmentlist = (
@@ -203,9 +193,9 @@ export default class EquipmentManagement extends Component {
     );
     return (
       <div className='equipmentmanagement'>
-        <Addgrouping ref={(node=>this.Addgrouping = node)} Toupdatelist={this.Toupdatelist} />
-        <Official ref={(node=>this.Official = node)} />
-        <Custom ref={(node=>this.Custom = node)} />
+        {/* <Addgrouping ref={(node=>this.Addgrouping = node)} Toupdatelist={this.Toupdatelist} /> */}
+        <Official ref={(node=>this.Official = node)} fetchData={this.fetchData.bind(this)} />
+        {/* <Custom ref={(node=>this.Custom = node)} /> */}
         <Tab shape='pure' className='income-tab'>
           <Tab.Item title="设备管理">
             <div className='equipmentmanagement-content'>
@@ -217,25 +207,25 @@ export default class EquipmentManagement extends Component {
                 <Row wrap gutter="20" style={styles.formRow}>
                   <Col l="24">
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>商户ID:</span>
+                      {/*  <span style={styles.formLabel}>商户ID:</span>
                       <FormBinder name="merchantId">
                         <Input style={styles.formInput} />
-                      </FormBinder>
+                      </FormBinder> */}
                       <span style={styles.formLabel}>设备名称:</span>
-                      <FormBinder name="channame">
+                      <FormBinder name="dName">
                         <Input style={styles.formInput} />
                       </FormBinder>
-                      <span style={styles.formLabel}>设备ID:</span>
+                      {/*   <span style={styles.formLabel}>设备ID:</span>
                       <FormBinder name="name">
                         <Input style={styles.formInput} />
-                      </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索设备</Button>
-                      <Button className='btn-all bg' size="large" type="secondary" onClick={this.grouplist.bind(this)}>分组列表</Button>
+                      </FormBinder> */}
+                      <Button className='btn-all bg' size="large" type="primary" onClick={this.searchBtn.bind(this)}>搜索设备</Button>
+                      {/*   <Button className='btn-all bg' size="large" type="secondary" onClick={this.grouplist.bind(this)}>分组列表</Button>
                       <Button className='btn-all bg' size="large" type="secondary" onClick={this.groupingopen.bind(this)}>编辑分组</Button>
                       <div className={this.state.toplist ? ('devicemanagement-top-list opicty') : ('devicemanagement-top-list')} >
                         {equipmentlist}
-                        {/* <button className='devicemanagement-top-list-btn' onClick={this.closetoplist.bind(this)}>关闭列表</button> */}
-                      </div>
+                         // <button className='devicemanagement-top-list-btn' onClick={this.closetoplist.bind(this)}>关闭列表</button>
+                      </div> */}
                     </div>
                   </Col>
                 </Row>
@@ -243,15 +233,22 @@ export default class EquipmentManagement extends Component {
             </div>
             <div className='equipmentmanagement-panel'>
               <Table loading={isLoading} dataSource={datas} hasBorder={false}>
-                <Table.Column title="商户ID" dataIndex="merchantId" />
-                <Table.Column title="企业名称" dataIndex="name" />
-                <Table.Column title="设备名称" dataIndex="role" />
-                <Table.Column title="设备ID" dataIndex="time" />
-                <Table.Column title="今日流水/笔" dataIndex="order" />
-                <Table.Column title="昨日流水/笔" dataIndex="remark" />
-                <Table.Column title="累计流水/笔" dataIndex="balance" />
-                <Table.Column title={statusBtn} dataIndex="2" cell={this.renderStatus} />
-                <Table.Column title="操作" dataIndex="oper" />
+                <Table.Column title="创建时间" dataIndex="createdAt" cell={this.createdAt} />
+                <Table.Column title="应用ID" dataIndex="appId" />
+                <Table.Column title="设备分组" dataIndex="dGroupName" />
+                <Table.Column title="设备名称" dataIndex="dName" />
+                <Table.Column title="设备ID" dataIndex="_id" />
+                <Table.Column title="今日流水/笔" dataIndex="todayFlow" />
+                <Table.Column title="昨日流水/笔" dataIndex="yeTodayFlow" />
+                <Table.Column title="累计流水/笔" dataIndex="totalFlow" />
+                {/* cell={this.renderRule}  */}
+                <Table.Column title={statusBtn} dataIndex="2" />
+                <Table.Column title="类型" dataIndex="classify" width={120} />
+                <Table.Column
+                  title="操作"
+                  dataIndex="oper"
+                  cell={this.renderOper}
+                />
               </Table>
               <Pagination
                 style={{ marginTop: '20px', textAlign: 'right' }}

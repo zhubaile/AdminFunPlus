@@ -132,14 +132,6 @@ class MemberManagement extends Component {
         });
       });
   }
-
-   renderStatus = (datas) => {
-     return (
-       <div>
-         <Radio id="enabled" value="enabled" checked={datas.enabled} >{datas.enabledName}</Radio>
-       </div>
-     );
-   };
   onRemove = (id) => {
     const { datas } = this.state;
     sysUserDelete({
@@ -245,8 +237,7 @@ class MemberManagement extends Component {
                 <Table.Column title="角色" dataIndex="roleName" />
                 <Table.Column
                   title="状态"
-                  dataIndex="enabled"
-                  cell={this.renderStatus}
+                  dataIndex="statusName"
                 />
                 {/*                <Table.Column title="操作" dataIndex="caozuo" /> */}
 

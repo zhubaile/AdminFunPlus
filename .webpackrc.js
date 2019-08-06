@@ -6,9 +6,9 @@ let proxy = {};
   target: "http://192.168.1.123:3000",
   changeOrigin: true,
 };*/
-proxy['/admin/**'] = {
+proxy['/admin/web/**'] = {
   // 代理测试环境地址 如下，代理就是把请求本地的url接到配置好的url上。
-  target: "http://192.168.1.122:3001",
+  target: "http://192.168.1.118:3001",
   changeOrigin: true,
 };
 console.log('---------111112222333456---------')
@@ -19,14 +19,16 @@ module.exports = {
   // 如果需要代理请解开下面注释   regex e("abc")
   devServer: {
     proxy: proxy,
+    index: 'build/login.html',
     historyApiFallback: {
-      index: 'build/login.html',
+      // index: 'build/login.html',
       disableDotRule: true,
       rewrites:[
         { from: /^\/$/, to: 'build/login.html' },
-        { from: /^\/user/, to: 'build/login.html' }, // 登录界面
+        { from: /^\/backadminuser/, to: 'build/login.html' }, // 登录界面
         { from: /^\/website/, to: 'build/website.html' }, // 官网界面
         { from: /^\/backadmin/, to: 'build/index.html' } // 管理后台
+
       ],
     }
   },

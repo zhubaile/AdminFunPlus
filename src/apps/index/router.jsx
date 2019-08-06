@@ -1,6 +1,7 @@
 /**
  * 定义应用路
  */
+// BrowserRouter as Router
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 
@@ -116,4 +117,5 @@ function renderRouterConfigV4(container, router, contextPath) {
 
 const routerWithReactRouter4 = recursiveRouterConfigV4(routerData);
 const routeChildren = renderRouterConfigV4(null, routerWithReactRouter4, '/');
+// export default withRouter(routeChildren);
 export default <Router>{routeChildren}</Router>;

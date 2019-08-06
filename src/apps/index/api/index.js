@@ -13,13 +13,7 @@ export async function getMenu(params) {
   //   ;
   // });deviceGroup
 }
-// 设备管理列表
-export async function devicelist(params) {
-  return ajaxAmd.get({
-    url: '/device/list',
-    params,
-  });
-}
+
 // 获取分组列表
 export async function deviceGrouplist(params) {
   return ajaxAmd.get({
@@ -40,65 +34,7 @@ export async function deviceGroupadd(params) {
     data: params,
   });
 }
-// 获取添加设备参数
-export async function deviceparams(params) {
-  return ajaxAmd.get({
-    url: '/device/params',
-    params,
-  });
-}
 
-// 路由里面新规则的初始应用通道
-export async function channelParams(params) {
-  return ajaxAmd.get({
-    url: '/channelParams',
-    params,
-  });
-}
-// 选择应用通道来获取设备组信息
-export async function channeldeviceGroup(params) {
-  return ajaxAmd.get({
-    url: '/channel/deviceGroup',
-    params,
-  });
-}
-// 选择设备组获取其他信息
-export async function deviceGroupruleParams(params) {
-  return ajaxAmd.post({
-    url: '/deviceGroup/ruleParams',
-    data: params,
-  });
-}
-
-
-// 改变直连渠道的开关
-export async function channelbindRule(params) {
-  return ajaxAmd.post({
-    url: '/channel/bindRule',
-    data: params,
-  });
-}
-// 获取路由规则列表
-export async function routerRulelist(params) {
-  return ajaxAmd.get({
-    url: '/routerRule/list',
-    params,
-  });
-}
-// 路由规则
-export async function routerRule(params) {
-  return ajaxAmd.get({
-    url: '/routerRule',
-    params,
-  });
-}
-// 创建新规则
-export async function routerRuleadd(params) {
-  return ajaxAmd.post({
-    url: '/routerRule/add',
-    data: params,
-  });
-}
 // 获取应用参数
 export async function settingget(params) {
   return ajaxAmd.get({
@@ -334,17 +270,18 @@ export function verifybill(params) {
     params,
   });
 }
-// 导出excle
-export function exportExcel(params) {
-  return ajaxAmd.get({
-    url: '/exportExcel',
-    params,
-  });
-}
 
 
 // BackAdmin的API接口 zbl starting
 
+// 导出excle
+export function exportExcel(params) {
+  return ajaxAmd.get({
+    url: '/exportExcel',
+    responseType: 'blob',
+    params,
+  });
+}
 // 默认展示的聊天记录
 export function workOrderuserRecordOne(params) {
   return ajaxAmd.post({
@@ -443,20 +380,20 @@ export function invoiceList(params) {
     data: params,
   });
 }
-// 获取应用渠道规则
-export async function channel(params) {
-  return ajaxAmd.get({
-    url: '/channel',
-    params,
+// 发票操作
+export function InvoiceOperation(params) {
+  return ajaxAmd.post({
+    url: '/InvoiceOperation',
+    data: params,
   });
 }
-// 获取设备列表
+/* // 获取设备列表
 export async function device(params) {
   return ajaxAmd.get({
     url: '/device',
     params,
   });
-}
+} */
 // 角色权限列表
 export function sysRoleList(params) {
   return ajaxAmd.get({
@@ -507,18 +444,18 @@ export function sysCreateUser(params) {
     data: params,
   });
 }
+// 获取添加成员和编辑成员的下拉框数据
+export function userGroupRole(params) {
+  return ajaxAmd.get({
+    url: '/userGroupRole',
+    params,
+  });
+}
 // 成员管理的修改密码
 export function sysChangePwd(params) {
   return ajaxAmd.post({
     url: '/sysChangePwd',
     data: params,
-  });
-}
-// 站点设置
-export function siteConfigget(params) {
-  return ajaxAmd.get({
-    url: '/siteConfig',
-    params,
   });
 }
 // 邮箱配置
@@ -534,10 +471,126 @@ export function mailConfigpost(params) {
     data: params,
   });
 }
+// 站点设置
+export function siteConfigget(params) {
+  return ajaxAmd.get({
+    url: '/siteConfig',
+    params,
+  });
+}
 // 编辑站点设置
 export function siteConfigpost(params) {
   return ajaxAmd.post({
     url: '/siteConfig',
+    data: params,
+  });
+}
+// 获取路由规则列表
+export async function routerRulelist(params) {
+  return ajaxAmd.get({
+    url: '/routerRule/list',
+    params,
+  });
+}
+// 路由规则
+export async function routerRule(params) {
+  return ajaxAmd.get({
+    url: '/routerRule',
+    params,
+  });
+}
+// 创建新规则
+export async function routerRuleadd(params) {
+  return ajaxAmd.post({
+    url: '/routerRule/add',
+    data: params,
+  });
+}
+// 编辑新规则
+export async function routerRuledit(params) {
+  return ajaxAmd.post({
+    url: '/routerRule/edit',
+    data: params,
+  });
+}
+// 获取渠道参数
+export async function rulessearch(params) {
+  return ajaxAmd.get({
+    url: '/rules/search',
+    params,
+  });
+}
+// 获取白名单列表
+export async function settingwhiteIpscompany(params) {
+  return ajaxAmd.get({
+    url: '/setting/whiteIps/company',
+    params,
+  });
+}
+// ip白名单的操作
+export async function settingwhiteIpsget(params) {
+  return ajaxAmd.get({
+    url: '/setting/whiteIps',
+    params,
+  });
+}
+export async function settingwhiteIpspost(params) {
+  return ajaxAmd.post({
+    url: '/setting/whiteIps',
+    data: params,
+  });
+}
+export async function settingwhiteIpsdele(params) {
+  return ajaxAmd.delete({
+    url: '/setting/whiteIps',
+    params,
+  });
+}
+// 权限白名单开关
+export async function settingwhiteIpschangeStatus(params) {
+  return ajaxAmd.post({
+    url: '/setting/whiteIps/changeStatus',
+    data: params,
+  });
+}
+// 获取应用渠道规则
+export async function channel(params) {
+  return ajaxAmd.get({
+    url: '/channel',
+    params,
+  });
+}
+// 改变直连渠道的开关
+export async function channelbindRule(params) {
+  return ajaxAmd.post({
+    url: '/channel/bindRule',
+    data: params,
+  });
+}
+// 设备管理列表
+export async function devicelist(params) {
+  return ajaxAmd.get({
+    url: '/device/list',
+    params,
+  });
+}
+/* // 获取添加设备参数
+export async function deviceparams(params) {
+  return ajaxAmd.get({
+    url: '/device/params',
+    params,
+  });
+} */
+// 获取已编辑设备的详情
+export async function deviceget(params) {
+  return ajaxAmd.get({
+    url: '/device',
+    params,
+  });
+}
+export async function device(params) {
+  return ajaxAmd.post({
+    url: '/device',
     data: params,
   });
 }

@@ -42,6 +42,7 @@ export default class Operationlog extends Component {
       isLoading: false,
       result: [],
       data: [],
+      toplist: false,
       value: {
         username: '',
         startdate: [],
@@ -124,17 +125,36 @@ export default class Operationlog extends Component {
       this.fetchData(values.username,arrivalDate);
     });
   }
-  // search() {
-  //   const values = this.state.value;
-  //   this.fetchData(values);
-  // }
-
-  renderStatus = () => {
-    return (
-      <Switch size='small' className='div-switch' defaultChecked={false} />
+  // 添加分组
+  groupingopen() {
+    this.Addgrouping.addgroupingopen();
+  }
+  // 获取分组列表
+  grouplist() {
+    this.setState({
+      toplist: !this.state.toplist,
+    });
+  }
+  // 获取设备参数
+  /*  deviceopen(id) {
+    // const dd = this.state.ApplicationChannel;
+    console.log(id);
+    deviceparams({
+      dGroupId: id,
+    }).then(
+      ({ status, data }) => {
+        if (data.errCode == 0) {
+          this.grouplist();
+          this.Official.officialopen(data.data,id);
+          /!* this.setState({
+            datas: data.data,
+          });
+          debugger; *!/
+          // this.Custom.customopen();
+        }
+      }
     );
-  };
-
+  } */
   render() {
     const { isLoading, data, current, pageSize, total,result } = this.state;
     const Allstatus = [
@@ -179,7 +199,7 @@ export default class Operationlog extends Component {
                 <Table.Column title="IP" dataIndex="host" />
                 <Table.Column title="操作" dataIndex="urlName" />
                 <Table.Column title="操作时间" dataIndex="createdAt" />
-                {/*<Table.Column title="说明" dataIndex="" />*/}
+                {/* <Table.Column title="说明" dataIndex="" /> */}
               </Table>
               <Pagination
                 style={{ marginTop: '20px', textAlign: 'right' }}

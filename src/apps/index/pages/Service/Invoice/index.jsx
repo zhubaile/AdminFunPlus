@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button , Tab, Message ,Pagination,Table,Select, Input,MenuButton,DatePicker,Form } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
-import { invoiceList } from '@indexApi';
+import { invoiceList,InvoiceOperation } from '@indexApi';
 import '../index.css';
 import moment from "moment/moment";
 import Shipping from "./Shipping";
@@ -32,9 +32,6 @@ export default class Invoice extends Component {
       },
     };
   }
-  // btnClick() {
-  //   this.props.editor(this.input.getInputNode().value);
-  // }
 
   componentDidMount() {
     this.fetchData();
@@ -78,42 +75,15 @@ export default class Invoice extends Component {
       }
     );
   };
-  renderRule = () => {
-    return (
-      <div>
-        <select className='table-select'>
-          <option value="volvo">默认规则</option>
-          <option value="saab">自定义规则</option>
-          <option value="opel">自定义规则</option>
-          <option value="audi">新增规则</option>
-        </select>
-      </div>
-    );
-  };
-  renderOper = () => {
-    return (
-      <div style={{ color: '#1A55E2', cursor: 'pointer' }}>
-        <span onClick={this.detailBtn.bind(this)}>详情</span>
-        <span onClick={this.invoiceBtn.bind(this)}>寄件</span>
-      </div>
-    );
-  };
-  renderStatus = () => {
-    return (
-      <div>
-        <span>待处理</span>
-      </div>
-    );
-  };
   // 获取到选中的数据
-  Choice(args) {
+  /* Choice(args) {
     debugger;
     this.setState({
       args,
     });
-  }
+  } */
   // 删除方法
-  removes() {
+  /*  removes() {
     const { datas,args } = this.state;
     debugger;
     let index = -1;
@@ -130,7 +100,7 @@ export default class Invoice extends Component {
         });
       }
     });
-  }
+  } */
   // 改变选择的时间
   rangetime(value) {
     const createdAt = [];
@@ -161,39 +131,86 @@ export default class Invoice extends Component {
   searchbtn() {
     const invoiceTitle = this.input.getInputNode().value;
     const arrivalDate = this.state.startdate;
+    debugger;
     this.fetchData(invoiceTitle,arrivalDate);
   }
   // 寄件
-  invoiceBtn() {
-    this.Shipping.shippingopen();
+  invoiceBtn(id) {
+    this.Shipping.shippingopen(id);
   }
   // 详情
-  detailBtn() {
-    this.props.history.push("/backadmin/service/invoicedetails");
+  detailBtn(record) {
+    this.props.history.push({ pathname: '/backadmin/service/invoicedetails', state: { record } });
   }
+  // 时间转换
+  datatime=(e)=>{
+    const updatedAt = moment(e).format('YYYY-MM-DD HH:mm:ss');
+    return (
+      <p>{updatedAt}</p>
+    );
+  }
+  torefundbtn(_id,i) {
+    debugger;
+    InvoiceOperation({
+      _id,
+      operation: i,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        Message.success(data.message);
+        this.fetchData();
+      } else {
+        Message.success(data.message);
+      }
+    });
+  }
+  // 操作
+  renderOper = (value, index, record) => {
+    return (
+      <div style={{ color: '#1A55E2', cursor: 'pointer' }}>
+        <a onClick={this.detailBtn.bind(this,record)} style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px', borderRight: '2px solid #999999' }}>详情</a>
+        {value.includes(1) ? (
+          <a
+            style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px' }}
+            onClick={this.invoiceBtn.bind(this,record._id)}
+          >
+            寄件
+          </a>
+        ) : null}
+        {value.includes(4) ? (
+          <a
+            style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px' }}
+            onClick={this.torefundbtn.bind(this,record._id,4)}
+          >
+            退票完成
+          </a>
+        ) : null}
+        {value.includes(5) ? (
+          <a
+            style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px' }}
+            onClick={this.torefundbtn.bind(this,record._id,5)}
+          >
+            退票驳回
+          </a>
+        ) : null}
+      </div>
+    );
+  };
   render() {
     const { isLoading, datas, current,total,pageSize,value } = this.state;
     const startValue = moment('2019-05-08', 'YYYY-MM-DD', true);
-    const endValue = moment('2017-12-15', 'YYYY-MM-DD', true);
+    const endValue = moment('2019-07-24', 'YYYY-MM-DD', true);
     const grouplistdata = this.state.grouplistdata;
     console.log(this.state.datas);
     // 多选按钮
-    const rowSelection = {
+    /* const rowSelection = {
       onChange: this.Choice.bind(this),
       getProps: (record,index) => {
-        /* return {
-          disabled: record.id === 100306660942,
-        }; */
       },
-    };
-    const list = [
-      { value: '上海', label: '上海' },
-      { value: '杭州', label: '杭州' },
-      { value: '北京', label: '北京' },
-    ];
+    }; */
     return (
       <div className='invoice'>
-        <Shipping ref={ node=>this.Shipping = node } />
+        <Shipping ref={ node=>this.Shipping = node } fetchData={this.fetchData.bind(this)} />
         <div className='currency-top'>
           发票管理
           <div className='currency-top-bottombor' />
@@ -204,8 +221,8 @@ export default class Invoice extends Component {
               <span>开票时间：</span>
               <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} onChange={this.rangetime.bind(this)} />
               <span style={{ marginLeft: '20px' }}>发票抬头：</span>
-              {/* <Input placeholder='请输入发票抬头' ref={node=>this.input = node} /> */}
-              <Select style={{ width: '200px' }} name="fapiao" dataSource={list} />
+              <Input placeholder='请输入发票抬头' ref={node=>this.input = node} />
+              {/* <Select style={{ width: '200px' }} name="fapiao" dataSource={list} /> */}
             </div>
             <div className='right'>
               <button onClick={this.searchbtn.bind(this)}>查询</button>
@@ -217,30 +234,29 @@ export default class Invoice extends Component {
               loading={isLoading}
               dataSource={datas}
               hasBorder={false}
-              primaryKey='_id'
-              rowSelection={rowSelection}
+              // primaryKey='_id'
+              // rowSelection={rowSelection}
             >
-              <Table.Column title="发票ID" dataIndex="_id" />
-              <Table.Column title="企业名称" dataIndex="todayFlow" />
-              <Table.Column title="企业税号" dataIndex="yeTodayFlow" />
-              <Table.Column title="发票抬头" dataIndex="classify" />
-              <Table.Column title="发票类型 " dataIndex="totalFlow" />
-{/*              <Table.Column title="订单号" dataIndex="classify" />*/}
-              <Table.Column title="开票金额" dataIndex="1" />
-              <Table.Column title="开票时间" dataIndex="3  " />
+              <Table.Column title="发票ID" dataIndex="invoiceNo" />
+              <Table.Column title="企业名称" dataIndex="cpName" />
+              <Table.Column title="企业税号" dataIndex="taxNumber" />
+              <Table.Column title="发票抬头" dataIndex="invoiceTitle" />
+              <Table.Column title="发票类型 " dataIndex="invoiceTypeName" />
+              {/*              <Table.Column title="订单号" dataIndex="classify" /> */}
+              <Table.Column title="开票金额" dataIndex="fee" />
+              <Table.Column title="开票时间" dataIndex="createdAt" cell={this.datatime} />
               <Table.Column
                 title="状态"
-                dataIndex="4"
-                cell={this.renderStatus}
+                dataIndex="invoiceStatusName"
               />
               <Table.Column
                 title="操作"
                 width={200}
-                dataIndex="oper"
+                dataIndex="operation"
                 cell={this.renderOper}
               />
             </Table>
-            <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button>
+            {/* <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button> */}
 
             <Pagination
               style={{ marginTop: '20px', textAlign: 'right' }}

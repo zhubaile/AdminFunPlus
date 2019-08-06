@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Input,Button , Grid, Message } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 import IceContainer from '@icedesign/container';
-import { addsettingwhiteIps } from "@indexApi";
+import { settingwhiteIpspost } from "@indexApi";
 import '../../../../index.css';
 
 const { Row, Col } = Grid;
@@ -12,6 +12,7 @@ export default class Ippopup extends Component {
     super(props);
     this.state = {
       open: false,
+      content: null,
     };
   }
   ippopupclose=()=> {
@@ -36,48 +37,33 @@ export default class Ippopup extends Component {
   }
   // deviceGroupaddparmas
   addip() {
-    const IP = this.input.value;
+    const appId = this.state.content;
+    const IP = this.inputip.value;
     console.log(IP);
-    addsettingwhiteIps({
+    settingwhiteIpspost({
+      appId,
       ip: IP,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         this.ippopupclose();
         Message.success(data.message);
-        location.reload(); // 待优化
+        this.props.fetchData();
+        // location.reload(); // 待优化
       } else { Message.success(data.message); }
     });
   }
-  /*  adddaypopup() {
-    this.refs.form.validateAll((errors,values)=>{
-      this.props.time(values);
-    });
-    this.daypopupclose();
-  } */
-  /*  inputValidator = (rule, value, callback) => {
-    debugger;
-    const z=this.state.openTimeRangestart;
-    const errors = [];
-    console.log(value)
-    if (!value) {
-      callback('输入不能为空');
-    } else if (value>z) {
-      callback('lalala');
-    } else {
-      callback();
-    }
-  }; */
   render() {
     if (!this.state.open) return null;
     return (
       <div className='ippopup'>
         <div className='ippopup-top'>
-          <h2>选择时间</h2>
+          <h2>添加IP</h2>
           <strong onClick={this.ippopupclose.bind(this)}>×</strong>
         </div>
         <div className='ippopup-content'>
           <span>新增IP地址</span>
-          <input type="text" ref={input=>this.input = input} />
+          <input type="text" ref={input=>this.inputip = input} />
         </div>
         <div className='ippopup-btn'>
           <button onClick={this.ippopupclose.bind(this)}>取消</button>

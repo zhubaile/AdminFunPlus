@@ -2,34 +2,12 @@
 import React, { Component } from 'react';
 import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch,Radio } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
-import { searchUserList } from '@indexApi';
+import { searchUserList,userGroupRole } from '@indexApi';
 import '../../index.css';
 import Addmember from "./Addmember/index";
 import Resetpassword from "./Resetpassword/index";
 import { Message } from "@alifd/next/lib/index";
 
-// const random = (min, max) => {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// };
-//
-// const getData = (length = 10) => {
-//   return Array.from({ length }).map(() => {
-//     return {
-//       _id: random(10000, 20000, 30000, 50025, 68522),
-//       merchantId: '000662',
-//       name: ['有此山'],
-//       time: '连岳',
-//       order: '01',
-//       remark: '系统管理',
-//       balance: '2019.6.11 11:36',
-//       email: ['78@qq.com'],
-//       tel: ['136000'],
-//       role: [''],
-//       status: '',
-//       oper: [''],
-//     };
-//   });
-// };
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 
@@ -56,7 +34,6 @@ export default class Membermanagement extends Component {
   componentDidMount() {
     this.fetchData();
   }
-
 
   fetchData = (len) => {
     this.setState(
@@ -104,51 +81,71 @@ export default class Membermanagement extends Component {
       value,
     });
   };
-    renderStatus = (datas) => {
+  /*  renderStatus = (datas) => {
       return (
         <div>
           <Radio id="enabled" value="enabled" checked={datas.enabled} >{datas.enabledName}</Radio>
         </div>
       );
-    };
+    }; */
   // 获取到选中的数据
-    Choice(args) {
-      this.setState({
-        args,
-      },);
-    }
+  Choice(args) {
+    this.setState({
+      args,
+    },);
+  }
   // 删除方法
-    removes() {
-      const { result,args } = this.state;
-      debugger;
-      let index = -1;
-      args.map((id)=>{
-        result.forEach((item, i) => {
-          if (item._id === id) {
-            index = i;
-          }
-        });
-        if (index !== -1) {
-          result.splice(index, 1);
-          this.setState({
-            result,
-          });
+  removes() {
+    const { result,args } = this.state;
+    debugger;
+    let index = -1;
+    args.map((id)=>{
+      result.forEach((item, i) => {
+        if (item._id === id) {
+          index = i;
         }
       });
-    }
-    // 添加成员
-    addmemberBtnOpen() {
-      const adds = this.state.roless;
-      debugger;
-      this.Addmenber.addmemberopen(adds);
-    }
+      if (index !== -1) {
+        result.splice(index, 1);
+        this.setState({
+          result,
+        });
+      }
+    });
+  }
+  // 添加成员
+  addmemberBtnOpen(record) {
+    // const adds = this.state.roless;
+    const groupId = record.groupId;
+    userGroupRole({
+      groupId,
+    }).then(({ status,data })=>{
+      if (data.errCode == 0) {
+        const kkk = data.data;
+        const adds = kkk.map(item=>({ value: item.roleName, label: item.description }));
+        const id = '';
+        this.Addmenber.addmemberopen(adds,id,record);
+      }
+    });
+    // this.Addmenber.addmemberopen(adds);
+  }
   // 编辑
-    editmemberBtnOpen(record) {
-      const adds = this.state.roless;
-      const id = record._id;
+  editmemberBtnOpen(record) {
+    const adds = this.state.roless;
+    const id = record._id;
+    const groupId = record.groupId;
+    userGroupRole({
+      groupId,
+    }).then(({ status,data })=>{
       debugger;
-      this.Addmenber.addmemberopen(adds,id,record);
-    }
+      if (data.errCode == 0) {
+        const kkk = data.data;
+        const adds = kkk.map(item=>({ value: item.roleName, label: item.description }));
+        this.Addmenber.addmemberopen(adds,id,record);
+      }
+    });
+    this.Addmenber.addmemberopen(adds,id,record);
+  }
   resetBtnOpen=(id)=> {
     debugger;
     this.Resetpassword.resetPasswordopen(id);
@@ -166,7 +163,7 @@ export default class Membermanagement extends Component {
           searchUserList({
             cpId: values.cpId,
             cpName: values.cpName,
-            roleName: values.roleName,
+            roles: values.roleName,
             keyword: values.keyword,
             page: pages,
             pageSize: pageSizes,
@@ -192,7 +189,7 @@ export default class Membermanagement extends Component {
       <div className='tb_span'>
         <span onClick={this.editmemberBtnOpen.bind(this,record)}>编辑</span>
         <span onClick={this.resetBtnOpen.bind(this, record._id)}>重置密码</span>
-        <span onClick={this.addmemberBtnOpen.bind(this, record._id)}>添加成员</span>
+        <span onClick={this.addmemberBtnOpen.bind(this, record)}>添加成员</span>
       </div>
     );
   };
@@ -266,8 +263,7 @@ export default class Membermanagement extends Component {
                 <Table.Column title="上次登录时间" dataIndex="lastTime" />
                 <Table.Column
                   title="状态"
-                  dataIndex="enabled"
-                  cell={this.renderStatus}
+                  dataIndex="statusName"
                 />
                 <Table.Column title="操作" dataIndex="" cell={this.renderOper} />
               </Table>

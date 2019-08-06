@@ -5,10 +5,10 @@ import qs from 'qs';
 const ajaxConfig = {
   timeout: 30000,
   withCredentials: true,
-  urlPrefix: '/admin', // 请求本地的/admin，通过代理访问服务器的/admin
+  urlPrefix: '/admin/web', // 请求本地的/admin，通过代理访问服务器的/admin
   // 此处错误
-  // urlPrefix: 'http://192.168.1.118:3000/web/beta/v1.0', // 这样写就成跨域了，
-  // urlPrefix: 'http://funplus.yue-net.com/web/beta/v1.0',
+  // urlPrefix: 'http://funplus.yue-net.com:8888/admin/web', // 这样写就成跨域了，
+  // urlPrefix: 'http://funplus.yue-net.com/admin/web',
 };
 // urlPrefix: 'http://192.168.1.118:3000/web/beta/v1.0',fog本地的
 // http://192.168.1.113:3000/web/beta/v1.0   发送邮箱的接口

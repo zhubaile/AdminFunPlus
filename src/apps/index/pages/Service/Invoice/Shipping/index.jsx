@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Input, Radio , Message, Grid, Form, Select,Button } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
+import { InvoiceOperation } from '@indexApi';
 import '../../index.css';
 
 const Option = Select.Option;
@@ -14,8 +15,8 @@ export default class Shipping extends Component {
     super(props);
     this.state = {
       value: {
-        username: '',
-        phone: '',
+        weCourierCompany: '',
+        weCourierNumber: '',
       },
       open: false,
       content: null,
@@ -25,8 +26,10 @@ export default class Shipping extends Component {
   shippingclose() {
     this.setState({
       open: false,
-      // content: null,
-      // value: {},
+      value: {
+        weCourierCompany: '',
+        weCourierNumber: '',
+      },
     });
   }
   shippingopen(content,confirm) {
@@ -36,8 +39,29 @@ export default class Shipping extends Component {
       confirm,
     });
   }
+  formChange=(value)=>{
+    this.setState({
+      value,
+    });
+  }
+  // 寄件操作
   confirmBtn() {
-    this.setState({});
+    const _id = this.state.content;
+    const value = this.state.value;
+    InvoiceOperation({
+      _id,
+      operation: 1,
+      ...value,
+    }).then(({ status,data })=>{
+      debugger;
+      if (data.errCode == 0) {
+        Message.success(data.message);
+        this.shippingclose();
+        this.props.fetchData();
+      } else {
+        Message.success(data.message);
+      }
+    });
   }
   render() {
     // const jiaose = this.state.content;
@@ -53,17 +77,18 @@ export default class Shipping extends Component {
         <div className='shipping-content'>
           <FormBinderWrapper
             value={this.state.value}
+            onChange={this.formChange}
             ref="form"
           >
             <div style={styles.formItem}>
               <span style={styles.formItemLabel}>快递公司</span>
-              <FormBinder name="username">
+              <FormBinder name="weCourierCompany">
                 <Input hasClear placeholder='单行输入' />
               </FormBinder>
             </div>
             <div style={styles.formItem}>
               <span style={styles.formItemLabel}>运单号</span>
-              <FormBinder name='phone'>
+              <FormBinder name='weCourierNumber'>
                 <Input hasClear placeholder='单行输入' />
               </FormBinder>
             </div>
@@ -89,4 +114,4 @@ const styles = {
     display: 'inline-block',
     textAlign: 'right',
   },
-}
+};

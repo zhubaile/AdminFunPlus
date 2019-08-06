@@ -26,8 +26,10 @@
 .user-list .user-w .avatar img {width: 50px;height: auto;border-radius: 50px;display: block;}
 .user-list .user-w .user-info {-webkit-box-flex: 1;-ms-flex: 1 1 auto;flex: 1 1 auto;}
 .user-list .user-w .user-name {font-weight: 500;font-size: 0.99rem;-webkit-transition: all 0.2s ease;transition: all 0.2s ease;}
+.user-list .user-w .user-name .noreadednum{ float: right; color: red;}
+.user-list .user-w .user-name .noreadednum.no{display: none;}
 .user-list .user-w .last-message {color: rgba(0, 0, 0, 0.4);font-size: 0.81rem;-webkit-transition: all 0.2s ease;transition: all 0.2s ease;}
-.user-list .user-w .user-date {float: right;padding: 2px 7px;border-radius: 12px;font-size: 0.72rem;color: #1A55E2;-webkit-transition: all 0.2s ease;transition: all 0.2s ease;}
+.user-list .user-w .user-date {font-size: 0.72rem;color: #1A55E2;-webkit-transition: all 0.2s ease;transition: all 0.2s ease;}
 .user-list .user-w:hover {background-color: #047bf8;cursor: pointer;}
 .user-list .user-w:hover .user-name {color: #fff;}
 .user-list .user-w:hover .last-message {color: rgba(255, 255, 255, 0.5); margin-top: 5px;}

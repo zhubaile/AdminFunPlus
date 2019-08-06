@@ -3,20 +3,11 @@ import { Link,withRouter } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select, Menu,MenuButton } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 
-import { channel } from '@indexApi';
+import { channel,channelbindRule } from '@indexApi';
 import '../../../index.css';
 
 const Option = Select.Option;
 const { Item } = MenuButton;
-/* const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      name: ['淘小宝', '淘二宝'],
-      level: ['普通会员'],
-      rule: ['余杭盒马店'],
-    };
-  });
-}; */
 @withRouter
 export default class ApplicationChannel extends Component {
   constructor(props) {
@@ -31,21 +22,10 @@ export default class ApplicationChannel extends Component {
       datas: [],
     };
   }
-  btnClick() {
-    this.props.editor(this.input.getInputNode().value);
-  }
 
   componentDidMount() {
     this.fetchData();
   }
-
-  /*  mockApi = (len) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getData(len)); // Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象 成功以后携带数据  resolve(应该写ajax方法)
-      }, 600);
-    });
-  }; */
 
   fetchData = (len) => {
     this.setState(
@@ -128,14 +108,14 @@ export default class ApplicationChannel extends Component {
   renderOper = (value,index,record) => {
     return (
       <div>
-        <Switch className='div-switch' checked={value} />
+        <Switch className='div-switch' checked={value} onClick={()=>this.changeswitch(record,index)} />
         {/* 如果需要改变开关状态加入onClick */}
         {/* onClick={()=>this.changeswitch(record,index)} */}
       </div>
     );
   };
   // 改变开关状态
-  /*  changeswitch(record,index) {
+  changeswitch(record,index) {
     debugger;
     const shuzi = this.state.shuzi;
     const reluss = record.rules;
@@ -157,7 +137,7 @@ export default class ApplicationChannel extends Component {
         this.fetchData();
       }
     });
-  } */
+  }
   render() {
     const { isLoading, datas, current, total, pageSize } = this.state;
     console.log(this.state.datas);

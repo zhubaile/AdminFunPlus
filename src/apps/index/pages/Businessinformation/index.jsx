@@ -136,24 +136,9 @@ export default class Businessinformation extends Component {
           {v == 1 ? '冻结' : null}
           {v == 2 ? '解冻' : null}
         </span>
-
       </div>
     );
   };
-  /* renderStatus = () => {
-    return (
-      <div>
-        <Switch size='small' className='div-switch' defaultChecked={false} />
-      </div>
-    );
-  }; */
-  /* renderPermission = () => {
-    return (
-      <div>
-        <Switch size='small' className='div-switch' defaultChecked={false} />
-      </div>
-    );
-  }; */
   renderCertification = (v,e,record) => {
     debugger;
     return (

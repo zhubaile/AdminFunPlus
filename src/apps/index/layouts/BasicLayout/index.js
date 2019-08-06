@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from '@icedesign/layout';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { enquire } from 'enquire-js';
 import MainRoutes from './MainRoutes';
 import Header from './components/Header';
@@ -56,9 +56,15 @@ export default class BasicLayout extends Component {
   };
   // 切换一级路由
   Statuschange(e) {
-    this.setState({
-      status: e,
-    });
+    if (!e) {
+      this.setState({
+        status: 0,
+      });
+    } else {
+      this.setState({
+        status: e,
+      });
+    }
   }
 
   render() {

@@ -26,8 +26,7 @@ export default class Addmember extends Component {
         phone: '',
         email: '',
         roles: [],
-        enabled: '',
-        groupId: '',
+        status: false,
       },
       open: false,
       content: null, // 下拉框数据
@@ -45,14 +44,25 @@ export default class Addmember extends Component {
     });
   }
   addmemberopen(content,confirm,record) {
-    this.setState({
-      open: true,
-      content,
-      confirm,
-      value: record,
-      record,
-    });
-    this.confirmCallBack = confirm;
+    debugger;
+    if (!confirm) {
+      debugger
+      this.setState({
+        open: true,
+        content,
+        record,
+      });
+    } else {
+      debugger
+      this.setState({
+        open: true,
+        content,
+        confirm,
+        value: record,
+        record,
+      });
+    }
+    // this.confirmCallBack = confirm;
   }
   //   addmemberopen(content,confirm) {
   //   debugger;
@@ -81,7 +91,7 @@ export default class Addmember extends Component {
   Addbtn=()=> {
     this.refs.form.validateAll((errors, values) => {
       const _id = this.state.confirm;
-      const groupId = this.state.confirm;
+      const groupId = this.state.record.groupId;
       debugger;
       const addedit = !_id ? createUser : changeUser;
       addedit({
@@ -194,8 +204,8 @@ export default class Addmember extends Component {
             </div>
             <div style={styles.formItem}>
               <span style={styles.formLabel}>状态</span>
-              <FormBinder name="enabled">
-                <Switch value="" checked={content} />
+              <FormBinder name="status">
+                <Switch value="" defaultChecked={value.status} />
               </FormBinder>
               <p style={styles.prompt}>（是否禁用）</p>
             </div>
