@@ -86,7 +86,7 @@ export default class ChannelReconciliation extends Component {
   search() {
     const values = this.state.value;
     debugger;
-    /*    this.refs.linegraph.fetchData(values);*/
+    /*    this.refs.linegraph.fetchData(values); */
   }
   handlePaginationChange = (current) => {
     this.setState(
@@ -153,9 +153,6 @@ export default class ChannelReconciliation extends Component {
     const rowSelection = {
       onChange: this.Choice.bind(this),
       getProps: (record,index) => {
-        /* return {
-          disabled: record.id === 100306660942,
-        }; */
       },
     };
 
@@ -170,34 +167,34 @@ export default class ChannelReconciliation extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <Row wrap gutter="20" style={styles.formRow}>
+                  <Row wrap gutter="20">
                     <Col l="24">
                       <div style={styles.formItem}>
-                        <span style={styles.formLabel}>商户ID:</span>
+                        <span style={styles.formLabel}>商户ID：</span>
                         <FormBinder name="timeType"
                           autoWidth={false}
                         >
-                          <Input style={styles.formInput} placeholder='' />
+                          <Input style={styles.formSelect} placeholder='' />
                         </FormBinder>
                         <span style={styles.formLabel}>交易时间：</span>
                         <FormBinder name='startdate'>
-                          <RangePicker className='showHour' showTime resetTime />
+                          <RangePicker className='showHour' showTime resetTime style={styles.formTime} />
                         </FormBinder>
                         <span style={styles.formLabel}>商户订单号：</span>
                         <FormBinder name='orderStatus'>
-                          <Input style={styles.formInput} />
+                          <Input style={styles.formSelect} />
                         </FormBinder>
                       </div>
                     </Col>
                     <Col l="24">
                       <div style={styles.formItemTwo}>
-                        <span style={styles.formLabel}>支付渠道:</span>
+                        <span style={styles.formLabel}>支付渠道：</span>
                         <FormBinder name='payChannel'>
                           <Select style={styles.formSelect} dataSource={payChannel} />
                         </FormBinder>
                         <span style={styles.formLabel}>支付渠道流水号：</span>
                         <FormBinder name='out_trade_no'>
-                          <Input style={styles.formInput} className='input-bg' placeholder='' />
+                          <Input style={styles.formSelect} className='input-bg' placeholder='' />
                         </FormBinder>
                         <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                       </div>
@@ -235,7 +232,7 @@ export default class ChannelReconciliation extends Component {
                     current={current}
                     onChange={this.handlePaginationChange}
                   />
-                  <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+                  <Button className='btn-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
                 </div>
               </div>
             </div>
@@ -260,16 +257,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

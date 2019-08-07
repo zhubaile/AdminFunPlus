@@ -185,47 +185,79 @@ export default class interfaceDocument extends Component {
     return (
       <div className='interfaceDocument'>
         <Addmenu ref={(node=>this.addmenu = node)} />
-        <div className='currency-top'>
-          设备列表
-          <div className='currency-top-bottombor' />
-        </div>
-        <div className='interfaceDocument-main'>
-          <div className='interfaceDocument-main-top'>
-            <div className='left'>
-              <span>菜单名称：</span>
-              <input placeholder='请输入' />
+        <Tab shape='pure'>
+          <Tab.Item title="接口文档">
+            <div className='interfaceDocument-main'>
+              <div className='interfaceDocument-main-top'>
+                <div className='left'>
+                  <span style={styles.formLabel}>菜单名称：</span>
+                  <Input style={styles.formSelect} placeholder='请输入' />
+                </div>
+                <div className='right'>
+                  <Button className='btn-all' size='large' type='secondary' onClick={this.search.bind(this)}>搜索</Button>
+                  <Button className='btn-alls' size='large' type='secondary' onClick={this.addmenubtn.bind(this)}>添加菜单</Button>
+                </div>
+              </div>
+              <div className='interfaceDocument-main-content'>
+                <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+                  <Table.Column title="菜单名称" dataIndex="_id" />
+                  <Table.Column title="创建时间" dataIndex="todayFlow" />
+                  <Table.Column title="属性" dataIndex="yeTodayFlow" />
+                  <Table.Column title="描述 " dataIndex="totalFlow" />
+                  <Table.Column title="菜单等级" dataIndex="classify" />
+                  <Table.Column title="所属栏目" dataIndex="classify" />
+                  <Table.Column
+                    title="操作"
+                    width={200}
+                    dataIndex="oper"
+                    cell={this.renderOper}
+                  />
+                </Table>
+                <Pagination
+                  style={{ marginTop: '20px', textAlign: 'right' }}
+                  current={current}
+                  onChange={this.handlePaginationChange}
+                  pageSize={pageSize} // 界面展示多少条数据
+                  total={total}
+                />
+                <Button className='btn-all' size='large' type='primary' onClick={this.removes.bind(this)}>刪除</Button>
+              </div>
             </div>
-            <div className='right'>
-              <button onClick={this.search.bind(this)}>搜索</button>
-              <button onClick={this.addmenubtn.bind(this)}>添加菜单</button>
-            </div>
-          </div>
-          <div className='interfaceDocument-main-content'>
-            <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-              <Table.Column title="菜单名称" dataIndex="_id" />
-              <Table.Column title="创建时间" dataIndex="todayFlow" />
-              <Table.Column title="属性" dataIndex="yeTodayFlow" />
-              <Table.Column title="描述 " dataIndex="totalFlow" />
-              <Table.Column title="菜单等级" dataIndex="classify" />
-              <Table.Column title="所属栏目" dataIndex="classify" />
-              <Table.Column
-                title="操作"
-                width={200}
-                dataIndex="oper"
-                cell={this.renderOper}
-              />
-            </Table>
-            <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button>
-            <Pagination
-              style={{ marginTop: '20px', textAlign: 'right' }}
-              current={current}
-              onChange={this.handlePaginationChange}
-              pageSize={pageSize} // 界面展示多少条数据
-              total={total} // 一共多少条数据
-            />
-          </div>
-        </div>
+          </Tab.Item>
+        </Tab>
       </div>
     );
   }
 }
+const styles = {
+  divMargin: {
+    margin: '20px 0px',
+  },
+  formItem: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  formItemTwo: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '15px',
+  },
+  formLabel: {
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
+  },
+  formSelect: {
+    width: '200px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
+  },
+  delbtn: {
+    marginLeft: '20px',
+  },
+};

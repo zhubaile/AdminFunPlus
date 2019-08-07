@@ -127,35 +127,34 @@ export default class foreignAPI extends Component {
     console.log(this.state.datas);
     return (
       <div className='foreignAPI'>
-        <div className='currency-top'>
-          设备列表
-          <div className='currency-top-bottombor' />
-        </div>
-        <div className='foreignAPI-main'>
-
-          <div className='devicemanagement-main-content'>
-            <Table loading={isLoading} dataSource={datas} hasBorder={false}>
-              <Table.Column title="设备ID" dataIndex="_id" />
-              <Table.Column title="今日流水/笔" dataIndex="todayFlow" />
-              <Table.Column title="昨日流水/笔" dataIndex="yeTodayFlow" />
-              <Table.Column title="累计流水/笔" dataIndex="totalFlow" />
-              <Table.Column title="类型" dataIndex="classify" />
-              <Table.Column
-                title="操作"
-                width={200}
-                dataIndex="oper"
-                cell={this.renderOper}
-              />
-            </Table>
-            <Pagination
-              style={{ marginTop: '20px', textAlign: 'right' }}
-              current={current}
-              onChange={this.handlePaginationChange}
-              pageSize={pageSize} // 界面展示多少条数据
-              total={total} // 一共多少条数据
-            />
-          </div>
-        </div>
+        <Tab shape='pure'>
+          <Tab.Item title="对外API">
+            <div className='foreignAPI-main'>
+              <div className='foreignAPI-main-content'>
+                <Table loading={isLoading} dataSource={datas} hasBorder={false}>
+                  <Table.Column title="设备ID" dataIndex="_id" />
+                  <Table.Column title="今日流水/笔" dataIndex="todayFlow" />
+                  <Table.Column title="昨日流水/笔" dataIndex="yeTodayFlow" />
+                  <Table.Column title="累计流水/笔" dataIndex="totalFlow" />
+                  <Table.Column title="类型" dataIndex="classify" />
+                  <Table.Column
+                    title="操作"
+                    width={200}
+                    dataIndex="oper"
+                    cell={this.renderOper}
+                  />
+                </Table>
+                <Pagination
+                  style={{ marginTop: '20px', textAlign: 'right' }}
+                  current={current}
+                  onChange={this.handlePaginationChange}
+                  pageSize={pageSize} // 界面展示多少条数据
+                  total={total}
+                />
+              </div>
+            </div>
+          </Tab.Item>
+        </Tab>
       </div>
     );
   }

@@ -116,32 +116,64 @@ export default class interfaceaccess extends Component {
       <div className='interfaceaccess'>
         <Ippopup ref={node=>this.Ippopup = node} />
         <EditingList ref={node=>this.EditingList = node } />
-        <div className='currency-top'>
-          接口访问白名单
-          <div className='currency-top-bottombor' />
-        </div>
-        <div className='membermanagement-top'>
-          <span>企业名称：</span>
-          <Input hasClear placeholder='企业名称' ref={node=>this.enterprisename = node} />
-          <Button className='btn-all' style={{ marginLeft: '20px' }} size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
-        </div>
-        <div className='interfaceaccess-main'>
-          <div className='interfaceaccess-main-content'>
-            <Table loading={isLoading} dataSource={datas} hasBorder={false}>
-              <Table.Column title="应用ID" dataIndex="appId" cell={this.applicationid} />
-              <Table.Column title="企业名称" dataIndex="cpName" />
-              <Table.Column title="是否默认应用" dataIndex="default" />
-            </Table>
-            <Pagination
-              style={{ marginTop: '20px', textAlign: 'right' }}
-              current={current}
-              onChange={this.handlePaginationChange}
-              pageSize={pageSize} // 界面展示多少条数据
-              total={total}
-            />
-          </div>
-        </div>
+        <Tab shape='pure'>
+          <Tab.Item title="接口访问白名单">
+            <div className='membermanagement-top'>
+              <span style={styles.formLabel}>企业名称：</span>
+              <Input style={styles.formSelect} hasClear placeholder='企业名称' ref={node=>this.enterprisename = node} />
+              <Button className='btn-all' style={{ marginLeft: '20px' }} size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
+            </div>
+            <div className='interfaceaccess-main'>
+              <div className='interfaceaccess-main-content'>
+                <Table loading={isLoading} dataSource={datas} hasBorder={false}>
+                  <Table.Column title="应用ID" dataIndex="appId" cell={this.applicationid} />
+                  <Table.Column title="企业名称" dataIndex="cpName" />
+                  <Table.Column title="是否默认应用" dataIndex="default" />
+                </Table>
+                <Pagination
+                  style={{ marginTop: '20px', textAlign: 'right' }}
+                  current={current}
+                  onChange={this.handlePaginationChange}
+                  pageSize={pageSize} // 界面展示多少条数据
+                  total={total}
+                />
+              </div>
+            </div>
+          </Tab.Item>
+        </Tab>
       </div>
     );
   }
 }
+const styles = {
+  divMargin: {
+    margin: '20px 0px',
+  },
+  formItem: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  formItemTwo: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '15px',
+  },
+  formLabel: {
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
+  },
+  formSelect: {
+    width: '200px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
+  },
+  delbtn: {
+    marginLeft: '20px',
+  },
+};

@@ -241,7 +241,7 @@ export default class Enterprisepayment extends Component {
       <div className='expendordbat'>
         <Tab shape='pure' className='expendordbat-tab' defaultActiveKey='1'>
           <Tab.Item title="企业付款" key='1'>
-            <div>
+            <div className="expendordbat-top">
               <FormBinderWrapper
                 value={this.state.value}
                 onChange={this.formChange}
@@ -250,18 +250,18 @@ export default class Enterprisepayment extends Component {
                 <Row wrap gutter="20" style={styles.formRow}>
                   <Col l="24">
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>选择时间</span>
+                      <span style={styles.formLabel}>选择时间：</span>
                       <FormBinder name="timeType"
                         required
                         message="请输入正确的名称"
                         autoWidth={false}
                       >
-                        <Select style={styles.formSelect} dataSource={dateType} defaultValue='createdAt' />
+                        <Select style={styles.formSpecial} dataSource={dateType} defaultValue='createdAt' />
                       </FormBinder>
                       <FormBinder name='startdate'>
-                        <RangePicker showTime resetTime defaultValue={[startValue,endValue]} />
+                        <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
                       </FormBinder>
-                      <span style={styles.formLabel}>付款渠道</span>
+                      <span style={styles.formLabel}>付款渠道：</span>
                       <FormBinder name='payChannel'>
                         <Select style={styles.formSelect} dataSource={channel} />
                       </FormBinder>
@@ -269,17 +269,17 @@ export default class Enterprisepayment extends Component {
                   </Col>
                   <Col l="24">
                     <div style={styles.formItemTwo}>
-                      <span style={styles.formLabel}>付款状态</span>
+                      <span style={styles.formLabel}>付款状态：</span>
                       <FormBinder name='orderStatus'>
                         <Select style={styles.formSelect} dataSource={orderStatus} />
                       </FormBinder>
-                      <span style={styles.formLabel}>订单号</span>
+                      <span style={styles.formLabel}>订单号：</span>
                       <FormBinder name='out_trade_no'>
-                        <Input className='input-bg' placeholder='输入订单号' hasClear />
+                        <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                      <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
-                      <Button className='btn-all bg right' size="large" type="secondary">导出表格</Button>
+                      <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                      <Button className='btns-all' size="large" type="secondary">导出表格</Button>
                     </div>
                   </Col>
                 </Row>
@@ -314,7 +314,7 @@ export default class Enterprisepayment extends Component {
                 total={total} // 一共多少条数据
               />
             </IceContainer>
-            <Button className='btn-all orderposab' size='large' type='secondary'>发起单笔付款</Button>
+            <Button className='btns-all orderposab' size='large' type='secondary'>发起单笔付款</Button>
           </Tab.Item>
 
           <Tab.Item title="批量付款" key='2' onClick={this.btnTwo.bind(this)} >
@@ -350,13 +350,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
   },
   pagination: {
     marginTop: '20px',

@@ -220,7 +220,7 @@ export default class PaymentReview extends Component {
                 total={total}
                 onChange={this.handlePaginationChange}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btn-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </div>
         </div>

@@ -195,7 +195,7 @@ export default class RoutingRules extends Component {
                         <FormBinder name="channelId">
                           <Select style={styles.formSelect} dataSource={channellist} />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="primary" onClick={this.fetchData.bind(this)}>搜索</Button>
+                        <Button className='btn-all' size="large" type="primary" onClick={this.fetchData.bind(this)}>搜索</Button>
                       </div>
                     </Col>
                   </Row>
@@ -239,16 +239,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

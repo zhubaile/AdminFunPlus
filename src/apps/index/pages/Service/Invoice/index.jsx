@@ -211,63 +211,94 @@ export default class Invoice extends Component {
     return (
       <div className='invoice'>
         <Shipping ref={ node=>this.Shipping = node } fetchData={this.fetchData.bind(this)} />
-        <div className='currency-top'>
-          发票管理
-          <div className='currency-top-bottombor' />
-        </div>
-        <div className='invoice-main'>
-          <div className='invoice-main-top'>
-            <div className='left'>
-              <span>开票时间：</span>
-              <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} onChange={this.rangetime.bind(this)} />
-              <span style={{ marginLeft: '20px' }}>发票抬头：</span>
-              <Input placeholder='请输入发票抬头' ref={node=>this.input = node} />
-              {/* <Select style={{ width: '200px' }} name="fapiao" dataSource={list} /> */}
-            </div>
-            <div className='right'>
-              <button onClick={this.searchbtn.bind(this)}>查询</button>
-            </div>
-          </div>
+        <Tab shape='pure'>
+          <Tab.Item title="发票管理">
+            <div className='invoice-main'>
+              <div className='invoice-main-top'>
+                <div className='left'>
+                  <span>开票时间：</span>
+                  <RangePicker name='startdate' showTime resetTime defaultValue={[startValue,endValue]} onChange={this.rangetime.bind(this)} />
+                  <span style={{ marginLeft: '20px' }}>发票抬头：</span>
+                  <Input placeholder='请输入发票抬头' ref={node=>this.input = node} />
+                  {/* <Select style={{ width: '200px' }} name="fapiao" dataSource={list} /> */}
+                </div>
+                <div className='right'>
+                  <Button className='btn-all' size='large' type='primary' onClick={this.searchbtn.bind(this)}>查询</Button>
+                </div>
+              </div>
 
-          <div className='invoice-main-content'>
-            <Table
-              loading={isLoading}
-              dataSource={datas}
-              hasBorder={false}
-              // primaryKey='_id'
-              // rowSelection={rowSelection}
-            >
-              <Table.Column title="发票ID" dataIndex="invoiceNo" />
-              <Table.Column title="企业名称" dataIndex="cpName" />
-              <Table.Column title="企业税号" dataIndex="taxNumber" />
-              <Table.Column title="发票抬头" dataIndex="invoiceTitle" />
-              <Table.Column title="发票类型 " dataIndex="invoiceTypeName" />
-              {/*              <Table.Column title="订单号" dataIndex="classify" /> */}
-              <Table.Column title="开票金额" dataIndex="fee" />
-              <Table.Column title="开票时间" dataIndex="createdAt" cell={this.datatime} />
-              <Table.Column
-                title="状态"
-                dataIndex="invoiceStatusName"
-              />
-              <Table.Column
-                title="操作"
-                width={200}
-                dataIndex="operation"
-                cell={this.renderOper}
-              />
-            </Table>
-            {/* <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button> */}
-
-            <Pagination
-              style={{ marginTop: '20px', textAlign: 'right' }}
-              current={current}
-              onChange={this.handlePaginationChange}
-              pageSize={pageSize} // 界面展示多少条数据
-              total={total} // 一共多少条数据
-            />
-          </div>
-        </div>
+              <div className='invoice-main-content'>
+                <Table
+                  loading={isLoading}
+                  dataSource={datas}
+                  hasBorder={false}
+                  // primaryKey='_id'
+                  // rowSelection={rowSelection}
+                >
+                  <Table.Column title="发票ID" dataIndex="invoiceNo" />
+                  <Table.Column title="企业名称" dataIndex="cpId.cpName" />
+                  <Table.Column title="企业税号" dataIndex="cpId.cpBusinessNumber" />
+                  <Table.Column title="发票抬头" dataIndex="invoiceTitle" />
+                  <Table.Column title="发票类型 " dataIndex="invoiceTypeName" />
+                  {/*              <Table.Column title="订单号" dataIndex="classify" /> */}
+                  <Table.Column title="开票金额" dataIndex="fee" />
+                  <Table.Column title="开票时间" dataIndex="createdAt" cell={this.datatime} />
+                  <Table.Column
+                    title="状态"
+                    dataIndex="invoiceStatusName"
+                  />
+                  <Table.Column
+                    title="操作"
+                    width={200}
+                    dataIndex="operation"
+                    cell={this.renderOper}
+                  />
+                </Table>
+                {/* <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button> */}
+                <Pagination
+                  style={{ marginTop: '20px', textAlign: 'right' }}
+                  current={current}
+                  onChange={this.handlePaginationChange}
+                  pageSize={pageSize} // 界面展示多少条数据
+                  total={total}
+                />
+              </div>
+            </div>
+          </Tab.Item>
+        </Tab>
       </div>
     );
   }
 }
+const styles = {
+  divMargin: {
+    margin: '20px 0px',
+  },
+  formItem: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  formItemTwo: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '15px',
+  },
+  formLabel: {
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
+  },
+  formSelect: {
+    width: '200px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
+  },
+  delbtn: {
+    marginLeft: '20px',
+  },
+};

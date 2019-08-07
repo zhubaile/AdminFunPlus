@@ -146,14 +146,14 @@ export default class DaySummary extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <Row wrap gutter="20" style={styles.formRow}>
+                  <Row wrap gutter="20">
                     <Col l="24">
                       <div style={styles.formItem}>
-                        <span style={styles.formLabel}>商户ID:</span>
+                        <span style={styles.formLabel}>商户ID：</span>
                         <FormBinder name="timeType"
                           autoWidth={false}
                         >
-                          <Input style={styles.formInput} dataSource={timeType} />
+                          <Input style={styles.formSelect} dataSource={timeType} />
                         </FormBinder>
                         <span style={styles.formLabel}>所属行业：</span>
                         <FormBinder name='orderStatus'>
@@ -161,12 +161,12 @@ export default class DaySummary extends Component {
                         </FormBinder>
                         <span style={styles.formLabel}>支付渠道：</span>
                         <FormBinder name='payChannel'>
-                          <Select style={styles.formSelect} dataSource={payChannel} />
+                          <Select style={styles.formSpecial} dataSource={payChannel} />
                         </FormBinder>
                         <FormBinder name="device" >
-                          <Select style={{ width: '200px' }} dataSource={device} />
+                          <Select style={styles.formSelect} dataSource={device} />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary">对比其他时间</Button>
+                        <Button className='btns-all' size="large" type="secondary">对比其他时间</Button>
                         <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                       </div>
                     </Col>
@@ -226,16 +226,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

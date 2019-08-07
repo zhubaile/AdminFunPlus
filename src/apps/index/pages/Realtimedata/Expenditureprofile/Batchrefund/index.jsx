@@ -153,21 +153,21 @@ export default class Batchrefund extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <span style={styles.formLabel}>选择时间</span>
+                  <span style={styles.formLabel}>选择时间：</span>
                   <FormBinder name="dateType"
                     required
                     message="请输入正确的名称"
                     autoWidth={false}
                   >
-                    <Select style={styles.formSelect} dataSource={dateType} />
+                    <Select style={styles.formSpecial} dataSource={dateType} />
                   </FormBinder>
                   <FormBinder name='startdate'>
-                    <RangePicker showTime resetTime defaultValue={[startValue,endValue]} />
+                    <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
                   </FormBinder>
                 </FormBinderWrapper>
-                <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
-                <Button className='btn-all orderposab' size='large' type='secondary' >批量退款</Button>
+                <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                <Button className='btns-all orderposab' size='large' type='secondary' >批量退款</Button>
               </div>
               {/* <div className='expendordbat-tabs-border' /> */}
               <hr />
@@ -215,13 +215,19 @@ const styles = {
     margin: '10px 0',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
   },
   pagination: {
     marginTop: '20px',

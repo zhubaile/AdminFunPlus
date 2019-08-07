@@ -89,7 +89,9 @@ export default class RealtimedataIncome extends Component {
         incomeList({
           page,
           pageSize,
+          ...len,
         }).then(({ status,data })=>{
+          debugger;
           if (data.errCode == 0) {
             const rrr = data.data.result2;
             const result2 = rrr.channel;
@@ -138,9 +140,11 @@ export default class RealtimedataIncome extends Component {
   };
 
 
-  formChange=(value)=>{
-    debugger;
-  }
+  formChange = (value) => {
+    this.setState({
+      value,
+    });
+  };
 
   // 获取到选中的数据
   Choice(args) {
@@ -215,7 +219,7 @@ export default class RealtimedataIncome extends Component {
   render() {
     const { isLoading, data, current,pageSize,total,result,result1,result2 } = this.state;
     const timeType = result2.dateType; // 选择时间下拉框
-    const orderStatus = result2.orderStatus; // 退款状态
+    const orderStatus = result2.orderStatus; // 支付状态
     const channel = result2.channel; // 支付渠道
     const device = this.state.value.device;
     const rowSelection = {
@@ -237,8 +241,8 @@ export default class RealtimedataIncome extends Component {
                 <div>支付成功率：{result1.successRate}</div>
               </div>
               <div className='income-tabs rightbtn'>
-                <Button className='btn-all bg' size="large" type="secondary" disabled style={{ opacity: 0.5 }}>表格列过滤</Button>
-                <Button className='btn-all bg' size="large" type="secondary" onClick={this.exportexcelbtn.bind(this)}>导出结果为表格</Button>
+                <Button className='btns-all bg' size="large" type="secondary" disabled style={{ opacity: 0.5 }}>表格列过滤</Button>
+                <Button className='btns-all bg' size="large" type="secondary" onClick={this.exportexcelbtn.bind(this)}>导出结果为表格</Button>
                 <a href='javascript:;' ref={(node)=>{ this.btna = node; }} style={{ display: 'none' }} />
               </div>
             </div>
@@ -253,20 +257,20 @@ export default class RealtimedataIncome extends Component {
                   <Row wrap gutter="20" style={styles.formRow}>
                     <Col l="24">
                       <div style={styles.formItem}>
-                        <span style={styles.formLabel}>选择时间</span>
+                        <span style={styles.formLabel}>选择时间：</span>
                         <FormBinder name="timeType"
                           autoWidth={false}
                         >
-                          <Select style={styles.formSelect} dataSource={timeType} />
+                          <Select style={styles.formSpecial} dataSource={timeType} />
                         </FormBinder>
                         <FormBinder name='startdate'>
-                          <RangePicker className='showHour' showTime resetTime />
+                          <RangePicker style={styles.formTime} className='showHour' showTime resetTime />
                         </FormBinder>
-                        <span style={styles.formLabel}>支付状态</span>
+                        <span style={styles.formLabel}>支付状态：</span>
                         <FormBinder name='orderStatus'>
                           <Select style={styles.formSelect} dataSource={orderStatus} />
                         </FormBinder>
-                        <span style={styles.formLabel}>退款状态</span>
+                        <span style={styles.formLabel}>退款状态：</span>
                         <FormBinder name='refundStatus'>
                           <Select style={styles.formSelect} dataSource='' />
                         </FormBinder>
@@ -274,16 +278,16 @@ export default class RealtimedataIncome extends Component {
                     </Col>
                     <Col l="24">
                       <div style={styles.formItemTwo}>
-                        <span style={styles.formLabel}>支付渠道</span>
+                        <span style={styles.formLabel}>支付渠道：</span>
                         <FormBinder name='channel'>
-                          <Select style={styles.formSelect} dataSource={channel} onChange={this.Accesschannels.bind(this)} />
+                          <Select style={styles.formSpecial} dataSource={channel} onChange={this.Accesschannels.bind(this)} />
                         </FormBinder>
                         <FormBinder name="device" >
-                          <Select style={{ width: '200px' }} dataSource={device} />
+                          <Select style={styles.formSelect} dataSource={device} />
                         </FormBinder>
-                        <span style={styles.formLabel}>订单号</span>
+                        <span style={styles.formLabel}>订单号：</span>
                         <FormBinder name='out_trade_no'>
-                          <Input className='input-bg' placeholder='输入订单号' />
+                          <Input style={styles.formSelect} placeholder='输入订单号' />
                         </FormBinder>
                         <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                         <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
@@ -304,8 +308,8 @@ export default class RealtimedataIncome extends Component {
                       dataIndex=""
                       cell={this.renderSelectall}
                     /> */}
-                    <Table.Column title="商户ID" dataIndex="cpId" />
-                    <Table.Column title="企业名称" dataIndex="cpName" />
+                    <Table.Column title="商户ID" dataIndex="cpId._id" />
+                    <Table.Column title="企业名称" dataIndex="cpId.cpName" />
                     <Table.Column title="创建时间" dataIndex="createdAt" onClick={this.createdAt} />
                     <Table.Column title="完成时间" dataIndex="updatedAt" onClick={this.updatedAt} />
                     <Table.Column title="商户订单号" dataIndex="out_trade_no" />
@@ -330,7 +334,7 @@ export default class RealtimedataIncome extends Component {
                     pageSize={pageSize} // 界面展示多少条数据
                     total={total} // 一共多少条数据
                   />
-                  <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+                  <Button className='btns-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
                 </div>
               </div>
             </div>
@@ -355,13 +359,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

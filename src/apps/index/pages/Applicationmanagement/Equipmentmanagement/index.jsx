@@ -204,7 +204,7 @@ export default class EquipmentManagement extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <Row wrap gutter="20" style={styles.formRow}>
+                <Row wrap gutter="20">
                   <Col l="24">
                     <div style={styles.formItem}>
                       {/*  <span style={styles.formLabel}>商户ID:</span>
@@ -219,7 +219,7 @@ export default class EquipmentManagement extends Component {
                       <FormBinder name="name">
                         <Input style={styles.formInput} />
                       </FormBinder> */}
-                      <Button className='btn-all bg' size="large" type="primary" onClick={this.searchBtn.bind(this)}>搜索设备</Button>
+                      <Button className='btns-all' size="large" type="primary" onClick={this.searchBtn.bind(this)}>搜索设备</Button>
                       {/*   <Button className='btn-all bg' size="large" type="secondary" onClick={this.grouplist.bind(this)}>分组列表</Button>
                       <Button className='btn-all bg' size="large" type="secondary" onClick={this.groupingopen.bind(this)}>编辑分组</Button>
                       <div className={this.state.toplist ? ('devicemanagement-top-list opicty') : ('devicemanagement-top-list')} >
@@ -276,16 +276,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

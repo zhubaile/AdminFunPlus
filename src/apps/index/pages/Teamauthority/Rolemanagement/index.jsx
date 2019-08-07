@@ -150,19 +150,19 @@ export default class Rolemanagement extends Component {
                 <Row wrap gutter="20" style={styles.formRow}>
                   <Col l="24">
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>商户ID:</span>
+                      <span style={styles.formLabel}>商户ID：</span>
                       <FormBinder name="cpId"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} />
+                        <Input style={styles.formSelect} />
                       </FormBinder>
-                      <span style={styles.formLabel}>企业名称:</span>
+                      <span style={styles.formLabel}>企业名称：</span>
                       <FormBinder name="cpName"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} />
+                        <Input style={styles.formSelect} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size='large' type='primary' onClick={this.search.bind(this)}>搜索</Button>
                       {/* <Button className='btn-all bg' size="large" type="secondary" onClick={this.newroleBtnOpen.bind(this)}>新增角色</Button> */}
                     </div>
                   </Col>
@@ -177,8 +177,8 @@ export default class Rolemanagement extends Component {
                   dataIndex=""
                   cell={this.renderSelectall}
                 /> */}
-                <Table.Column title="商户ID" dataIndex="cpId" />
-                <Table.Column title="企业名称" dataIndex="cpName" />
+                <Table.Column title="商户ID" dataIndex="cpId._id" />
+                <Table.Column title="企业名称" dataIndex="cpId.cpName" />
                 {/* <Table.Column title="姓名" dataIndex="time" /> */}
                 <Table.Column title="角色名称" dataIndex="description" />
                 <Table.Column title="描述" dataIndex="notes" />
@@ -194,7 +194,7 @@ export default class Rolemanagement extends Component {
                 total={total}
                 onChange={this.handlePaginationChange}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btn-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
         </Tab>
@@ -214,16 +214,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

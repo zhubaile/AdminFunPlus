@@ -284,7 +284,7 @@ const styles = {
   },
   forminput: {
     width: '200px',
-    marginLeft: '20px',
+    marginRight: '10px',
   },
 };
 

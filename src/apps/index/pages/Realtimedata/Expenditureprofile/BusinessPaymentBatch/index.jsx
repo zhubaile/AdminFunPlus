@@ -146,7 +146,7 @@ export default class BusinessPaymentBatch extends Component {
     const { isLoading, datas, current,pageSize,total,results2 } = this.state;
     const dataType = results2.dateType;
     const channel = results2.channel;
-/*    debugger;*/
+    /*    debugger; */
     const paymentchannel = [
       { value: '全部', label: '全部' },
       { value: '支付宝wap', label: '支付宝wap' },
@@ -166,27 +166,27 @@ export default class BusinessPaymentBatch extends Component {
 
           <Tab.Item title="批量付款" key='2'>
             <div>
-              <div>
+              <div className="expendordbat-top">
                 <FormBinderWrapper
                   value={this.state.value}
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <Row wrap gutter="20" style={styles.formRow}>
+                  <Row wrap gutter="20">
                     <Col l="24">
                       <div style={styles.formItem}>
-                        <span style={styles.formLabel}>选择时间</span>
+                        <span style={styles.formLabel}>选择时间：</span>
                         <FormBinder name="timeType"
                           required
                           message="请输入正确的名称"
                           autoWidth={false}
                         >
-                          <Select style={styles.formSelect} dataSource={dataType} />
+                          <Select style={styles.formSpecial} dataSource={dataType} />
                         </FormBinder>
                         <FormBinder name='startdate'>
-                          <RangePicker showTime resetTime defaultValue={[startValue,endValue]} />
+                          <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
                         </FormBinder>
-                        <span style={styles.formLabel}>付款渠道</span>
+                        <span style={styles.formLabel}>付款渠道：</span>
                         <FormBinder name='payChannel'>
                           <Select style={styles.formSelect} dataSource={channel} />
                         </FormBinder>
@@ -194,16 +194,16 @@ export default class BusinessPaymentBatch extends Component {
                     </Col>
                     <Col l="24">
                       <div style={styles.formItemTwo}>
-                         <span style={styles.formLabel}>付款状态</span>
+                        <span style={styles.formLabel}>付款状态：</span>
                         <FormBinder name='orderStatus'>
                           <Select style={styles.formSelect} dataSource={orderStatus} />
                         </FormBinder>
-                        <span style={styles.formLabel}>批次号</span>
+                        <span style={styles.formLabel}>批次号：</span>
                         <FormBinder name='batchNo'>
-                          <Input className='input-bg' placeholder='输入订单号' hasClear />
+                          <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                        <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                        <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
                       </div>
                     </Col>
                   </Row>
@@ -234,7 +234,7 @@ export default class BusinessPaymentBatch extends Component {
                   total={total} // 一共多少条数据
                 />
               </IceContainer>
-              <Button className='btn-all orderposab' size='large' type='secondary'>批量企业付款</Button>
+              <Button className='btns-all orderposab' size='large' type='secondary'>批量企业付款</Button>
             </div>
           </Tab.Item>
 
@@ -266,13 +266,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
   },
   pagination: {
     marginTop: '20px',

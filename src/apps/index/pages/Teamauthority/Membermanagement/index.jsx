@@ -84,7 +84,7 @@ export default class Membermanagement extends Component {
   /*  renderStatus = (datas) => {
       return (
         <div>
-          <Radio id="enabled" value="enabled" checked={datas.enabled} >{datas.enabledName}</Radio>
+          <Radio id="status" value="status" checked={datas.status} >{datas.statusName}</Radio>
         </div>
       );
     }; */
@@ -227,24 +227,24 @@ export default class Membermanagement extends Component {
                     <div style={styles.formItem}>
                       <span style={styles.formLabel}>商户ID：</span>
                       <FormBinder name="cpId">
-                        <Input style={styles.formInput} />
+                        <Input style={styles.formSelect} />
                       </FormBinder>
-                      <span style={styles.formLabel}>企业名称:</span>
+                      <span style={styles.formLabel}>企业名称：</span>
                       <FormBinder name="cpName"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} />
+                        <Input style={styles.formSelect} />
                       </FormBinder>
-                      <span style={styles.formLabel}>角色名称:</span>
+                      <span style={styles.formLabel}>角色名称：</span>
                       <FormBinder name="roleName"
                         autoWidth={false}
                       >
-                        <Select mode="multiple" style={styles.formSelect} dataSource={roleName} />
+                        <Select mode="multiple" style={styles.formSpecial} dataSource={roleName} />
                       </FormBinder>
                       <FormBinder name="keyword" autoWidth={false}>
-                        <Input hasClear placeholder='支持姓名邮箱手机号' style={styles.formInput} />
+                        <Input hasClear placeholder='支持姓名邮箱手机号' style={styles.formSelect} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
                       {/* <Button className='btn-all bg' size="large" type="secondary" onClick={this.addmemberBtnOpen.bind(this)}>添加成员</Button> */}
                     </div>
                   </Col>
@@ -253,8 +253,8 @@ export default class Membermanagement extends Component {
             </div>
             <div className='membermanagement-panel'>
               <Table loading={isLoading} dataSource={result} hasBorder={false} primaryKey='_id' rowSelection={rowSelection }>
-                <Table.Column title="商户ID" dataIndex="cpId" />
-                <Table.Column title="企业名称" dataIndex="cpName" />
+                <Table.Column title="商户ID" dataIndex="cpId._id" />
+                <Table.Column title="企业名称" dataIndex="cpId.cpName" />
                 <Table.Column title="姓名" dataIndex="name" />
                 <Table.Column title="用户名" dataIndex="username" />
                 <Table.Column title="联系方式" dataIndex="phone" />
@@ -274,7 +274,7 @@ export default class Membermanagement extends Component {
                 pageSize={pageSize}
                 total={total}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btn-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
         </Tab>
@@ -294,16 +294,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

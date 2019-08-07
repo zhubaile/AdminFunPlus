@@ -194,23 +194,22 @@ export default class Userapilog extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <Row wrap gutter="20" style={styles.formRow}>
+                <Row wrap gutter="20">
                   <Col l="24">
                     <div style={styles.formItem}>
-
                       <span style={styles.formLabel}>请求时间：</span>
                       <FormBinder name='refundStatus'>
-                        <RangePicker style={styles.formInput} />
+                        <RangePicker style={styles.formSelect} />
                       </FormBinder>
                       <span style={styles.formLabel}>请求状态：</span>
                       <FormBinder name="device" >
-                        <Select style={{ width: '200px' }} dataSource={device} />
+                        <Select style={styles.formSelect} dataSource={device} />
                       </FormBinder>
                       <span style={styles.formLabel}>请求IP：</span>
                       <FormBinder name='out_trade_no'>
-                        <Input className='' placeholder='请输入' />
+                        <Input style={styles.formSelect} placeholder='请输入' />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索</Button>
+                      <Button className='btn-all' size="large" type="primary">搜索</Button>
                     </div>
                   </Col>
                 </Row>
@@ -240,7 +239,7 @@ export default class Userapilog extends Component {
                 current={current}
                 onChange={this.handlePaginationChange}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btn-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
         </Tab>
@@ -263,16 +262,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

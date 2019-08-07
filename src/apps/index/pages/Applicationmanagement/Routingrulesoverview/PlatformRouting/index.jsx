@@ -152,13 +152,13 @@ export default class PlatformRouting extends Component {
                 <Row wrap gutter="20" style={styles.formRow}>
                   <Col l="24">
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>商户ID:</span>
+                      <span style={styles.formLabel}>商户ID：</span>
                       <FormBinder name="merchantId"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} />
+                        <Input style={styles.formSelect} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索</Button>
+                      <Button className='btn-all' size="large" type="primary">搜索</Button>
                     </div>
                   </Col>
                 </Row>
@@ -183,7 +183,7 @@ export default class PlatformRouting extends Component {
                 current={current}
                 onChange={this.handlePaginationChange}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btns-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
         </Tab>
@@ -203,16 +203,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

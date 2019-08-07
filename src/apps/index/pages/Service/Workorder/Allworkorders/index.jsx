@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table,Button,Input,Grid ,DatePicker,Pagination,Message,Select } from '@alifd/next';
+import { Table,Button,Input,Grid ,DatePicker,Pagination,Message,Select,Tab } from '@alifd/next';
 import { Link } from 'react-router-dom';
 // import Nav from '../components/Nav';
 // import Administrators from '../../Personal/components/Administrators/Administrators';
@@ -213,74 +213,71 @@ export default class Allworkorders extends Component {
       { value: '4',label: '已存档' },
     ];
     return (
-      <div className='backstageworkorder'>
-        {/* <Nav defaultActiveKey='2' history={this.props.history} /> */}
-        <div className='wodegongdan'>
-          <div className='wodegongdan-top'>
-            <span>全部工单</span>
-            <div className='wodegongdan-top-border' />
-          </div>
-          <div className='wodegongdan-conter'>
-            <FormBinderWrapper
-              value={this.state.value}
-              onChange={this.formChange}
-              ref="form"
-            >
-              <Row wrap gutter="20">
-                <Col l="24">
-                  <div className='wodegongdan-conter-main'>
-                    <span>企业名称：</span>
-                    <FormBinder name='companyName'>
-                      <Input placeholder='请输入企业名称 ' hasClear />
-                    </FormBinder>
-                    <span>操作时间：</span>
-                    <FormBinder name='operationtime'>
-                      {/* <DatePicker /> */}
-                      <RangePicker />
-                      {/* <RangePicker showTime resetTime defaultValue={[startValue,endValue]} /> defaultValue={startValue}  */}
-                    </FormBinder>
-                    <span>工单编号：</span>
-                    <FormBinder name='_id'>
-                      <Input placeholder='输入编号' hasClear />
-                    </FormBinder>
-                    <span>工单状态：</span>
-                    <FormBinder name='status'>
-                      {/* dataSource={orderStatus} */}
-                      <Select style={styles.formSelect} dataSource={status} />
-                    </FormBinder>
-                    <button className='searchbtn' onClick={this.searchbtn.bind(this)}>搜索</button>
-                    <button className='searchbtn' onClick={this.resetbtn.bind(this)}>重置</button>
-                  </div>
-                </Col>
-              </Row>
-            </FormBinderWrapper>
-          </div>
-          <div className='wodegongdan-footer'>
-            <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-              <Table.Column title="工单编号" dataIndex="_id" />
-              <Table.Column title="描述" dataIndex="description" />
-              <Table.Column title="优先级" dataIndex="level" />
-              <Table.Column title="企业名称" dataIndex="companyName" />
-              <Table.Column title="提交账号" dataIndex="account" />
-              <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} />
-              <Table.Column title="创建时间" dataIndex="createdAt" cell={this.time} />
-              <Table.Column
-                title="操作"
-                width={200}
-                dataIndex="oper"
-                cell={this.renderOper}
+      <div className='wodegongdan'>
+        <Tab shape='pure'>
+          <Tab.Item title="全部工单">
+            <div className='wodegongdan-conter'>
+              <FormBinderWrapper
+                value={this.state.value}
+                onChange={this.formChange}
+                ref="form"
+              >
+                <Row wrap gutter="20">
+                  <Col l="24">
+                    <div className='wodegongdan-conter-main'>
+                      <span style={styles.formLabel}>企业名称：</span>
+                      <FormBinder name='companyName'>
+                        <Input style={styles.formSelect} placeholder='请输入企业名称 ' hasClear />
+                      </FormBinder>
+                      <span style={styles.formLabel}>操作时间：</span>
+                      <FormBinder name='operationtime'>
+                        {/* <DatePicker /> */}
+                        <RangePicker style={styles.formTime} />
+                        {/* <RangePicker showTime resetTime defaultValue={[startValue,endValue]} /> defaultValue={startValue}  */}
+                      </FormBinder>
+                      <span style={styles.formLabel}>工单编号：</span>
+                      <FormBinder name='_id'>
+                        <Input style={styles.formSelect} placeholder='输入编号' hasClear />
+                      </FormBinder>
+                      <span style={styles.formLabel}>工单状态：</span>
+                      <FormBinder name='status'>
+                        {/* dataSource={orderStatus} */}
+                        <Select style={styles.formSelect} dataSource={status} />
+                      </FormBinder>
+                      <Button className='btn-all' size='large' type='primary' onClick={this.searchbtn.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size='large' type='primary' onClick={this.resetbtn.bind(this)}>重置</Button>
+                    </div>
+                  </Col>
+                </Row>
+              </FormBinderWrapper>
+            </div>
+            <div className='wodegongdan-footer'>
+              <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
+                <Table.Column title="工单编号" dataIndex="_id" />
+                <Table.Column title="描述" dataIndex="description" />
+                <Table.Column title="优先级" dataIndex="level" />
+                <Table.Column title="企业名称" dataIndex="companyName" />
+                <Table.Column title="提交账号" dataIndex="account" />
+                <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} />
+                <Table.Column title="创建时间" dataIndex="createdAt" cell={this.time} />
+                <Table.Column
+                  title="操作"
+                  width={200}
+                  dataIndex="oper"
+                  cell={this.renderOper}
+                />
+              </Table>
+              <Button className='btn-all' size='large' type='primary' onClick={this.removes.bind(this)}>刪除</Button>
+              <Pagination
+                style={styles.pagination}
+                current={current}
+                onChange={this.handlePaginationChange}
+                pageSize={pageSize} // 界面展示多少条数据
+                total={total}
               />
-            </Table>
-            <button className='removebtn' onClick={this.removes.bind(this)}>刪除</button>
-            <Pagination
-              style={styles.pagination}
-              current={current}
-              onChange={this.handlePaginationChange}
-              pageSize={pageSize} // 界面展示多少条数据
-              total={total} // 一共多少条数据
-            />
-          </div>
-        </div>
+            </div>
+          </Tab.Item>
+        </Tab>
       </div>
     );
   }
@@ -290,7 +287,19 @@ const styles = {
     marginTop: '20px',
     textAlign: 'right',
   },
+  formLabel: {
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
+  },
   formSelect: {
     width: '200px',
+    marginRight: '25px',
+  },
+  formTime: {
+    marginRight: '25px',
   },
 };

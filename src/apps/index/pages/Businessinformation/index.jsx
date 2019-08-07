@@ -231,22 +231,22 @@ export default class Businessinformation extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <Row wrap gutter="20" style={styles.formRow}>
+                <Row wrap gutter="20">
                   <Col l="24">
                     <div style={styles.formItem}>
                       <span style={styles.formLabel}>商户ID：</span>
                       <FormBinder name="id"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} placeholder='' />
+                        <Input style={styles.formSelect} placeholder='' />
                       </FormBinder>
                       <span style={styles.formLabel}>企业名称：</span>
                       <FormBinder name='cpName'>
-                        <Input style={styles.formInput} placeholder='' />
+                        <Input style={styles.formSelect} placeholder='' />
                       </FormBinder>
                       <span style={styles.formLabel}>法人姓名：</span>
                       <FormBinder name='linkName'>
-                        <Input style={styles.formInput} placeholder='' />
+                        <Input style={styles.formSelect} placeholder='' />
                       </FormBinder>
                     </div>
                   </Col>
@@ -258,14 +258,14 @@ export default class Businessinformation extends Component {
                       </FormBinder>
                       <span style={styles.formLabel}>手机号：</span>
                       <FormBinder name='linkPhone'>
-                        <Input className='input-bg' placeholder='' />
+                        <Input style={styles.formSelect} className='input-bg' placeholder='' />
                       </FormBinder>
                       <span style={styles.formLabel}>状态：</span>
                       <FormBinder name='frozenState' >
-                        <Select style={{ width: '200px' }} dataSource={device} />
+                        <Select style={styles.formSelect} dataSource={device} />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
-                      <Button className='btn-all bg' size="large" type="primary" style={{ opacity: '0.5' }} onClick={this.resetbtn.bind(this)}>重置</Button>
+                      <Button className='btn-all' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size="large" type="primary" style={{ opacity: '0.5' }} onClick={this.resetbtn.bind(this)}>重置</Button>
                     </div>
                   </Col>
                 </Row>
@@ -294,7 +294,7 @@ export default class Businessinformation extends Component {
                 pageSize={pageSize}
                 total={total}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btns-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
         </Tab>
@@ -317,16 +317,12 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
-  },
-  formInput: {
-    margin: '0 10px',
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

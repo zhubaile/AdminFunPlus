@@ -179,15 +179,15 @@ export default class Operationlog extends Component {
                       <FormBinder name="username"
                         autoWidth={false}
                       >
-                        <Input style={styles.formInput} />
+                        <Input style={styles.formSelect} />
                       </FormBinder>
                       <span style={styles.formLabel}>操作时间:</span>
                       <FormBinder name="startdate"
                         autoWidth={false}
                       >
-                        <RangePicker style={styles.formInput} showTime resetTime />
+                        <RangePicker style={styles.formTime} showTime resetTime />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
                     </div>
                   </Col>
                 </Row>
@@ -227,16 +227,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

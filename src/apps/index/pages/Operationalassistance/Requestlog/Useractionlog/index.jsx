@@ -197,41 +197,28 @@ export default class Useractionlog extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <Row wrap gutter="20" style={styles.formRow}>
+                <Row wrap gutter="20">
                   <Col l="24">
                     <div style={styles.formItem}>
                       <span style={styles.formLabel}>商户ID：</span>
                       <FormBinder name="timeType"
                         autoWidth={false}
                       >
-                        <Input placeholder='请输入' />
+                        <Input style={styles.formSelect} placeholder='请输入' />
                       </FormBinder>
                       <span style={styles.formLabel}>企业名称：</span>
                       <FormBinder name='refundStatus'>
-                        <Input placeholder='请输入' />
+                        <Input style={styles.formSelect} placeholder='请输入' />
                       </FormBinder>
-                      {/*                      <span style={styles.formLabel}>法人姓名：</span>
-                      <FormBinder name='orderStatus'>
-                        <Input style={styles.formInput} placeholder='' />
-                      </FormBinder> */}
-                    </div>
-                  </Col>
-                  <Col l="24">
-                    <div style={styles.formItemTwo}>
-                      {/*                      <span style={styles.formLabel}>所属行业：</span>
-                      <FormBinder name='payChannel'>
-                        <Select style={styles.formSelect} dataSource={payChannel} />
-                      </FormBinder> */}
                       <span style={styles.formLabel}>应用ID：</span>
                       <FormBinder name='out_trade_no'>
-                        <Input placeholder='请输入' />
+                        <Input style={styles.formSelect} placeholder='请输入' />
                       </FormBinder>
                       <span style={styles.formLabel}>IP地址：</span>
                       <FormBinder name="device" >
-                        <Input placeholder='请输入' />
+                        <Input style={styles.formSelect} placeholder='请输入' />
                       </FormBinder>
-                      <Button className='btn-all bg' size="large" type="primary">搜索</Button>
-                      {/*                      <Button className='btn-all bg' size="large" type="primary" style={{ opacity: '0.5' }}>重置</Button> */}
+                      <Button className='btn-all' size="large" type="primary">搜索</Button>
                     </div>
                   </Col>
                 </Row>
@@ -264,7 +251,7 @@ export default class Useractionlog extends Component {
                 current={current}
                 onChange={this.handlePaginationChange}
               />
-              <Button className='' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
+              <Button className='btn-all' size='large' type='primary' style={styles.delbtn} onClick={this.removes.bind(this)}>删除</Button>
             </div>
           </Tab.Item>
           <Tab.Item title="用户API日志" onClick={this.tabBtn.bind(this)}></Tab.Item>
@@ -288,16 +275,19 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',

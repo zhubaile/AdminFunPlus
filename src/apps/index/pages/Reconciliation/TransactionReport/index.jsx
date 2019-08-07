@@ -1,6 +1,6 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
-import { Grid, DatePicker, Select, Input, Button,Calendar } from '@alifd/next';
+import { Grid, DatePicker, Select, Input, Button,Calendar,Tab } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import '../../index.css';
 import moment from 'moment';
@@ -82,76 +82,76 @@ export default class TransactionReport extends Component {
   render() {
     return (
       <div className='transactionreport'>
-        <div className='transactionreport-top'>
-          <span>交易报表</span>
-          <div className='transactionreport-top-border' />
-        </div>
-        <div className='transactionreport-content'>
-          <div className='daysummary-top'>
-            <FormBinderWrapper
-              value={this.state.value}
-              onChange={this.formChange}
-              ref="form"
-            >
-              <Row wrap gutter="20" style={styles.formRow}>
-                <Col l="24">
-                  <div style={styles.formItem}>
-                    <span style={styles.formLabel}>商户ID:</span>
-                    <FormBinder name="merchantId"
-                                autoWidth={false}
-                    >
-                      <Input style={styles.formInput} />
-                    </FormBinder>
-                    <span style={styles.formLabel}>企业名称:</span>
-                    <FormBinder name="name"
-                                autoWidth={false}
-                    >
-                      <Input style={styles.formInput} />
-                    </FormBinder>
-                    <FormBinder name='startdate'>
-                      <RangePicker className='showHour' showTime resetTime />
-                    </FormBinder>
-                    <Button className='btn-all bg' size="large" type="secondary">查询</Button>
-                    <Button className='btn-all bg' size="large" type="secondary">月报表下载</Button>
-                    <Button className='btn-all bg' size="large" type="secondary">日报表下载</Button>
-                  </div>
-                </Col>
-              </Row>
-            </FormBinderWrapper>
-          </div>
-          <div className='transactionreport-content-top'>
-            <ul>
-              <li>
-                <span className='kexiazai' />
-                <span>可下载</span>
-              </li>
-              <li>
-                <span className='weishengcheng' />
-                <span>未生成</span>
-              </li>
-              <li>
-                <span className='wujiaoyi' />
-                <span>无交易</span>
-              </li>
-              <li>
-                <span className='youchacuo' />
-                <span>有差错未解决</span>
-              </li>
-              <li>
-                <span className='duizhangwanbi' />
-                <span>对账完毕</span>
-              </li>
-            </ul>
-          </div>
-          <div className='transactionreport-content-calendar'>
-            <Calendar style={{ width: '900px', padding: '12px', border: '1px solid #C4C6CF', borderRadius: '3px' }}
-              shape="fullscreen"
-              onVisibleMonthChange={this.onMonthCellRender.bind(this)}
-              dateCellRender={this.dateCellRender.bind(this)}
-              monthCellRender={this.monthCellRender.bind(this)}
-            />
-          </div>
-        </div>
+        <Tab shape='pure'>
+          <Tab.Item title="交易报表">
+            <div className='transactionreport-content'>
+              <div className='daysummary-top'>
+                <FormBinderWrapper
+                  value={this.state.value}
+                  onChange={this.formChange}
+                  ref="form"
+                >
+                  <Row wrap gutter="20" style={styles.formRow}>
+                    <Col l="24">
+                      <div style={styles.formItem}>
+                        <span style={styles.formLabel}>商户ID：</span>
+                        <FormBinder name="merchantId"
+                          autoWidth={false}
+                        >
+                          <Input style={styles.formSelect} />
+                        </FormBinder>
+                        <span style={styles.formLabel}>企业名称：</span>
+                        <FormBinder name="name"
+                          autoWidth={false}
+                        >
+                          <Input style={styles.formSpecial} />
+                        </FormBinder>
+                        <FormBinder name='startdate'>
+                          <RangePicker style={styles.formTime} className='showHour' showTime resetTime />
+                        </FormBinder>
+                        <Button className='btn-all bg' size="large" type="secondary">查询</Button>
+                        <Button className='btns-all' size="large" type="secondary">月报表下载</Button>
+                        <Button className='btns-all' size="large" type="secondary">日报表下载</Button>
+                      </div>
+                    </Col>
+                  </Row>
+                </FormBinderWrapper>
+              </div>
+              <div className='transactionreport-content-top'>
+                <ul>
+                  <li>
+                    <span className='kexiazai' />
+                    <span>可下载</span>
+                  </li>
+                  <li>
+                    <span className='weishengcheng' />
+                    <span>未生成</span>
+                  </li>
+                  <li>
+                    <span className='wujiaoyi' />
+                    <span>无交易</span>
+                  </li>
+                  <li>
+                    <span className='youchacuo' />
+                    <span>有差错未解决</span>
+                  </li>
+                  <li>
+                    <span className='duizhangwanbi' />
+                    <span>对账完毕</span>
+                  </li>
+                </ul>
+              </div>
+              <div className='transactionreport-content-calendar'>
+                <Calendar style={{ width: '900px', padding: '12px', border: '1px solid #C4C6CF', borderRadius: '3px' }}
+                  shape="fullscreen"
+                  onVisibleMonthChange={this.onMonthCellRender.bind(this)}
+                  dateCellRender={this.dateCellRender.bind(this)}
+                  monthCellRender={this.monthCellRender.bind(this)}
+                />
+              </div>
+            </div>
+          </Tab.Item>
+        </Tab>
       </div>
     );
   }
@@ -168,15 +168,18 @@ const styles = {
     marginTop: '15px',
   },
   formLabel: {
-    minWidth: '80px',
-    marginLeft: '10px',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginRight: '5px',
+  },
+  formSpecial: {
+    width: '200px',
+    marginRight: '10px',
   },
   formSelect: {
     width: '200px',
-    margin: '0 10px',
+    marginRight: '25px',
   },
-  formInput: {
-    margin: '0 10px',
+  formTime: {
+    marginRight: '25px',
   },
 };
