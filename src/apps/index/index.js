@@ -24,6 +24,7 @@ if (!CONTAINER) {
   throw new Error('当前页面不存在 <div id="root"></div> 节点.');
 }
 moment.locale(locale);
+
 ReactDOM.render(
   // 国际化语言
   <LanguageProvider locale={locale}>

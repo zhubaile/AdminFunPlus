@@ -220,12 +220,13 @@ a:active{ text-decoration: none; }
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}
 .rolemanagement-panel{ background: #FFFFFF; padding: 20px; border-radius: 10px;}
 /*角色管理-新增角色弹框*/
-.newrole-bulletbox{ position: fixed; width: 400px; height: 540px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
+.newrole-bulletbox{ position: fixed; width: 800px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -400px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
-  border: 1px solid #BBBBBB;}
+  border: 1px solid #BBBBBB; overflow: auto;}
 .newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
-.newrole-content{ padding: 20px 15px; text-align: center;}
-.newrole-content div{ margin-bottom: 20px;}
+.newrole-content{ padding: 20px 15px;}
+.newrole-content .premissions_li{ width: 20%; float: left; height: 30px;}
+.newrole-content div{ margin: 8px auto;}
 .newrole-content div label{ margin-right: 15px;}
 
 /*团队权限-成员管理*/
@@ -404,18 +405,20 @@ a:active{ text-decoration: none; }
 .membermanagement-top .next-select .next-select-inner{ height: auto; padding: 1.5px 0px;}
 .member-panel .tab-panel{ padding-bottom: 20px; }
 /*成员管理----新增角色--starting*/
-.newrole{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+.newrole{ position: fixed; width: 800px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -400px; z-index: 8888;
   border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
-  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
-.newrole div{ margin: 15px auto;}
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb; overflow: auto;}
+.newrole .premissions_li{ width: 20%; float: left; height: 30px;}
+.newrole div{ margin: 8px auto;}
 .newrole label{ margin-right: 10px;}
 /*成员管理----新增角色--ending*/
 
 /*成员管理----编辑角色--starting*/
-.editingrole{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
+.editingrole{ position: fixed; width: 800px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -400px;  z-index: 8888;
   border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
-  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
-.editingrole div{ margin: 15px auto;}
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;overflow: auto;}
+.editingrole .premissions_li{ width: 20%; float: left; height: 30px;}
+.editingrole div{ margin: 8px auto;}
 .editingrole label{ margin-right: 10px;}
 /*成员管理----编辑角色--ending*/
 

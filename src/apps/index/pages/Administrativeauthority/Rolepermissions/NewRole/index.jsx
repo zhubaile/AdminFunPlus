@@ -107,9 +107,11 @@ export default class Newrole extends Component {
           {
             content.map((item)=>{
               return (
-                <FormBinder name='premissions'>
-                  <Checkbox name={item.pmsName} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
-                </FormBinder>
+                <div className='premissions_li'>
+                  <FormBinder name='premissions'>
+                    <Checkbox name={item.pmsName} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                  </FormBinder>
+                </div>
               );
             })
           }

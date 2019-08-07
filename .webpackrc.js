@@ -8,7 +8,7 @@ let proxy = {};
 };*/
 proxy['/admin/web/**'] = {
   // 代理测试环境地址 如下，代理就是把请求本地的url接到配置好的url上。
-  target: "http://192.168.1.118:3001",
+  target: "http://192.168.1.121:3001",
   changeOrigin: true,
 };
 console.log('---------111112222333456---------')
@@ -21,14 +21,13 @@ module.exports = {
     proxy: proxy,
     index: 'build/login.html',
     historyApiFallback: {
-      // index: 'build/login.html',
+      index: 'build/login.html',
       disableDotRule: true,
       rewrites:[
         { from: /^\/$/, to: 'build/login.html' },
         { from: /^\/backadminuser/, to: 'build/login.html' }, // 登录界面
         { from: /^\/website/, to: 'build/website.html' }, // 官网界面
         { from: /^\/backadmin/, to: 'build/index.html' } // 管理后台
-
       ],
     }
   },

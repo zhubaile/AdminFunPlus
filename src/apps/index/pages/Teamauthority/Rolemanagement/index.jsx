@@ -90,11 +90,11 @@ export default class Rolemanagement extends Component {
       value,
     });
   };
-  renderStatus = (datas) => {
+  /*  renderStatus = (datas) => {
     return (
       <Switch size='small' className='div-switch' id="enabled" value="enabled" checked={datas.enabled} />
     );
-  };
+  }; */
   // 获取到选中的数据
   Choice(args) {
     this.setState({
@@ -183,8 +183,7 @@ export default class Rolemanagement extends Component {
                 <Table.Column title="角色名称" dataIndex="description" />
                 <Table.Column title="描述" dataIndex="notes" />
                 {/* <Table.Column title="权限类型" dataIndex="notes" /> */}
-                {/*                <Table.Column title={statusBtn} dataIndex="2" cell={this.renderStatus} /> */}
-                <Table.Column title="状态" dataIndex="enabled" cell={this.renderStatus} />
+                {/* <Table.Column title="状态" dataIndex="enabled" cell={this.renderStatus} /> */}
                 <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
               </Table>
               <Pagination

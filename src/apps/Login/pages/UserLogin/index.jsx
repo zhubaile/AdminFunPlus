@@ -91,9 +91,10 @@ class UserLogin extends Component {
       type: this.state.type === 'password' ? 'text' : 'password',
     });
   }
-  btnn(){
+  btnn() {
     debugger;
-    this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
+    this.props.history.push({ pathname: "/backadmin/realtimedata/realtimedataIncome", state: { one: 1,two: 2 } });
+    // this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
     // window.location.href = "";
   }
   render() {

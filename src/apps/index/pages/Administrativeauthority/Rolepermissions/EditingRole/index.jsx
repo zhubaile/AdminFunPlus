@@ -103,7 +103,9 @@ export default class Editingrole extends Component {
             premission.map((item)=>{
               debugger;
               return (
-                <Checkbox name='premissions' defaultChecked={premissionss.includes(item._id)} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                <div className='premissions_li'>
+                  <Checkbox name='premissions' defaultChecked={premissionss.includes(item._id)} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                </div>
               );
             })
           }

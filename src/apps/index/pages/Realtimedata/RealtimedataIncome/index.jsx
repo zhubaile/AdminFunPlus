@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,withRouter } from 'react-router-dom';
 import { Button , Tab, Message ,Switch,Pagination,Table,Select , Menu,MenuButton, Radio, Input, Grid, DatePicker, Checkbox } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 import { incomeList,exportExcel } from '@indexApi';
@@ -20,10 +20,14 @@ const getData = (length = 10) => {
 const { Item } = MenuButton;
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
+@withRouter
 export default class RealtimedataIncome extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.location.state);
+    debugger;
     this.state = {
+      one: this.props.location.state,
       current: 1,
       pageSize: 10,
       total: 0,

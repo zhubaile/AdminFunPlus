@@ -52,7 +52,7 @@ export default class Newrole extends Component {
       value,
     });
   }; */
-
+  // 提交
   SubInvoiceinfo() {
     const id = this.state.content._id;
     const premissions = this.state.content.premissions;
@@ -76,6 +76,7 @@ export default class Newrole extends Component {
       }
     });
   }
+  // 更改选中的权限
   checkoutbtn(v,e) {
     let zzzz = this.state.content.premissions;
     debugger;
@@ -110,6 +111,7 @@ export default class Newrole extends Component {
             <Input
               name="description"
               placeholder=""
+              disabled
               defaultValue={content.description}
               ref={node=>this.description = node}
             />
@@ -131,32 +133,14 @@ export default class Newrole extends Component {
           <div>
             {
                   premission.map((item)=>{
-                    debugger;
                     return (
-                      <Checkbox name='premissions' defaultChecked={premissionss.includes(item._id)} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                      <div className='premissions_li'>
+                        <Checkbox name='premissions' defaultChecked={premissionss.includes(item._id)} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                      </div>
                     );
                   })
                 }
           </div>
-
-          {/*            </FormItem> */}
-
-          {/*            <FormItem
-              label='应用面板权限'
-              {...formItemLayout}
-            >
-              <Checkbox defaultChecked value="">应用概览</Checkbox>
-              <Checkbox defaultChecked value="">支付渠道</Checkbox>
-              <Checkbox defaultChecked value="">收款账号</Checkbox>
-            </FormItem>
-            <FormItem
-              label='操作权限'
-              {...formItemLayout}
-            >
-              <Checkbox defaultChecked value="">退款（包含支付订单、支付订单批量退款、业务订单查询、充值记录管理处的退款权限）</Checkbox>
-
-            </FormItem> */}
-
           <div>
             <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
             <Button type='primary' style={styles.submitbtn} onClick={this.SubInvoiceinfo.bind(this)}>提交</Button>

@@ -95,19 +95,6 @@ class Rolepermissions extends Component {
       }
     );
   };
-  /*  formChange=(value)=>{
-    debugger;
-  } */
-  /* // 状态的值
-  renderOper = (datas) => {
-    const z = datas[0];
-    return (
-      <div>
-        <Radio id="shiduide" value="shiduide" checked={z} >{datas[1]}</Radio>
-        {/!* <Radio id="shiduide" value="shiduide" checked={false}>--</Radio> *!/}
-      </div>
-    );
-  }; */
   // 新增角色
   newrolebtnopen() {
     const premissions = this.state.premissions;
@@ -164,61 +151,61 @@ class Rolepermissions extends Component {
     );
   };
   // 状态
-   renderStatus = (datas) => {
+  /*   renderStatus = (datas) => {
      return (
        <div>
          <Radio id="status" value="status" checked={datas.enabled} >{datas.enabledName}</Radio>
        </div>
      );
-   };
-   render() {
-     const { isLoading, datas, current, total,pageSize } = this.state;
-     const {
-       intl: { formatMessage },
-     } = this.props;
-     return (
-       <div className='membermanagement'>
-         <Newrole ref={node=>this.Newrole = node} fetchData={this.fetchData.bind(this)} />
-         <Editingrole ref={node=>this.Editingrole = node} fetchData={this.fetchData.bind(this)} />
-         <Tab shape='pure'>
-           <Tab.Item title="角色权限">
-             <div className='membermanagements-top'>
-               <div className='membermanagement-bottom-top'>
-                 <button className='mybtn Newrole' onClick={this.newrolebtnopen.bind(this)}>新增角色</button>
-               </div>
-               <Table loading={isLoading} dataSource={datas} hasBorder={false}>
-                 <Table.Column title="角色" dataIndex="description" />
-                 <Table.Column
-                   title="说明"
-                   dataIndex="notes"
-                 />
-                 <Table.Column
+   }; */
+  render() {
+    const { isLoading, datas, current, total,pageSize } = this.state;
+    const {
+      intl: { formatMessage },
+    } = this.props;
+    return (
+      <div className='membermanagement'>
+        <Newrole ref={node=>this.Newrole = node} fetchData={this.fetchData.bind(this)} />
+        <Editingrole ref={node=>this.Editingrole = node} fetchData={this.fetchData.bind(this)} />
+        <Tab shape='pure'>
+          <Tab.Item title="角色权限">
+            <div className='membermanagements-top'>
+              <div className='membermanagement-bottom-top'>
+                <button className='mybtn Newrole' onClick={this.newrolebtnopen.bind(this)}>新增角色</button>
+              </div>
+              <Table loading={isLoading} dataSource={datas} hasBorder={false}>
+                <Table.Column title="角色" dataIndex="description" />
+                <Table.Column
+                  title="说明"
+                  dataIndex="notes"
+                />
+                {/*   <Table.Column
                    title="状态"
                    dataIndex="enabled"
                    cell={this.renderStatus}
-                 />
-                 {/*                <Table.Column title="操作" dataIndex="caozuo" /> */}
-                 <Table.Column
-                   title="操作"
-                   width={200}
-                   dataIndex="oper"
-                   cell={this.renderOper}
-                 />
-               </Table>
-               <Pagination
-                 style={{ marginTop: '20px', textAlign: 'right' }}
-                 current={current}
-                 onChange={this.handlePaginationChange}
-                 pageSize={pageSize} // 界面展示多少条数据
-                 total={total} // 一共多少条数据
-               />
-             </div>
-           </Tab.Item>
-         </Tab>
-         {/*         <Customerservice /> */}
-       </div>
-     );
-   }
+                 /> */}
+                {/*                <Table.Column title="操作" dataIndex="caozuo" /> */}
+                <Table.Column
+                  title="操作"
+                  width={200}
+                  dataIndex="oper"
+                  cell={this.renderOper}
+                />
+              </Table>
+              <Pagination
+                style={{ marginTop: '20px', textAlign: 'right' }}
+                current={current}
+                onChange={this.handlePaginationChange}
+                pageSize={pageSize} // 界面展示多少条数据
+                total={total}
+              />
+            </div>
+          </Tab.Item>
+        </Tab>
+        {/*         <Customerservice /> */}
+      </div>
+    );
+  }
 }
 
 const styles = {
