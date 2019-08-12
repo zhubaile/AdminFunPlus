@@ -6,7 +6,7 @@ import { asideMenuConfig } from './menuConfig';
 // 实时数据-收入
 const RealtimedataIncome = React.lazy(() => import('./pages/Realtimedata/RealtimedataIncome'));
 // 实时数据-支出概况
-const OutLay = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/OutLay')); // 支出
+// const OutLay = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/OutLay')); // 支出
 const Enterprisepayment = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/Enterprisepayment')); // 企业付款
 const BusinessPaymentBatch = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/BusinessPaymentBatch')); // 批量付款
 const Orderrefund = React.lazy(() => import('./pages/Realtimedata/Expenditureprofile/Orderrefund')); // 订单退款
@@ -75,10 +75,10 @@ const routerConfig = [
     path: '/backadmin/realtimedata/realtimedataIncome',
     component: RealtimedataIncome,
   },
-  {
+  /*  {
     path: '/backadmin/Realtimedata/outLay',
     component: OutLay,
-  },
+  }, */
   {
     path: '/backadmin/Realtimedata/enterprisepayment',
     component: Enterprisepayment,

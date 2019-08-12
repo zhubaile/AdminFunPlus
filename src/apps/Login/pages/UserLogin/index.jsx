@@ -58,13 +58,12 @@ class UserLogin extends Component {
         password: values.password,
       }).then(
         ({ status, data }) => {
-          debugger;
           if (data.errCode == 0) {
             Cookies.set('userId', data.userData._id);
-            Cookies.set('status', 0,{ expires: 1 });
+            Cookies.set('status', 0);
             Message.success(intl.formatMessage({ id: 'app.login.Login successfully' }));
-            this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
-            window.location.href = "";
+            // this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
+            window.location.href = "/backadmin/realtimedata/realtimedataIncome";
           } else {
             Message.success(data.message);
           }
@@ -91,12 +90,7 @@ class UserLogin extends Component {
       type: this.state.type === 'password' ? 'text' : 'password',
     });
   }
-  btnn() {
-    debugger;
-    this.props.history.push({ pathname: "/backadmin/realtimedata/realtimedataIncome", state: { one: 1,two: 2 } });
-    // this.props.history.push('/backadmin/realtimedata/realtimedataIncome');
-    // window.location.href = "";
-  }
+
   render() {
     const { intl } = this.props;
     return (
@@ -167,31 +161,30 @@ class UserLogin extends Component {
                 >
                   <FormattedMessage id='app.login.sign.in' />
                 </Button>
-                <button onClick={this.btnn.bind(this)}>
-                  跳转
-                </button>
-                <Link to="/backadmin/realtimedata/realtimedataIncome" style={styles.tips}>
+                {/* <Link to="/backadmin/realtimedata/realtimedataIncome" style={styles.tips}>
                   <FormattedMessage id='app.login.register.now' />
-                </Link>
+                </Link> */}
               </div>
             </div>
           </IceFormBinderWrapper>
         </div>
         <div style={styles.right}>
-          <div style={styles.box}>
-            <IceImg
-              src={require('@img/login/tel.png')}
-            />
-            <p> <FormattedMessage id='app.login.Tel.consult' /></p>
-            <a>000-1111-2222</a>
-          </div>
-          <div style={styles.box}>
-            <IceImg
-              src={require('@img/login/email.png')}
-            />
-            <p><FormattedMessage id='app.login.Mail.box' /></p>
-            <a>YanYue@3FunPlus.com</a>
-          </div>
+         <div>
+           <div style={styles.box}>
+             <IceImg
+               src={require('@img/login/tel.png')}
+             />
+             <p> <FormattedMessage id='app.login.Tel.consult' /></p>
+             <a>000-1111-2222</a>
+           </div>
+           <div style={styles.box}>
+             <IceImg
+               src={require('@img/login/email.png')}
+             />
+             <p><FormattedMessage id='app.login.Mail.box' /></p>
+             <a>YanYue@3FunPlus.com</a>
+           </div>
+         </div>
         </div>
       </div>
     );
@@ -207,6 +200,7 @@ const styles = {
     marginTop: '-60px',
     border: '#cccccc 1px solid',
     display: 'flex',
+    zIndex: '2',
   },
   left: {
     float: 'left',
@@ -249,11 +243,16 @@ const styles = {
   right: {
     float: 'left',
     // width: '250px',
+    display: 'flex',
     flexGrow: '1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    textAlign: 'justify',
   },
   box: {
     textAlign: 'center',
-    marginTop: '20px',
+    margin: '20px 0',
     cursor: 'pointer',
   },
   prompt: {

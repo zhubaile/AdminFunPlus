@@ -12,27 +12,6 @@ import Freezeuser from "./Freezeuser/index";
 import Certificationstatus from "./Certificationstatus/index";
 
 const { Item } = MenuButton;
-/* const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      merchantId: '000662',
-      name: ['甲乙'],
-      time: '1234789',
-      order: '茅以升',
-      remark: ['上海市...'],
-      balance: '互联网',
-      tel: ['1361111'],
-      email: ['52@'],
-      role: [' 7'],
-      status: '成功',
-      oper: ['查看'],
-      _id: random(10000, 20000,30000,50025,68522),
-    };
-  });
-}; */
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 export default class Businessinformation extends Component {
@@ -231,44 +210,57 @@ export default class Businessinformation extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <Row wrap gutter="20">
-                  <Col l="24">
+                {/*<Row wrap gutter="20">
+                  <Col l="24">*/}
                     <div style={styles.formItem}>
-                      <span style={styles.formLabel}>商户ID：</span>
-                      <FormBinder name="id"
-                        autoWidth={false}
-                      >
-                        <Input style={styles.formSelect} placeholder='' />
-                      </FormBinder>
-                      <span style={styles.formLabel}>企业名称：</span>
-                      <FormBinder name='cpName'>
-                        <Input style={styles.formSelect} placeholder='' />
-                      </FormBinder>
-                      <span style={styles.formLabel}>法人姓名：</span>
-                      <FormBinder name='linkName'>
-                        <Input style={styles.formSelect} placeholder='' />
-                      </FormBinder>
-                    </div>
-                  </Col>
-                  <Col l="24">
-                    <div style={styles.formItemTwo}>
-                      <span style={styles.formLabel}>所属行业：</span>
-                      <FormBinder name='cpIndustryCategory'>
-                        <Select style={styles.formSelect} dataSource={payChannel} />
-                      </FormBinder>
+                      <div style={styles.formItemdiv}>
+                        <span style={styles.formLabel}>商户ID：</span>
+                        <FormBinder name="id"
+                                    autoWidth={false}
+                        >
+                          <Input style={styles.formSelect} placeholder='' />
+                        </FormBinder>
+                      </div>
+                      <div style={styles.formItemdiv}>
+                       <span style={styles.formLabel}>企业名称：</span>
+                       <FormBinder name='cpName'>
+                         <Input style={styles.formSelect} placeholder='' />
+                       </FormBinder>
+                     </div>
+                      <div style={styles.formItemdiv}>
+                        <span style={styles.formLabel}>法人姓名：</span>
+                        <FormBinder name='linkName'>
+                          <Input style={styles.formSelect} placeholder='' />
+                        </FormBinder>
+                      </div>
+                      <div style={styles.formItemdiv}>
+                       <span style={styles.formLabel}>所属行业：</span>
+                       <FormBinder name='cpIndustryCategory'>
+                         <Select style={styles.formSelect} dataSource={payChannel} />
+                       </FormBinder>
+                     </div>
+                      <div style={styles.formItemdiv}>
                       <span style={styles.formLabel}>手机号：</span>
                       <FormBinder name='linkPhone'>
                         <Input style={styles.formSelect} className='input-bg' placeholder='' />
                       </FormBinder>
-                      <span style={styles.formLabel}>状态：</span>
-                      <FormBinder name='frozenState' >
-                        <Select style={styles.formSelect} dataSource={device} />
-                      </FormBinder>
+                    </div>
+                      <div style={styles.formItemdiv}>
+                       <span style={styles.formLabel}>状态：</span>
+                       <FormBinder name='frozenState' >
+                         <Select style={styles.formSelect} dataSource={device} />
+                       </FormBinder>
+                     </div>
                       <Button className='btn-all' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
                       <Button className='btn-all' size="large" type="primary" style={{ opacity: '0.5' }} onClick={this.resetbtn.bind(this)}>重置</Button>
                     </div>
-                  </Col>
-                </Row>
+                 {/* </Col>
+                  <Col l="24">*/}
+                    {/*<div style={styles.formItemTwo}>
+
+                    </div>*/}
+                {/*  </Col>
+                </Row>*/}
               </FormBinderWrapper>
             </div>
             <div className='businessinformation-panel' >
@@ -310,6 +302,7 @@ const styles = {
   formItem: {
     display: 'flex',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   formItemTwo: {
     display: 'flex',
@@ -326,5 +319,8 @@ const styles = {
   },
   delbtn: {
     marginLeft: '20px',
+  },
+  formItemdiv: {
+    margin: '10px 0',
   },
 };

@@ -38,7 +38,7 @@ const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 
 export default class Extremesetting extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       current: 1,
@@ -73,12 +73,12 @@ export default class Extremesetting extends Component {
 
   componentDidMount() {
     debugger;
-    this.Toupdatelist();
+    // this.Toupdatelist();
     this.fetchData();
   }
 
   // 获取分组列表
-  Toupdatelist=()=>{
+  /*  Toupdatelist=()=>{
     deviceGrouplist().then(
       ({ status, data }) => {
         if (data.errCode == 0) {
@@ -89,7 +89,7 @@ export default class Extremesetting extends Component {
         // Message.success(data.message);
       }
     );
-  };
+  }; */
   mockApi = (len) => {
     return new Promise((resolve) => {
       setTimeout(() => {

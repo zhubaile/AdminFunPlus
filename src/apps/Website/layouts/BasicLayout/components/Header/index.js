@@ -11,6 +11,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 export default class Header extends Component {
   signin=()=> {
     this.props.history.push('/backadminuser/login');
+    window.location.href = "";
   }
 
   render() {

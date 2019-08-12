@@ -24,10 +24,7 @@ const { Row, Col } = Grid;
 export default class RealtimedataIncome extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.location.state);
-    debugger;
     this.state = {
-      one: this.props.location.state,
       current: 1,
       pageSize: 10,
       total: 0,
@@ -40,25 +37,24 @@ export default class RealtimedataIncome extends Component {
       value: {
         timeType: '',
         startdate: [],
-        orderStatus: '',
-        refundStatus: '',
+        orderStatus: [],
+        refundStatus: [],
         channel: [],
-        device: '',
+        device: [],
         out_trade_no: '',
       },
     };
   }
-
   // 重置按钮
   handleReset() {
     this.setState({
       value: {
         timeType: 'createdAt',
         startdate: [],
-        orderStatus: '',
-        payChannel: '',
-        channel: '',
-        device: '',
+        orderStatus: [],
+        refundStatus: [],
+        channel: [],
+        device: [],
         out_trade_no: '',
       },
     });
@@ -69,10 +65,21 @@ export default class RealtimedataIncome extends Component {
     validateFields((errors,values)=>{
       const arrivalDate = [];
       if (values.startdate.length == 2) {
-        const startdatestart = moment(values.startdate[0]._d).valueOf();
-        const startdateend = moment(values.startdate[1]._d).valueOf();
-        arrivalDate.push(startdatestart);
-        arrivalDate.push(startdateend);
+        if (values.startdate[0] && values.startdate[1]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[0]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = '';
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[1]) {
+          const startdatestart = '';
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else {
+          return null;
+        }
       }
       debugger;
       this.fetchData(values,arrivalDate);
@@ -111,6 +118,9 @@ export default class RealtimedataIncome extends Component {
             });
           } else {
             Message.success(data.message);
+            this.setState({
+              isLoading: false,
+            })
           }
         });
       }
@@ -258,30 +268,53 @@ export default class RealtimedataIncome extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <Row wrap gutter="20" style={styles.formRow}>
-                    <Col l="24">
-                      <div style={styles.formItem}>
-                        <span style={styles.formLabel}>选择时间：</span>
-                        <FormBinder name="timeType"
-                          autoWidth={false}
-                        >
-                          <Select style={styles.formSpecial} dataSource={timeType} />
-                        </FormBinder>
-                        <FormBinder name='startdate'>
-                          <RangePicker style={styles.formTime} className='showHour' showTime resetTime />
-                        </FormBinder>
-                        <span style={styles.formLabel}>支付状态：</span>
-                        <FormBinder name='orderStatus'>
-                          <Select style={styles.formSelect} dataSource={orderStatus} />
-                        </FormBinder>
-                        <span style={styles.formLabel}>退款状态：</span>
-                        <FormBinder name='refundStatus'>
-                          <Select style={styles.formSelect} dataSource='' />
-                        </FormBinder>
-                      </div>
-                    </Col>
-                    <Col l="24">
-                      <div style={styles.formItemTwo}>
+                  {/* <Row wrap gutter="20" style={styles.formRow}> */}
+                  {/* <Col l="24"> */}
+                  <div style={styles.formItem}>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>选择时间：</span>
+                      <FormBinder name="timeType"
+                        autoWidth={false}
+                      >
+                        <Select style={styles.formSpecial} dataSource={timeType} />
+                      </FormBinder>
+                      <FormBinder name='startdate'>
+                        <RangePicker style={styles.formTime} className='showHour' showTime resetTime />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>支付状态：</span>
+                      <FormBinder name='orderStatus'>
+                        <Select style={styles.formSelect} dataSource={orderStatus} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>退款状态：</span>
+                      <FormBinder name='refundStatus'>
+                        <Select style={styles.formSelect} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>订单号：</span>
+                      <FormBinder name='out_trade_no'>
+                        <Input style={styles.formSelect} placeholder='输入订单号' />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>支付渠道：</span>
+                      <FormBinder name='channel'>
+                        <Select style={styles.formSpecial} dataSource={channel} onChange={this.Accesschannels.bind(this)} />
+                      </FormBinder>
+                      <FormBinder name="device" >
+                        <Select style={styles.formSelect} dataSource={device} />
+                      </FormBinder>
+                    </div>
+                    <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                    <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                  </div>
+                  {/* </Col> */}
+                  {/* <Col l="24"> */}
+                  {/* <div style={styles.formItemTwo}>
                         <span style={styles.formLabel}>支付渠道：</span>
                         <FormBinder name='channel'>
                           <Select style={styles.formSpecial} dataSource={channel} onChange={this.Accesschannels.bind(this)} />
@@ -295,9 +328,9 @@ export default class RealtimedataIncome extends Component {
                         </FormBinder>
                         <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                         <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
-                      </div>
-                    </Col>
-                  </Row>
+                      </div> */}
+                  {/* </Col> */}
+                  {/* </Row> */}
                 </FormBinderWrapper>
 
               </div>
@@ -329,7 +362,7 @@ export default class RealtimedataIncome extends Component {
                     <Table.Column title="分润状态" dataIndex="" />
                     <Table.Column title="渠道" dataIndex="channelName" />
                     <Table.Column title="设备ID" dataIndex="deviceId" />
-                    <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} />
+                    <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} width={70} />
                   </Table>
                   <Pagination
                     style={{ marginTop: '20px', textAlign: 'right' }}
@@ -356,6 +389,7 @@ const styles = {
   formItem: {
     display: 'flex',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   formItemTwo: {
     display: 'flex',
@@ -372,12 +406,15 @@ const styles = {
   },
   formSelect: {
     width: '200px',
-    marginRight: '25px',
+    marginRight: '20px',
   },
   formTime: {
     marginRight: '25px',
   },
   delbtn: {
     marginLeft: '20px',
+  },
+  formItemdiv: {
+    margin: '10px 0',
   },
 };

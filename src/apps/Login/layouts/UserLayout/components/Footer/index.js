@@ -54,6 +54,9 @@ export default () => {
 
 const styles = {
   footer: {
+    position: 'absolute',
+    bottom: '0',
+    width: '100%',
     display: 'flex',
     color: '#000',
     height: '60px',

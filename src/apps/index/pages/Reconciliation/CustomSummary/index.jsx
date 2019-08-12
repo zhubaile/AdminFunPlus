@@ -104,7 +104,10 @@ export default class CustomSummary extends Component {
     const paymentchannelone = this.state.Dropdownbox;
     const paymentchanneltwo = this.state.Dropdownboxson;
     const { Transactionfigures } = this.state;
-    debugger;
+    let successPercent = Transactionfigures.successPercent;
+    if (successPercent) {
+      successPercent = successPercent.toFixed(2);
+    }
     return (
       <div className='customsummary'>
         <Tab shape='pure' className='income-tab'>
@@ -153,7 +156,7 @@ export default class CustomSummary extends Component {
                 <div className='exhibition-bor'>
                   <span>成功率</span>
                   <div>
-                    <strong>{Transactionfigures.successPercent}</strong>
+                    <strong>{successPercent}</strong>
                   </div>
                 </div>
                 <div className='exhibition-bor'>

@@ -34,7 +34,7 @@ export default class Header extends Component {
     return `app.header.${item.name}`;
   };
   statusbtn(i) {
-    Cookies.set('status', i,{ expires: 1 });
+    Cookies.set('status', i);
     this.setState({
       status: i,
     },()=>{
@@ -42,37 +42,17 @@ export default class Header extends Component {
     }
     );
   }
-  /* statusbtn1() {
-    Cookies.set('status', 1);
-    this.setState({
-      status: 1,
-    },()=>{
-      this.props.Statuschange(1);
-    });
-  }
-  statusbtn2() {
-    this.setState({
-      status: 2,
-    },()=>{
-      this.props.Statuschange(2);
-    });
-  }
-  statusbtn3() {
-    this.setState({
-      status: 3,
-    },()=>{
-      this.props.Statuschange(3);
-    });
-  } */
   // 跳转到官网
-  Websitechange() {
+  /*  Websitechange() {
     this.props.history.push('/website');
     window.location.href = "";
-  }
+  } */
   // 跳转到登录
   Userchange() {
-    this.props.history.push('/backadminuser/login');
-    // window.location.href = "";
+    Cookies.remove('userId');
+    Cookies.remove('status');
+    // this.props.history.push('/backadminuser/login');
+    window.location.href = "/backadminuser/login";
   }
   render() {
     const {
@@ -115,9 +95,9 @@ export default class Header extends Component {
         <div style={{ color: '#fff', marginRight: '30px', fontSize: '18px' }}>
           欢迎你，系统管理员
         </div>
-        <div style={{ color: '#fff',fontSize: '18px', marginRight: '30px',cursor: 'pointer' }} onClick={this.Websitechange.bind(this)}>
+        {/* <div style={{ color: '#fff',fontSize: '18px', marginRight: '30px',cursor: 'pointer' }} onClick={this.Websitechange.bind(this)}>
           网站首页
-        </div>
+        </div> */}
         {/* <SelectLang /> */}
         <div className='logged-user-w'>
           <div className='logged-user-i'>

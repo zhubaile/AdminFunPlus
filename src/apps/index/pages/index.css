@@ -9,7 +9,7 @@ a:active{ text-decoration: none; }
 .next-range-picker.next-medium .next-range-picker-trigger{ border-radius: 4px;}
 .next-input.next-medium{ height: 30px;}
 .next-pagination-pages{ margin-right: 20px; }/*分页*/
-.next-table.only-bottom-border{ margin-right: 20px; }
+/*.next-table.only-bottom-border{ margin-right: 20px; }*/
 .next-input.next-medium .next-input-text-field{ height: 30px; }
 .next-select .next-select-inner{ height: 30px; border-radius: 4px;}
 .next-input.next-medium{ border-radius: 4px;}
@@ -87,10 +87,10 @@ a:active{ text-decoration: none; }
 
 .selfsumm-exhibition{ width: 100%; display: flex; margin-top: 20px;}
 .selfsumm-exhibition .exhibition-bor{border: 1px solid rgba(187, 187, 187, 1); margin-right: 40px; width: 200px; height: 75px; display: flex; justify-content: center; flex-direction: column; padding-left: 15px; color: rgba(16, 16, 16, 1);
-  font-size: 14px;}
+  font-size: 14px; background: #fff;}
 .selfsumm-exhibition .exhibition-bor div strong{ font-size: 28px; font-weight: 500; }
 
-.Trading-btn{ width: 100%; height: 50px;}
+.Trading-btn{ width: 100%; height: 50px; margin-top: 10px;}
 .Trading-btn ul{ display: flex; align-items: center; align-content: center; justify-items: center; justify-content: center;}
 .Trading-btn ul li{ width: 100px; height: 50px; line-height: 50px; text-align: center;border: 1px solid rgba(220, 223, 230, 1); cursor: pointer;}
 .Trading-btn ul li.active{ color: #1A55E2;}
@@ -220,11 +220,11 @@ a:active{ text-decoration: none; }
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}
 .rolemanagement-panel{ background: #FFFFFF; padding: 20px; border-radius: 10px;}
 /*角色管理-新增角色弹框*/
-.newrole-bulletbox{ position: fixed; width: 800px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -400px; z-index: 8888;
-  border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
-  border: 1px solid #BBBBBB; overflow: auto;}
+.newrole-bulletbox{ position: fixed; width: 960px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -480px; z-index: 8888;
+  border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0 0 10px #b5b3b3; overflow: auto;}
 .newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
-.newrole-content{ padding: 20px 15px;}
+.newbulletbox_btn{ clear: both; text-align: center;}
+.newrole-content{ padding: 20px 10px;}
 .newrole-content .premissions_li{ width: 20%; float: left; height: 30px;}
 .newrole-content div{ margin: 8px auto;}
 .newrole-content div label{ margin-right: 15px;}
@@ -236,8 +236,7 @@ a:active{ text-decoration: none; }
 .membermanagement-content .next-select .next-select-inner{ height: auto; padding: 1.5px 0px;}
 /*成员管理-添加成员弹框*/
 .addmember-bulletbox{ position: fixed; width: 600px; height: 640px; top: 50%; left: 50%; margin-top: -320px; margin-left: -300px; z-index: 8888;
-  border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
-  border: 1px solid #BBBBBB;}
+  border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0 0 10px #b5b3b3;}
 .addmember-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
 .addmember-content{ margin: 20px auto; padding: 0 80px;}
 .addmember-content .next-select .next-select-inner{ height: auto;}
@@ -362,14 +361,18 @@ a:active{ text-decoration: none; }
 }
 
 /*企业付款、批量付款、订单退款、批量退款-----------Starting*/
-.all_span{ margin-left: 15px;}
+.all_span{ margin-left: 15px; width: 240px; height: 30px; background: #e8f0fd; line-height: 30px; border-radius: 4px; color: #1989FA; padding-left: 5px}
 .expendbatchre .container-block,.expendordbat .container-block,.auditofpayment .container-block{ margin: 20px 0px 0px 0px;}
+.expendbatchre .expendbatchre-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px;}
 .expendordbat .next-row.next-row-wrap{ margin: 20px 0px 20px 0px;}
-.expendordbat-top{ padding: 10px 15px;}
+.expendordbat-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 10px 15px; margin-bottom: 20px;}
 .expendordbat-tab  .expendordbat-tabs-border{clear: both; border-bottom: 1px solid #dddddd;}
 .expendordbat-tab { position: relative;}
 .expendordbat-tab .orderposab{ position: absolute; top: 0; right: 20px; background:#E2EDFF; color: #1989FA; border-radius: 4px; border-color: #A3D0FD;}
 .expendordbat-tab .next-tabs-content .expendbatchre-message{background: #E6F7FF; border: 1px solid #91D5FF; border-radius: 4px; margin: 20px 0px; width: 80%;}
+.expendordbat-top .btns-all.right{position: absolute; right: 20px;}
 /*批量付款、订单退款、批量退款-----------Ending*/
 .paymentreview .auditofpayment-top{border-bottom: 1px solid rgba(187, 187, 187, 1); margin-top: 20px;}
 .paymentreview .auditofpayment-top span{ font-size: 20px; font-weight: 400;width: 64px;height: 24px;color: rgba(116, 116, 116, 1);font-size: 16px;text-align: left;}
@@ -387,11 +390,16 @@ a:active{ text-decoration: none; }
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}
 .membermanagement-bottom-top{ border-bottom: 1px solid rgba(187, 187, 187, 0.45); padding-bottom: 10px; margin-bottom: 10px;}
 
-.addmenber{ position: fixed; width: 330px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -165px;  z-index: 8888;
-  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
-  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;}
-.addmenber>span{ margin-top: 10px; width: 90%;}
-.addmenber>span input{ display: block; width: 90%;}
+
+.addmenber{ position: fixed; width: 480px; height: 500px; top: 50%; left: 50%; margin-top: -250px; margin-left: -240px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;box-shadow: 0 0 10px #b5b3b3}
+.addmenber-title{ border-bottom: 1px solid #dddddd; padding: 0 20px;}
+.addmenber-title p{ font-size: 18px;}
+.addmenber-content{ margin: 20px auto; padding: 0 20px;}
+
+.addmenber .addmenber_span>span{ margin-top: 15px; margin-left: 10%; width: 75%;}
+.addmenber .addmenber_span>span input{ display: block; width: 90%;}
+.addmenber .addmenber_btn{ margin-top: 10px; text-align: center;}
 .addmenber button{margin: 10px 20px;width: 80px;height: 30px;border-radius: 4px;background-color: rgba(26, 85, 226, 0.95);color: rgba(255, 255, 255, 1);font-size: 14px;text-align: center;border: 1px solid rgba(255, 255, 255, 0);}
 .addmenber button.quxiao{border-radius: 4px;background-color: rgba(230, 241, 252, 1);color: rgba(26, 85, 226, 0.95);font-size: 14px;border: 1px solid rgba(187, 218, 249, 1);}
 .addmenber .next-select .next-select-inner{ height: auto;}
@@ -405,18 +413,22 @@ a:active{ text-decoration: none; }
 .membermanagement-top .next-select .next-select-inner{ height: auto; padding: 1.5px 0px;}
 .member-panel .tab-panel{ padding-bottom: 20px; }
 /*成员管理----新增角色--starting*/
-.newrole{ position: fixed; width: 800px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -400px; z-index: 8888;
-  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
-  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb; overflow: auto;}
+.newrole{ position: fixed; width: 960px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -480px; z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;box-shadow: 0 0 10px #b5b3b3; overflow: auto;}
+.newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.newrole .newrole_main{width: 100%; padding: 10px 20px;}
 .newrole .premissions_li{ width: 20%; float: left; height: 30px;}
 .newrole div{ margin: 8px auto;}
 .newrole label{ margin-right: 10px;}
+.newrole .newrole-btn{ clear: both; text-align: center;}
 /*成员管理----新增角色--ending*/
 
 /*成员管理----编辑角色--starting*/
-.editingrole{ position: fixed; width: 800px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -400px;  z-index: 8888;
-  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px; padding: 20px;
-  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid #bbbbbb;overflow: auto;}
+.editingrole{ position: fixed; width: 960px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -480px;  z-index: 8888;
+  border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;box-shadow: 0 0 10px #b5b3b3;overflow: auto;}
+.editingrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.editingrole_btn{ clear: both; text-align: center;}
+.editingrole .editingrole_main{width: 100%; padding: 10px 20px;}
 .editingrole .premissions_li{ width: 20%; float: left; height: 30px;}
 .editingrole div{ margin: 8px auto;}
 .editingrole label{ margin-right: 10px;}

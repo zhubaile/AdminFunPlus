@@ -167,39 +167,50 @@ export default class ChannelReconciliation extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <Row wrap gutter="20">
-                    <Col l="24">
-                      <div style={styles.formItem}>
-                        <span style={styles.formLabel}>商户ID：</span>
-                        <FormBinder name="timeType"
-                          autoWidth={false}
-                        >
-                          <Input style={styles.formSelect} placeholder='' />
-                        </FormBinder>
-                        <span style={styles.formLabel}>交易时间：</span>
-                        <FormBinder name='startdate'>
-                          <RangePicker className='showHour' showTime resetTime style={styles.formTime} />
-                        </FormBinder>
-                        <span style={styles.formLabel}>商户订单号：</span>
-                        <FormBinder name='orderStatus'>
-                          <Input style={styles.formSelect} />
-                        </FormBinder>
-                      </div>
-                    </Col>
-                    <Col l="24">
-                      <div style={styles.formItemTwo}>
-                        <span style={styles.formLabel}>支付渠道：</span>
-                        <FormBinder name='payChannel'>
-                          <Select style={styles.formSelect} dataSource={payChannel} />
-                        </FormBinder>
-                        <span style={styles.formLabel}>支付渠道流水号：</span>
-                        <FormBinder name='out_trade_no'>
-                          <Input style={styles.formSelect} className='input-bg' placeholder='' />
-                        </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                      </div>
-                    </Col>
-                  </Row>
+                  {/* <Row wrap gutter="20">
+                    <Col l="24"> */}
+                  <div style={styles.formItem}>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>商户ID：</span>
+                      <FormBinder name="timeType"
+                        autoWidth={false}
+                      >
+                        <Input style={styles.formSelect} placeholder='' />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>交易时间：</span>
+                      <FormBinder name='startdate'>
+                        <RangePicker className='showHour' showTime resetTime style={styles.formTime} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>商户订单号：</span>
+                      <FormBinder name='orderStatus'>
+                        <Input style={styles.formSelect} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>支付渠道：</span>
+                      <FormBinder name='payChannel'>
+                        <Select style={styles.formSelect} dataSource={payChannel} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>支付渠道流水号：</span>
+                      <FormBinder name='out_trade_no'>
+                        <Input style={styles.formSelect} className='input-bg' placeholder='' />
+                      </FormBinder>
+                    </div>
+                    <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                  </div>
+                  {/* </Col>
+                    <Col l="24"> */}
+                  {/* <div style={styles.formItemTwo}>
+
+                      </div> */}
+                  {/* </Col>
+                  </Row> */}
                 </FormBinderWrapper>
 
               </div>
@@ -250,6 +261,7 @@ const styles = {
   formItem: {
     display: 'flex',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   formItemTwo: {
     display: 'flex',
@@ -273,5 +285,8 @@ const styles = {
   },
   delbtn: {
     marginLeft: '20px',
+  },
+  formItemdiv: {
+    margin: '10px 0',
   },
 };

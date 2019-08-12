@@ -98,12 +98,30 @@ export default class Allworkorders extends Component {
       },
       () => {
         this.refs.form.validateAll((errors, values) => {
-          const arrivalDate = [];
+          /* const arrivalDate = [];
           if (values.operationtime.length == 2) {
             const startdatestart = moment(values.operationtime[0]._d).valueOf();
             const startdateend = moment(values.operationtime[1]._d).valueOf();
             arrivalDate.push(startdatestart);
             arrivalDate.push(startdateend);
+          } */
+          const arrivalDate = [];
+          if (values.operationtime.length == 2) {
+            if (values.operationtime[0] && values.operationtime[1]) {
+              const startdatestart = moment(values.operationtime[0]._d).valueOf();
+              const startdateend = moment(values.operationtime[1]._d).valueOf();
+              arrivalDate.push(startdatestart,startdateend);
+            } else if (values.operationtime[0]) {
+              const startdatestart = moment(values.operationtime[0]._d).valueOf();
+              const startdateend = '';
+              arrivalDate.push(startdatestart,startdateend);
+            } else if (values.operationtime[1]) {
+              const startdatestart = '';
+              const startdateend = moment(values.operationtime[1]._d).valueOf();
+              arrivalDate.push(startdatestart,startdateend);
+            } else {
+              return null;
+            }
           }
           const pages = this.state.current;
           const pageSizes = this.state.pageSize;

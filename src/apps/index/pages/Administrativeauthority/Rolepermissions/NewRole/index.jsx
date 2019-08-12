@@ -84,44 +84,47 @@ export default class Newrole extends Component {
     console.log(content);
     return (
       <div className="newrole">
-        <h2>新增角色</h2>
-        <FormBinderWrapper
-          value={this.state.value}
-          onChange={this.formChange}
-          ref="form"
-        >
-          <div>
-            <label>角色名称</label>
-            <FormBinder name="description"
-              autoWidth={false}
-            >
-              <Input hasClear placeholder='角色名称' />
-            </FormBinder>
-          </div>
-          <div>
-            <label>权限说明</label>
-            <FormBinder name='notes' >
-              <Input hasClear placeholder='角色说明' />
-            </FormBinder>
-          </div>
-          {
-            content.map((item)=>{
-              return (
-                <div className='premissions_li'>
-                  <FormBinder name='premissions'>
-                    <Checkbox name={item.pmsName} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
-                  </FormBinder>
-                </div>
-              );
-            })
-          }
-          <div className='newrole-btn'>
-            <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
-            <Button type='primary' style={styles.submitbtn} onClick={this.addnewrole.bind(this)}>提交</Button>
-          </div>
-        </FormBinderWrapper>
-
-
+        <div className='newrole-title'>
+          <p style={{ display: 'inline-block', fontSize: '18px' }}>新增角色</p>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.newroleclose.bind(this)}>×</span>
+        </div>
+        <div className='newrole_main'>
+          <FormBinderWrapper
+            value={this.state.value}
+            onChange={this.formChange}
+            ref="form"
+          >
+            <div>
+              <label>角色名称</label>
+              <FormBinder name="description"
+                          autoWidth={false}
+              >
+                <Input hasClear placeholder='角色名称' />
+              </FormBinder>
+            </div>
+            <div>
+              <label>权限说明</label>
+              <FormBinder name='notes' >
+                <Input hasClear placeholder='角色说明' />
+              </FormBinder>
+            </div>
+            {
+              content.map((item)=>{
+                return (
+                  <div className='premissions_li'>
+                    <FormBinder name='premissions'>
+                      <Checkbox name={item.pmsName} id={item._id} style={{ marginLeft: '5px' }} onChange={this.checkoutbtn.bind(this)}>{item.description}</Checkbox>
+                    </FormBinder>
+                  </div>
+                );
+              })
+            }
+          </FormBinderWrapper>
+        </div>
+        <div className='newrole-btn'>
+          <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
+          <Button type='primary' style={styles.submitbtn} onClick={this.addnewrole.bind(this)}>提交</Button>
+        </div>
       </div>
     );
   }

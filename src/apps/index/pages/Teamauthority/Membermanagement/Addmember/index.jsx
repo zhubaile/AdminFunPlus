@@ -120,7 +120,6 @@ export default class Addmember extends Component {
           <h2 style={{ display: 'inline-block' }}>添加成员</h2>
           <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.addmemberclose.bind(this)}>×</span>
         </div>
-
         <div className='addmember-content'>
           <FormBinderWrapper
             value={this.state.value}
@@ -209,13 +208,10 @@ export default class Addmember extends Component {
               </FormBinder>
               <p style={styles.prompt}>（是否禁用）</p>
             </div>
-            <Button style={styles.submitbtn} onClick={this.Addbtn}>添加</Button>
             <Button style={styles.cancelbtn} onClick={this.addmemberclose.bind(this)}>取消</Button>
+            <Button style={styles.submitbtn} onClick={this.Addbtn}>添加</Button>
           </FormBinderWrapper>
-
         </div>
-
-
       </div>
     );
   }
@@ -233,16 +229,16 @@ const styles = {
   },
   cancelbtn: {
     display: 'inline-block',
-    marginLeft: '10px',
     width: '80px',
     height: '28px',
-    backgroundColor: 'rgba(230, 241, 252, 1)',
-    color: 'rgba(78, 126, 232, 1)',
-    borderColor: 'rgba(193, 241, 248, 1)',
+    backgroundColor: '#E2EDFF',
+    borderColor: '#A3D0FD',
+    color: '#1989FA',
     borderRadius: '4px',
   },
   submitbtn: {
     display: 'inline-block',
+    marginLeft: '10px',
     width: '80px',
     height: '28px',
     backgroundColor: 'rgba(86, 119, 252, 1)',

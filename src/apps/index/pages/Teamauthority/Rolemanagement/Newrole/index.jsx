@@ -141,13 +141,11 @@ export default class Newrole extends Component {
                   })
                 }
           </div>
-          <div>
+          <div className='newbulletbox_btn'>
             <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
             <Button type='primary' style={styles.submitbtn} onClick={this.SubInvoiceinfo.bind(this)}>提交</Button>
           </div>
         </div>
-
-
       </div>
     );
   }
@@ -165,9 +163,9 @@ const styles = {
     margin: '10px 20px 20px 40px',
     width: '80px',
     height: '28px',
-    backgroundColor: 'rgba(230, 241, 252, 1)',
-    color: 'rgba(78, 126, 232, 1)',
-    borderColor: 'rgba(193, 241, 248, 1)',
+    backgroundColor: '#E2EDFF',
+    borderColor: '#A3D0FD',
+    color: '#1989FA',
     borderRadius: '4px',
   },
   submitbtn: {

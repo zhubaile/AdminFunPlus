@@ -34,8 +34,9 @@ export default class Customerservice extends Component {
       byReplyId: '', // 对方id
       userId: '', // 用户id
     };
-    this.socket = io.connect(`ws://192.168.1.118:3000`);
-    // this.socket = io.connect(`ws://funplus.yue-net.com`);
+    this.socket = io.connect(`ws://192.168.1.118:3000`,{ path: '/chat' },{ transports: ['websocket', 'polling'] });
+    // this.socket = io.connect(`ws://47.100.188.156`);
+    // this.socket = io.connect(`ws://funplus.yue-net.com`,{ path: '/chat' },{ transports: ['websocket', 'polling'] });
     this.onScrollHandle = this.onScrollHandle.bind(this);
   }
   // 定时器

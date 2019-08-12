@@ -1,10 +1,9 @@
 /* eslint react/no-string-refs:0 */
 import React, { Component } from 'react';
-import { Grid, DatePicker, Select, Input, Button, Tab, Pagination, Table, Checkbox, Switch, Form } from '@alifd/next';
+import { Grid, DatePicker, Select, Input, Button, Tab, Message, Table, Checkbox, Switch, Form } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import { mailConfigget,mailConfigpost } from '@indexApi';
 import '../../index.css';
-import { Message } from "@alifd/next/lib/index";
 
 const FormItem = Form.Item;
 

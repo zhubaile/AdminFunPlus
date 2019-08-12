@@ -17,7 +17,6 @@ export default class Siteconfiguration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
       value: {
         siteName: '',
         netName: '',

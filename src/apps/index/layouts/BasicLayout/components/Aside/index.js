@@ -27,7 +27,6 @@ export default class Aside extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
   render() {
@@ -37,7 +36,6 @@ export default class Aside extends Component {
       status,
     } = this.props;
     const { openDrawer, collapse } = this.state;
-    debugger;
     return (
       <div className='headaside'>
         {
@@ -74,8 +72,8 @@ export default class Aside extends Component {
               >
                 <MenuItem key="4"><Link to="/backadmin/reconciliation/customSummary">自定义汇总</Link></MenuItem>
                 <MenuItem key="5"><Link to="/backadmin/reconciliation/channelReconciliation">渠道对账</Link></MenuItem>
-                <MenuItem key="6"><Link to="/backadmin/reconciliation/errortransaction">差错交易</Link></MenuItem>
-                <MenuItem key="7"><Link to='/backadmin/reconciliation/daySummary'>当日汇总</Link></MenuItem>
+                {/* <MenuItem key="6"><Link to="/backadmin/reconciliation/errortransaction">差错交易</Link></MenuItem>
+                <MenuItem key="7"><Link to='/backadmin/reconciliation/daySummary'>当日汇总</Link></MenuItem> */}
                 <MenuItem key="8"><Link to="/backadmin/reconciliation/transactionReport">交易报表</Link></MenuItem>
               </SubMenu>
             </StyledMenu>
@@ -251,7 +249,7 @@ export default class Aside extends Component {
                 <MenuItem key="10"><Link to="/backadmin/Systemsettings/mailboxsettings">邮箱收发设置</Link></MenuItem>
                 <MenuItem key="11"><Link to="/backadmin/Systemsettings/smsgatewaysettings">短信网关</Link></MenuItem>
                 <MenuItem key="12"><Link to="/backadmin/Systemsettings/qrcodegateway">二维码网关</Link></MenuItem>
-                <MenuItem key="13"><Link to="/backadmin/Systemsettings/extremesetting">极验设置</Link></MenuItem>
+                {/* <MenuItem key="13"><Link to="/backadmin/Systemsettings/extremesetting">极验设置</Link></MenuItem> */}
                 <MenuItem key="14"><Link to="/backadmin/Systemsettings/platformversion">平台版本</Link></MenuItem>
                 <MenuItem key="15"><Link to="/backadmin/Systemsettings/platforminitialization">平台初始化及系统搬家</Link></MenuItem>
               </SubMenu>

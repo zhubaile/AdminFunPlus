@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Input,Button , Grid, DatePicker , Tab, Select,Table,Pagination ,Message } from '@alifd/next';
+import { Input,Button , Grid, DatePicker , Tab, Select,Table,Pagination ,Message,Icon } from '@alifd/next';
 import { actions, reducers, connect } from '@indexStore';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import moment from "moment/moment";
@@ -12,26 +12,6 @@ import BusinessPaymentBatch from '../BusinessPaymentBatch';
 
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
-
-/*const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};*/
-
-// MOCK 数据，实际业务按需进行替换
-/*const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      name: ['淘小宝', '淘二宝'][random(0, 1)],
-      level: ['普通会员', '白银会员', '黄金会员', 'VIP 会员'][random(0, 3)],
-      balance: random(10000, 100000),
-      accumulative: random(50000, 100000),
-      regdate: `2018-12-1${random(1, 9)}`,
-      birthday: `1992-10-1${random(1, 9)}`,
-      store: ['余杭盒马店', '滨江盒马店', '西湖盒马店'][random(0, 2)],
-      z: ['支付宝'],
-    };
-  });
-};*/
 
 export default class Enterprisepayment extends Component {
   constructor(props) {
@@ -94,10 +74,21 @@ export default class Enterprisepayment extends Component {
     validateFields((errors,values)=>{
       const arrivalDate = [];
       if (values.startdate.length == 2) {
-        const startdatestart = moment(values.startdate[0]._d).valueOf();
-        const startdateend = moment(values.startdate[1]._d).valueOf();
-        arrivalDate.push(startdatestart);
-        arrivalDate.push(startdateend);
+        if (values.startdate[0] && values.startdate[1]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[0]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = '';
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[1]) {
+          const startdatestart = '';
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else {
+          return null;
+        }
       }
       this.fetchData(values,arrivalDate);
     });
@@ -247,47 +238,59 @@ export default class Enterprisepayment extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                <Row wrap gutter="20" style={styles.formRow}>
-                  <Col l="24">
-                    <div style={styles.formItem}>
-                      <span style={styles.formLabel}>选择时间：</span>
-                      <FormBinder name="timeType"
-                        required
-                        message="请输入正确的名称"
-                        autoWidth={false}
-                      >
-                        <Select style={styles.formSpecial} dataSource={dateType} defaultValue='createdAt' />
-                      </FormBinder>
-                      <FormBinder name='startdate'>
-                        <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
-                      </FormBinder>
-                      <span style={styles.formLabel}>付款渠道：</span>
-                      <FormBinder name='payChannel'>
-                        <Select style={styles.formSelect} dataSource={channel} />
-                      </FormBinder>
-                    </div>
-                  </Col>
-                  <Col l="24">
-                    <div style={styles.formItemTwo}>
-                      <span style={styles.formLabel}>付款状态：</span>
-                      <FormBinder name='orderStatus'>
-                        <Select style={styles.formSelect} dataSource={orderStatus} />
-                      </FormBinder>
-                      <span style={styles.formLabel}>订单号：</span>
-                      <FormBinder name='out_trade_no'>
-                        <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
-                      </FormBinder>
-                      <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                      <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
-                      <Button className='btns-all' size="large" type="secondary">导出表格</Button>
-                    </div>
-                  </Col>
-                </Row>
+                {/* <Row wrap gutter="20" style={styles.formRow}>
+                  <Col l="24"> */}
+                <div style={styles.formItem}>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>选择时间：</span>
+                    <FormBinder name="timeType"
+                      required
+                      message="请输入正确的名称"
+                      autoWidth={false}
+                    >
+                      <Select style={styles.formSpecial} dataSource={dateType} defaultValue='createdAt' />
+                    </FormBinder>
+                    <FormBinder name='startdate'>
+                      <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>付款渠道：</span>
+                    <FormBinder name='payChannel'>
+                      <Select style={styles.formSelect} dataSource={channel} />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>付款状态：</span>
+                    <FormBinder name='orderStatus'>
+                      <Select style={styles.formSelect} dataSource={orderStatus} />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>订单号：</span>
+                    <FormBinder name='out_trade_no'>
+                      <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
+                    </FormBinder>
+                  </div>
+                  <div style={{ margin: '10px'}}>
+                    <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                    <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                    <Button className='btns-all right' size="large" type="secondary">导出表格</Button>
+                  </div>
+                  <span className='all_span'><Icon type="success-filling" size='xs' style={{ marginRight: '5px' }} />本次搜索付款总额：5555</span>
+                </div>
+                {/* </Col>
+                  <Col l="24"> */}
+                {/* <div style={styles.formItemTwo}>
+
+                    </div> */}
+                {/*  </Col>
+                </Row> */}
               </FormBinderWrapper>
             </div>
-            <span className='all_span'>本次搜索付款总额：5555</span>
-            <hr />
-            {/*<div className='expendordbat-tabs-border' />*/}
+            {/* <span className='all_span'>本次搜索付款总额：5555</span> */}
+
+            {/* <div className='expendordbat-tabs-border' /> */}
 
             <IceContainer>
               <Table loading={isLoading} dataSource={datas} hasBorder={false}>
@@ -343,6 +346,7 @@ const styles = {
   formItem: {
     display: 'flex',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   formItemTwo: {
     display: 'flex',
@@ -367,5 +371,8 @@ const styles = {
   pagination: {
     marginTop: '20px',
     textAlign: 'right',
+  },
+  formItemdiv: {
+    margin: '10px 0',
   },
 };

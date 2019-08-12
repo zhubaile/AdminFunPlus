@@ -90,16 +90,20 @@ export default class Editingrole extends Component {
     if (!this.state.open) return null;
     return (
       <div className="editingrole">
-        <h2>编辑角色</h2>
-        <div>
-          <label>角色名称</label>
-          <Input name="description" disabled hasClear defaultValue={content.description} ref={node=>this.description = node} />
+        <div className='editingrole-title'>
+          <p style={{ display: 'inline-block', fontSize: '18px' }}>编辑角色</p>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.cancelbtnclose.bind(this)}>×</span>
         </div>
-        <div>
-          <label>权限说明</label>
-          <Input name='notes' hasClear defaultValue={content.notes} ref={node=>this.notes = node} />
-        </div>
-        {
+        <div className='editingrole_main'>
+          <div>
+            <label>角色名称</label>
+            <Input name="description" disabled hasClear defaultValue={content.description} ref={node=>this.description = node} />
+          </div>
+          <div>
+            <label>权限说明</label>
+            <Input name='notes' hasClear defaultValue={content.notes} ref={node=>this.notes = node} />
+          </div>
+          {
             premission.map((item)=>{
               debugger;
               return (
@@ -109,14 +113,12 @@ export default class Editingrole extends Component {
               );
             })
           }
-        {/* defaultChecked={premission.includes(item._id)} // 判断数组里面是否有该字符串，有为true，反之false  */}
-
-        <div>
+          {/* defaultChecked={premission.includes(item._id)} // 判断数组里面是否有该字符串，有为true，反之false  */}
+        </div>
+        <div className='editingrole_btn'>
           <Button type='secondary' style={styles.cancelbtn} onClick={this.cancelbtnclose.bind(this)}>取消</Button>
           <Button type='primary' style={styles.submitbtn} onClick={this.addeditingrole.bind(this)}>提交</Button>
         </div>
-
-
       </div>
     );
   }

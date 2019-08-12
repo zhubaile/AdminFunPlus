@@ -90,10 +90,21 @@ export default class Batchrefund extends Component {
     validateFields((errors,values)=>{
       const arrivalDate = [];
       if (values.startdate.length == 2) {
-        const startdatestart = moment(values.startdate[0]._d).valueOf();
-        const startdateend = moment(values.startdate[1]._d).valueOf();
-        arrivalDate.push(startdatestart);
-        arrivalDate.push(startdateend);
+        if (values.startdate[0] && values.startdate[1]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[0]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = '';
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[1]) {
+          const startdatestart = '';
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else {
+          return null;
+        }
       }
       this.fetchData(values,arrivalDate);
     });
@@ -147,7 +158,7 @@ export default class Batchrefund extends Component {
               <Message type='notice' className='message-all expendbatchre-message'>
                 应用直连：使用您直接申请的渠道支付参数或我们代为您申请的渠道参数进行交易，所有资金有微信，支付宝，银联，持牌方清算
               </Message>
-              <div style={{ marginBottom: '20px' }}>
+              <div className='expendbatchre-top' style={{ marginBottom: '20px' }}>
                 <FormBinderWrapper
                   value={this.state.value}
                   onChange={this.formChange}

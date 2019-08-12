@@ -70,10 +70,21 @@ export default class BusinessPaymentBatch extends Component {
     validateFields((errors,values)=>{
       const arrivalDate = [];
       if (values.startdate.length == 2) {
-        const startdatestart = moment(values.startdate[0]._d).valueOf();
-        const startdateend = moment(values.startdate[1]._d).valueOf();
-        arrivalDate.push(startdatestart);
-        arrivalDate.push(startdateend);
+        if (values.startdate[0] && values.startdate[1]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[0]) {
+          const startdatestart = moment(values.startdate[0]._d).valueOf();
+          const startdateend = '';
+          arrivalDate.push(startdatestart,startdateend);
+        } else if (values.startdate[1]) {
+          const startdatestart = '';
+          const startdateend = moment(values.startdate[1]._d).valueOf();
+          arrivalDate.push(startdatestart,startdateend);
+        } else {
+          return null;
+        }
       }
       this.fetchData(values,arrivalDate);
     });
@@ -172,41 +183,52 @@ export default class BusinessPaymentBatch extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  <Row wrap gutter="20">
-                    <Col l="24">
-                      <div style={styles.formItem}>
-                        <span style={styles.formLabel}>选择时间：</span>
-                        <FormBinder name="timeType"
-                          required
-                          message="请输入正确的名称"
-                          autoWidth={false}
-                        >
-                          <Select style={styles.formSpecial} dataSource={dataType} />
-                        </FormBinder>
-                        <FormBinder name='startdate'>
-                          <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
-                        </FormBinder>
-                        <span style={styles.formLabel}>付款渠道：</span>
-                        <FormBinder name='payChannel'>
-                          <Select style={styles.formSelect} dataSource={channel} />
-                        </FormBinder>
-                      </div>
-                    </Col>
-                    <Col l="24">
-                      <div style={styles.formItemTwo}>
-                        <span style={styles.formLabel}>付款状态：</span>
-                        <FormBinder name='orderStatus'>
-                          <Select style={styles.formSelect} dataSource={orderStatus} />
-                        </FormBinder>
-                        <span style={styles.formLabel}>批次号：</span>
-                        <FormBinder name='batchNo'>
-                          <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
-                        </FormBinder>
-                        <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                        <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
-                      </div>
-                    </Col>
-                  </Row>
+                  {/* <Row wrap gutter="20">
+                    <Col l="24"> */}
+                  <div style={styles.formItem}>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>选择时间：</span>
+                      <FormBinder name="timeType"
+                        required
+                        message="请输入正确的名称"
+                        autoWidth={false}
+                      >
+                        <Select style={styles.formSpecial} dataSource={dataType} />
+                      </FormBinder>
+                      <FormBinder name='startdate'>
+                        <RangePicker style={styles.formTime} showTime resetTime defaultValue={[startValue,endValue]} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>付款渠道：</span>
+                      <FormBinder name='payChannel'>
+                        <Select style={styles.formSelect} dataSource={channel} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>付款状态：</span>
+                      <FormBinder name='orderStatus'>
+                        <Select style={styles.formSelect} dataSource={orderStatus} />
+                      </FormBinder>
+                    </div>
+                    <div style={styles.formItemdiv}>
+                      <span style={styles.formLabel}>批次号：</span>
+                      <FormBinder name='batchNo'>
+                        <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
+                      </FormBinder>
+                    </div>
+                    <div style={{ margin: '10px' }}>
+                      <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                      <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                    </div>
+                  </div>
+                  {/* </Col>
+                    <Col l="24"> */}
+                  {/* <div style={styles.formItemTwo}>
+
+                      </div> */}
+                  {/*  </Col>
+                  </Row> */}
                 </FormBinderWrapper>
               </div>
               <div className='expendordbat-tabs-border' />
@@ -221,7 +243,7 @@ export default class BusinessPaymentBatch extends Component {
                   <Table.Column title="结果" dataIndex="result" cell={this.result} />
                   <Table.Column
                     title="操作"
-                    width={200}
+                    width={70}
                     dataIndex="oper"
                     cell={this.renderOper}
                   />
@@ -259,6 +281,7 @@ const styles = {
   formItem: {
     display: 'flex',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   formItemTwo: {
     display: 'flex',
@@ -283,5 +306,8 @@ const styles = {
   pagination: {
     marginTop: '20px',
     textAlign: 'right',
+  },
+  formItemdiv: {
+    margin: '10px 0',
   },
 };

@@ -82,51 +82,56 @@ export default class Addmenber extends Component {
     debugger;
     return (
       <div className="addmenber">
-        {!confirm.id ? (<h2>添加成员</h2>) : (<h2>编辑成员</h2>)}
-        <FormBinderWrapper
-          value={this.state.value}
-          onChange={this.formChange}
-          ref="form"
-        >
-          <FormBinder name="username" >
-            <Input hasClear placeholder='账号' defaultValue={confirm.username} readOnly={confirm.id} />
-          </FormBinder>
+        <div className='addmenber-title'>
+          <p style={{ display: 'inline-block' }}>{!confirm.id ? '添加成员' : '编辑成员'}</p>
+          <span style={{ fontSize: '38px', color: '#666666', float: 'right', cursor: 'pointer' }} onClick={this.addmemberclose.bind(this)}>×</span>
+        </div>
+        <div className='addmenber_span'>
+          <FormBinderWrapper
+            value={this.state.value}
+            onChange={this.formChange}
+            ref="form"
+          >
+            <FormBinder name="username" >
+              <Input hasClear placeholder='账号' defaultValue={confirm.username} readOnly={confirm.id} />
+            </FormBinder>
 
-          <FormBinder name='email' >
-            <Input hasClear placeholder='邮箱' defaultValue={confirm.username} />
-          </FormBinder>
-          <FormBinder name='phone'>
-            <Input hasClear placeholder='手机号' defaultValue={confirm.username} />
-          </FormBinder>
-          {
-            !confirm.id ? (
-              <FormBinder name='password'>
-                <Input hasClear placeholder='密码' htmlType="password" />
-              </FormBinder>
-            ) : null
-          }
-          {
-            !confirm.id ? (
-              <FormBinder name='passwordTwo'>
-                <Input hasClear placeholder='重复密码' htmlType="password" />
-              </FormBinder>
-            ) : null
-          }
-          <FormBinder name='notes'>
-            <Input hasClear placeholder='备注' htmlType="text" defaultValue={confirm.notes} />
-          </FormBinder>
-          <FormBinder name='roles'>
-            <Select mode="multiple" dataSource={content} placeholder='选择角色' defaultValue={confirm.roles} />
-            {/* <Select dataSource={content} placeholder='选择角色' defaultValue={confirm.roles} /> */}
-          </FormBinder>
-          <FormBinder name="status">
-            <Switch checkedChildren="正常" unCheckedChildren="禁止" defaultChecked={value.status} style={{ marginTop: '10px', width: '100px' }} />
-          </FormBinder>
-          <div>
-            <button className='quxiao' onClick={this.addmemberclose.bind(this)}>取消</button>
-            <button onClick={this.addmember}>添加</button>
-          </div>
-        </FormBinderWrapper>
+            <FormBinder name='email' >
+              <Input hasClear placeholder='邮箱' defaultValue={confirm.username} />
+            </FormBinder>
+            <FormBinder name='phone'>
+              <Input hasClear placeholder='手机号' defaultValue={confirm.username} />
+            </FormBinder>
+            {
+              !confirm.id ? (
+                <FormBinder name='password'>
+                  <Input hasClear placeholder='密码' htmlType="password" />
+                </FormBinder>
+              ) : null
+            }
+            {
+              !confirm.id ? (
+                <FormBinder name='passwordTwo'>
+                  <Input hasClear placeholder='重复密码' htmlType="password" />
+                </FormBinder>
+              ) : null
+            }
+            <FormBinder name='notes'>
+              <Input hasClear placeholder='备注' htmlType="text" defaultValue={confirm.notes} />
+            </FormBinder>
+            <FormBinder name='roles'>
+              <Select mode="multiple" dataSource={content} placeholder='选择角色' defaultValue={confirm.roles} />
+              {/* <Select dataSource={content} placeholder='选择角色' defaultValue={confirm.roles} /> */}
+            </FormBinder>
+            <FormBinder name="status">
+              <Switch checkedChildren="正常" unCheckedChildren="禁止" defaultChecked={value.status} style={{ marginTop: '10px', marginLeft: '10%', width: '100px' }} />
+            </FormBinder>
+          </FormBinderWrapper>
+        </div>
+        <div className='addmenber_btn'>
+          <button className='quxiao' onClick={this.addmemberclose.bind(this)}>取消</button>
+          <button onClick={this.addmember}>添加</button>
+        </div>
       </div>
     );
   }

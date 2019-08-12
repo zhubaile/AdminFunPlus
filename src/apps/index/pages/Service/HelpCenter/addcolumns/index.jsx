@@ -21,6 +21,7 @@ export default class Addcolumns extends Component {
     });
   }
   addcolumnsopen(content,confirm) {
+    debugger;
     this.setState({
       open: true,
       content,
