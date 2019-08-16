@@ -180,8 +180,6 @@ export default class Batchrefund extends Component {
                 <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
                 <Button className='btns-all orderposab' size='large' type='secondary' >批量退款</Button>
               </div>
-              {/* <div className='expendordbat-tabs-border' /> */}
-              <hr />
 
               <IceContainer>
                 <Table loading={isLoading} dataSource={datas} hasBorder={false}>

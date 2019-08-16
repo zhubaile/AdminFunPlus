@@ -102,7 +102,7 @@ export default class Newrole extends Component {
                 <Input hasClear placeholder='角色名称' />
               </FormBinder>
             </div>
-            <div>
+            <div style={{ marginBottom: '20px' }}>
               <label>权限说明</label>
               <FormBinder name='notes' >
                 <Input hasClear placeholder='角色说明' />
@@ -122,8 +122,8 @@ export default class Newrole extends Component {
           </FormBinderWrapper>
         </div>
         <div className='newrole-btn'>
-          <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
-          <Button type='primary' style={styles.submitbtn} onClick={this.addnewrole.bind(this)}>提交</Button>
+          <Button className='btn-all' type='secondary' size='large' style={styles.submitbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
+          <Button type='primary' size='large' style={styles.submitbtn}nClick={this.addnewrole.bind(this)}>提交</Button>
         </div>
       </div>
     );
@@ -131,29 +131,8 @@ export default class Newrole extends Component {
 }
 
 const styles = {
-  cancelbtn: {
-    display: 'inline-block',
-    margin: '10px 20px 20px 40px',
-    /*    position: 'absolute',
-    left: '100px',
-    bottom: '15px', */
-    width: '80px',
-    height: '30px',
-    backgroundColor: 'rgba(255, 159, 159, 1)',
-    color: 'rgba(255, 255, 255, 1)',
-    border: 'none',
-    borderRadius: '5px',
-  },
   submitbtn: {
-    display: 'inline-block',
-    margin: '10px 40px 20px 20px',
-    /*    position: 'absolute',
-    right: '40px',
-    bottom: '15px', */
-    width: '80px',
-    height: '30px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
-    border: 'none',
-    borderRadius: '5px',
+    width: '76px',
+    margin: '0 10px',
   },
 };

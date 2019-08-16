@@ -228,8 +228,6 @@ export default class Orderrefund extends Component {
                 // onChange={this.formChange}
                 ref="form"
               >
-                {/* <Row wrap gutter="20" style={styles.formRow}> */}
-                {/* <Col l="24"> */}
                 <div style={styles.formItem}>
                   <div style={styles.formItemdiv}>
                     <span style={styles.formLabel}>选择时间：</span>
@@ -262,20 +260,13 @@ export default class Orderrefund extends Component {
                       <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
                     </FormBinder>
                   </div>
-                  <div style={{ margin: '10px' }}>
+                  <div style={{ margin: '10px 0' }}>
                     <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                     <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
                     <Button className='btns-all right' size="large" type="secondary">导出表格</Button>
                   </div>
                   <span className='all_span'><Icon type="success-filling" size='xs' style={{ marginRight: '5px' }} />本次搜索退款总额：5555</span>
                 </div>
-                {/* </Col> */}
-                {/* <Col l="24"> */}
-                {/* <div style={styles.formItemTwo}> */}
-                {/**/}
-                {/* </div> */}
-                {/* </Col> */}
-                {/* </Row> */}
               </FormBinderWrapper>
             </div>
             {/* <span className='all_span'>本次搜索付款总额：5555</span> */}

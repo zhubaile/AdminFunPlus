@@ -50,7 +50,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     {/* <Icon type="filter" /> */}
-                    <i className="iconfont icon-shuju" />
+                    <i className="iconfont icon-shishishuju" />
                     <span>实时数据</span>
                   </span>
                 }
@@ -91,7 +91,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     {/* <Icon type="filter" /> */}
-                    <i className="iconfont icon-yingyongguanli2" />
+                    <i className="iconfont icon-yingyong" />
                     <span>应用管理</span>
                   </span>
                 }
@@ -114,7 +114,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     <Link to="/backadmin/businessinformation">
-                      <i className="iconfont icon-icon63" />
+                      <i className="iconfont icon-shanghuxinxi" />
                       <span>商户信息</span>
                     </Link>
                   </span>
@@ -137,7 +137,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     <Link to='/backadmin/service/realtimetion'>
-                      <i className="iconfont icon-huihua" />
+                      <i className="iconfont icon-zixun" />
                       <span>实时咨询</span>
                     </Link>
                   </span>
@@ -149,7 +149,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     <Link to='/backadmin/service/allworkorders'>
-                      <i className="iconfont icon-gongdan1" />
+                      <i className="iconfont icon-gongdan" />
                       <span>工单管理</span>
                     </Link>
                   </span>
@@ -165,7 +165,7 @@ export default class Aside extends Component {
                   <span>
                     {/* <Icon type="filter" /> */}
                     <Link to='/backadmin/service/invoice'>
-                      <i className="iconfont icon-invoice" />
+                      <i className="iconfont icon-fapiao2" />
                       <span>发票</span>
                     </Link>
                   </span>
@@ -178,7 +178,7 @@ export default class Aside extends Component {
                   <span>
                     {/* <Icon type="filter" /> */}
                     <Link to='/backadmin/service/helpCenter'>
-                      <i className="iconfont icon-bangzhuzhongxin" />
+                      <i className="iconfont icon-bangzhu" />
                       <span>帮助中心</span>
                     </Link>
                   </span>
@@ -199,7 +199,7 @@ export default class Aside extends Component {
                 title={
                   <span>
                     {/* <Icon type="filter" /> */}
-                    <i className="iconfont icon-jiekou1" />
+                    <i className="iconfont icon-jiekou" />
                     <span>接口管理</span>
                   </span>
                 }
@@ -213,7 +213,7 @@ export default class Aside extends Component {
                 key="sub2"
                 title={
                   <span>
-                    <i className="iconfont icon-shanghuguanli" />
+                    <i className="iconfont icon-tuandui3" />
                     <span>团队权限</span>
                   </span>
                 }
@@ -226,7 +226,7 @@ export default class Aside extends Component {
                 key="sub3"
                 title={
                   <span>
-                    <i className="iconfont icon-guanli" />
+                    <i className="iconfont icon-zuzhiguanli-quanxianchakan" />
                     <span>管理权限</span>
                   </span>
                 }
@@ -240,7 +240,7 @@ export default class Aside extends Component {
                 key="sub4"
                 title={
                   <span>
-                    <i className="iconfont icon-shezhi1" />
+                    <i className="iconfont icon-setUp" />
                     <span>系统设置</span>
                   </span>
                 }
@@ -257,7 +257,7 @@ export default class Aside extends Component {
                 key="sub5"
                 title={
                   <span>
-                    <i className="iconfont icon-yunying1" />
+                    <i className="iconfont icon--" />
                     <span>运营辅助</span>
                   </span>
                 }
@@ -273,7 +273,7 @@ export default class Aside extends Component {
                 key="sub6"
                 title={
                   <span>
-                    <i className="iconfont icon-gongju2" />
+                    <i className="iconfont icon-gongju" />
                     <span>高级工具</span>
                   </span>
                 }

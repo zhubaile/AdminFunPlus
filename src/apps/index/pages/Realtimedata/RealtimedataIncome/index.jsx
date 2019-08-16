@@ -162,7 +162,6 @@ export default class RealtimedataIncome extends Component {
 
   // 获取到选中的数据
   Choice(args) {
-    debugger;
     this.setState({
       args,
     });
@@ -170,7 +169,6 @@ export default class RealtimedataIncome extends Component {
   // 删除方法
   removes() {
     const { result,args } = this.state;
-    debugger;
     let index = -1;
     args.map((id)=>{
       result.forEach((item, i) => {
@@ -188,6 +186,7 @@ export default class RealtimedataIncome extends Component {
   }
   createdAt=(e)=>{
     const createdAt = moment(e).format('YYYY-MM-DD HH:mm:ss');
+    debugger;
     return (
       <p>{createdAt}</p>
     );
@@ -230,6 +229,15 @@ export default class RealtimedataIncome extends Component {
       debugger;
     });
   }
+  yirubtn(e) {}
+  yichubtn() {}
+  ceshiZhuanyong = (value,index,record) => {
+    return (
+      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} onMouseMove={this.yirubtn.bind(this,value)} onMouseOut={this.yichubtn.bind(this)} title={value} >
+        {value}
+      </div>
+    );
+  };
   render() {
     const { isLoading, data, current,pageSize,total,result,result1,result2 } = this.state;
     const timeType = result2.dateType; // 选择时间下拉框
@@ -268,8 +276,6 @@ export default class RealtimedataIncome extends Component {
                   onChange={this.formChange}
                   ref="form"
                 >
-                  {/* <Row wrap gutter="20" style={styles.formRow}> */}
-                  {/* <Col l="24"> */}
                   <div style={styles.formItem}>
                     <div style={styles.formItemdiv}>
                       <span style={styles.formLabel}>选择时间：</span>
@@ -309,28 +315,9 @@ export default class RealtimedataIncome extends Component {
                         <Select style={styles.formSelect} dataSource={device} />
                       </FormBinder>
                     </div>
-                    <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                    <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
+                    <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
+                    <Button className='btn-all bg' size="large" type="primary" onClick={this.handleReset.bind(this)}>重置</Button>
                   </div>
-                  {/* </Col> */}
-                  {/* <Col l="24"> */}
-                  {/* <div style={styles.formItemTwo}>
-                        <span style={styles.formLabel}>支付渠道：</span>
-                        <FormBinder name='channel'>
-                          <Select style={styles.formSpecial} dataSource={channel} onChange={this.Accesschannels.bind(this)} />
-                        </FormBinder>
-                        <FormBinder name="device" >
-                          <Select style={styles.formSelect} dataSource={device} />
-                        </FormBinder>
-                        <span style={styles.formLabel}>订单号：</span>
-                        <FormBinder name='out_trade_no'>
-                          <Input style={styles.formSelect} placeholder='输入订单号' />
-                        </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
-                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
-                      </div> */}
-                  {/* </Col> */}
-                  {/* </Row> */}
                 </FormBinderWrapper>
 
               </div>
@@ -338,30 +325,24 @@ export default class RealtimedataIncome extends Component {
             <div className='realtimedataincome-panel' >
               <div className=''>
                 <div className='tab-panel'>
-                  <Table loading={isLoading} dataSource={result} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-                    {/*                    <Table.Column
-                      title=""
-                      width={50}
-                      dataIndex=""
-                      cell={this.renderSelectall}
-                    /> */}
-                    <Table.Column title="商户ID" dataIndex="cpId._id" />
-                    <Table.Column title="企业名称" dataIndex="cpId.cpName" />
-                    <Table.Column title="创建时间" dataIndex="createdAt" onClick={this.createdAt} />
-                    <Table.Column title="完成时间" dataIndex="updatedAt" onClick={this.updatedAt} />
-                    <Table.Column title="商户订单号" dataIndex="out_trade_no" />
-                    <Table.Column title="平台流水号" dataIndex="orderNo" />
-                    <Table.Column title="商品名称" dataIndex="orderDes" />
-                    <Table.Column title="备注" dataIndex="" />
-                    <Table.Column title="创建金额" dataIndex="amount" />
-                    <Table.Column title="实付金额" dataIndex="amount_real" />
-                    <Table.Column title="支付状态" dataIndex="orderStatusName" />
-                    <Table.Column title="退款金额" dataIndex="" />
-                    <Table.Column title="退款状态" dataIndex="" />
-                    <Table.Column title="分润金额" dataIndex="" />
-                    <Table.Column title="分润状态" dataIndex="" />
-                    <Table.Column title="渠道" dataIndex="channelName" />
-                    <Table.Column title="设备ID" dataIndex="deviceId" />
+                  <Table loading={isLoading} dataSource={result} hasBorder={false} primaryKey='_id' rowSelection={rowSelection} fixedHeader maxBodyHeight={600}>
+                    <Table.Column title="商户ID" dataIndex="cpId._id" width={240} />
+                    <Table.Column title="企业名称" dataIndex="cpId.cpName" width={200} />
+                    <Table.Column title="创建时间" dataIndex="createdAt" cell={this.createdAt} width={200} />
+                    <Table.Column title="完成时间" dataIndex="updatedAt" cell={this.updatedAt} width={200} />
+                    <Table.Column title="商户订单号" dataIndex="out_trade_no" width={200} />
+                    <Table.Column title="平台流水号" dataIndex="orderNo" width={200} />
+                    <Table.Column title="商品名称" dataIndex="orderDes" width={200} />
+                    <Table.Column title="备注" dataIndex="" width={200} />
+                    <Table.Column title="创建金额" dataIndex="amount" width={200} />
+                    <Table.Column title="实付金额" dataIndex="amount_real" width={200} />
+                    <Table.Column title="支付状态" dataIndex="orderStatusName" width={200} />
+                    <Table.Column title="退款金额" dataIndex="" width={150} />
+                    <Table.Column title="退款状态" dataIndex="" width={150} />
+                    <Table.Column title="分润金额" dataIndex="" width={150} />
+                    <Table.Column title="分润状态" dataIndex="" width={150} />
+                    <Table.Column title="渠道" dataIndex="channelName" width={150} cell={this.ceshiZhuanyong} />
+                    <Table.Column title="设备ID" dataIndex="deviceId" width={150} />
                     <Table.Column title="操作" dataIndex="oper" cell={this.renderOper} width={70} />
                   </Table>
                   <Pagination
@@ -412,7 +393,7 @@ const styles = {
     marginRight: '25px',
   },
   delbtn: {
-    marginLeft: '20px',
+    // marginLeft: '20px',
   },
   formItemdiv: {
     margin: '10px 0',

@@ -139,7 +139,7 @@ export default class CustomSummary extends Component {
                         <FormBinder name="deviceId" >
                           <Select style={styles.formSelect} dataSource={paymentchanneltwo} />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                        <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
                       </div>
                     </Col>
                   </Row>

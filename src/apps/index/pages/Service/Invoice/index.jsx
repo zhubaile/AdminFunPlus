@@ -249,7 +249,7 @@ export default class Invoice extends Component {
                   />
                   <Table.Column
                     title="操作"
-                    width={200}
+                    width={180}
                     dataIndex="operation"
                     cell={this.renderOper}
                   />

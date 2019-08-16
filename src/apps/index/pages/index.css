@@ -17,8 +17,8 @@ a:active{ text-decoration: none; }
 /*Btn全局样式*/
 .next-btn.next-large.next-btn-secondary.btns-all{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; margin-left: 15px;}
 .next-btn.next-large.next-btn-secondary.btns-all:hover{ background-color: #225AE1; color: #FFFFFF;}
-.next-btn.next-large.next-btn-primary.btns-all{ height: 30px; background-color: #0076FF; border-color: #60A9FF; color: #FFFFFF; border-radius: 4px; margin-left: 15px;}
-.next-btn.next-large.next-btn-primary.btns-all:hover{ background-color: #225AE1; color: #FFFFFF;}
+.next-btn.next-large.next-btn-primary{ height: 30px; background-color: #0076FF; border-color: #60A9FF; color: #FFFFFF; border-radius: 4px; margin-left: 15px;}
+.next-btn.next-large.next-btn-primary:hover{ background-color: #225AE1; color: #FFFFFF;}
 .next-btn.next-large.next-btn-secondary.btn-all{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; width: 76px; margin-right: 15px;}
 .next-btn.next-large.next-btn-secondary.btn-all:hover{ background-color: #225AE1; color: #FFFFFF;}
 .next-btn.next-large.next-btn-primary.btn-all{ height: 30px; background-color: #0076FF; border-color: #60A9FF; color: #FFFFFF; border-radius: 4px; width: 76px; margin-right: 15px;}
@@ -36,6 +36,9 @@ a:active{ text-decoration: none; }
 .next-btn.next-large.next-btn-secondary.bg{ margin-left: 20px;}
 /*.next-btn.next-large.next-btn-secondary.tablebtn{ margin-right: 5px;}*/
 
+/* IceContainer格式的列表页 (tabel)*/
+.expendbatchre .container-block, .expendordbat .container-block, .auditofpayment .container-block{margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 0; margin-bottom: 20px;}
 /*开关组件样式*/
 .switchSty .next-switch-on{ background-color: #01E266;}
 .switchSty .next-switch-on:focus, .next-switch-on:hover{ background-color: #01E266;}
@@ -53,7 +56,8 @@ a:active{ text-decoration: none; }
 .realtimedataincome .income-tabs-border{ clear: both; border-bottom: 1px solid #dddddd;}
 .realtimedataincome .realtimedataincome-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}
-.realtimedataincome-panel .tab-panel{ padding-bottom: 20px; }
+.realtimedataincome-panel .tab-panel{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
 /*支出概况-支出*/
 .outlay{ width: 100%;}
 .outlay .outlay-tabs{display: inline-block;}
@@ -72,14 +76,16 @@ a:active{ text-decoration: none; }
 .paymentreview .paymentreview-tabs div{display: inline-block; padding: 5px 10px; border-radius: 4px; border: 1px solid #A3D0FD; background-color: #E2EDFF; color: #419DFA; margin-right: 15px; }
 .paymentreview-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px; margin-bottom: 20px;}
-.paymentreview-panel .tab-panel{ padding-bottom: 20px; }
+.paymentreview-panel .tab-panel{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); margin-bottom: 20px; padding: 20px;}
 /*对账-差错交易*/
 /*对账-渠道对账*/
 .channelreconciliation{ width: 100%;}
 .channelreconciliation .income-tabs{display: inline-block;}
 .channelreconciliation-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}
-.channelreconciliation-panel .tab-panel{ padding-bottom: 20px; }
+.channelreconciliation-panel .tab-panel{  margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}
 /*对账-自定义汇总*/
 .customsummary{ width: 100%;}
 .customsummary-top{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
@@ -222,9 +228,11 @@ a:active{ text-decoration: none; }
 /*角色管理-新增角色弹框*/
 .newrole-bulletbox{ position: fixed; width: 960px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -480px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0 0 10px #b5b3b3; overflow: auto;}
-.newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.newrole-bulletbox .newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+/*.newrole-bulletbox .newrole-title p{ margin: 6px 0 12px 0;}*/
+/*.newrole-bulletbox .newrole-title span{ margin-top: -12px;}*/
 .newbulletbox_btn{ clear: both; text-align: center;}
-.newrole-content{ padding: 20px 10px;}
+.newrole-content{ padding: 10px;}
 .newrole-content .premissions_li{ width: 20%; float: left; height: 30px;}
 .newrole-content div{ margin: 8px auto;}
 .newrole-content div label{ margin-right: 15px;}
@@ -415,8 +423,10 @@ a:active{ text-decoration: none; }
 /*成员管理----新增角色--starting*/
 .newrole{ position: fixed; width: 960px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -480px; z-index: 8888;
   border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;box-shadow: 0 0 10px #b5b3b3; overflow: auto;}
-.newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
-.newrole .newrole_main{width: 100%; padding: 10px 20px;}
+.newrole .newrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.newrole .newrole-title p{ margin: 6px 0 12px 0;}
+.newrole .newrole-title span{ margin-top: -12px;}
+.newrole .newrole_main{width: 100%; padding: 5px 20px;}
 .newrole .premissions_li{ width: 20%; float: left; height: 30px;}
 .newrole div{ margin: 8px auto;}
 .newrole label{ margin-right: 10px;}
@@ -426,9 +436,11 @@ a:active{ text-decoration: none; }
 /*成员管理----编辑角色--starting*/
 .editingrole{ position: fixed; width: 960px; height: 800px; top: 50%; left: 50%; margin-top: -400px; margin-left: -480px;  z-index: 8888;
   border-radius: 10px 10px 10px 10px;background-color: rgba(255, 255, 255, 1);color: rgba(16, 16, 16, 1);font-size: 14px;box-shadow: 0 0 10px #b5b3b3;overflow: auto;}
-.editingrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.editingrole .editingrole-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
+.editingrole .editingrole-title p{ margin: 6px 0 12px 0;}
+.editingrole .editingrole-title span{ margin-top: -12px;}
 .editingrole_btn{ clear: both; text-align: center;}
-.editingrole .editingrole_main{width: 100%; padding: 10px 20px;}
+.editingrole .editingrole_main{width: 100%; padding: 5px 20px;}
 .editingrole .premissions_li{ width: 20%; float: left; height: 30px;}
 .editingrole div{ margin: 8px auto;}
 .editingrole label{ margin-right: 10px;}

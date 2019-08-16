@@ -217,7 +217,7 @@ export default class BusinessPaymentBatch extends Component {
                         <Input style={styles.formSelect} placeholder='输入订单号' hasClear />
                       </FormBinder>
                     </div>
-                    <div style={{ margin: '10px' }}>
+                    <div style={{ margin: '10px 0' }}>
                       <Button className='btn-all' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
                       <Button className='btn-all' size="large" type="secondary" onClick={this.handleReset.bind(this)}>重置</Button>
                     </div>

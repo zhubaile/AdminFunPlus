@@ -109,9 +109,9 @@ export default class TransactionReport extends Component {
                         <FormBinder name='startdate'>
                           <RangePicker style={styles.formTime} className='showHour' showTime resetTime />
                         </FormBinder>
-                        <Button className='btn-all bg' size="large" type="secondary">查询</Button>
-                        <Button className='btns-all' size="large" type="secondary">月报表下载</Button>
-                        <Button className='btns-all' size="large" type="secondary">日报表下载</Button>
+                        <Button className='btn-all bg' size="large" type="primary">查询</Button>
+                        <Button className='btns-all' size="large" type="primary">月报表下载</Button>
+                        <Button className='btns-all' size="large" type="primary">日报表下载</Button>
                       </div>
                     </Col>
                   </Row>

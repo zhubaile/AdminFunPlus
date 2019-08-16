@@ -99,7 +99,7 @@ export default class Editingrole extends Component {
             <label>角色名称</label>
             <Input name="description" disabled hasClear defaultValue={content.description} ref={node=>this.description = node} />
           </div>
-          <div>
+          <div style={{ marginBottom: '20px' }}>
             <label>权限说明</label>
             <Input name='notes' hasClear defaultValue={content.notes} ref={node=>this.notes = node} />
           </div>
@@ -116,8 +116,8 @@ export default class Editingrole extends Component {
           {/* defaultChecked={premission.includes(item._id)} // 判断数组里面是否有该字符串，有为true，反之false  */}
         </div>
         <div className='editingrole_btn'>
-          <Button type='secondary' style={styles.cancelbtn} onClick={this.cancelbtnclose.bind(this)}>取消</Button>
-          <Button type='primary' style={styles.submitbtn} onClick={this.addeditingrole.bind(this)}>提交</Button>
+          <Button className='btn-all' type='secondary' size='large' style={styles.submitbtn} onClick={this.cancelbtnclose.bind(this)}>取消</Button>
+          <Button type='primary' size='large' style={styles.submitbtn} onClick={this.addeditingrole.bind(this)}>提交</Button>
         </div>
       </div>
     );
@@ -125,29 +125,8 @@ export default class Editingrole extends Component {
 }
 
 const styles = {
-  cancelbtn: {
-    display: 'inline-block',
-    margin: '10px 20px 20px 40px',
-    /*    position: 'absolute',
-    left: '100px',
-    bottom: '15px', */
-    width: '80px',
-    height: '30px',
-    backgroundColor: 'rgba(255, 159, 159, 1)',
-    color: 'rgba(255, 255, 255, 1)',
-    border: 'none',
-    borderRadius: '5px',
-  },
   submitbtn: {
-    display: 'inline-block',
-    margin: '10px 20px 20px 40px',
-    /*    position: 'absolute',
-    right: '40px',
-    bottom: '15px', */
-    width: '80px',
-    height: '30px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
-    border: 'none',
-    borderRadius: '5px',
+    width: '76px',
+    margin: '0 10px',
   },
 };

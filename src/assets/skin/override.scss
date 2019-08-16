@@ -39,10 +39,11 @@ body {
 .ice-layout .ice-layout-aside {
   color: #666;
   .ice-menu:not(.ice-menu-horizontal) .ice-menu-item-selected {
-    background-image: linear-gradient(90deg, #1861d5 0%, #3080fe 100%);
+    // background-image: linear-gradient(90deg, #1861d5 0%, #3080fe 100%);
+    background: none;
     border-radius: 6px;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
-    color: #fff;
+    color: #5485f7;
     &.ice-menu-item-selected:before {
       width: 0;
     }
@@ -70,12 +71,12 @@ body {
   }
   .ice-menu-item-selected,
   .ice-menu-item-selected > a {
-    color: #fff;
+    color: #3080fe;
   }
   .ice-menu-submenu-title,
   .ice-menu-submenu-title,
   i::before {
-    font-weight: bold;
+    font-weight: normal;
   }
 
   // 侧边导航折叠

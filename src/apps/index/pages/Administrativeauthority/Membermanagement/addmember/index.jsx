@@ -1,7 +1,7 @@
 /* eslint  react/no-string-refs: 0 */
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { Input, Radio , Message, Switch, Form, Select } from '@alifd/next';
+import { Input, Radio , Message, Switch, Form, Select,Button } from '@alifd/next';
 import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binder';
 import { sysCreateUser } from '@indexApi';
 import '../../../index.css';
@@ -129,8 +129,8 @@ export default class Addmenber extends Component {
           </FormBinderWrapper>
         </div>
         <div className='addmenber_btn'>
-          <button className='quxiao' onClick={this.addmemberclose.bind(this)}>取消</button>
-          <button onClick={this.addmember}>添加</button>
+          <Button className='btn-all' type='secondary' size='large' onClick={this.addmemberclose.bind(this)}>取消</Button>
+          <Button type='primary' size='large' onClick={this.addmember}>添加</Button>
         </div>
       </div>
     );

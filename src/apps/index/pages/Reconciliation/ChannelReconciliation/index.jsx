@@ -202,7 +202,7 @@ export default class ChannelReconciliation extends Component {
                         <Input style={styles.formSelect} className='input-bg' placeholder='' />
                       </FormBinder>
                     </div>
-                    <Button className='btn-all bg' size="large" type="secondary" onClick={this.search.bind(this)}>搜索</Button>
+                    <Button className='btn-all bg' size="large" type="primary" onClick={this.search.bind(this)}>搜索</Button>
                   </div>
                   {/* </Col>
                     <Col l="24"> */}
@@ -219,12 +219,6 @@ export default class ChannelReconciliation extends Component {
               <div className=''>
                 <div className='tab-panel'>
                   <Table loading={isLoading} dataSource={data} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-                    {/* <Table.Column
-                      title=""
-                      width={50}
-                      dataIndex=""
-                      cell={this.renderSelectall}
-                    /> */}
                     <Table.Column title="商户ID" dataIndex="merchantId" />
                     <Table.Column title="商户订单号" dataIndex="order" />
                     <Table.Column title="支付渠道" dataIndex="pay" />

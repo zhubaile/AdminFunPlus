@@ -102,7 +102,7 @@ export default class Newrole extends Component {
     return (
       <div className='newrole-bulletbox'>
         <div className='newrole-title'>
-          <h2 style={{ display: 'inline-block' }}>新增角色</h2>
+          <h2 style={{ display: 'inline-block', fontSize: '18px' }}>新增角色</h2>
           <span style={styles.cha} onClick={this.newroleclose.bind(this)}>×</span>
         </div>
         <div className='newrole-content'>
@@ -116,7 +116,7 @@ export default class Newrole extends Component {
               ref={node=>this.description = node}
             />
           </div>
-          <div>
+          <div style={{ marginBottom: '20px' }}>
             <label>角色描述</label>
             <Input
               name="notes"
@@ -142,8 +142,8 @@ export default class Newrole extends Component {
                 }
           </div>
           <div className='newbulletbox_btn'>
-            <Button type='secondary' style={styles.cancelbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
-            <Button type='primary' style={styles.submitbtn} onClick={this.SubInvoiceinfo.bind(this)}>提交</Button>
+            <Button className='btn-all' type='secondary' size='large' style={styles.submitbtn} onClick={this.newroleclose.bind(this)}>取消</Button>
+            <Button type='primary' size='large' style={styles.submitbtn} onClick={this.SubInvoiceinfo.bind(this)}>提交</Button>
           </div>
         </div>
       </div>
@@ -158,22 +158,8 @@ const styles = {
     float: 'right',
     cursor: 'pointer',
   },
-  cancelbtn: {
-    display: 'inline-block',
-    margin: '10px 20px 20px 40px',
-    width: '80px',
-    height: '28px',
-    backgroundColor: '#E2EDFF',
-    borderColor: '#A3D0FD',
-    color: '#1989FA',
-    borderRadius: '4px',
-  },
   submitbtn: {
-    display: 'inline-block',
-    margin: '10px 20px 20px 40px',
-    width: '80px',
-    height: '28px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
-    borderRadius: '4px',
+    width: '76px',
+    margin: '0 10px',
   },
 };

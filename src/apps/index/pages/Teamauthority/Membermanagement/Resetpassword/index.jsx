@@ -11,8 +11,8 @@ const FormItem = Form.Item;
 
 const { Row, Col } = Grid;
 const formItemLayout = {
-  labelCol: { xxs: 8, s: 6, l: 6 },
-  wrapperCol: { s: 12, l: 14 },
+  labelCol: { xxs: 6, s: 6, l: 6 },
+  wrapperCol: { xxs: 14, s: 14, l: 14 },
 };
 export default class Resetpassword extends Component {
   constructor(props) {
@@ -51,15 +51,13 @@ export default class Resetpassword extends Component {
       value,
     });
   };
-
-  SubInvoiceinfo(r,v) {
+  Subadd() {
     const content = this.state.content;
-    debugger;
+    const value = this.state.value;
     changePwd({
       _id: content,
-      ...r,
+      ...value,
     }).then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
         Message.success(data.message);
         this.resetPasswordclose();
@@ -80,7 +78,7 @@ export default class Resetpassword extends Component {
         </div>
 
         <div className='resetpsd-content'>
-          <Form className='form' name={value}>
+          <Form className='form' name={value} onChange={this.formChange}>
             <FormItem
               label='新密码'
               {...formItemLayout}
@@ -103,10 +101,10 @@ export default class Resetpassword extends Component {
                 name="passwordTwo"
                 htmlType='password'
                 placeholder="请输入确认新密码"
-                /* defaultValue={content.invoiceTitle} */
               />
             </FormItem>
-            <FormItem wrapperCol={{ offset: 6 }} >
+            {/* <FormItem wrapperCol={{ offset: 6 }} >
+              <Form.Reset style={styles.cancelbtn} onClick={this.resetPasswordclose.bind(this)}>取消</Form.Reset>
               <Form.Submit
                 style={styles.submitbtn}
                 validate
@@ -115,8 +113,11 @@ export default class Resetpassword extends Component {
               >
                 确认
               </Form.Submit>
-              <Form.Reset style={styles.cancelbtn} onClick={this.resetPasswordclose.bind(this)}>取消</Form.Reset>
-            </FormItem>
+            </FormItem> */}
+            <div style={{ textAlign: 'center' }}>
+              <Button className='btn-all' type='secondary' size='large' style={styles.submitbtn} onClick={this.resetPasswordclose.bind(this)}>取消</Button>
+              <Button type='primary' size='large' style={styles.submitbtn} onClick={this.Subadd.bind(this)}>添加</Button>
+            </div>
           </Form>
         </div>
 
@@ -142,10 +143,7 @@ const styles = {
     borderRadius: '4px',
   },
   submitbtn: {
-    display: 'inline-block',
-    width: '80px',
-    height: '28px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
-    borderRadius: '4px',
+    width: '76px',
+    margin: '0 10px',
   },
 };

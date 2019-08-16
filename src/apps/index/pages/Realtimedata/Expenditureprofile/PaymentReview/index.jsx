@@ -7,25 +7,6 @@ import { FormBinderWrapper, FormBinder , FormError } from '@icedesign/form-binde
 import '../../../index.css';
 
 const { Item } = MenuButton;
-/* const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-const getData = (length = 10) => {
-  return Array.from({ length }).map(() => {
-    return {
-      merchantId: '000662',
-      name: ['花果山'],
-      time: '20190606',
-      order: '02456245',
-      remark: ['￥100.00'],
-      email: ['支付中'],
-      tel: ['api付款'],
-      status: '京东代付',
-      oper: ['查看'],
-      _id: random(10000, 20000,30000,50025,68522),
-    };
-  });
-}; */
 const { RangePicker } = DatePicker;
 const { Row, Col } = Grid;
 export default class PaymentReview extends Component {
@@ -195,12 +176,6 @@ export default class PaymentReview extends Component {
           <div className='tab-bg'>
             <div className='tab-panel'>
               <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-                {/*                    <Table.Column
-                      title=""
-                      width={50}
-                      dataIndex=""
-                      cell={this.renderSelectall}
-                    /> */}
                 <Table.Column title="商户ID" dataIndex="cpId" />
                 <Table.Column title="企业名称" dataIndex="cpName" />
                 <Table.Column title="创建时间" dataIndex="createdAt" />
@@ -251,6 +226,6 @@ const styles = {
     margin: '0 10px',
   },
   delbtn: {
-    marginLeft: '20px',
+    // marginLeft: '20px',
   },
 };

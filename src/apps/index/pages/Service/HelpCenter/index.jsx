@@ -91,7 +91,7 @@ export default class HelpCenter extends Component {
     return (
       <div className='helpCenter'>
         <Addcolumns ref={node=>this.Addcolumns = node} fetchData={this.fetchData.bind(this)} />
-        <Button className='btns-all Addcolumns' size='large' type='secondary' onClick={this.addcolumnsbtn.bind(this)}>添加栏目</Button>
+        <Button className='btns-all Addcolumns' size='large' type='primary' onClick={this.addcolumnsbtn.bind(this)}>添加栏目</Button>
         <Tab shape='pure'>
           <Tab.Item title="帮助中心">
             {/* <Button className='btns-all Addcolumns' size='large' type='secondary' onClick={this.addcolumnsbtn.bind(this)}>添加栏目</Button> */}

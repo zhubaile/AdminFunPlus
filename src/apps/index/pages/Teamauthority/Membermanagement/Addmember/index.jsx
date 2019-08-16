@@ -208,8 +208,8 @@ export default class Addmember extends Component {
               </FormBinder>
               <p style={styles.prompt}>（是否禁用）</p>
             </div>
-            <Button style={styles.cancelbtn} onClick={this.addmemberclose.bind(this)}>取消</Button>
-            <Button style={styles.submitbtn} onClick={this.Addbtn}>添加</Button>
+            <Button className='btn-all' type='secondary' size='large' style={styles.submitbtn} onClick={this.addmemberclose.bind(this)}>取消</Button>
+            <Button type='primary' size='large' style={styles.submitbtn} onClick={this.Addbtn}>添加</Button>
           </FormBinderWrapper>
         </div>
       </div>
@@ -237,12 +237,8 @@ const styles = {
     borderRadius: '4px',
   },
   submitbtn: {
-    display: 'inline-block',
-    marginLeft: '10px',
-    width: '80px',
-    height: '28px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
-    borderRadius: '4px',
+    width: '76px',
+    margin: '0 10px',
   },
   prompt: {
     color: 'rgba(108, 117, 125, 0.7)',

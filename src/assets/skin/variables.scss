@@ -559,6 +559,231 @@ $balloon-tooltip-size-padding-bottom: 12px;
 
 $balloon-tooltip-size-padding-left: 12px;
 
+// ------------------------ message ------------------------ //
+
+$message-size-l-padding: 16px;
+
+$message-size-l-border-width: 2px;
+
+$message-size-l-title-content-padding-left: 12px;
+
+$message-size-l-title-content-padding-right: 20px;
+
+$message-size-l-title-font: 20px;
+
+$message-size-l-content-margin-top: 8px;
+
+$message-size-l-content-font: 14px;
+
+$message-size-l-close-top: 16px;
+
+$message-size-l-close-right: 16px;
+
+$message-size-l-icon: 24px;
+
+$message-size-m-padding: 12px;
+
+$message-size-m-border-width: 1px;
+
+$message-size-m-title-content-padding-left: 8px;
+
+$message-size-m-title-content-padding-right: 20px;
+
+$message-size-m-title-font: 16px;
+
+$message-size-m-content-margin-top: 8px;
+
+$message-size-m-content-font: 14px;
+
+$message-size-m-close-top: 12px;
+
+$message-size-m-close-right: 12px;
+
+$message-size-m-icon: 16px;
+
+$message-close-icon-size: 12px;
+
+$message-border-radius: 3px;
+
+$message-border-style: solid;
+
+$message-border-radius-toast: 3px;
+
+$message-border-style-toast: solid;
+
+$message-shadow-toast: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+
+$message-success-color-bg-inline: #D6FFF3;
+
+$message-success-color-bg-addon: transparent;
+
+$message-success-color-bg-toast: #FFFFFF;
+
+$message-success-color-border-inline: #D6FFF3;
+
+$message-success-color-border-toast: #FFFFFF;
+
+$message-success-color-title-inline: #333333;
+
+$message-success-color-title-addon: #333333;
+
+$message-success-color-title-toast: #333333;
+
+$message-success-color-content-inline: #666666;
+
+$message-success-color-content-addon: #666666;
+
+$message-success-color-content-toast: #666666;
+
+$message-success-color-icon-inline: #2ECA9C;
+
+$message-success-color-icon-addon: #2ECA9C;
+
+$message-success-color-icon-toast: #2ECA9C;
+
+$message-error-color-bg-inline: #FFECE4;
+
+$message-error-color-bg-addon: transparent;
+
+$message-error-color-bg-toast: #FFFFFF;
+
+$message-error-color-border-inline: #FFECE4;
+
+$message-error-color-border-toast: #FFFFFF;
+
+$message-error-color-title-inline: #333333;
+
+$message-error-color-title-addon: #333333;
+
+$message-error-color-title-toast: #333333;
+
+$message-error-color-content-inline: #666666;
+
+$message-error-color-content-addon: #666666;
+
+$message-error-color-content-toast: #666666;
+
+$message-error-color-icon-inline: #FF3000;
+
+$message-error-color-icon-addon: #FF3000;
+
+$message-error-color-icon-toast: #FF3000;
+
+$message-warning-color-bg-inline: #FFF9E0;
+
+$message-warning-color-bg-addon: transparent;
+
+$message-warning-color-bg-toast: #FFFFFF;
+
+$message-warning-color-border-inline: #FFF9E0;
+
+$message-warning-color-border-toast: #FFFFFF;
+
+$message-warning-color-title-inline: #333333;
+
+$message-warning-color-title-addon: #333333;
+
+$message-warning-color-title-toast: #333333;
+
+$message-warning-color-content-inline: #666666;
+
+$message-warning-color-content-addon: #666666;
+
+$message-warning-color-content-toast: #666666;
+
+$message-warning-color-icon-inline: #F1C826;
+
+$message-warning-color-icon-addon: #F1C826;
+
+$message-warning-color-icon-toast: #F1C826;
+
+$message-notice-color-bg-inline: #EAF0FF;
+
+$message-notice-color-bg-addon: transparent;
+
+$message-notice-color-bg-toast: #FFFFFF;
+
+$message-notice-color-border-inline: #EAF0FF;
+
+$message-notice-color-border-toast: #FFFFFF;
+
+$message-notice-color-title-inline: #333333;
+
+$message-notice-color-title-addon: #333333;
+
+$message-notice-color-title-toast: #333333;
+
+$message-notice-color-content-inline: #666666;
+
+$message-notice-color-content-addon: #666666;
+
+$message-notice-color-content-toast: #666666;
+
+$message-notice-color-icon-inline: #5485F7;
+
+$message-notice-color-icon-addon: #5485F7;
+
+$message-notice-color-icon-toast: #5485F7;
+
+$message-help-color-bg-inline: #FFF9E0;
+
+$message-help-color-bg-addon: transparent;
+
+$message-help-color-bg-toast: #FFFFFF;
+
+$message-help-color-border-inline: #FFF9E0;
+
+$message-help-color-border-toast: #FFFFFF;
+
+$message-help-color-title-inline: #333333;
+
+$message-help-color-title-addon: #333333;
+
+$message-help-color-title-toast: #333333;
+
+$message-help-color-content-inline: #666666;
+
+$message-help-color-content-addon: #666666;
+
+$message-help-color-content-toast: #666666;
+
+$message-help-color-icon-inline: #F1C826;
+
+$message-help-color-icon-addon: #F1C826;
+
+$message-help-color-icon-toast: #F1C826;
+
+$message-loading-color-bg-inline: #FFFFFF;
+
+$message-loading-color-bg-addon: transparent;
+
+$message-loading-color-bg-toast: #FFFFFF;
+
+$message-loading-color-border-inline: #FFFFFF;
+
+$message-loading-color-border-toast: #FFFFFF;
+
+$message-loading-color-title-inline: #333333;
+
+$message-loading-color-title-addon: #333333;
+
+$message-loading-color-title-toast: #333333;
+
+$message-loading-color-content-inline: #666666;
+
+$message-loading-color-content-addon: #666666;
+
+$message-loading-color-content-toast: #666666;
+
+$message-loading-color-icon-inline: #3080FE;
+
+$message-loading-color-icon-addon: #3080FE;
+
+$message-loading-color-icon-toast: #3080FE;
+
+$message-close-icon-color: #999999;
+
+$message-hover-close-icon-color: #666666;
 
 
 
@@ -1000,6 +1225,8 @@ $input-size-m-font: 14px;
 
 
 // ------------------------ menu ------------------------ //
+
+
 
 $menu-border-color: transparent;
 
@@ -1669,13 +1896,16 @@ $step-dot-item-title-process-color: #2077FF;
 
 // ------------------------ switch ------------------------ //
 
-$switch-normal-on-bg-color: #FFC107;
+//$switch-normal-on-bg-color: #FFC107;
+//$switch-hover-on-bg-color: #FFA000;
 
 $switch-hover-off-bg-color: #F4F4F4;
 
 $switch-hover-off-border-color: #C4C6CF;
 
-$switch-hover-on-bg-color: #FFA000;
+$switch-normal-on-bg-color: #01e266;
+
+$switch-hover-on-bg-color: #01e266;
 
 $switch-disabled-off-bg-color: #E0E0E0;
 
@@ -1749,23 +1979,70 @@ $tab-wrapped-tab-corner-radius: 4px;
 
 // ------------------------ table ------------------------ //
 
+
+$table-normal-border-width: 1px;
+
+$table-th-font-size: 14px;
+
+$table-th-font-weight: normal;
+
+$table-sort-icon-size: 12px;
+
+$table-filter-icon-size: 12px;
+
+$table-body-font-size: 14px;
+
+$table-empty-padding: 32px;
+
+$table-expanded-icon-size: 12px;
+
+$table-tree-expanded-icon-size: 12px;
+
 $table-cell-padding-top: 12px;
 
-$table-sort-color: #666666;
+$table-cell-padding-left: 16px;
 
-$table-cell-padding-left: 12px;
+$table-group-split: 8px;
 
-$table-td-gray: #F4F4F4;
+$table-normal-border-color: #DCDEE3;
 
-$table-normal-border-color: #EEEFF3;
+$table-normal-border-style: solid;
 
-$table-th-bg: #FFFFFF;
+$table-th-bg: #EBECF0;
 
-$table-th-color: #999999;
+$table-th-color: #333333;
 
-$table-group-th-bg: #F4F4F4;
+$table-sort-color: #333333;
 
-$table-row-hover-bg: #F4F4F4;
+$table-group-th-bg: #EBECF0;
+
+$table-group-th-color: #333333;
+
+$table-row-bg: #FFFFFF;
+
+$table-row-color: #333333;
+
+$table-td-gray: #F7F8FA;
+
+$table-td-normal: #FFFFFF;
+
+$table-empty-color: #A0A2AD;
+
+$table-group-footer-bg: #EBECF0;
+
+$table-group-footer-color: #333333;
+
+$table-row-hover-bg: #F7F8FA;
+
+$table-row-hover-color: #333333;
+
+$table-row-selected-bg: #F2F3F7;
+
+$table-row-selected-color: #333333;
+
+$table-sort-color-current: #3080FE;
+
+$table-expanded-ctrl-disabled-color: #999999;
 
 
 
@@ -2527,38 +2804,38 @@ $line3-dotted: $line-3-width $line-dotted;
 
 // lessUnsupport
 @function shadow-maker(
-    $direction: $shadow-sides-base,
-    $blur: $shadow-blur-sd1,
-    $shadow-color: $shadow-color-opacity-sd1,
-    $shadow-x: $shadow-distance-sd1,
-    $shadow-y: $shadow-distance-sd1,
-    $shadow-spread: $shadow-spread-sd1
+  $direction: $shadow-sides-base,
+  $blur: $shadow-blur-sd1,
+  $shadow-color: $shadow-color-opacity-sd1,
+  $shadow-x: $shadow-distance-sd1,
+  $shadow-y: $shadow-distance-sd1,
+  $shadow-spread: $shadow-spread-sd1
 
 ) {
 
-    $x: $shadow-x;
-    $y: $shadow-y;
-    $b: $blur;
-    $c: $shadow-color;
-    $s: $shadow-spread;
+  $x: $shadow-x;
+  $y: $shadow-y;
+  $b: $blur;
+  $c: $shadow-color;
+  $s: $shadow-spread;
 
-    @if ($b == 0) {
-        @return 0 0 0 #FFFFFF;
-    }
+  @if ($b == 0) {
+    @return 0 0 0 #FFFFFF;
+  }
 
-    @if ($direction == $shadow-sides-up) {
-        $x: 0;
-        $y: -$shadow-y;
-    } @else if ($direction == $shadow-sides-right) {
-        $y: 0;
-    } @else if ($direction == $shadow-sides-down) {
-        $x: 0;
-    } @else if ($direction == $shadow-sides-left) {
-        $x: -$shadow-x;
-        $y: 0;
-    }
+  @if ($direction == $shadow-sides-up) {
+    $x: 0;
+    $y: -$shadow-y;
+  } @else if ($direction == $shadow-sides-right) {
+    $y: 0;
+  } @else if ($direction == $shadow-sides-down) {
+    $x: 0;
+  } @else if ($direction == $shadow-sides-left) {
+    $x: -$shadow-x;
+    $y: 0;
+  }
 
-    @return #{$x}px #{$y}px #{$b}px #{$s}px $c;
+  @return #{$x}px #{$y}px #{$b}px #{$s}px $c;
 }
 
 $shadow-color-opacity-sd1: rgba($shadow-color-sd1, $shadow-opacity-sd1) !default;
