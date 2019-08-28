@@ -11,8 +11,8 @@ const FormItem = Form.Item;
 
 const { Row, Col } = Grid;
 const formItemLayout = {
-  labelCol: { xxs: 8, s: 6, l: 6 },
-  wrapperCol: { s: 12, l: 14 },
+  labelCol: { s: 8, l: 8 },
+  wrapperCol: { s: 12, l: 12 },
 };
 export default class Edit extends Component {
   constructor(props) {
@@ -73,7 +73,6 @@ export default class Edit extends Component {
   render() {
     const { isLoading,content, confirm,value,dustyInfo } = this.state;
     const payChannel = dustyInfo.channel;
-    debugger;
     if (!this.state.open) return null;
     console.log(value);
     return (
@@ -86,7 +85,7 @@ export default class Edit extends Component {
         <div className='edit-content'>
           <Form className='form' value={value}>
             <FormItem
-              label='企业名称'
+              label='企业名称：'
               {...formItemLayout}
             >
               <Input
@@ -97,7 +96,7 @@ export default class Edit extends Component {
               />
             </FormItem>
             <FormItem
-              label='统一社会信用代码'
+              label='统一社会信用代码：'
               {...formItemLayout}
             >
               <Input
@@ -109,7 +108,7 @@ export default class Edit extends Component {
               />
             </FormItem>
             <FormItem
-              label='法人姓名'
+              label='法人姓名：'
               {...formItemLayout}
               /* asterisk */
             >
@@ -121,7 +120,7 @@ export default class Edit extends Component {
             </FormItem>
 
             <FormItem
-              label='企业地址'
+              label='企业地址：'
               {...formItemLayout}
             >
               <Input
@@ -132,7 +131,7 @@ export default class Edit extends Component {
             </FormItem>
 
             <FormItem
-              label='所属行业'
+              label='所属行业：'
               {...formItemLayout}
             >
               <Select
@@ -147,7 +146,7 @@ export default class Edit extends Component {
             </FormItem>
 
             <FormItem
-              label='联系方式'
+              label='联系方式：'
               {...formItemLayout}
             >
               <Input
@@ -157,7 +156,7 @@ export default class Edit extends Component {
               />
             </FormItem>
             <FormItem
-              label='联系邮箱'
+              label='联系邮箱：'
               {...formItemLayout}
             >
               <Input

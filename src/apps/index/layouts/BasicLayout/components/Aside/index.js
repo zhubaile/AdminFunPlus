@@ -184,6 +184,18 @@ export default class Aside extends Component {
                   </span>
                 }
               />
+              <SubMenu
+                className='cancel'
+                key="sub5"
+                title={
+                  <span>
+                    <Link to='/backadmin/service/messagecenter'>
+                      <i className="iconfont icon-xiaoxi2" />
+                      <span>消息中心</span>
+                    </Link>
+                  </span>
+                }
+              />
             </StyledMenu>
           ) : null
         }

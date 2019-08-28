@@ -594,6 +594,27 @@ export async function device(params) {
     data: params,
   });
 }
+// 消息中心列表
+export async function bulletinlist(params) {
+  return ajaxAmd.get({
+    url: '/bulletin/list',
+    params,
+  });
+}
+// 公告删除
+export async function bulletindelete(params) {
+  return ajaxAmd.delete({
+    url: '/bulletin/delete',
+    data: params,
+  });
+}
+// 公告增加
+export async function bulletinadd(params) {
+  return ajaxAmd.post({
+    url: '/bulletin/add',
+    data: params,
+  });
+}
 // BackAdmin的API接口 zbl ending
 // BackAdmin的API接口 kkk starting
 // 收入

@@ -199,11 +199,15 @@ a:active{ text-decoration: none; }
 .resetpsd-title{ border-bottom: 1px solid #dddddd; padding: 0 20px;}
 .resetpsd-content{ margin: 20px auto; padding: 0 20px;}
 /*商户信息-编辑弹框*/
-.edit-bulletbox{ position: fixed; width: 600px; height: 640px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
+.edit-bulletbox{ position: fixed; width: 600px; height: 560px; top: 50%; left: 50%; margin-top: -280px; margin-left: -300px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
   border: 1px solid #BBBBBB;}
 .edit-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
 .edit-content{ margin: 20px auto;}
+.edit-content .next-form .next-row{ margin-top: 20px;}
+.edit-content .next-form .next-row .next-col-s-8{ text-align: right; padding: 7px}
+.edit-content .next-form .next-row .next-col-s-12{ padding-left: 20px;}
+.edit-content .next-form .next-row .next-col-offset-6{ padding-left: 20px;}
 .edit-content .next-form-item .next-radio-wrapper{ margin-right: 20px;}
 /*商户信息-冻结用户弹框*/
 .freezeuser-bulletbox{ position: fixed; width: 480px; height: 300px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
@@ -211,16 +215,26 @@ a:active{ text-decoration: none; }
   border: 1px solid #BBBBBB;}
 .freezeuser-title{ background-color: rgba(26, 85, 226, 0.95); text-align: center; border: none; padding: 0 10px;}
 .freezeuser-title h2{ margin: 0; line-height: 40px; color: rgba(255, 255, 255, 1);}
-.freezeuser-mid{ text-align: center;}
+.freezeuser-mid{ text-align: center; margin: 60px 0;}
 .freezeuser-mid p{ color: rgba(16, 16, 16, 1);  font-size: 16px;}
-.freezeuser-content{ margin: 20px auto;}
 /*商户信息-认证状态弹框*/
-.certificationstatus-bulletbox{ position: fixed; width: 400px; height: 300px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px; z-index: 8888;
+.certificationstatus-bulletbox{ position: fixed; width: 500px; height: 550px; top: 50%; left: 50%; margin-top: -275px; margin-left: -250px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
   border: 1px solid #BBBBBB;}
 .certificationstatus-title{ border-bottom: 1px solid #dddddd; padding: 0 10px;}
 .certificationstatus-content{ margin: 20px auto;}
 .certificationstatus-content .next-form-item .next-radio-wrapper{ margin-right: 20px;}
+.certificationstatus-content .next-form .next-row{ margin-top: 20px;}
+.certificationstatus-content .next-form .next-row .next-col-8{ text-align: right;}
+.certificationstatus-content .next-form .next-row .next-col-14{ padding-left: 20px;}
+.certificationstatus-content .next-form .next-row .next-col-offset-6{ padding-left: 20px;}
+
+.idcardimg{position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9000;}
+.idcardimg .idcardimg-shadow{position: fixed; top: 0; left: 0; width: 100%; height: 100%;background-color: #000; opacity: 0.7;}
+.idcardimg .idcardimg-mainimg{position:fixed; width: 500px; height: 550px; top: 50%; left: 50%; margin-top: -275px; margin-left: -250px;}
+.Businesslicense{position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9000; }
+.Businesslicense .Businesslicense-shadow{position: fixed; top: 0; left: 0; width: 100%; height: 100%;background-color: #000; opacity: 0.7;}
+.Businesslicense .Businesslicense-mainimg{position:fixed; width: 600px; height: 400px; top: 50%; left: 50%; margin-top: -200px; margin-left: -300px;}
 /*团队权限-角色管理*/
 .rolemanagement-content{ margin-top: 10px;border-radius: 10px;background-color: rgba(255, 255, 255, 1);font-size: 14px; position: relative;
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);border: 1px solid rgba(255, 255, 255, 0); padding: 20px 15px; margin-bottom: 20px;}

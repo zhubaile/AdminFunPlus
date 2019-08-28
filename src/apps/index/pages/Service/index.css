@@ -204,3 +204,22 @@ a:hover .sidebar-navone,a:hover .sidebar-navtwo{ background:#037cf8; color: #FFF
 .invoicedetails-footer div{ display: inline-block; vertical-align: top; width: 50%;}
 .invoicedetails-footer div ul li{ line-height: 30px;}
 .invoicedetails-footer div ul li span{ font-weight: normal;}
+
+/* 消息中心 */
+.MessageCenter{ width: 100%;}
+.MessageCenter-main{ padding: 20px;}
+.MessageCenter-main .next-input.next-medium.next-select-inner{ border-radius: 4px;}
+.MessageCenter .Addmessage{ float: right; z-index: 10;}
+
+.addmessage{position: fixed; width: 500px; height:300px;  top: 50%; left: 50%; margin-top: -250px; margin-left: -110px; z-index: 8888; background-color: #FFF; border-radius: 5px; font-size: 16px;
+  -webkit-box-shadow: 1px 1px 3px #666; -moz-box-shadow: 1px 1px 3px #666; box-shadow: 1px 1px 3px #666; overflow: auto;line-height: 20px;border: 1px solid rgba(187, 187, 187, 1); padding: 10px 0;}
+.addmessage .addmessage-top{ width: 100%; height: 40px; border-bottom: 1px solid #999;}
+.addmessage .addmessage-top span{float: left; padding-left: 15px; line-height: 30px;}
+.addmessage .addmessage-top strong{ float: right; font-size: 25px; font-weight: 500; cursor: pointer; padding-right: 15px;}
+
+.addmessage-content{ clear: both;}
+.addmessage-content .next-form .next-row{ margin-top: 20px;}
+.addmessage-content .next-form .next-row .next-col-6{ text-align: right;}
+.addmessage-content .next-form .next-row .next-col-16{ padding-left: 20px;}
+
+.addmessage .addmessage-btn{margin-left: 25%; margin-top: 20px; }

@@ -5,7 +5,7 @@ import qs from 'qs';
 const ajaxConfig = {
   timeout: 30000,
   withCredentials: true,
-  urlPrefix: '/admin/web', // 请求本地的/admin/web，通过代理访问服务器的/admin
+  urlPrefix: '/admin/web', // 请求本地的/admin/web，通过代理访问服务器的/admin/web
   // 此处错误
   // urlPrefix: 'http://funplus.yue-net.com:8888/admin/web', // 这样写就成跨域了，
   // urlPrefix: 'http://funplus.yue-net.com/admin/web',
@@ -32,7 +32,6 @@ const ajaxBase = (param) => {
       // 判断权限 还需添加
       // const appid = Cookies.get('userId');
       console.log(data);
-      debugger;
       if (data.status === 401) {
       // if (!appid) {
         debugger;

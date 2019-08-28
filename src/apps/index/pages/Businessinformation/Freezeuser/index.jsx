@@ -50,24 +50,23 @@ export default class Freezeuser extends Component {
     const _id = this.state.content._id;
     const statues = this.state.content.frozenState;
     let frozenState;
-    if (statues == 1) {
-      frozenState = 2;
-    } else if (statues == 2) {
-      frozenState = 1;
+    if (statues == true) {
+      frozenState = false;
+    } else if (statues == false) {
+      frozenState = true;
     } else {
       return null;
     }
-    debugger;
     companyfreeze({
       _id,
       frozenState,
     }).then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
-        debugger;
         Message.success(data.message);
         this.freezeUserclose();
         this.props.fetchData();
+      } else {
+        Message.success(data.message);
       }
     });
   }
@@ -78,18 +77,18 @@ export default class Freezeuser extends Component {
       <div className='freezeuser-bulletbox'>
         <div className='freezeuser-title'>
           {
-            content.frozenState == 2 ? (
+            content.frozenState == false ? (
               <h2 style={{ display: 'inline-block' }}>解冻用户</h2>
             ) : (
               <h2 style={{ display: 'inline-block' }}>冻结用户</h2>
             )
           }
           {/*          <h2 style={{ display: 'inline-block' }}>冻结用户</h2> */}
-          <span style={{ fontSize: '38px', color: '#ffffff', float: 'right', cursor: 'pointer' }} onClick={this.freezeUserclose.bind(this)}>×</span>
+          <span style={{ fontSize: '38px', color: '#ffffff', float: 'right', cursor: 'pointer',lineHeight: '38px' }} onClick={this.freezeUserclose.bind(this)}>×</span>
         </div>
         <div className='freezeuser-mid'>
           {
-            content.frozenState == 2 ? (
+            content.frozenState == false ? (
               <p>确定要解冻用户吗？</p>
             ) : (
               <p>确定要冻结用户吗？</p>
@@ -99,7 +98,7 @@ export default class Freezeuser extends Component {
 
         <div className='freezeuser-content'>
           <Form className='form' value={value}>
-            <FormItem wrapperCol={{ offset: 6 }} >
+            <FormItem wrapperCol={{ offset: 8 }} >
               <Form.Submit
                 style={styles.submitbtn}
                 validate

@@ -30,11 +30,11 @@ export default class Customerservice extends Component {
       array: {
         roles: [],
       }, // 用户的个人信息
-      username: '', // 当前对方用户名称
+      // username: '', // 当前客服名称,8-19更改成array.username
       byReplyId: '', // 对方id
       userId: '', // 用户id
     };
-    this.socket = io.connect(`ws://192.168.1.118:3000`,{ path: '/chat' },{ transports: ['websocket', 'polling'] });
+    this.socket = io.connect(`ws://192.168.1.121:3001`,{ path: '/chat' },{ transports: ['websocket', 'polling'] });
     // this.socket = io.connect(`ws://47.100.188.156`);
     // this.socket = io.connect(`ws://funplus.yue-net.com`,{ path: '/chat' },{ transports: ['websocket', 'polling'] });
     this.onScrollHandle = this.onScrollHandle.bind(this);
@@ -51,7 +51,6 @@ export default class Customerservice extends Component {
     this.fetchData();
     /* 联系人的列表 */
     workOrderserviceList().then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
         this.setState({
           workOrderserviceLists: data.data,
@@ -67,11 +66,12 @@ export default class Customerservice extends Component {
       senderType: 2,
       userId,
     }).then(({ status,data })=>{
+      debugger;
       if (data.errCode == 0) {
         this.setState({
           datas: data.data,
           array: data.userInfo,
-          username: data.userInfo.username,
+          // username: data.userInfo.username,
           userId,
           byReplyId: data.userInfo.byReplyId,
         },()=>{
@@ -94,7 +94,6 @@ export default class Customerservice extends Component {
     });
     this.socket.on('message',(msg)=>{
       console.log(msg);
-      debugger;
       this.setState((prevState)=>{
         prevState.messagelist.push(msg);
         return prevState;
@@ -171,7 +170,6 @@ export default class Customerservice extends Component {
     const customerContent = this.state.Probleminput; // 输入框的值
     // const times = moment().format('YYYY-MM-DD HH:mm:ss');
     const times = moment().valueOf();
-    debugger;
     if (!customerContent) {
       return Message.success('输入问题不能为空');
     }
@@ -202,18 +200,16 @@ export default class Customerservice extends Component {
   // 切换用户
   SwitchingUsers(e) {
     const userId = this.state.userId;
-    debugger;
     workOrderuserRecord({
       userId,
       byReplyId: e,
       senderType: 2,
     }).then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
         this.setState({
           datas: data.data, // 获取之前的聊天记录
           messagelist: [], // 此刻聊天记录清空
-          username: data.userInfo.username,
+          // username: data.userInfo.username,
           array: data.userInfo,
           byReplyId: e,
           userId,
@@ -226,13 +222,12 @@ export default class Customerservice extends Component {
     });
   }
   render() {
-    const { stylecolor,workOrdersessionLists,workOrderserviceLists, datas, messagelist,username,array } = this.state;
+    const { stylecolor,workOrdersessionLists,workOrderserviceLists, datas, messagelist,array } = this.state;
+    const username = array.username;
     const zbla = (
       messagelist.map((item) => {
         const userid = this.state.userId; // 自己的id
         const times = moment(item.times).format('YYYY-MM-DD HH:mm:ss');
-        console.log(times);
-        debugger;
         return (
           <div>
             {
@@ -291,7 +286,6 @@ export default class Customerservice extends Component {
             {
               stylecolor == true ? (
                 workOrdersessionLists.map((item)=>{
-                  debugger;
                   return (
                     <div className='user-w' onClick={this.SwitchingUsers.bind(this,item.sendId)}>
                       <div className="avatar with-status status-green">
@@ -423,7 +417,7 @@ export default class Customerservice extends Component {
               <p>企业名称：{array.cpName}</p>
               <p>联系方式：{array.phone}</p>
               <p>联系邮箱：{array.email}</p>
-              <p>角色名称：{array.roles.join('.')}</p>
+              <p>角色名称：{array.roles?array.roles.join('.'):''}</p>
             </div>
           </div>
         </div>

@@ -111,9 +111,10 @@ export default class Businessinformation extends Component {
     return (
       <div className='tb_span'>
         <span onClick={this.editBtnOpen.bind(this,record,dustyInfo)}>编辑</span>
+        <span onClick={this.certificationStatusOpen.bind(this,record)}>审核</span>
         <span style={{ color: 'darkorange' }} onClick={this.freezeUserOpen.bind(this,record)}>
-          {v == 1 ? '冻结' : null}
-          {v == 2 ? '解冻' : null}
+          {v == false ? '解冻' : null}
+          {v == true ? '冻结' : null}
         </span>
       </div>
     );
@@ -121,8 +122,8 @@ export default class Businessinformation extends Component {
   renderCertification = (v,e,record) => {
     debugger;
     return (
-      <div style={{ color: 'red', cursor: 'pointer' }}>
-        <span onClick={this.certificationStatusOpen.bind(this,record)}>
+      <div>
+        <span>
           {v == 1 ? '待审核' : null}
           {v == 2 ? '审核通过' : null}
           {v == 3 ? '审核失败' : null}
@@ -143,7 +144,6 @@ export default class Businessinformation extends Component {
     });
   }
   editBtnOpen(record,dustyInfo) {
-    debugger;
     this.Edit.editopen(record,dustyInfo);
   }
   freezeUserOpen(record) {
@@ -151,12 +151,10 @@ export default class Businessinformation extends Component {
     this.Freezeuser.freezeUseropen(record);
   }
   certificationStatusOpen(record) {
-    debugger;
     this.Certificationstatus.certificationopen(record);
   }
   // 获取到选中的数据
   Choice(args) {
-    debugger;
     this.setState({
       args,
     });
@@ -164,7 +162,6 @@ export default class Businessinformation extends Component {
   // 删除方法
   removes() {
     const { result,args } = this.state;
-    debugger;
     let index = -1;
     args.map((id)=>{
       result.forEach((item, i) => {
@@ -210,57 +207,57 @@ export default class Businessinformation extends Component {
                 onChange={this.formChange}
                 ref="form"
               >
-                {/*<Row wrap gutter="20">
-                  <Col l="24">*/}
-                    <div style={styles.formItem}>
-                      <div style={styles.formItemdiv}>
-                        <span style={styles.formLabel}>商户ID：</span>
-                        <FormBinder name="id"
-                                    autoWidth={false}
-                        >
-                          <Input style={styles.formSelect} placeholder='' />
-                        </FormBinder>
-                      </div>
-                      <div style={styles.formItemdiv}>
-                       <span style={styles.formLabel}>企业名称：</span>
-                       <FormBinder name='cpName'>
-                         <Input style={styles.formSelect} placeholder='' />
-                       </FormBinder>
-                     </div>
-                      <div style={styles.formItemdiv}>
-                        <span style={styles.formLabel}>法人姓名：</span>
-                        <FormBinder name='linkName'>
-                          <Input style={styles.formSelect} placeholder='' />
-                        </FormBinder>
-                      </div>
-                      <div style={styles.formItemdiv}>
-                       <span style={styles.formLabel}>所属行业：</span>
-                       <FormBinder name='cpIndustryCategory'>
-                         <Select style={styles.formSelect} dataSource={payChannel} />
-                       </FormBinder>
-                     </div>
-                      <div style={styles.formItemdiv}>
-                      <span style={styles.formLabel}>手机号：</span>
-                      <FormBinder name='linkPhone'>
-                        <Input style={styles.formSelect} className='input-bg' placeholder='' />
-                      </FormBinder>
-                    </div>
-                      <div style={styles.formItemdiv}>
-                       <span style={styles.formLabel}>状态：</span>
-                       <FormBinder name='frozenState' >
-                         <Select style={styles.formSelect} dataSource={device} />
-                       </FormBinder>
-                     </div>
-                      <Button className='btn-all' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
-                      <Button className='btn-all' size="large" type="primary" style={{ opacity: '0.5' }} onClick={this.resetbtn.bind(this)}>重置</Button>
-                    </div>
-                 {/* </Col>
-                  <Col l="24">*/}
-                    {/*<div style={styles.formItemTwo}>
+                {/* <Row wrap gutter="20">
+                  <Col l="24"> */}
+                <div style={styles.formItem}>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>商户ID：</span>
+                    <FormBinder name="id"
+                      autoWidth={false}
+                    >
+                      <Input style={styles.formSelect} placeholder='' />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>企业名称：</span>
+                    <FormBinder name='cpName'>
+                      <Input style={styles.formSelect} placeholder='' />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>法人姓名：</span>
+                    <FormBinder name='linkName'>
+                      <Input style={styles.formSelect} placeholder='' />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>所属行业：</span>
+                    <FormBinder name='cpIndustryCategory'>
+                      <Select style={styles.formSelect} dataSource={payChannel} />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>手机号：</span>
+                    <FormBinder name='linkPhone'>
+                      <Input style={styles.formSelect} className='input-bg' placeholder='' />
+                    </FormBinder>
+                  </div>
+                  <div style={styles.formItemdiv}>
+                    <span style={styles.formLabel}>状态：</span>
+                    <FormBinder name='frozenState' >
+                      <Select style={styles.formSelect} dataSource={device} />
+                    </FormBinder>
+                  </div>
+                  <Button className='btn-all' size="large" type="primary" onClick={this.searchbtn.bind(this)}>搜索</Button>
+                  <Button className='btn-all' size="large" type="primary" style={{ opacity: '0.5' }} onClick={this.resetbtn.bind(this)}>重置</Button>
+                </div>
+                {/* </Col>
+                  <Col l="24"> */}
+                {/* <div style={styles.formItemTwo}>
 
-                    </div>*/}
+                    </div> */}
                 {/*  </Col>
-                </Row>*/}
+                </Row> */}
               </FormBinderWrapper>
             </div>
             <div className='businessinformation-panel' >
