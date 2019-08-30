@@ -167,14 +167,14 @@ export default class Certificationstatus extends Component {
               >
                 确认
               </Form.Submit>
-              <Form.Reset style={styles.cancelbtn} onClick={this.certificationclose.bind(this)}>取消</Form.Reset>
+              <Form.Reset style={styles.cancelbtn} onClick={this.certificationclose.bind(this)}>
+                取消
+              </Form.Reset>
             </FormItem>
             {/* <Button className='btn-all' size="large" type="primary" onClick={this.certificationclose.bind(this)>取消</Button> */}
             {/* <Button type='primary'style={styles.submitbtn} siza='large' onClick={this.SubInvoiceinfo.bind(this)}>提交</Button> */}
           </Form>
         </div>
-
-
       </div>
     );
   }
@@ -186,16 +186,16 @@ const styles = {
     marginLeft: '10px',
     width: '80px',
     height: '28px',
-    backgroundColor: 'rgba(230, 241, 252, 1)',
-    color: 'rgba(78, 126, 232, 1)',
-    borderColor: 'rgba(193, 241, 248, 1)',
+    // backgroundColor: 'rgba(230, 241, 252, 1)',
+    // color: 'rgba(78, 126, 232, 1)',
+    // borderColor: 'rgba(193, 241, 248, 1)',
     borderRadius: '4px',
   },
   submitbtn: {
     display: 'inline-block',
     width: '80px',
     height: '28px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
+    // backgroundColor: 'rgba(86, 119, 252, 1)',
     borderRadius: '4px',
   },
 };

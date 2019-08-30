@@ -394,6 +394,7 @@ export default class Customerservice extends Component {
                   value={this.state.Probleminput}
                   onChange={this.probleminput.bind(this)}
                   onKeyDown={this.onprobleminputKey}
+                  disabled={!username}
                   // ref={node => this.charmessageself = node}
                 />
                 {/* <input placeholder="Type your message here..." type="text" /> */}
@@ -417,7 +418,7 @@ export default class Customerservice extends Component {
               <p>企业名称：{array.cpName}</p>
               <p>联系方式：{array.phone}</p>
               <p>联系邮箱：{array.email}</p>
-              <p>角色名称：{array.roles?array.roles.join('.'):''}</p>
+              <p>角色名称：{array.roles ? array.roles.join('.') : ''}</p>
             </div>
           </div>
         </div>

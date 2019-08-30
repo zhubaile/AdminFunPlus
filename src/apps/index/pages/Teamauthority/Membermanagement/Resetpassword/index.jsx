@@ -114,7 +114,7 @@ export default class Resetpassword extends Component {
                 确认
               </Form.Submit>
             </FormItem> */}
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
               <Button className='btn-all' type='secondary' size='large' style={styles.submitbtn} onClick={this.resetPasswordclose.bind(this)}>取消</Button>
               <Button type='primary' size='large' style={styles.submitbtn} onClick={this.Subadd.bind(this)}>添加</Button>
             </div>

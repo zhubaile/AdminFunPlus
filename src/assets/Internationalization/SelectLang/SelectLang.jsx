@@ -26,7 +26,10 @@ export default class SelectLang extends Component {
         onChange={this.changeLang}
         value={selectedLang}
         size="small"
+        autoWidth={false}
+        hasBorder={false}
         style={{ display: 'flex', alignItems: 'center' }}
+        popupStyle={{ border: 'none',borderRadius: '4px' }}
       >
         {Object.keys(LANG_CONFIG).map((lang) => {
           return (

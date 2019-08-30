@@ -133,7 +133,7 @@ class Rolepermissions extends Component {
   };
   renderOper = (value,index,record) => {
     return (
-      <div>
+      <div style={{ cursor: 'pointer' }}>
         <a
           style={{ color: 'rgba(26, 85, 226, 1)', padding: '0px 5px', borderRight: '2px solid #999999' }}
           onClick={this.editingrolebtnopen.bind(this,record)}

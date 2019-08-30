@@ -19,6 +19,9 @@ a:active{ text-decoration: none; }
 .next-btn.next-large.next-btn-secondary.btns-all:hover{ background-color: #225AE1; color: #FFFFFF;}
 .next-btn.next-large.next-btn-primary{ height: 30px; background-color: #0076FF; border-color: #60A9FF; color: #FFFFFF; border-radius: 4px; margin-left: 15px;}
 .next-btn.next-large.next-btn-primary:hover{ background-color: #225AE1; color: #FFFFFF;}
+.next-btn.next-medium.next-btn-primary{ height: 30px; background-color: #0076FF; border-color: #60A9FF; color: #FFFFFF; border-radius: 4px; margin-left: 15px;}
+.next-btn.next-medium.next-btn-primary:hover{ background-color: #225AE1; color: #FFFFFF;}
+
 .next-btn.next-large.next-btn-secondary.btn-all{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; width: 76px; margin-right: 15px;}
 .next-btn.next-large.next-btn-secondary.btn-all:hover{ background-color: #225AE1; color: #FFFFFF;}
 .next-btn.next-large.next-btn-primary.btn-all{ height: 30px; background-color: #0076FF; border-color: #60A9FF; color: #FFFFFF; border-radius: 4px; width: 76px; margin-right: 15px;}
@@ -198,6 +201,9 @@ a:active{ text-decoration: none; }
   border: 1px solid #BBBBBB;}
 .resetpsd-title{ border-bottom: 1px solid #dddddd; padding: 0 20px;}
 .resetpsd-content{ margin: 20px auto; padding: 0 20px;}
+
+.resetpsd-bulletbox .resetpsd-content .next-btn.next-medium.next-btn-normal{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; width: 76px; margin-right: 15px;}
+.resetpsd-bulletbox .resetpsd-content .next-btn.next-medium.next-btn-normal:hover{background-color: #225AE1; color: #FFFFFF;}
 /*商户信息-编辑弹框*/
 .edit-bulletbox{ position: fixed; width: 600px; height: 560px; top: 50%; left: 50%; margin-top: -280px; margin-left: -300px; z-index: 8888;
   border-radius: 4px; background-color: rgba(255, 255, 255, 1); color: rgba(16, 16, 16, 1); font-size: 14px; box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 1);
@@ -229,6 +235,14 @@ a:active{ text-decoration: none; }
 .certificationstatus-content .next-form .next-row .next-col-14{ padding-left: 20px;}
 .certificationstatus-content .next-form .next-row .next-col-offset-6{ padding-left: 20px;}
 
+/* 商户信息三个弹框的取消按钮样式 */
+.businessinformation .certificationstatus-bulletbox .certificationstatus-content .next-btn.next-medium.next-btn-normal{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; width: 76px; margin-right: 15px;}
+.businessinformation .certificationstatus-bulletbox .certificationstatus-content .next-btn.next-medium.next-btn-normal:hover{background-color: #225AE1; color: #FFFFFF;}
+.businessinformation .edit-bulletbox .edit-content .next-btn.next-medium.next-btn-normal{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; width: 76px; margin-right: 15px;}
+.businessinformation .edit-bulletbox .edit-content .next-btn.next-medium.next-btn-normal:hover{background-color: #225AE1; color: #FFFFFF;}
+.businessinformation .freezeuser-bulletbox .freezeuser-content .next-btn.next-medium.next-btn-normal{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; width: 76px; margin-right: 15px;}
+.businessinformation .freezeuser-bulletbox .freezeuser-content .next-btn.next-medium.next-btn-normal:hover{background-color: #225AE1; color: #FFFFFF;}
+/* ending商户信息 */
 .idcardimg{position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9000;}
 .idcardimg .idcardimg-shadow{position: fixed; top: 0; left: 0; width: 100%; height: 100%;background-color: #000; opacity: 0.7;}
 .idcardimg .idcardimg-mainimg{position:fixed; width: 500px; height: 550px; top: 50%; left: 50%; margin-top: -275px; margin-left: -250px;}

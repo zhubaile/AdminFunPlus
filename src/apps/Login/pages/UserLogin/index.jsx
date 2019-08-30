@@ -141,7 +141,7 @@ class UserLogin extends Component {
                 <IceFormError name="password" />
               </div>
 
-              <div style={styles.formItem}>
+              {/* <div style={styles.formItem}>
                 <IceFormBinder name="checkbox">
                   <Checkbox style={styles.checkbox}>
                     <FormattedMessage id='app.login.storage.number' />
@@ -150,7 +150,7 @@ class UserLogin extends Component {
                 <a style={{ float: 'right', cursor: 'pointer' }}>
                   <FormattedMessage id='app.login.forget.password' />
                 </a>
-              </div>
+              </div> */}
 
               <div style={styles.footer}>
                 <Button
@@ -169,22 +169,22 @@ class UserLogin extends Component {
           </IceFormBinderWrapper>
         </div>
         <div style={styles.right}>
-         <div>
-           <div style={styles.box}>
-             <IceImg
-               src={require('@img/login/tel.png')}
-             />
-             <p> <FormattedMessage id='app.login.Tel.consult' /></p>
-             <a>000-1111-2222</a>
-           </div>
-           <div style={styles.box}>
-             <IceImg
-               src={require('@img/login/email.png')}
-             />
-             <p><FormattedMessage id='app.login.Mail.box' /></p>
-             <a>YanYue@3FunPlus.com</a>
-           </div>
-         </div>
+          <div>
+            <div style={styles.box}>
+              <IceImg
+                src={require('@img/login/tel.png')}
+              />
+              <p> <FormattedMessage id='app.login.Tel.consult' /></p>
+              <a>000-1111-2222</a>
+            </div>
+            <div style={styles.box}>
+              <IceImg
+                src={require('@img/login/email.png')}
+              />
+              <p><FormattedMessage id='app.login.Mail.box' /></p>
+              <a>YanYue@3FunPlus.com</a>
+            </div>
+          </div>
         </div>
       </div>
     );

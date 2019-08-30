@@ -96,30 +96,30 @@ export default class HelpCenter extends Component {
           <Tab.Item title="帮助中心">
             {/* <Button className='btns-all Addcolumns' size='large' type='secondary' onClick={this.addcolumnsbtn.bind(this)}>添加栏目</Button> */}
             <div className='helpCenter-main'>
-              <Form value={this.state.value} onChange={this.formChange} ref="form" {...formItemLayout}>
+              <Form value={this.state.value} onChange={this.formChange} {...formItemLayout}>
                 <FormItem label='所属栏目'
-                  style={{ margin: '10px 0' }}
+                  style={{ margin: '20px 0' }}
                   required
                   requiredMessage="不能为空"
                 >
                   <Select style={styles.formbinderbox} name="columnName" dataSource={columnslist} />
                 </FormItem>
                 <FormItem label='标题'
-                  style={{ margin: '10px 0' }}
+                  style={{ margin: '20px 0' }}
                   required
                   requiredMessage="不能为空"
                 >
                   <Input style={styles.formbinderbox} name='title' placeholder='输入自定义名称备注' hasClear />
                 </FormItem>
                 <FormItem label='关键字'
-                  style={{ margin: '10px 0' }}
+                  style={{ margin: '20px 0' }}
                   required
                   requiredMessage="不能为空"
                 >
                   <Input style={styles.formbinderbox} name='keyword' placeholder='输入自定义名称备注' hasClear />
                 </FormItem>
                 <FormItem label='内容'
-                  style={{ margin: '10px 0' }}
+                  style={{ margin: '20px 0' }}
                   required
                   requiredMessage="不能为空"
                 >
@@ -131,22 +131,22 @@ export default class HelpCenter extends Component {
                   />
                 </FormItem>
                 <FormItem label='时间'
-                  style={{ margin: '10px 0' }}
+                  style={{ margin: '20px 0' }}
                   required
                   requiredMessage="不能为空"
                 >
                   <DatePicker name='createdAt' format="YYYY-M-D" showTime={{ format: 'HH:mm' }} />
                 </FormItem>
-                <FormItem label='阅读权限' style={{ margin: '10px 0' }} >
+                <FormItem label='阅读权限' style={{ margin: '20px 0' }} >
                   <Switch name='readPower' />
                 </FormItem>
-                <FormItem label='属性设置' style={{ margin: '10px 0' }} >
+                <FormItem label='属性设置' style={{ margin: '20px 0' }} >
                   <RadioGroup aria-labelledby="radio-a11y" name='status'>
                     <Radio id="python" value="python">置顶显示</Radio>
                     <Radio id="java" value="java">默认排序</Radio>
                   </RadioGroup>
                 </FormItem>
-                <FormItem label=" " style={{ margin: '10px 0' }}>
+                <FormItem label=" " style={{ margin: '20px 0' }}>
                   <Form.Submit validate type="primary" onClick={this.subHelp.bind(this)} style={{ marginRight: 7, borderRadius: 4, width: '76px' }}>提交</Form.Submit>
                 </FormItem>
               </Form>

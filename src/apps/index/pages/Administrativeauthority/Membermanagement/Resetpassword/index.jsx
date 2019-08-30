@@ -117,8 +117,6 @@ export default class Resetpassword extends Component {
             </FormItem>
           </Form>
         </div>
-
-
       </div>
     );
   }
@@ -134,9 +132,9 @@ const styles = {
     marginLeft: '10px',
     width: '80px',
     height: '28px',
-    backgroundColor: 'rgba(230, 241, 252, 1)',
-    color: 'rgba(78, 126, 232, 1)',
-    borderColor: 'rgba(193, 241, 248, 1)',
+    // backgroundColor: 'rgba(230, 241, 252, 1)',
+    // color: 'rgba(78, 126, 232, 1)',
+    // borderColor: 'rgba(193, 241, 248, 1)',
     borderRadius: '4px',
     marginTop: '8px',
   },
@@ -144,7 +142,7 @@ const styles = {
     display: 'inline-block',
     width: '80px',
     height: '28px',
-    backgroundColor: 'rgba(86, 119, 252, 1)',
+    // backgroundColor: 'rgba(86, 119, 252, 1)',
     borderRadius: '4px',
     marginTop: '8px',
   },

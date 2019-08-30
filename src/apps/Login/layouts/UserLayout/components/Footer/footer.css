@@ -1,3 +1,7 @@
 .image{
   margin-left: 10px;
 }
+.next-select .next-select-inner{
+  background: none;
+}
+.next-input.next-small .next-input-text-field{ font-size: 14px;}

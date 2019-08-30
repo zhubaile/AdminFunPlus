@@ -102,7 +102,7 @@ export default class Newrole extends Component {
     return (
       <div className='newrole-bulletbox'>
         <div className='newrole-title'>
-          <h2 style={{ display: 'inline-block', fontSize: '18px' }}>新增角色</h2>
+          <h2 style={{ display: 'inline-block', fontSize: '18px' }}>编辑角色</h2>
           <span style={styles.cha} onClick={this.newroleclose.bind(this)}>×</span>
         </div>
         <div className='newrole-content'>

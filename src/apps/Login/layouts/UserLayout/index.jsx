@@ -74,7 +74,7 @@ const styles = {
     position: 'relative',
     width: '100%',
     height: '300px',
-    background: 'linear-gradient(to top left, #D6A0FD , #B086FD)',
+    background: 'linear-gradient(to right, #5372c5, #b7a1fe)',
   },
   lcircular: {
     width: '50px',
