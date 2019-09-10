@@ -196,6 +196,18 @@ export default class Aside extends Component {
                   </span>
                 }
               />
+              <SubMenu
+                className='cancel'
+                key="sub5"
+                title={
+                  <span>
+                    <Link to='/backadmin/service/feedback'>
+                      <i className="iconfont icon-liuyan" />
+                      <span>留言咨询</span>
+                    </Link>
+                  </span>
+                }
+              />
             </StyledMenu>
           ) : null
         }
@@ -261,6 +273,7 @@ export default class Aside extends Component {
                 <MenuItem key="10"><Link to="/backadmin/Systemsettings/mailboxsettings">邮箱收发设置</Link></MenuItem>
                 <MenuItem key="11"><Link to="/backadmin/Systemsettings/smsgatewaysettings">短信网关</Link></MenuItem>
                 <MenuItem key="12"><Link to="/backadmin/Systemsettings/qrcodegateway">二维码网关</Link></MenuItem>
+                <MenuItem key="13"><Link to="/backadmin/Systemsettings/industryCategory">行业类目</Link></MenuItem>
                 {/* <MenuItem key="13"><Link to="/backadmin/Systemsettings/extremesetting">极验设置</Link></MenuItem> */}
                 <MenuItem key="14"><Link to="/backadmin/Systemsettings/platformversion">平台版本</Link></MenuItem>
                 <MenuItem key="15"><Link to="/backadmin/Systemsettings/platforminitialization">平台初始化及系统搬家</Link></MenuItem>

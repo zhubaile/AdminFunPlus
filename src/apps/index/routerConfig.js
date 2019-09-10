@@ -43,7 +43,8 @@ const Realtimetion = React.lazy(() => import('./pages/Service/Realtimetion')); /
 const HelpCenter = React.lazy(() => import('./pages/Service/HelpCenter')); // 帮助中心
 const Invoice = React.lazy(() => import('./pages/Service/Invoice')); // 发票
 const Invoicedetails = React.lazy(() => import('./pages/Service/Invoicedetails'));// 发票详情
-const MessageCenter = React.lazy(() => import('./pages/Service/MessageCenter'));// 帮助中心
+const MessageCenter = React.lazy(() => import('./pages/Service/MessageCenter'));// 消息中心
+const Feedback = React.lazy(() => import('./pages/Service/Feedback'));// 留言咨询
 // import { asideMenuConfig } from './pages/Service/Invoice';
 // 管控
 // 接口管理
@@ -59,6 +60,7 @@ const Mailboxsettings = React.lazy(() => import('./pages/Systemsettings/Mailboxs
 const Smsgatewaysettings = React.lazy(() => import('./pages/Systemsettings/Smsgatewaysettings')); // 短信网关
 const Qrcodegateway = React.lazy(() => import('./pages/Systemsettings/Qrcodegateway')); // 二维码网关
 const Extremesetting = React.lazy(() => import('./pages/Systemsettings/Extremesetting'));// 极验设置
+const IndustryCategory = React.lazy(() => import('./pages/Systemsettings/IndustryCategory'));// 行业类目
 const Platformversion = React.lazy(() => import('./pages/Systemsettings/Platformversion')); // 平台版本
 const Platforminitialization = React.lazy(() => import('./pages/Systemsettings/Platforminitialization')); // 平台初始化及系统搬家
 
@@ -185,6 +187,10 @@ const routerConfig = [
     component: MessageCenter,
   },
   {
+    path: '/backadmin/service/feedback',
+    component: Feedback,
+  },
+  {
     path: '/backadmin/service/helpCenter',
     component: HelpCenter,
   },
@@ -227,6 +233,10 @@ const routerConfig = [
   {
     path: '/backadmin/Systemsettings/extremesetting',
     component: Extremesetting,
+  },
+  {
+    path: '/backadmin/Systemsettings/industryCategory',
+    component: IndustryCategory,
   },
   {
     path: '/backadmin/Systemsettings/platformversion',

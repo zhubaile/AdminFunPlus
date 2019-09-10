@@ -315,7 +315,7 @@ const styles = {
     marginRight: '25px',
   },
   delbtn: {
-    marginLeft: '20px',
+    marginTop: '-50px',
   },
   formItemdiv: {
     margin: '10px 0',

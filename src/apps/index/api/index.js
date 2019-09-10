@@ -615,6 +615,34 @@ export async function bulletinadd(params) {
     data: params,
   });
 }
+// 获取类目
+export function categorylist(params) {
+  return ajaxAmd.get({
+    url: '/category/list',
+    params,
+  });
+}
+// 添加修改一级目录
+export async function categorychangeCategory(params) {
+  return ajaxAmd.post({
+    url: '/category/changeCategory',
+    data: params,
+  });
+}
+// 添加修改二级目录
+/* export async function categorychangeTwoCategory(params) {
+  return ajaxAmd.post({
+    url: '/category/changeTwoCategory',
+    data: params,
+  });
+} */
+// 删除类目
+export async function categorydelete(params) {
+  return ajaxAmd.delete({
+    url: '/category/delete',
+    data: params,
+  });
+}
 // BackAdmin的API接口 zbl ending
 // BackAdmin的API接口 kkk starting
 // 收入

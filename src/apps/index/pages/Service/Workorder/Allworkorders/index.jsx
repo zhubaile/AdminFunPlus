@@ -271,21 +271,20 @@ export default class Allworkorders extends Component {
             </div>
             <div className='wodegongdan-footer'>
               <Table loading={isLoading} dataSource={datas} hasBorder={false} primaryKey='_id' rowSelection={rowSelection}>
-                <Table.Column title="工单编号" dataIndex="_id" />
-                <Table.Column title="描述" dataIndex="description" />
-                <Table.Column title="优先级" dataIndex="level" />
-                <Table.Column title="企业名称" dataIndex="companyName" />
-                <Table.Column title="提交账号" dataIndex="account" />
-                <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} />
-                <Table.Column title="创建时间" dataIndex="createdAt" cell={this.time} />
+                <Table.Column title="工单编号" dataIndex="_id" width={100} />
+                <Table.Column title="描述" dataIndex="description" width={300} />
+                <Table.Column title="优先级" dataIndex="level" width={70} />
+                <Table.Column title="企业名称" dataIndex="companyName" width={100} />
+                <Table.Column title="提交账号" dataIndex="account" width={100} />
+                <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} width={100} />
+                <Table.Column title="创建时间" dataIndex="createdAt" cell={this.time} width={100} />
                 <Table.Column
                   title="操作"
-                  width={200}
+                  width={100}
                   dataIndex="oper"
                   cell={this.renderOper}
                 />
               </Table>
-              <Button className='btn-all' size='large' type='primary' onClick={this.removes.bind(this)}>刪除</Button>
               <Pagination
                 style={styles.pagination}
                 current={current}
@@ -293,6 +292,7 @@ export default class Allworkorders extends Component {
                 pageSize={pageSize} // 界面展示多少条数据
                 total={total}
               />
+              <Button className='btn-all' size='large' type='primary' style={{ marginTop: '-50px' }} onClick={this.removes.bind(this)}>刪除</Button>
             </div>
           </Tab.Item>
         </Tab>

@@ -142,7 +142,6 @@ export default class Qrcodegateway extends Component {
     this.props.onChange(value);
   };
   tabBtnOne() {
-    debugger;
     this.props.history.push("/backadmin/Systemsettings/siteconfiguration");
   }
   tabBtnTwo() {
@@ -152,8 +151,10 @@ export default class Qrcodegateway extends Component {
     this.props.history.push("/backadmin/Systemsettings/smsgatewaysettings");
   }
   tabBtnFour() {
-    debugger;
     this.props.history.push("/backadmin/Systemsettings/qrcodegateway");
+  }
+  tabBtnfive() {
+    this.props.history.push("/backadmin/Systemsettings/industryCategory");
   }
   render() {
     const { isLoading, data, current } = this.state;
@@ -220,9 +221,10 @@ export default class Qrcodegateway extends Component {
               </Form>
             </div>
           </Tab.Item>
-
-          {/*<Tab.Item title="极验设置">
-          </Tab.Item>*/}
+          <Tab.Item title="行业类目" key='5' onClick={this.tabBtnfive.bind(this)}>
+          </Tab.Item>
+          {/* <Tab.Item title="极验设置">
+          </Tab.Item> */}
         </Tab>
       </div>
     );

@@ -7,6 +7,7 @@ import '../../index.css';
 
 import Addtemplate from "./Addtemplate/index";
 import Editing from "./Editing/index";
+
 const FormItem = Form.Item;
 
 const formItemLayout = {
@@ -155,7 +156,9 @@ export default class Smsgatewaysettings extends Component {
   tabBtnFour() {
     this.props.history.push("/backadmin/Systemsettings/qrcodegateway");
   }
-
+  tabBtnfive() {
+    this.props.history.push("/backadmin/Systemsettings/industryCategory");
+  }
   innerTabTwo() {
     this.props.history.push("/backadmin/Systemsettings/templateconfiguration");
   }
@@ -251,9 +254,10 @@ export default class Smsgatewaysettings extends Component {
 
           <Tab.Item title="二维码网关" key='4' onClick={this.tabBtnFour.bind(this)}>
           </Tab.Item>
-
-{/*          <Tab.Item title="极验设置">
-          </Tab.Item>*/}
+          <Tab.Item title="行业类目" key='5' onClick={this.tabBtnfive.bind(this)}>
+          </Tab.Item>
+          {/*          <Tab.Item title="极验设置">
+          </Tab.Item> */}
         </Tab>
       </div>
     );
