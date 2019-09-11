@@ -125,7 +125,7 @@ export default class Addtemplate extends Component {
             <Select dataSource={jiaose} placeholder='选择角色' />
           </FormBinder> */}
             <div className='addtemplate_content_bottom'>
-{/*              <Button className='btn-all' size='large' type='secondary' onClick={this.addtemplateclose.bind(this)}>取消</Button>*/}
+              {/*              <Button className='btn-all' size='large' type='secondary' onClick={this.addtemplateclose.bind(this)}>取消</Button> */}
               <Button size='large' type='primary'>保存</Button>
             </div>
 

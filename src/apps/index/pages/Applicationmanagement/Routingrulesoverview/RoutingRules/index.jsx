@@ -34,11 +34,10 @@ export default class RoutingRules extends Component {
   // 获取渠道
   searchchangebtn() {
     rulessearch().then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
-        const channel = data.data;
+        // const channel = data.data;
+        const channel = data.data.channelData;
         const channellist = channel.map(item=>({ value: item.channelId,label: item.channelName }));
-        debugger;
         this.setState({
           channellist,
         });
@@ -61,7 +60,6 @@ export default class RoutingRules extends Component {
           page: current,
           limit,
         }).then(({ status,data })=>{
-          debugger;
           if (data.errCode == 0) {
             this.setState({
               data: data.data,

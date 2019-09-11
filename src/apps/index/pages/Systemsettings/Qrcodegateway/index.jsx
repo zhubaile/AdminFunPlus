@@ -181,6 +181,7 @@ export default class Qrcodegateway extends Component {
                 <FormItem
                   label='获取唯一标识'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name='name1'
@@ -193,18 +194,21 @@ export default class Qrcodegateway extends Component {
                 <FormItem
                   label='二维码有效时间：'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Select name='time' dataSource={shuju} />
                 </FormItem>
                 <FormItem
                   label='展示二维码：'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <img src='' alt='' />
                 </FormItem>
                 <FormItem
                   label='免授权登录:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Switch defaultChecked value="" />
                 </FormItem>
@@ -233,7 +237,7 @@ export default class Qrcodegateway extends Component {
 
 const styles = {
   formItem: {
-    display: 'flex',
+    margin: '10px 0',
     alignItems: 'center',
   },
   formItemTwo: {

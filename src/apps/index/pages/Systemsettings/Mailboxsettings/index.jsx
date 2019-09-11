@@ -83,12 +83,14 @@ export default class Mailboxsettings extends Component {
                 <FormItem
                   label='邮箱模式:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Checkbox checked >SMYP函数发送</Checkbox>
                 </FormItem>
                 <FormItem
                   label='服务器:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="host"
@@ -99,6 +101,7 @@ export default class Mailboxsettings extends Component {
                 <FormItem
                   label='端口:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="port"
@@ -109,6 +112,7 @@ export default class Mailboxsettings extends Component {
                 <FormItem
                   label='发件人:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="sender"
@@ -119,6 +123,7 @@ export default class Mailboxsettings extends Component {
                 <FormItem
                   label='名称:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name='sendName'
@@ -131,6 +136,7 @@ export default class Mailboxsettings extends Component {
                 <FormItem
                   label='用户名:'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name='loginUser'
@@ -142,6 +148,7 @@ export default class Mailboxsettings extends Component {
                 <FormItem
                   label='密码:'
                   {...formItemLayout}
+                  style={styles.formItem}
                   /* asterisk */
                 >
                   <Input
@@ -183,7 +190,7 @@ export default class Mailboxsettings extends Component {
 
 const styles = {
   formItem: {
-    display: 'flex',
+    margin: '10px 0',
     alignItems: 'center',
   },
   formItemTwo: {

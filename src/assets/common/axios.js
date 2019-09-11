@@ -30,23 +30,25 @@ const ajaxBase = (param) => {
     if ((params.status === 200)) {
       const data = params.data;
       // 判断权限 还需添加
-      // const appid = Cookies.get('userId');
       console.log(data);
-      if (data.status === 401) {
-      // if (!appid) {
+      if (data.errCode === 401) {
         debugger;
         // 没有权限统一跳转到登录页面 非法请求
-        // import { Input,Button , Grid, DatePicker , Tab,Message ,Table,Pagination,Select,Radio,Switch } from '@alifd/next';
         // alert('未登录的用户,请您先登录');
-        // this.props.history.push('/backadminuser/login');
         window.location.href = "/backadminuser/login";
-        // window.location.href = 'login.html';
         return {
           status: false,
           data: params.data,
         };
       }
       // 增加判断，data.data如果为null，则不返回
+      if (data.data === null) {
+        debugger;
+        return {
+          status: false,
+          data: [],
+        };
+      }
       return {
         status: (params.data.errCode === 0),
         data: params.data,

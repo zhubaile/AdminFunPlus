@@ -200,7 +200,7 @@ export default class Workorderdetails extends Component {
     const usernames = work[0].username; // 用户识别
     const isStatement = work[0].isStatement; // 是否结单
     return (
-      <div className='backstageworkorder'>
+      <div>
         <Deletedata ref={ node => this.Deletedata = node } history={this.props.history} />
         {/* <Check ref={ node => this.Check = node } history={this.props.history} />
         <Nav defaultActiveKey='2' history={this.props.history} /> */}
@@ -211,17 +211,17 @@ export default class Workorderdetails extends Component {
           </div>
           <div className='wodegongdan-table'>
             <Table loading={isLoading} dataSource={work} hasBorder={false}>
-              <Table.Column title="工单编号" dataIndex="_id" />
-              <Table.Column title="描述" dataIndex="description" />
-              <Table.Column title="优先级" dataIndex="level" />
-              <Table.Column title="企业名称" dataIndex="companyName" />
-              <Table.Column title="创建人" dataIndex="username" />
-              <Table.Column title="联系方式" dataIndex="phone" />
-              <Table.Column title="提交时间" dataIndex="createdAt" cell={this.time} />
-              <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} />
+              <Table.Column title="工单编号" dataIndex="_id" width={150} />
+              <Table.Column title="描述" dataIndex="description" width={300} />
+              <Table.Column title="优先级" dataIndex="level" width={70} />
+              {/* <Table.Column title="企业名称" dataIndex="companyName" /> */}
+              <Table.Column title="创建人" dataIndex="username" width={70} />
+              {/* <Table.Column title="联系方式" dataIndex="phone" /> */}
+              <Table.Column title="提交时间" dataIndex="createdAt" cell={this.time} width={100} />
+              <Table.Column title="状态" dataIndex="status" cell={this.statusoneortwo} width={70} />
               <Table.Column
                 title="操作"
-                width={200}
+                width={100}
                 dataIndex="oper"
                 cell={this.renderOper}
               />

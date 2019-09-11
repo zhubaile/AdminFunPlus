@@ -20,7 +20,7 @@
 .next-btn.next-large.next-btn-secondary.btn-alls{ height: 30px; background-color: #E2EDFF; border-color: #A3D0FD; color: #1989FA; border-radius: 4px; margin-right: 15px;}
 .next-btn.next-large.next-btn-secondary.btn-alls:hover{ background-color: #225AE1; color: #FFFFFF;}
 /*Btn全局樣式Ending*/
-.backstageworkorder{ display: flex; width: 100%;min-height: 100%; justify-items: center; }
+.backstageworkorder{ display: flex; width: 100%;min-height: 100%; justify-items: center; margin-top: -20px; margin-left: -20px;}
 
 /*.backstageworkorder{ width: 100%;}*/
 /*

@@ -34,7 +34,6 @@ export default class Siteconfiguration extends Component {
   // 获取初始值
   componentDidMount() {
     siteConfigget().then(({ status,data })=>{
-      debugger;
       if (data.errCode == 0) {
         this.setState({
           value: data.data,
@@ -68,19 +67,22 @@ export default class Siteconfiguration extends Component {
     this.props.history.push("/backadmin/Systemsettings/smsgatewaysettings");
   }
   tabBtnFour() {
-    debugger;
     this.props.history.push("/backadmin/Systemsettings/qrcodegateway");
+  }
+  tabBtnfive(){
+    this.props.history.push("/backadmin/Systemsettings/industryCategory");
   }
   render() {
     return (
       <div className='siteconfiguration'>
-        <Tab shape='pure' >
-          <Tab.Item title="站点配置" onClick={this.tabBtnOne.bind(this)}>
+        <Tab shape='pure' defaultActiveKey='1' >
+          <Tab.Item title="站点配置" key='1' onClick={this.tabBtnOne.bind(this)}>
             <div className='siteconfiguration-content'>
               <Form className='form' value={this.state.value}>
                 <FormItem
                   label='站点名称'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name='siteName'
@@ -90,6 +92,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='网站名称'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name='netName'
@@ -100,6 +103,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='网站域名'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="netDomin"
@@ -110,6 +114,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='站长邮箱'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="siteMail"
@@ -120,6 +125,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='版权所有'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="copyright"
@@ -129,6 +135,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='备案号'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input
                     name="baNo"
@@ -138,6 +145,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='是否缓存'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Switch name='isCash' />
                   <span>（是否禁用）</span>
@@ -145,6 +153,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='静态首页'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <RadioGroup aria-labelledby="radio-a11y" name='isCreateIndex'>
                     <Radio id="true" value>生成</Radio>
@@ -154,6 +163,7 @@ export default class Siteconfiguration extends Component {
                 <FormItem
                   label='闭站提示'
                   {...formItemLayout}
+                  style={styles.formItem}
                 >
                   <Input.TextArea name='netCloseTip' placeholder='服务器正在打瞌睡' />
                 </FormItem>
@@ -171,15 +181,16 @@ export default class Siteconfiguration extends Component {
             </div>
           </Tab.Item>
 
-          <Tab.Item title="邮箱收发设置" onClick={this.tabBtnTwo.bind(this)}>
+          <Tab.Item title="邮箱收发设置" key='2' onClick={this.tabBtnTwo.bind(this)}>
           </Tab.Item>
 
-          <Tab.Item title="短信网关" onClick={this.tabBtnThree.bind(this)}>
+          <Tab.Item title="短信网关" key='3' onClick={this.tabBtnThree.bind(this)}>
           </Tab.Item>
 
-          <Tab.Item title="二维码网关" onClick={this.tabBtnFour.bind(this)}>
+          <Tab.Item title="二维码网关" key='4' onClick={this.tabBtnFour.bind(this)}>
           </Tab.Item>
-
+          <Tab.Item title="行业类目" key='5' onClick={this.tabBtnfive.bind(this)}>
+          </Tab.Item>
           {/*          <Tab.Item title="极验设置">
           </Tab.Item> */}
         </Tab>
@@ -190,7 +201,7 @@ export default class Siteconfiguration extends Component {
 
 const styles = {
   formItem: {
-    display: 'flex',
+    margin: '10px 0',
     alignItems: 'center',
   },
   formItemTwo: {

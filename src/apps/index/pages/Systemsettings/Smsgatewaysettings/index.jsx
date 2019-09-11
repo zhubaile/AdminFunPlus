@@ -191,6 +191,7 @@ export default class Smsgatewaysettings extends Component {
                       <FormItem
                         label='用户名：'
                         {...formItemLayout}
+                        style={styles.formItem}
                       >
                         <Input
                           name='admin'
@@ -203,6 +204,7 @@ export default class Smsgatewaysettings extends Component {
                       <FormItem
                         label='密码：'
                         {...formItemLayout}
+                        style={styles.formItem}
                       >
                         <Input
                           name='psd'
@@ -215,6 +217,7 @@ export default class Smsgatewaysettings extends Component {
                       <FormItem
                         label='接受短信地址：'
                         {...formItemLayout}
+                        style={styles.formItem}
                         /* asterisk */
                       >
                         <Input
@@ -266,7 +269,7 @@ export default class Smsgatewaysettings extends Component {
 
 const styles = {
   formItem: {
-    display: 'flex',
+    margin: '10px 0',
     alignItems: 'center',
   },
   formItemTwo: {
